@@ -1,0 +1,13 @@
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.csproj.GenerateResource.cache
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\bin\Debug\Hello_World.dll
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\bin\Debug\Hello_World.pdb
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.MyCommands.resources
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.dll
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.pdb
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.UI.EdgeForm.resources
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.UI.MainWellForm.resources
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.Properties.Resources.resources
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.UI.MislaForm.resources
+C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.UI.TopForm.resources
