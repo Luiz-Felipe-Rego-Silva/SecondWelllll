@@ -17,7 +17,8 @@ namespace Structures.WellDetailer.Entities
         private Point3d[] MislaInCut;
 
         public Misla() 
-        { 
+        {
+            MislaInCut = new Point3d[6];
         }
         public Misla(double length, double heigth)
         {
@@ -42,7 +43,7 @@ namespace Structures.WellDetailer.Entities
             double efectiveSpacing = CalculateEfectiveSpacingOfCircles();
             string layer = "1";
 
-            for (int i = 1; i < numberOfCircles; i++) { Utilities.DrawingShapes.DrawCircle(bluePrintCenter, MislaInsideDiameter + 2 * efectiveSpacing, layer); }
+            for (int i = 1; i < numberOfCircles; i++) { Utilities.DrawingShapes.DrawCircle(bluePrintCenter, MislaInsideDiameter + 2 * efectiveSpacing * i, layer); }
         }
         private int CalculateNumberOfCircles()
         {

@@ -41,7 +41,7 @@ namespace Structures.WellDetailer.Entities
 
             Wall.DrawWallBluePrint(CenterWallBluePrint);
             Bottom.DrawBottomBluePrint(CenterBottomBluePrint);
-            if (Misla != null) { Misla.DrawBluePrint(CenterMislaBluePrint, Wall.InternalDiameter - 2.0*Misla.Length); }
+            if (Misla.Length > 1 && Misla.Heigth > 1) { Misla.DrawBluePrint(CenterMislaBluePrint, Wall.InternalDiameter - 2.0*Misla.Length); }
 
             Wall.DrawWallBluePrintAnnotations(CenterWallBluePrint);
             Bottom.DrawBottomBluePrintAnnotations(CenterBottomBluePrint);
@@ -58,13 +58,22 @@ namespace Structures.WellDetailer.Entities
             cutLine.DrawCutLine((Wall.ExternalDiameter / 2.0) + Bottom.EdgeLength, bluePrintCenter);
         }
 
-        public void DrawWellAACut( Point3d StartPointAACut) 
+        public void DrawWellAACut(Point3d StartPointAACut) 
         {
-            Wall.DrawAACut(StartPointAACut);
+            Point3d topAndWallStartPoint = new Point3d(StartPointAACut.X + Top.Passarela + 300, StartPointAACut.Y - Top.Thickness - 170, 0);
+            Point3d bottomStartPoint = new Point3d(topAndWallStartPoint.X, topAndWallStartPoint.Y - Wall.Heigth, 0);
+            Point3d mislaStartPoint = new Point3d(bottomStartPoint.X + Wall.Thickness, bottomStartPoint.Y, 0);
+            Point3d topCenter = new Point3d(topAndWallStartPoint.X + 0.5 * Top.ExternalDiameter, topAndWallStartPoint.Y + Top.Thickness, 0);
+            Top.DrawTopAACut(topAndWallStartPoint);
+            
+            Wall.DrawAACut(topAndWallStartPoint);
             Wall.DrawAACutAnnotations(StartPointAACut);
+            Wall.DrawProjectionLinesInCut(Misla, Top, topCenter);
 
-            Bottom.DrawAACut(StartPointAACut);
+            Bottom.DrawAACut(bottomStartPoint);
             Bottom.DrawAACutAnnotations();
+
+            if (Misla.Length > 1 && Misla.Heigth > 1) { Misla.DrawMislaAACut(mislaStartPoint, Wall.InternalDiameter - 2 * Misla.Length); }
             
         }
     }

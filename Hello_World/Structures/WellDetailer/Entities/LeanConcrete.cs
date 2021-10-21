@@ -19,16 +19,14 @@ namespace WellDetailing.WellDetailer.Entities
         public LeanConcrete(double bottomDiameter)
         {
             BottomDiameter = bottomDiameter;
-            LeanConcretePointsInCut = new Point3d[4];
+            LeanConcretePointsInCut = new Point3d[6];
             HorizontalShiftness = 5.0;
             VerticalShiftness = 5.0;
         }
         public LeanConcrete(double horizontalShiftness, double verticalShiftness, double bottomDiameter)
         {
             BottomDiameter = bottomDiameter;
-            LeanConcretePointsInCut = new Point3d[4];
-            HorizontalShiftness = 5.0;
-            VerticalShiftness = 5.0;
+            LeanConcretePointsInCut = new Point3d[6];
             HorizontalShiftness = horizontalShiftness;
             VerticalShiftness = verticalShiftness;
         }
@@ -41,16 +39,19 @@ namespace WellDetailing.WellDetailer.Entities
         }
         private void DoPointsLeanConreteInCut(Point3d startPointOfLeanConcreteCut)
         {
-            LeanConcretePointsInCut[0] = startPointOfLeanConcreteCut;
+            LeanConcretePointsInCut[0] = new Point3d(startPointOfLeanConcreteCut.X - HorizontalShiftness, startPointOfLeanConcreteCut.Y, 0);
             LeanConcretePointsInCut[1] = new Point3d(LeanConcretePointsInCut[0].X, LeanConcretePointsInCut[0].Y - VerticalShiftness, 0);
             LeanConcretePointsInCut[2] = new Point3d(LeanConcretePointsInCut[1].X + 2 * HorizontalShiftness + BottomDiameter, LeanConcretePointsInCut[1].Y, 0);
             LeanConcretePointsInCut[3] = new Point3d(LeanConcretePointsInCut[2].X, LeanConcretePointsInCut[2].Y + VerticalShiftness, 0);
+            LeanConcretePointsInCut[4] = new Point3d(LeanConcretePointsInCut[3].X - HorizontalShiftness, LeanConcretePointsInCut[3].Y, 0);
+            LeanConcretePointsInCut[5] = new Point3d(LeanConcretePointsInCut[4].X - BottomDiameter, LeanConcretePointsInCut[4].Y, 0);
         }
         
         private void DrawLinesLeanConcreteInCut()
         {
             string layer = "1";
-            for (int i = 0; i < 3; i++) {DrawingShapes.DrawLine(LeanConcretePointsInCut[i], LeanConcretePointsInCut[i+1], layer);}
+            for (int i = 0; i < 4; i++) {DrawingShapes.DrawLine(LeanConcretePointsInCut[i], LeanConcretePointsInCut[i+1], layer);}
+            DrawingShapes.DrawLine(LeanConcretePointsInCut[0], LeanConcretePointsInCut[5], layer);
         }
         private void DrawHatchLeanConcrete()
         {

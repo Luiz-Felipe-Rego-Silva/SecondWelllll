@@ -14,17 +14,32 @@ namespace Structures.Utilities
     {
         public static void AddToDrawing(Entity entity)
         {
-            Document Document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
-            Database CurrentDatabase = Document.Database;
-            Transaction Transaction = CurrentDatabase.TransactionManager.StartTransaction();
+            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
+            Editor editor = document.Editor;
+            Database database = document.Database;
+            try
             {
-                BlockTable AutocadBlockTable = Transaction.GetObject(CurrentDatabase.BlockTableId, OpenMode.ForRead) as BlockTable;
-                BlockTableRecord AutocadBlockTableRecord = Transaction.GetObject(AutocadBlockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
-                AutocadBlockTableRecord.AppendEntity(entity);
-                Transaction.AddNewlyCreatedDBObject(entity, true);
-                Transaction.Commit();
+                using (DocumentLock documentLock = document.LockDocument())
+                {
+                    using (Transaction transaction = database.TransactionManager.StartTransaction())
+                    {
+                        BlockTable blockTable = (BlockTable) transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                        BlockTableRecord blockTableRecord = (BlockTableRecord) transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+
+                        blockTableRecord.AppendEntity(entity);
+                        transaction.AddNewlyCreatedDBObject(entity, true);
+
+                        transaction.Commit();
+                    }
+                }
             }
+            catch (Exception e)
+            {
+                editor.WriteMessage(e.Message);
+            }
+
         }
+
         public static Point3d GetPointFromUser(string question)
         {
             Autodesk.AutoCAD.Internal.Utils.SetFocusToDwgView();

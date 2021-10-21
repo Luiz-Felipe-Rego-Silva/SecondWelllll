@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WellDetailing.WellDetailer.Entities;
 
 namespace Hello_World.UI
 {
@@ -22,6 +23,7 @@ namespace Hello_World.UI
         {
             InitializeComponent();
             Top = top;
+            Top.Hood = new CircularHood();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -31,7 +33,7 @@ namespace Hello_World.UI
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            InternalHoodDiameter = Math.Round(Convert.ToDouble(msktxt_insideDiameter), 3);
+            InternalHoodDiameter = Math.Round(Convert.ToDouble(msktxt_insideDiameter.Text), 3);
             Top.Hood.InternalShiftness = InternalHoodDiameter;
             HorizontalGap = Math.Round(Convert.ToDouble(msktxt_horizontalGap.Text), 3);
             Top.Hood.HorizontalGap = HorizontalGap;

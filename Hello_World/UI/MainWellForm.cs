@@ -24,15 +24,16 @@ namespace Hello_World.UI
         private const double AACutYShiftness = 170.0;
         public MainWellForm()
         {
-            
+            InitializeComponent();
+            Well = new Well();
             Well.Misla = new Misla();
             MislaForm = new MislaForm(Well.Misla);
 
             Well.Bottom = new Bottom();
             EdgeForm = new EdgeForm(Well.Bottom);
 
-            ToopForm = new TopForm(Well.Top);
-            InitializeComponent();
+            Well.Top = new Top();
+            ToopForm = new TopForm(Well.Top);    
         }
 
         private void btn_misla_Click(object sender, EventArgs e)
@@ -57,10 +58,31 @@ namespace Hello_World.UI
 
         private void btn_doDetail_Click(object sender, EventArgs e)
         {
+            
+            //Construindo Parede
+            double internalDiameter = Convert.ToDouble(msktxt_insideDiameter.Text);
+            double wallThickness = Convert.ToDouble(msktxt_wallThickness.Text);
+            double wallHeigth = Convert.ToDouble(msktxt_wallHeigth.Text);
+            Well.Wall = new CircularWall(internalDiameter,wallThickness, wallHeigth);
+            //Construindo Fundo
+            double bottomThickness = Convert.ToDouble(msktxt_bottomThickness.Text);
+            Well.Bottom = new Bottom(internalDiameter, wallThickness, bottomThickness, Well.Bottom.EdgeLength);
+            
+            //Construindo a Laje
+            double topThickness = Convert.ToDouble(msktxt_topThickness.Text);
+            double TopExternalDiameter = internalDiameter + 2 * wallThickness;
+            double passarela = Convert.ToDouble(msktxt_passarela.Text);
+            double lengthSide = Convert.ToDouble(msktxt_sideLength.Text);
+            Well.Top.ExternalDiameter = TopExternalDiameter;
+            Well.Top.Thickness = topThickness;
+            Well.Top.Passarela = passarela;
+            Well.Top.WallThickness = wallThickness;
+            Well.Top.LengthSide = lengthSide;
+           
+            //Definição de Pontos
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
-
             Point3d bluePrintCenter = new Point3d(BasePoint.X + Well.Bottom.Diameter * 0.5 + BluePrintShiftness, BasePoint.Y - Well.Bottom.Diameter * 0.5 - BluePrintShiftness, 0);
-            Point3d AAStartCut = new Point3d(BasePoint.X + Well.Bottom.Diameter + 270.0 + 300, BasePoint.Y - 170.0, 0);
+            Point3d AAStartCut = new Point3d(BasePoint.X + Well.Bottom.Diameter + 270.0, BasePoint.Y, 0);
             Point3d upperViewCenter = new Point3d(BasePoint.X + 2.5 * Well.Bottom.Diameter + 700.0 + BluePrintShiftness, BasePoint.Y - Well.Bottom.Diameter * 0.5 - BluePrintShiftness, 0);
 
             Well.DrawWellBluePrint(bluePrintCenter);

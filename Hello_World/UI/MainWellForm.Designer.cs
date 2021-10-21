@@ -47,6 +47,8 @@ namespace Hello_World.UI
             this.btn_top = new System.Windows.Forms.Button();
             this.btn_doDetail = new System.Windows.Forms.Button();
             this.btn_steel = new System.Windows.Forms.Button();
+            this.lbl_passarela = new System.Windows.Forms.Label();
+            this.msktxt_passarela = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_supWell)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +57,7 @@ namespace Hello_World.UI
             // 
             this.picBox_supWell.Image = ((System.Drawing.Image)(resources.GetObject("picBox_supWell.Image")));
             this.picBox_supWell.Location = new System.Drawing.Point(305, 61);
-            this.picBox_supWell.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBox_supWell.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_supWell.Name = "picBox_supWell";
             this.picBox_supWell.Size = new System.Drawing.Size(198, 163);
             this.picBox_supWell.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -87,6 +89,7 @@ namespace Hello_World.UI
             this.msktxt_topThickness.Name = "msktxt_topThickness";
             this.msktxt_topThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_topThickness.TabIndex = 6;
+            this.msktxt_topThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_bottomThickness
             // 
@@ -94,6 +97,7 @@ namespace Hello_World.UI
             this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
             this.msktxt_bottomThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_bottomThickness.TabIndex = 7;
+            this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_wallHeigth
             // 
@@ -101,6 +105,7 @@ namespace Hello_World.UI
             this.msktxt_wallHeigth.Name = "msktxt_wallHeigth";
             this.msktxt_wallHeigth.Size = new System.Drawing.Size(43, 26);
             this.msktxt_wallHeigth.TabIndex = 8;
+            this.msktxt_wallHeigth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_sideLength
             // 
@@ -108,6 +113,7 @@ namespace Hello_World.UI
             this.msktxt_sideLength.Name = "msktxt_sideLength";
             this.msktxt_sideLength.Size = new System.Drawing.Size(43, 26);
             this.msktxt_sideLength.TabIndex = 9;
+            this.msktxt_sideLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_insideDiameter
             // 
@@ -115,6 +121,7 @@ namespace Hello_World.UI
             this.msktxt_insideDiameter.Name = "msktxt_insideDiameter";
             this.msktxt_insideDiameter.Size = new System.Drawing.Size(43, 26);
             this.msktxt_insideDiameter.TabIndex = 10;
+            this.msktxt_insideDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_wallThickness
             // 
@@ -122,11 +129,12 @@ namespace Hello_World.UI
             this.msktxt_wallThickness.Name = "msktxt_wallThickness";
             this.msktxt_wallThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_wallThickness.TabIndex = 11;
+            this.msktxt_wallThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_insideDiameter
             // 
             this.lbl_insideDiameter.AutoSize = true;
-            this.lbl_insideDiameter.Location = new System.Drawing.Point(344, 234);
+            this.lbl_insideDiameter.Location = new System.Drawing.Point(332, 234);
             this.lbl_insideDiameter.Name = "lbl_insideDiameter";
             this.lbl_insideDiameter.Size = new System.Drawing.Size(110, 19);
             this.lbl_insideDiameter.TabIndex = 12;
@@ -135,7 +143,7 @@ namespace Hello_World.UI
             // lbl_wallThickness
             // 
             this.lbl_wallThickness.AutoSize = true;
-            this.lbl_wallThickness.Location = new System.Drawing.Point(384, 266);
+            this.lbl_wallThickness.Location = new System.Drawing.Point(372, 263);
             this.lbl_wallThickness.Name = "lbl_wallThickness";
             this.lbl_wallThickness.Size = new System.Drawing.Size(70, 19);
             this.lbl_wallThickness.TabIndex = 13;
@@ -153,7 +161,7 @@ namespace Hello_World.UI
             // 
             // btn_misla
             // 
-            this.btn_misla.Location = new System.Drawing.Point(17, 367);
+            this.btn_misla.Location = new System.Drawing.Point(17, 396);
             this.btn_misla.Name = "btn_misla";
             this.btn_misla.Size = new System.Drawing.Size(75, 23);
             this.btn_misla.TabIndex = 15;
@@ -163,7 +171,7 @@ namespace Hello_World.UI
             // 
             // btn_edge
             // 
-            this.btn_edge.Location = new System.Drawing.Point(99, 367);
+            this.btn_edge.Location = new System.Drawing.Point(99, 396);
             this.btn_edge.Name = "btn_edge";
             this.btn_edge.Size = new System.Drawing.Size(75, 23);
             this.btn_edge.TabIndex = 16;
@@ -173,7 +181,7 @@ namespace Hello_World.UI
             // 
             // btn_top
             // 
-            this.btn_top.Location = new System.Drawing.Point(181, 366);
+            this.btn_top.Location = new System.Drawing.Point(181, 395);
             this.btn_top.Name = "btn_top";
             this.btn_top.Size = new System.Drawing.Size(75, 23);
             this.btn_top.TabIndex = 17;
@@ -183,7 +191,7 @@ namespace Hello_World.UI
             // 
             // btn_doDetail
             // 
-            this.btn_doDetail.Location = new System.Drawing.Point(427, 366);
+            this.btn_doDetail.Location = new System.Drawing.Point(427, 395);
             this.btn_doDetail.Name = "btn_doDetail";
             this.btn_doDetail.Size = new System.Drawing.Size(75, 23);
             this.btn_doDetail.TabIndex = 18;
@@ -193,7 +201,7 @@ namespace Hello_World.UI
             // 
             // btn_steel
             // 
-            this.btn_steel.Location = new System.Drawing.Point(336, 366);
+            this.btn_steel.Location = new System.Drawing.Point(336, 395);
             this.btn_steel.Name = "btn_steel";
             this.btn_steel.Size = new System.Drawing.Size(85, 23);
             this.btn_steel.TabIndex = 19;
@@ -201,11 +209,31 @@ namespace Hello_World.UI
             this.btn_steel.UseVisualStyleBackColor = true;
             this.btn_steel.Click += new System.EventHandler(this.btn_steel_Click);
             // 
+            // lbl_passarela
+            // 
+            this.lbl_passarela.AutoSize = true;
+            this.lbl_passarela.Location = new System.Drawing.Point(13, 347);
+            this.lbl_passarela.Name = "lbl_passarela";
+            this.lbl_passarela.Size = new System.Drawing.Size(133, 19);
+            this.lbl_passarela.TabIndex = 21;
+            this.lbl_passarela.Text = "Passarela/Pingadeira";
+            // 
+            // msktxt_passarela
+            // 
+            this.msktxt_passarela.Location = new System.Drawing.Point(152, 344);
+            this.msktxt_passarela.Name = "msktxt_passarela";
+            this.msktxt_passarela.Size = new System.Drawing.Size(43, 26);
+            this.msktxt_passarela.TabIndex = 20;
+            this.msktxt_passarela.Text = "0";
+            this.msktxt_passarela.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // MainWellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 402);
+            this.ClientSize = new System.Drawing.Size(521, 430);
+            this.Controls.Add(this.lbl_passarela);
+            this.Controls.Add(this.msktxt_passarela);
             this.Controls.Add(this.btn_steel);
             this.Controls.Add(this.btn_doDetail);
             this.Controls.Add(this.btn_top);
@@ -224,7 +252,7 @@ namespace Hello_World.UI
             this.Controls.Add(this.lbl_instruction);
             this.Controls.Add(this.picBox_supWell);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWellForm";
             this.Text = "MainWellForm";
             ((System.ComponentModel.ISupportInitialize)(this.picBox_supWell)).EndInit();
@@ -252,5 +280,7 @@ namespace Hello_World.UI
         private System.Windows.Forms.Button btn_top;
         private System.Windows.Forms.Button btn_doDetail;
         private System.Windows.Forms.Button btn_steel;
+        private System.Windows.Forms.Label lbl_passarela;
+        private System.Windows.Forms.MaskedTextBox msktxt_passarela;
     }
 }

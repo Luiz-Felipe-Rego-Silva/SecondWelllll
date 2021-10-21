@@ -5,25 +5,27 @@ namespace Structures.WellDetailer.Entities
 {
     public class Top
     {
-        public bool HasLeftEngaged  { get;  set; }
         public double Thickness { get;  set; }
         public double ExternalDiameter {get;  set;}
         public double Passarela { get;  set; }
-        public Hood Hood { get;  set; }
+        public CircularHood Hood { get;  set; }
         private Point3d[] TopInCut;
-        private double LengthSide;
-        private double WallThickness; 
+        public double LengthSide;
+        public double WallThickness; 
         public Terrain Terrain { get; private set; }
 
-        public Top (bool hasLeftEngaged, double thickness, double externalDiameter, double passarela, Hood hood, double wallThickness)
+        public Top (double thickness, double externalDiameter, double passarela, CircularHood hood, double wallThickness)
         {
-            HasLeftEngaged = hasLeftEngaged;
             Thickness = thickness;
             ExternalDiameter = externalDiameter;
             Passarela = passarela;
             Hood = hood;
             WallThickness = wallThickness;
             LengthSide = Passarela - Hood.HorizontalGap + (ExternalDiameter - Hood.InternalShiftness)/2.0;
+            TopInCut = new Point3d[16];
+        }
+        public Top() 
+        {
             TopInCut = new Point3d[16];
         }
 

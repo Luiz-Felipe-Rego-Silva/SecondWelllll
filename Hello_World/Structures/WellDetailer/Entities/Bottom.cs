@@ -21,10 +21,11 @@ namespace Structures.WellDetailer.Entities
         public Bottom()
         {
         }
-        public Bottom(double insideDiameter, double wallThickness, double thickness)
+        public Bottom(double insideDiameter, double wallThickness, double thickness, double edgeLength)
         {
             InsideDiameter = insideDiameter;
             WallThickness = wallThickness;
+            EdgeLength = edgeLength;
             Thickness = thickness;
             Diameter = InsideDiameter + 2 * (WallThickness + EdgeLength);
             BottomInCut = new Point3d[8];
@@ -53,7 +54,8 @@ namespace Structures.WellDetailer.Entities
         {
             DoPointsInBottomCut(startPointOfBottomCut);
             DrawLinesBottomInCut();
-            LeanConcrete.DrawLeanConcreteInCut(startPointOfBottomCut);
+            LeanConcrete = new LeanConcrete(Diameter);
+            LeanConcrete.DrawLeanConcreteInCut(new Point3d(startPointOfBottomCut.X - EdgeLength, startPointOfBottomCut.Y - Thickness,0));
         }
 
         private void DoPointsInBottomCut(Point3d startPointOfBottomCut) 
