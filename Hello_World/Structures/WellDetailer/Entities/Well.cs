@@ -49,8 +49,9 @@ namespace Structures.WellDetailer.Entities
         }
 
         public void DrawWellUpperView(Point3d startUpperView) 
-        { 
-
+        {
+            Wall.DrawWallUpperView(startUpperView);
+            Top.DrawTopUpperView(startUpperView);
         }
         public void DrawGeneralAnnotations(Point3d bluePrintCenter) 
         {

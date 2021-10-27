@@ -43,7 +43,8 @@ namespace Structures.WellDetailer.Entities
         public void DrawWallUpperView(Point3d upperViewCenter)
         {
             string insideLayer = "1";
-            Utilities.DrawingShapes.DrawCircle(upperViewCenter, InternalDiameter, insideLayer); //InsideWall colocar tracejado
+            string lineType = "DASHED";
+            Utilities.DrawingShapes.DrawCircle(upperViewCenter, InternalDiameter, insideLayer, lineType); //InsideWall colocar tracejado
 
             string outsideLayer = "3";
             Utilities.DrawingShapes.DrawCircle(upperViewCenter, InternalDiameter + 2 * Thickness, outsideLayer); //OutsideWall
@@ -58,7 +59,6 @@ namespace Structures.WellDetailer.Entities
         {
             DoPointsAtWallInCut(startPointOfWallCut);
             DrawLinesWallInCut();
-
         }
 
         private void DoPointsAtWallInCut(Point3d startPoint)
@@ -92,55 +92,6 @@ namespace Structures.WellDetailer.Entities
 
         public void DrawProjectionLinesInCut(Misla misla, Top top, Point3d CenterPoint)
         {
-            double spacingLines = 0;
-            string layer = "1";
-            int i = 1;
-            do
-            {
-                Point3d leftTopPoint = new Point3d(CenterPoint.X + spacingLines, CenterPoint.Y - SuperiorDescount(top, spacingLines), 0);
-                Point3d rightTopPoint = new Point3d(CenterPoint.X - spacingLines, CenterPoint.Y - SuperiorDescount(top, -spacingLines), 0);
-
-                Point3d lefBottomPoint = new Point3d(CenterPoint.X + spacingLines, CenterPoint.Y - Heigth + InferiorAmount(misla, spacingLines), 0);
-                Point3d rightBottomPoint = new Point3d(CenterPoint.X - spacingLines, CenterPoint.Y - Heigth + InferiorAmount(misla, -spacingLines), 0);
-                i++;
-                Utilities.DrawingShapes.DrawLine(leftTopPoint, lefBottomPoint, layer);
-                Utilities.DrawingShapes.DrawLine(rightTopPoint, rightBottomPoint, layer);
-                spacingLines = InternalDiameter / Math.Pow(2, i);
-
-            } while (spacingLines > MinimumProjectonLinesSpacing);
-        }
-        private double SuperiorDescount(Top top, double position)
-        {
-            double startHood = top.LengthSide - top.Passarela - top.WallThickness + top.Hood.HorizontalGap;
-            double endHood = startHood + top.Hood.InternalShiftness;
-
-            if (position < startHood)
-                return 0.0;
-            else
-                if (position > endHood)
-                return 0.0;
-            else
-                return top.Thickness;
-        }
-
-        private double InferiorAmount(Misla misla, double position)
-        {
-            double LeftMislaPosition = (-misla.Length / 2.0) + misla.Length;
-            double RightMislaPosition = (misla.Length / 2.0) - misla.Length;
-
-            if (position > LeftMislaPosition)
-            {
-                if (position < RightMislaPosition)
-                    return 0;
-                else
-                {
-                    return (misla.Heigth / misla.Length) * (position - RightMislaPosition);
-                }
-            }
-            else
-            {
-                return (misla.Heigth / misla.Length) * (LeftMislaPosition - position);
-            }
         }
 
         private int CalculateNumberOfProjectionLines()

@@ -58,7 +58,6 @@ namespace Hello_World.UI
 
         private void btn_doDetail_Click(object sender, EventArgs e)
         {
-            
             //Construindo Parede
             double internalDiameter = Convert.ToDouble(msktxt_insideDiameter.Text);
             double wallThickness = Convert.ToDouble(msktxt_wallThickness.Text);
@@ -70,14 +69,14 @@ namespace Hello_World.UI
             
             //Construindo a Laje
             double topThickness = Convert.ToDouble(msktxt_topThickness.Text);
-            double TopExternalDiameter = internalDiameter + 2 * wallThickness;
             double passarela = Convert.ToDouble(msktxt_passarela.Text);
+            double TopExternalDiameter = internalDiameter + 2 * wallThickness + 2 * passarela;
             double lengthSide = Convert.ToDouble(msktxt_sideLength.Text);
             Well.Top.ExternalDiameter = TopExternalDiameter;
             Well.Top.Thickness = topThickness;
             Well.Top.Passarela = passarela;
             Well.Top.WallThickness = wallThickness;
-            Well.Top.LengthSide = lengthSide;
+            Well.Top.LengthSide = Well.Top.Hood.Position.X;
            
             //Definição de Pontos
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");

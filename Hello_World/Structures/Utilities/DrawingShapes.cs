@@ -19,6 +19,15 @@ namespace Structures.Utilities
             Circle.Layer = layer;
             DrawingUtilities.AddToDrawing(Circle);
         }
+        public static void DrawCircle(Point3d center, double diameter, string layer, string lineType)
+        {
+            Circle Circle = new Circle();
+            Circle.Center = center;
+            Circle.Radius = diameter / 2.0;
+            Circle.Layer = layer;
+            Circle.Linetype = lineType; 
+            DrawingUtilities.AddToDrawing(Circle);
+        }
 
         public static void DrawArc(Point3d center, double diameter, double startAngle, double endAngle, string layer)
         {
@@ -36,6 +45,16 @@ namespace Structures.Utilities
         {
             Polyline line = new Polyline();
             line.Layer = layer;
+            line.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
+            line.AddVertexAt(0, new Point2d(endPoint.X, endPoint.Y), 0, 0, 0);
+
+            DrawingUtilities.AddToDrawing(line);
+        }
+        public static void DrawLine(Point3d startPoint, Point3d endPoint, string layer, string lineType)
+        {
+            Polyline line = new Polyline();
+            line.Layer = layer;
+            line.Linetype = lineType;
             line.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
             line.AddVertexAt(0, new Point2d(endPoint.X, endPoint.Y), 0, 0, 0);
 

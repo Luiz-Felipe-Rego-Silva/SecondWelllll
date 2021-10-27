@@ -41,7 +41,8 @@ namespace Structures.WellDetailer.Entities
 
         public void DrawTopUpperView(Point3d TopCenterPoint)
         {
-            Hood.DrawHoodUpperView(TopCenterPoint);
+            Point3d hoodCenterPoint = new Point3d(TopCenterPoint.X - (0.5 * ExternalDiameter - Hood.Position.X), TopCenterPoint.Y - (0.5 * ExternalDiameter - Hood.Position.Y), 0);
+            Hood.DrawHoodUpperView(hoodCenterPoint);
         }
         public void DrawTopUpperViewAnnotations()
         {
@@ -64,7 +65,7 @@ namespace Structures.WellDetailer.Entities
             TopInCut[6] = new Point3d(TopInCut[5].X, TopInCut[0].Y, 0);
             TopInCut[7] = new Point3d(TopInCut[0].X + WallThickness, TopInCut[0].Y, 0);
 
-            TopInCut[8] = new Point3d(TopInCut[0].X + ExternalDiameter, TopInCut[0].Y, 0);
+            TopInCut[8] = new Point3d(TopInCut[0].X + ExternalDiameter - 2 * Passarela, TopInCut[0].Y, 0);
             TopInCut[9] = new Point3d(TopInCut[8].X + Passarela, TopInCut[8].Y, 0);
             TopInCut[10] = new Point3d(TopInCut[9].X, TopInCut[9].Y + Thickness, 0);
             TopInCut[11] = new Point3d(TopInCut[10].X - LengthSide, TopInCut[10].Y, 0);

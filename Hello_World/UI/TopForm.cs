@@ -39,6 +39,7 @@ namespace Hello_World.UI
             Top.Hood.HorizontalGap = HorizontalGap;
             VerticalGap = Math.Round(Convert.ToDouble(msktxt_verticalGap.Text), 3);
             Top.Hood.VerticalGap = VerticalGap;
+            
 
             double posX = Convert.ToDouble(msktxt_posX.Text);
             double posY = Convert.ToDouble(msktxt_posY.Text);

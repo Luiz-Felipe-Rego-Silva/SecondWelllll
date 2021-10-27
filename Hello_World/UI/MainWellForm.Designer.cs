@@ -220,7 +220,7 @@ namespace Hello_World.UI
             // 
             // msktxt_passarela
             // 
-            this.msktxt_passarela.Location = new System.Drawing.Point(152, 344);
+            this.msktxt_passarela.Location = new System.Drawing.Point(164, 344);
             this.msktxt_passarela.Name = "msktxt_passarela";
             this.msktxt_passarela.Size = new System.Drawing.Size(43, 26);
             this.msktxt_passarela.TabIndex = 20;

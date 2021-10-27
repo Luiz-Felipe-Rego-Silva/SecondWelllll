@@ -10,8 +10,8 @@ namespace WellDetailing.WellDetailer.Entities
 {
     public abstract class Hood
     {
-        public double HorizontalGap { get;  set; }
-        public double VerticalGap { get;  set; }
+        public double HorizontalGap {get;  set; }
+        public double VerticalGap {get;  set; }
         public double InternalShiftness {get;  set;}
         public Point3d Position {get;  set;} 
 
