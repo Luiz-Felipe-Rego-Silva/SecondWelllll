@@ -61,15 +61,14 @@ namespace Structures.WellDetailer.Entities
 
         public void DrawWellAACut(Point3d StartPointAACut) 
         {
-            Point3d topAndWallStartPoint = new Point3d(StartPointAACut.X + Top.Passarela + 300, StartPointAACut.Y - Top.Thickness - 170, 0);
+            Point3d topAndWallStartPoint = new Point3d(StartPointAACut.X + Top.Passarela, StartPointAACut.Y - Top.Thickness, 0);
             Point3d bottomStartPoint = new Point3d(topAndWallStartPoint.X, topAndWallStartPoint.Y - Wall.Heigth, 0);
             Point3d mislaStartPoint = new Point3d(bottomStartPoint.X + Wall.Thickness, bottomStartPoint.Y, 0);
-            Point3d topCenter = new Point3d(topAndWallStartPoint.X + 0.5 * Top.ExternalDiameter, topAndWallStartPoint.Y + Top.Thickness, 0);
             Top.DrawTopAACut(topAndWallStartPoint);
             
             Wall.DrawAACut(topAndWallStartPoint);
             Wall.DrawAACutAnnotations(StartPointAACut);
-            Wall.DrawProjectionLinesInCut(Misla, Top, topCenter);
+
 
             Bottom.DrawAACut(bottomStartPoint);
             Bottom.DrawAACutAnnotations();

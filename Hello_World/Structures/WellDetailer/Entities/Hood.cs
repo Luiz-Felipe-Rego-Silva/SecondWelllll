@@ -8,27 +8,28 @@ using Structures.WellDetailer.Entities;
 
 namespace WellDetailing.WellDetailer.Entities
 {
-    public abstract class Hood
+    public class Hood
     {
-        public double HorizontalGap {get;  set; }
-        public double VerticalGap {get;  set; }
-        public double InternalShiftness {get;  set;}
-        public Point3d Position {get;  set;} 
+        public double HorizontalGap { get; private set; }
+        public double VerticalGap { get; private set; }
+        public Point3d Position { get; private set; }
+        public double InternalShiftness { get; protected set; }
+        public double SecondShiftness { get; protected set; }
 
         public Hood()
         {
         }
-        public Hood(double horizontalGap, double verticalGap, double internalShiftness, Point3d position)
+        public Hood(double horizontalGap, double verticalGap, Point3d position)
         {
             HorizontalGap = horizontalGap;
             VerticalGap = verticalGap;
-            InternalShiftness = internalShiftness;
-            Position = position; 
+            Position = position;
         }
 
-        public abstract void DrawHoodUpperView(Point3d CenterHoodInUpperView);
+        public virtual void DrawHoodUpperView(Point3d CenterHoodInUpperView) { }
 
-        public abstract void DrawHoodUpperViewAnnotations(Point3d CenterHoodInUpperView);
-
+        public virtual void DrawHoodUpperViewAnnotations(Point3d CenterHoodInUpperView) { }
+        public virtual void DrawAACut(Point3d startAACut) { }
+        public virtual void DrawAACutAnnotations(Point3d startAACut) { }
     }
 }

@@ -15,7 +15,7 @@ namespace Structures.WellDetailer.Entities
         public double ExternalDiameter { private set; get; }
         public double Thickness { private set; get; }
         public double Heigth { private set; get; }
-        public Point3d[] WallInCut { private set; get; }
+        private Point3d[] WallInCut;
         private const double MinimumProjectonLinesSpacing = 5.0;
 
 

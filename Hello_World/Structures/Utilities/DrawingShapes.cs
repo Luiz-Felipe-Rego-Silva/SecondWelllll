@@ -29,9 +29,9 @@ namespace Structures.Utilities
             DrawingUtilities.AddToDrawing(Circle);
         }
 
-        public static void DrawArc(Point3d center, double diameter, double startAngle, double endAngle, string layer)
+        public static void DrawArc(Point3d center, double radius, double startAngle, double endAngle, string layer)
         {
-            Arc Arc = new Arc(center, diameter / 2.0, DegrresToRadians(startAngle), DegrresToRadians(endAngle));
+            Arc Arc = new Arc(center, radius, DegrresToRadians(startAngle), DegrresToRadians(endAngle));
             Arc.Layer = layer;
             DrawingUtilities.AddToDrawing(Arc);
         }

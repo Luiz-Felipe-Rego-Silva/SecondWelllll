@@ -57,18 +57,31 @@
     <Reference Include="AcCoreMgd">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\accoremgd.dll</HintPath>
     </Reference>
     <Reference Include="AcDbMgd">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\acdbmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AcDxPublishUi">
+      <HintPath>..\..\..\Suporte\LIBS\AcDxPublishUi.dll</HintPath>
     </Reference>
     <Reference Include="AcMgd">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\acmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AcMr">
+      <HintPath>..\..\..\Suporte\LIBS\AcMr.DLL</HintPath>
+    </Reference>
+    <Reference Include="AdUiPalettes">
+      <HintPath>..\..\..\Suporte\LIBS\AdUiPalettes.dll</HintPath>
     </Reference>
     <Reference Include="AdWindows">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\AdWindows.dll</HintPath>
     </Reference>
     <Reference Include="AcWindows">
       <SpecificVersion>False</SpecificVersion>
@@ -77,10 +90,12 @@
     <Reference Include="AcTcMgd">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\AcTcMgd.dll</HintPath>
     </Reference>
     <Reference Include="AcDx">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\AcDx.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop.Common">
       <SpecificVersion>False</SpecificVersion>
@@ -97,6 +112,7 @@
     <Reference Include="AcCui">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+      <HintPath>..\..\..\Suporte\LIBS\accui.dll</HintPath>
     </Reference>
     <!--ACA References Begin-->
     <!--ACA Refences End-->
@@ -118,6 +134,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Commands.resx</DependentUpon>
     </Compile>
+    <Compile Include="Structures\WellDetailer\Entities\Enums\Direction.cs" />
     <Compile Include="UI\EdgeForm.cs">
       <SubType>Form</SubType>
     </Compile>

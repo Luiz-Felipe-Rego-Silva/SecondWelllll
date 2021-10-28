@@ -231,7 +231,7 @@ namespace Hello_World.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 430);
+            this.ClientSize = new System.Drawing.Size(512, 430);
             this.Controls.Add(this.lbl_passarela);
             this.Controls.Add(this.msktxt_passarela);
             this.Controls.Add(this.btn_steel);

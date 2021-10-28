@@ -6,25 +6,19 @@ namespace WellDetailing.WellDetailer.Entities
     public class CircularHood : Hood
     {
         public double Diameter { get; private set; }
-
-        public CircularHood() 
-        {
-        }
-
-        public CircularHood(double horizontalGap, double verticalGap, double internalShiftness, Point3d position, double diameter)
-        : base(horizontalGap, verticalGap, internalShiftness, position)
+        public CircularHood(double horizontalGap, double verticalGap, Point3d position, double diameter)
+        : base(horizontalGap, verticalGap, position)
         {
             Diameter = diameter;
+            InternalShiftness = Diameter;
         }
-
-
         public override void DrawHoodUpperView(Point3d HoodCenter)
         {
             string insidelayer = "2";
-            DrawingShapes.DrawCircle(HoodCenter,InternalShiftness, insidelayer);
+            DrawingShapes.DrawCircle(HoodCenter, Diameter, insidelayer);
 
             string outsidelayer = "3";
-            double externalSideHood = InternalShiftness + 2*HorizontalGap;
+            double externalSideHood = Diameter + 2*HorizontalGap;
             DrawingShapes.DrawCircle(HoodCenter, externalSideHood, outsidelayer);
         }
 
@@ -32,6 +26,11 @@ namespace WellDetailing.WellDetailer.Entities
         {
 
         }
+        public override void DrawAACut(Point3d startAACut)
+        {
+            
+        }
+
 
 
     }

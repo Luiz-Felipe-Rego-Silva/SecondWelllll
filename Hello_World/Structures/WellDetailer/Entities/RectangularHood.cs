@@ -1,5 +1,6 @@
 using Autodesk.AutoCAD.Geometry;
 using Structures.Utilities;
+using System;
 
 namespace WellDetailing.WellDetailer.Entities
 {
@@ -11,11 +12,13 @@ namespace WellDetailing.WellDetailer.Entities
         public RectangularHood()
         {
         }
-        public RectangularHood(double horizontalGap, double verticalGap, double internalShiftness, Point3d position, double horizontalLength, double verticalLength) 
-        : base(horizontalGap, verticalGap, internalShiftness, position) 
+        public RectangularHood(double horizontalGap, double verticalGap, Point3d position, double horizontalLength, double verticalLength) 
+        : base(horizontalGap, verticalGap, position) 
         {
             HorizontalLength = horizontalLength;
             VerticalLength = verticalLength;
+            InternalShiftness = HorizontalLength;
+            SecondShiftness = VerticalLength;
         }
 
         public override void DrawHoodUpperView(Point3d CenterHoodInUpperView)
@@ -38,8 +41,9 @@ namespace WellDetailing.WellDetailer.Entities
             Point3d RightUp = new Point3d(HoodCenter.X + HorizontalLength/2.0, HoodCenter.Y + VerticalLength/2.0, 0);
 
             string layer = "1";
-            DrawingShapes.DrawLine(LeftUp, RightDown, layer);
-            DrawingShapes.DrawLine(RightUp, LeftDown, layer);
+            string lineType = "DASHED";
+            DrawingShapes.DrawLine(LeftUp, RightDown, layer, lineType);
+            DrawingShapes.DrawLine(RightUp, LeftDown, layer, lineType);
         }
 
         public override void DrawHoodUpperViewAnnotations(Point3d CenterHoodInUpperView)
