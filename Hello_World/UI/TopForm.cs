@@ -18,11 +18,11 @@ namespace Hello_World.UI
         public double HorizontalGap { get; private set; }
         public double VerticalGap { get; private set; }
         public double InternalHoodDiameter { get; private set; }
-        private Top Top;
+        private Top TopWell;
         public TopForm(Top top)
         {
             InitializeComponent();
-            Top = top;
+            TopWell = top;
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace Hello_World.UI
             double posX = Convert.ToDouble(msktxt_posX.Text);
             double posY = Convert.ToDouble(msktxt_posY.Text);
             Point3d Position = new Point3d(posX, posY, 0);
-            Top.Hood = new CircularHood(HorizontalGap, VerticalGap, Position, InternalHoodDiameter);
+            TopWell.Hood = new CircularHood(HorizontalGap, VerticalGap, Position, InternalHoodDiameter);
             this.Hide();
         }
     }

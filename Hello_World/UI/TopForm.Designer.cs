@@ -48,7 +48,7 @@ namespace Hello_World.UI
             // 
             this.picBox_hood.Image = ((System.Drawing.Image)(resources.GetObject("picBox_hood.Image")));
             this.picBox_hood.Location = new System.Drawing.Point(6, 48);
-            this.picBox_hood.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBox_hood.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_hood.Name = "picBox_hood";
             this.picBox_hood.Size = new System.Drawing.Size(280, 220);
             this.picBox_hood.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -59,7 +59,7 @@ namespace Hello_World.UI
             // 
             this.picBox_gaps.Image = ((System.Drawing.Image)(resources.GetObject("picBox_gaps.Image")));
             this.picBox_gaps.Location = new System.Drawing.Point(303, 49);
-            this.picBox_gaps.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picBox_gaps.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_gaps.Name = "picBox_gaps";
             this.picBox_gaps.Size = new System.Drawing.Size(256, 219);
             this.picBox_gaps.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -79,47 +79,52 @@ namespace Hello_World.UI
             // msktxt_posX
             // 
             this.msktxt_posX.Location = new System.Drawing.Point(39, 233);
-            this.msktxt_posX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_posX.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_posX.Name = "msktxt_posX";
             this.msktxt_posX.Size = new System.Drawing.Size(53, 26);
             this.msktxt_posX.TabIndex = 3;
+            this.msktxt_posX.Text = "0";
             // 
             // msktxt_posY
             // 
             this.msktxt_posY.Location = new System.Drawing.Point(223, 185);
-            this.msktxt_posY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_posY.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_posY.Name = "msktxt_posY";
             this.msktxt_posY.Size = new System.Drawing.Size(53, 26);
             this.msktxt_posY.TabIndex = 4;
+            this.msktxt_posY.Text = "-15";
             // 
             // msktxt_insideDiameter
             // 
             this.msktxt_insideDiameter.Location = new System.Drawing.Point(258, 94);
-            this.msktxt_insideDiameter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_insideDiameter.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_insideDiameter.Name = "msktxt_insideDiameter";
             this.msktxt_insideDiameter.Size = new System.Drawing.Size(37, 26);
             this.msktxt_insideDiameter.TabIndex = 5;
+            this.msktxt_insideDiameter.Text = "100";
             // 
             // msktxt_horizontalGap
             // 
             this.msktxt_horizontalGap.Location = new System.Drawing.Point(384, 58);
-            this.msktxt_horizontalGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_horizontalGap.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_horizontalGap.Name = "msktxt_horizontalGap";
             this.msktxt_horizontalGap.Size = new System.Drawing.Size(48, 26);
             this.msktxt_horizontalGap.TabIndex = 6;
+            this.msktxt_horizontalGap.Text = "10";
             // 
             // msktxt_verticalGap
             // 
             this.msktxt_verticalGap.Location = new System.Drawing.Point(510, 158);
-            this.msktxt_verticalGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_verticalGap.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_verticalGap.Name = "msktxt_verticalGap";
             this.msktxt_verticalGap.Size = new System.Drawing.Size(49, 26);
             this.msktxt_verticalGap.TabIndex = 7;
+            this.msktxt_verticalGap.Text = "10";
             // 
             // btn_save
             // 
             this.btn_save.Location = new System.Drawing.Point(447, 276);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(4);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(112, 34);
             this.btn_save.TabIndex = 8;
@@ -130,7 +135,7 @@ namespace Hello_World.UI
             // btn_cancel
             // 
             this.btn_cancel.Location = new System.Drawing.Point(327, 276);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(112, 34);
             this.btn_cancel.TabIndex = 9;
@@ -154,7 +159,7 @@ namespace Hello_World.UI
             this.Controls.Add(this.picBox_gaps);
             this.Controls.Add(this.picBox_hood);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TopForm";
             this.Text = "TopForm";
             ((System.ComponentModel.ISupportInitialize)(this.picBox_hood)).EndInit();

@@ -89,7 +89,9 @@ namespace Hello_World.UI
             this.msktxt_topThickness.Name = "msktxt_topThickness";
             this.msktxt_topThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_topThickness.TabIndex = 6;
+            this.msktxt_topThickness.Text = "25";
             this.msktxt_topThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.msktxt_topThickness.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.msktxt_topThickness_MaskInputRejected);
             // 
             // msktxt_bottomThickness
             // 
@@ -97,6 +99,7 @@ namespace Hello_World.UI
             this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
             this.msktxt_bottomThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_bottomThickness.TabIndex = 7;
+            this.msktxt_bottomThickness.Text = "30";
             this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_wallHeigth
@@ -105,6 +108,7 @@ namespace Hello_World.UI
             this.msktxt_wallHeigth.Name = "msktxt_wallHeigth";
             this.msktxt_wallHeigth.Size = new System.Drawing.Size(43, 26);
             this.msktxt_wallHeigth.TabIndex = 8;
+            this.msktxt_wallHeigth.Text = "300";
             this.msktxt_wallHeigth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_sideLength
@@ -121,6 +125,7 @@ namespace Hello_World.UI
             this.msktxt_insideDiameter.Name = "msktxt_insideDiameter";
             this.msktxt_insideDiameter.Size = new System.Drawing.Size(43, 26);
             this.msktxt_insideDiameter.TabIndex = 10;
+            this.msktxt_insideDiameter.Text = "150";
             this.msktxt_insideDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_wallThickness
@@ -129,6 +134,7 @@ namespace Hello_World.UI
             this.msktxt_wallThickness.Name = "msktxt_wallThickness";
             this.msktxt_wallThickness.Size = new System.Drawing.Size(43, 26);
             this.msktxt_wallThickness.TabIndex = 11;
+            this.msktxt_wallThickness.Text = "20";
             this.msktxt_wallThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_insideDiameter

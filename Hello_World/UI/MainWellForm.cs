@@ -83,5 +83,10 @@ namespace Hello_World.UI
             Well.DrawWellAACut(AAStartCut);
             Well.DrawWellUpperView(upperViewCenter);
         }
+
+        private void msktxt_topThickness_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }

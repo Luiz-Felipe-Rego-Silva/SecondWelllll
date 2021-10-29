@@ -64,17 +64,21 @@ namespace Structures.WellDetailer.Entities
             Point3d topAndWallStartPoint = new Point3d(StartPointAACut.X + Top.Passarela, StartPointAACut.Y - Top.Thickness, 0);
             Point3d bottomStartPoint = new Point3d(topAndWallStartPoint.X, topAndWallStartPoint.Y - Wall.Heigth, 0);
             Point3d mislaStartPoint = new Point3d(bottomStartPoint.X + Wall.Thickness, bottomStartPoint.Y, 0);
-            Top.DrawTopAACut(topAndWallStartPoint);
-            
-            Wall.DrawAACut(topAndWallStartPoint);
-            Wall.DrawAACutAnnotations(StartPointAACut);
 
+            Top.DrawTopAACut(topAndWallStartPoint);
+            Top.DrawTopAACutAnnotation(Bottom.EdgeLength);
+
+            Wall.DrawAACut(topAndWallStartPoint);
+            Wall.DrawAACutAnnotations(Bottom.EdgeLength);
 
             Bottom.DrawAACut(bottomStartPoint);
             Bottom.DrawAACutAnnotations();
 
-            if (Misla.Length > 1 && Misla.Heigth > 1) { Misla.DrawMislaAACut(mislaStartPoint, Wall.InternalDiameter - 2 * Misla.Length); }
-            
+            if (Misla.Length > 1 && Misla.Heigth > 1) 
+            { 
+                Misla.DrawMislaAACut(mislaStartPoint, Wall.InternalDiameter - 2 * Misla.Length);
+                Misla.DrawAACutAnnotations();
+            }
         }
     }
 }

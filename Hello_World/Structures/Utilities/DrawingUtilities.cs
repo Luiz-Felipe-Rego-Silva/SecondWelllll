@@ -49,5 +49,6 @@ namespace Structures.Utilities
 
             return pointResult.Value;
         }
+
     }
 }

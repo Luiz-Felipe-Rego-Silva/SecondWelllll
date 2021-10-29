@@ -75,6 +75,7 @@ namespace Hello_World.UI
             this.msktxt_mislaHeigth.Name = "msktxt_mislaHeigth";
             this.msktxt_mislaHeigth.Size = new System.Drawing.Size(36, 20);
             this.msktxt_mislaHeigth.TabIndex = 3;
+            this.msktxt_mislaHeigth.Text = "30";
             // 
             // mskdtxt_mislaLength
             // 
@@ -82,6 +83,7 @@ namespace Hello_World.UI
             this.mskdtxt_mislaLength.Name = "mskdtxt_mislaLength";
             this.mskdtxt_mislaLength.Size = new System.Drawing.Size(46, 20);
             this.mskdtxt_mislaLength.TabIndex = 4;
+            this.mskdtxt_mislaLength.Text = "30";
             // 
             // lbl_instruction
             // 

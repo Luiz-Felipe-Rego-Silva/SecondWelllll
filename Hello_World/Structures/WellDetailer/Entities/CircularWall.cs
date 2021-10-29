@@ -10,16 +10,12 @@ namespace Structures.WellDetailer.Entities
 {
     public class CircularWall
     {
-        //Instancias
         public double InternalDiameter { private set; get; }
         public double ExternalDiameter { private set; get; }
         public double Thickness { private set; get; }
         public double Heigth { private set; get; }
         private Point3d[] WallInCut;
         private const double MinimumProjectonLinesSpacing = 5.0;
-
-
-
         public CircularWall(double internalDiameter, double thickness, double heigth)
         {
             InternalDiameter = internalDiameter;
@@ -60,7 +56,6 @@ namespace Structures.WellDetailer.Entities
             DoPointsAtWallInCut(startPointOfWallCut);
             DrawLinesWallInCut();
         }
-
         private void DoPointsAtWallInCut(Point3d startPoint)
         {
             //Consultar DWG de referência
@@ -76,7 +71,6 @@ namespace Structures.WellDetailer.Entities
             WallInCut[6] = new Point3d(WallInCut[4].X + InternalDiameter, WallInCut[4].Y, 0);
             WallInCut[7] = new Point3d(WallInCut[6].X, WallInCut[1].Y, 0);
         }
-
         private void DrawLinesWallInCut()
         {
             string layer = "4";
@@ -89,23 +83,22 @@ namespace Structures.WellDetailer.Entities
             }
             catch (System.Exception e) { _ = e.Message; }
         }
-
         public void DrawProjectionLinesInCut(Misla misla, Top top, Point3d CenterPoint)
         {
         }
-
         private int CalculateNumberOfProjectionLines()
         {
             double estimateNumberOfLines = Math.Log(1 / MinimumProjectonLinesSpacing) / Math.Log(2.0);
             int numberOfLines = (int)estimateNumberOfLines;
             return numberOfLines;
         }
-        public void DrawAACutAnnotations(Point3d startPointOfWallCut)
+        public void DrawAACutAnnotations(double edgeLength)
         {
+            Polyline externalWall = new Polyline();
+            externalWall.AddVertexAt(0, new Point2d(WallInCut[0].X, WallInCut[0].Y), 0, 0, 0);
+            externalWall.AddVertexAt(1, new Point2d(WallInCut[1].X, WallInCut[1].Y), 0, 0, 0);
 
+            Utilities.DrawingShapes.AddQuotesInPolylines(externalWall, -15.0 - edgeLength, 0.0);
         }
-
-
-
     }
 }

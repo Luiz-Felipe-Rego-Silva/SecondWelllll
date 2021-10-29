@@ -1,4 +1,5 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,10 @@ namespace Structures.WellDetailer.Entities
         }
         public void DrawAACutAnnotations()
         {
+            Polyline thiknessLine = new Polyline();
+            thiknessLine.AddVertexAt(0, new Point2d(BottomInCut[1].X, BottomInCut[1].Y), 0, 0, 0);
+            thiknessLine.AddVertexAt(1, new Point2d(BottomInCut[2].X, BottomInCut[2].Y), 0, 0, 0);
+            Utilities.DrawingShapes.AddQuotesInPolylines(thiknessLine, - 15.0, 0);
         }
     }
 }

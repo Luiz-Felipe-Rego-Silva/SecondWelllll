@@ -79,7 +79,7 @@ namespace Structures.WellDetailer.Entities
         }
         public void DrawMislaHatch()
         {
-            Document document = Application.DocumentManager.MdiActiveDocument;
+            /*Document document = Application.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
             using (Transaction transaction = database.TransactionManager.StartTransaction())
             {
@@ -102,7 +102,7 @@ namespace Structures.WellDetailer.Entities
                         Hatch mislaHatch = new Hatch() { Layer = "1", PatternScale = 2.0 };
 
                         blockTableRecord.AppendEntity(mislaHatch);
-                        transaction.AddNewlyCreatedDBObject(mislaHatch, false);
+                        transaction.AddNewlyCreatedDBObject(mislaHatch, true);
 
                         mislaHatch.SetHatchPattern(HatchPatternType.PreDefined, "AR-CONC");
                         mislaHatch.Associative = true;
@@ -112,32 +112,22 @@ namespace Structures.WellDetailer.Entities
                     transaction.Commit();
                 }
 
-            }
-
-
-            //------------------------------------------------------------------------------------------------------------------------------------------------------------\\
-            /*Hatch leftMislaHatch = new Hatch() { Layer = "1", PatternScale = 2.0 };
-            Hatch rigthMislaHatch = new Hatch() { Layer = "1", PatternScale = 2.0 };
-            leftMislaHatch.SetHatchPattern(HatchPatternType.PreDefined, "AR-CONC");
-            rigthMislaHatch.SetHatchPattern(HatchPatternType.PreDefined, "AR-CONC");
-
-
-            Polyline rigthBoundary = new Polyline();
-            rigthBoundary.AddVertexAt(0, new Point2d(MislaInCut[3].X, MislaInCut[3].Y), 0, 0, 0);
-            rigthBoundary.AddVertexAt(1, new Point2d(MislaInCut[4].X, MislaInCut[4].Y), 0, 0, 0);
-            rigthBoundary.AddVertexAt(2, new Point2d(MislaInCut[5].X, MislaInCut[5].Y), 0, 0, 0);
-            rigthBoundary.AddVertexAt(3, new Point2d(MislaInCut[3].X, MislaInCut[3].Y), 0, 0, 0);
-            rigthHatchBoundary.Add(rigthBoundary.ObjectId);
-
-
-            rigthMislaHatch.AppendLoop(HatchLoopTypes.Outermost, rigthHatchBoundary);
-            Utilities.DrawingUtilities.AddToDrawing(leftMislaHatch);
-            Utilities.DrawingUtilities.AddToDrawing(rigthMislaHatch);*/
+            }*/
         }
 
         public void DrawAACutAnnotations()
         {
+            Polyline heigthLine = new Polyline();
+            Polyline lengthLine = new Polyline();
 
+            heigthLine.AddVertexAt(0, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
+            heigthLine.AddVertexAt(1, new Point2d(MislaInCut[1].X, MislaInCut[1].Y), 0, 0, 0);
+
+            lengthLine.AddVertexAt(0, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
+            lengthLine.AddVertexAt(1, new Point2d(MislaInCut[2].X, MislaInCut[2].Y), 0, 0, 0);
+
+            Utilities.DrawingShapes.AddQuotesInPolylines(heigthLine, Length + 20.0, 0.0);
+            Utilities.DrawingShapes.AddQuotesInPolylines(lengthLine, 0.0, Heigth + 15.0);
         }
         public bool HasMisla()
         {

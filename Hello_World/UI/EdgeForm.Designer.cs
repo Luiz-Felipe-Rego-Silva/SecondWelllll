@@ -42,7 +42,7 @@ namespace Hello_World.UI
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(13, 32);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(200, 182);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -62,15 +62,16 @@ namespace Hello_World.UI
             // msktxt_edgeLength
             // 
             this.msktxt_edgeLength.Location = new System.Drawing.Point(115, 88);
-            this.msktxt_edgeLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.msktxt_edgeLength.Margin = new System.Windows.Forms.Padding(4);
             this.msktxt_edgeLength.Name = "msktxt_edgeLength";
             this.msktxt_edgeLength.Size = new System.Drawing.Size(52, 26);
             this.msktxt_edgeLength.TabIndex = 2;
+            this.msktxt_edgeLength.Text = "20";
             // 
             // btn_save
             // 
             this.btn_save.Location = new System.Drawing.Point(242, 180);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(4);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(112, 34);
             this.btn_save.TabIndex = 3;
@@ -81,7 +82,7 @@ namespace Hello_World.UI
             // btn_cancel
             // 
             this.btn_cancel.Location = new System.Drawing.Point(242, 138);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(112, 34);
             this.btn_cancel.TabIndex = 4;
@@ -100,7 +101,7 @@ namespace Hello_World.UI
             this.Controls.Add(this.lbl_instruction);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EdgeForm";
             this.Text = "EdgeForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

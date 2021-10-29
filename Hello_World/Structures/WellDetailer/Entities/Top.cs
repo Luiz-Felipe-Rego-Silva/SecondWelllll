@@ -1,4 +1,5 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using WellDetailing.WellDetailer.Entities;
 
 namespace Structures.WellDetailer.Entities
@@ -88,6 +89,21 @@ namespace Structures.WellDetailer.Entities
                 Utilities.DrawingShapes.DrawLine(TopInCut[6], TopInCut[14], layer);
             }
             catch (System.Exception e) { _ = e.Message; }
+        }
+        public void DrawTopAACutAnnotation(double edgeLength) 
+        {
+            Polyline thicknessLine = new Polyline();
+            thicknessLine.AddVertexAt(0, new Point2d(TopInCut[1].X, TopInCut[1].Y), 0, 0, 0);
+            thicknessLine.AddVertexAt(1, new Point2d(TopInCut[2].X, TopInCut[2].Y), 0, 0, 0);
+            Utilities.DrawingShapes.AddQuotesInPolylines(thicknessLine, -15.0 - edgeLength, 0.0);
+
+            if (Hood.VerticalGap > 5)
+            {
+                Polyline gapYLine = new Polyline();
+                gapYLine.AddVertexAt(0, new Point2d(TopInCut[3].X, TopInCut[3].Y), 0, 0, 0);
+                gapYLine.AddVertexAt(1, new Point2d(TopInCut[4].X, TopInCut[4].Y), 0, 0, 0);
+                Utilities.DrawingShapes.AddQuotesInPolylines(gapYLine, -15.0 - LengthSide - WallThickness - Passarela, 0.0);
+            }
         }
         private void DrawProjectionShiftnessLines()
         {
