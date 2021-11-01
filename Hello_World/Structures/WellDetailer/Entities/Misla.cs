@@ -79,7 +79,7 @@ namespace Structures.WellDetailer.Entities
         }
         public void DrawMislaHatch()
         {
-            /*Document document = Application.DocumentManager.MdiActiveDocument;
+            Document document = Application.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
             using (Transaction transaction = database.TransactionManager.StartTransaction())
             {
@@ -87,32 +87,27 @@ namespace Structures.WellDetailer.Entities
                 using (DocumentLock documentLock = document.LockDocument())
                 {
                     BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
-                    using (Polyline leftBoundary = new Polyline())
-                    {
-                        leftBoundary.AddVertexAt(0, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
-                        leftBoundary.AddVertexAt(1, new Point2d(MislaInCut[1].X, MislaInCut[1].Y), 0, 0, 0);
-                        leftBoundary.AddVertexAt(2, new Point2d(MislaInCut[2].X, MislaInCut[2].Y), 0, 0, 0);
-                        leftBoundary.AddVertexAt(3, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
+                    Polyline leftBoundary = new Polyline();
+                    leftBoundary.AddVertexAt(0, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
+                    leftBoundary.AddVertexAt(1, new Point2d(MislaInCut[1].X, MislaInCut[1].Y), 0, 0, 0);
+                    leftBoundary.AddVertexAt(2, new Point2d(MislaInCut[2].X, MislaInCut[2].Y), 0, 0, 0);
+                    leftBoundary.AddVertexAt(3, new Point2d(MislaInCut[0].X, MislaInCut[0].Y), 0, 0, 0);
 
-                        blockTableRecord.AppendEntity(leftBoundary);
-                        transaction.AddNewlyCreatedDBObject(leftBoundary, true);
-                        ObjectIdCollection leftHatchBoundary = new ObjectIdCollection();
-                        leftHatchBoundary.Add(leftBoundary.ObjectId);
+                    blockTableRecord.AppendEntity(leftBoundary);
+                    transaction.AddNewlyCreatedDBObject(leftBoundary, true);
+                    ObjectIdCollection leftHatchBoundary = new ObjectIdCollection();
+                    leftHatchBoundary.Add(leftBoundary.ObjectId);
 
-                        Hatch mislaHatch = new Hatch() { Layer = "1", PatternScale = 2.0 };
-
-                        blockTableRecord.AppendEntity(mislaHatch);
-                        transaction.AddNewlyCreatedDBObject(mislaHatch, true);
-
-                        mislaHatch.SetHatchPattern(HatchPatternType.PreDefined, "AR-CONC");
-                        mislaHatch.Associative = true;
-                        mislaHatch.AppendLoop(HatchLoopTypes.Outermost, leftHatchBoundary);
-                        mislaHatch.EvaluateHatch(true);
-                    }
+                    Hatch mislaHatch = new Hatch() { Layer = "1", PatternScale = 2.0 };
+                    blockTableRecord.AppendEntity(mislaHatch);
+                    mislaHatch.Associative = true;
+                    mislaHatch.SetHatchPattern(HatchPatternType.PreDefined, "AR-CONC");
+                    mislaHatch.AppendLoop(HatchLoopTypes.Outermost, leftHatchBoundary);
+                    
+                    transaction.AddNewlyCreatedDBObject(mislaHatch, true);
                     transaction.Commit();
                 }
-
-            }*/
+            }
         }
 
         public void DrawAACutAnnotations()

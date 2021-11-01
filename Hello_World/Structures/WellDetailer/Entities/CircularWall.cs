@@ -32,8 +32,8 @@ namespace Structures.WellDetailer.Entities
         }
         public void DrawWallBluePrintAnnotations(Point3d bluePrintCenter)
         {
-            //Diametro interno
-            //Diametro externo
+            Utilities.DrawingShapes.AddDiameterDimension(bluePrintCenter, InternalDiameter, 45.0);
+            Utilities.DrawingShapes.AddDiameterDimension(bluePrintCenter, ExternalDiameter, 60.0);
             //Nome: Parede {i}
         }
         public void DrawWallUpperView(Point3d upperViewCenter)
@@ -47,10 +47,8 @@ namespace Structures.WellDetailer.Entities
         }
         public void DrawWallUpperViewAnnotations(Point3d upperViewCenter)
         {
-            //Diametro interno
-            //Diametro externo
+            Utilities.DrawingShapes.AddDiameterDimension(upperViewCenter, InternalDiameter, 45.0); 
         }
-
         public void DrawAACut(Point3d startPointOfWallCut)
         {
             DoPointsAtWallInCut(startPointOfWallCut);

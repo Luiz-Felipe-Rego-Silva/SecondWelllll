@@ -31,11 +31,12 @@ namespace WellDetailing.WellDetailer.Entities
             VerticalShiftness = verticalShiftness;
         }
 
-        public void DrawLeanConcreteInCut(Point3d startPointOfLeanConcreteCut )
+        public void DrawLeanConcreteInCut(Point3d startPointOfLeanConcreteCut)
         {
             DoPointsLeanConreteInCut(startPointOfLeanConcreteCut);
             DrawLinesLeanConcreteInCut();
             DrawHatchLeanConcrete();
+            DrawLeanConcreteAnnotations();
         }
         private void DoPointsLeanConreteInCut(Point3d startPointOfLeanConcreteCut)
         {
@@ -46,16 +47,25 @@ namespace WellDetailing.WellDetailer.Entities
             LeanConcretePointsInCut[4] = new Point3d(LeanConcretePointsInCut[3].X - HorizontalShiftness, LeanConcretePointsInCut[3].Y, 0);
             LeanConcretePointsInCut[5] = new Point3d(LeanConcretePointsInCut[4].X - BottomDiameter, LeanConcretePointsInCut[4].Y, 0);
         }
-        
+
         private void DrawLinesLeanConcreteInCut()
         {
             string layer = "1";
-            for (int i = 0; i < 4; i++) {DrawingShapes.DrawLine(LeanConcretePointsInCut[i], LeanConcretePointsInCut[i+1], layer);}
+            for (int i = 0; i < 4; i++) { DrawingShapes.DrawLine(LeanConcretePointsInCut[i], LeanConcretePointsInCut[i + 1], layer); }
             DrawingShapes.DrawLine(LeanConcretePointsInCut[0], LeanConcretePointsInCut[5], layer);
         }
         private void DrawHatchLeanConcrete()
         {
             string layer = "1";
+        }
+        public void DrawLeanConcreteAnnotations()
+        {
+            Point3d starPoint = LeanConcretePointsInCut[2];
+            Point3d endPointX = new Point3d(starPoint.X - HorizontalShiftness, starPoint.Y, 0);
+            Point3d endPointY = LeanConcretePointsInCut[3];
+
+            DrawingShapes.AddAlignedDimension("1-50", starPoint, endPointX, 0, -20);
+            DrawingShapes.AddAlignedDimension("1-50", starPoint, endPointY, 20, 0);
         }
 
     }

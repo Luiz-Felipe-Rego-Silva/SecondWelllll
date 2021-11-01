@@ -44,10 +44,13 @@ namespace Structures.WellDetailer.Entities
         {
             Point3d hoodCenterPoint = new Point3d(TopCenterPoint.X + Hood.Position.X, TopCenterPoint.Y + Hood.Position.Y, 0);
             Hood.DrawHoodUpperView(hoodCenterPoint);
+            Utilities.DrawingShapes.AddDiameterDimension(TopCenterPoint, InternalDiameter + 2 * WallThickness + 2 * Passarela, 60.0);
+            
         }
-        public void DrawTopUpperViewAnnotations()
+        public void DrawTopUpperViewAnnotations(Point3d TopCenterPoint)
         {
-
+            Point3d hoodCenterPoint = new Point3d(TopCenterPoint.X + Hood.Position.X, TopCenterPoint.Y + Hood.Position.Y, 0);
+            Hood.DrawHoodUpperViewAnnotations(hoodCenterPoint);
         }
 
         public void DrawTopAACut(Point3d TopStartPoint)

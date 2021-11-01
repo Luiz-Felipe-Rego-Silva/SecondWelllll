@@ -23,7 +23,4 @@ C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.pdb
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\Hello_World.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\Hello_World.pdb
-C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\AcDxPublishUi.dll
-C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\AcMr.DLL
-C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\AdUiPalettes.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache

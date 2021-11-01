@@ -24,7 +24,8 @@ namespace WellDetailing.WellDetailer.Entities
 
         public override void DrawHoodUpperViewAnnotations(Point3d CenterHoodInUpperView)
         {
-
+            DrawingShapes.AddRadialDimension(CenterHoodInUpperView, (Diameter + 2 * HorizontalGap) * 0.5, -75.0);
+            DrawingShapes.AddRadialDimension(CenterHoodInUpperView, Diameter * 0.5, -115.0);
         }
         public override void DrawAACut(Point3d startAACut)
         {

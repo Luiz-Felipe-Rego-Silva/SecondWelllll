@@ -30,7 +30,9 @@ namespace Structures.Utilities
                         transaction.AddNewlyCreatedDBObject(entity, true);
 
                         transaction.Commit();
+                        transaction.Dispose();
                     }
+                    documentLock.Dispose();
                 }
             }
             catch (Exception e)

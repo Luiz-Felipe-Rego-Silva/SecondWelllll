@@ -1,0 +1,167 @@
+﻿'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_64\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\Acdbmgd.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AdApplicationFrame.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\adui24.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AdUiPalettes.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_64\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'c:\program files (x86)\microsoft visual studio\2019\community\common7\ide\commonextensions\microsoft\xamldiagnostics\Framework\x64\Microsoft.VisualStudio.DesignTools.WpfTap.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\mscorlib.resources\v4.0_4.0.0.0_pt-BR_b77a5c561934e089\mscorlib.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Serialization.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AdUIMgd.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\SMDiagnostics\v4.0_4.0.0.0__b77a5c561934e089\SMDiagnostics.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.ServiceModel.Internals\v4.0_4.0.0.0__31bf3856ad364e35\System.ServiceModel.Internals.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+The thread 0x23f8 has exited with code 0 (0x0).
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization.resources\v4.0_4.0.0.0_pt-BR_b77a5c561934e089\System.Runtime.Serialization.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AdWindows.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsFormsIntegration\v4.0_4.0.0.0__31bf3856ad364e35\WindowsFormsIntegration.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework.Aero2\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.Aero2.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\accoremgd.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\acmgd.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AcWindows.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcWindows.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AcCui.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework-SystemXml\v4.0_4.0.0.0__b77a5c561934e089\PresentationFramework-SystemXml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework.Aero\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.Aero.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationUI\v4.0_4.0.0.0__31bf3856ad364e35\PresentationUI.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.Linq.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework-SystemXmlLinq\v4.0_4.0.0.0__b77a5c561934e089\PresentationFramework-SystemXmlLinq.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+The thread 0x1910 has exited with code 0 (0x0).
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Users\Projeckt\AppData\Roaming\Autodesk\ApplicationPlugins\Autodesk Save to Web and Mobile.bundle\Contents\AutoCAD\Win64\AcCloudAccess.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Users\Projeckt\AppData\Roaming\Autodesk\ApplicationPlugins\Autodesk Save to Web and Mobile.bundle\Contents\AutoCAD\Win64\en-US\AcCloudAccess.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'Microsoft.GeneratedCode'. 
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\ApplicationPlugins\Struct.bundle\Contents\StructCS.Creator.dll'. 
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcAeNet.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcCloudRender.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcCustomize.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcDxWizard.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcExportLayoutUI.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcInterfere.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcLayer.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcLayerTools.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcMrUi.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcMultiLineUi.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcRecoverAll.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcScaleList.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcSeamless.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcUnderlay.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcViewTransitionsUi.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AdskConnectionPointMgd.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcCalcUi.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework-SystemCore\v4.0_4.0.0.0__b77a5c561934e089\PresentationFramework-SystemCore.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'Anonymously Hosted DynamicMethods Assembly'. 
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\UIAutomationTypes\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationTypes.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\UIAutomationProvider\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationProvider.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+System.Windows.Data Error: 40 : BindingExpression path error: 'Layer' property not found on 'object' ''EffectiveProperties' (HashCode=32888014)'. BindingExpression:Path=EffectivePropertySource.EffectiveProperties.Layer; DataItem='DataBindings' (HashCode=37640571); target element is 'RibbonComboBindings' (HashCode=37301245); target property is 'Current' (type 'Object')
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Users\Projeckt\AppData\Roaming\Autodesk\ApplicationPlugins\Autodesk Save to Web and Mobile.bundle\Contents\AutoCAD\Win64\AcCloudFsMgd.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'AcLivePreviewContext'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AcLayer.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AcTaskDialogs.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcTaskDialogs.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\Hello_World.dll'. Symbols loaded.
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Exception thrown: 'Autodesk.AutoCAD.Runtime.Exception' in accoremgd.dll
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.Polyline): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+Forgot to call Dispose? (Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord): DisposableWrapper
+The thread 0x1924 has exited with code 0 (0x0).
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\AcDialogToolTips.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Program Files\Autodesk\AutoCAD 2021\en-US\AcDialogToolTips.resources.dll'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Accessibility\v4.0_4.0.0.0__b03f5f7f11d50a3a\Accessibility.dll'. 
+System.Windows.Media.Animation Warning: 6 : Unable to perform action because the specified Storyboard was never applied to this object for interactive control.; Action='Stop'; Storyboard='System.Windows.Media.Animation.Storyboard'; Storyboard.HashCode='15038186'; Storyboard.Type='System.Windows.Media.Animation.Storyboard'; TargetElement='Autodesk.Internal.Windows.ToolTip: Autodesk.Windows.RibbonToolTip'; TargetElement.HashCode='11528032'; TargetElement.Type='Autodesk.Internal.Windows.ToolTip'
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\system32\WinMetadata\Windows.UI.winmd'. Module was built without symbols.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\system32\WinMetadata\Windows.Foundation.winmd'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.InteropServices.WindowsRuntime\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.InteropServices.WindowsRuntime.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'acad.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.WindowsRuntime\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.WindowsRuntime.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+System.Windows.Media.Animation Warning: 6 : Unable to perform action because the specified Storyboard was never applied to this object for interactive control.; Action='Stop'; Storyboard='System.Windows.Media.Animation.Storyboard'; Storyboard.HashCode='36936330'; Storyboard.Type='System.Windows.Media.Animation.Storyboard'; TargetElement='Autodesk.Internal.Windows.ToolTip: Autodesk.Windows.RibbonToolTip'; TargetElement.HashCode='41093009'; TargetElement.Type='Autodesk.Internal.Windows.ToolTip'
+The thread 0x13ac has exited with code 0 (0x0).
+System.Windows.Media.Animation Warning: 6 : Unable to perform action because the specified Storyboard was never applied to this object for interactive control.; Action='Stop'; Storyboard='System.Windows.Media.Animation.Storyboard'; Storyboard.HashCode='2610670'; Storyboard.Type='System.Windows.Media.Animation.Storyboard'; TargetElement='Autodesk.Internal.Windows.ToolTip: Annotative'; TargetElement.HashCode='11230212'; TargetElement.Type='Autodesk.Internal.Windows.ToolTip'
+System.Windows.Data Error: 40 : BindingExpression path error: 'Layer' property not found on 'object' ''EffectiveProperties' (HashCode=32888014)'. BindingExpression:Path=EffectivePropertySource.EffectiveProperties.Layer; DataItem='DataBindings' (HashCode=37640571); target element is 'RibbonComboBindings' (HashCode=37301245); target property is 'Current' (type 'Object')
+The thread 0x3f94 has exited with code 0 (0x0).
+The program '[10056] acad.exe' has exited with code -1073741819 (0xc0000005) 'Access violation'.

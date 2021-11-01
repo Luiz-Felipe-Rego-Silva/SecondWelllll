@@ -61,6 +61,17 @@ namespace Structures.Utilities
 
             DrawingUtilities.AddToDrawing(line);
         }
+        public static void DrawLine(Point3d startPoint, Point3d endPoint, string layer, string lineType, int lineTypeScale)
+        {
+            Polyline line = new Polyline();
+            line.Layer = layer;
+            line.Linetype = lineType;
+            line.LinetypeScale = lineTypeScale;
+            line.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
+            line.AddVertexAt(0, new Point2d(endPoint.X, endPoint.Y), 0, 0, 0);
+
+            DrawingUtilities.AddToDrawing(line);
+        }
         public static void DrawRectangle(Point3d Center, double X_length, double Y_length, string layer)
         {
             Point3d LeftUp = new Point3d(Center.X - X_length / 2.0, Center.Y + Y_length / 2.0, 0);
@@ -107,14 +118,13 @@ namespace Structures.Utilities
 
                 blockTableRecord.AppendEntity(cota);
                 transaction.AddNewlyCreatedDBObject(cota, true);
-                documentLock.Dispose();
                 transaction.Commit();
+                documentLock.Dispose();
             }
         }
         public static void AddAlignedDimension(string dimStyleName, Point3d startPoint, Point3d endPoint, string textContent)
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
-            Editor editor = document.Editor;
             Database database = document.Database;
             DocumentLock documentLock = document.LockDocument();
             using (Transaction transaction = database.TransactionManager.StartTransaction())
@@ -129,14 +139,13 @@ namespace Structures.Utilities
 
                 blockTableRecord.AppendEntity(cota);
                 transaction.AddNewlyCreatedDBObject(cota, true);
-                documentLock.Dispose();
                 transaction.Commit();
+                documentLock.Dispose();
             }
         }
         public static void AddAlignedDimension(string dimStyleName, Point3d startPoint, Point3d endPoint, double xPadding, double yPadding)
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
-            Editor editor = document.Editor;
             Database database = document.Database;
             DocumentLock documentLock = document.LockDocument();
             using (Transaction transaction = database.TransactionManager.StartTransaction())
@@ -151,13 +160,11 @@ namespace Structures.Utilities
                 AlignedDimension cota = new AlignedDimension(startPoint, endPoint,
                     new Point3d(MiddlePoint(startPoint, endPoint).X + xPadding,
                     MiddlePoint(startPoint, endPoint).Y + yPadding, 0), textContent, dimensionStyleId)
-                { Layer = "1",
-                DIM};
-
+                { Layer = "1" };
                 blockTableRecord.AppendEntity(cota);
                 transaction.AddNewlyCreatedDBObject(cota, true);
-                documentLock.Dispose();
                 transaction.Commit();
+                documentLock.Dispose();
             }
         }
         public static double Distance(Point3d startPoint, Point3d endPoint)
@@ -170,9 +177,54 @@ namespace Structures.Utilities
             Point3d middlePoint = new Point3d((startPoint.X + endPoint.X) / 2, (startPoint.Y + endPoint.Y) / 2, 0);
             return middlePoint;
         }
-        public static void AddDiameterDimension() 
+        public static void AddDiameterDimension(Point3d center, double diameter, double angle)
         {
+            Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            using (Transaction transaction = database.TransactionManager.StartTransaction())
+            {
+                Point3d chordPoint = new Point3d(center.X + diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y + diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
+                Point3d farChordPoint = new Point3d(center.X - diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y - diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
+                double leaderLength = 55;
+                string textContent = (Math.Round(diameter)).ToString();
 
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                DimStyleTable dimensionStyleTable = (DimStyleTable)transaction.GetObject(database.DimStyleTableId, OpenMode.ForWrite);
+                DimStyleTableRecord dimensionStyleTableRecord = new DimStyleTableRecord();
+                ObjectId dimensionStyleId = dimensionStyleTable["1-50"];
+
+                DiametricDimension diameterDimension = new DiametricDimension(chordPoint, farChordPoint, leaderLength, textContent, dimensionStyleId) { Layer = "1" };
+                blockTableRecord.AppendEntity(diameterDimension);
+                transaction.AddNewlyCreatedDBObject(diameterDimension, true);
+                transaction.Commit();
+                documentLock.Dispose();
+            }
+        }
+        public static void AddRadialDimension(Point3d center, double radius, double angle) 
+        {
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            using (Transaction transaction = database.TransactionManager.StartTransaction())
+            {
+                Point3d chordPoint = new Point3d(center.X + radius * Math.Cos(DegrresToRadians(angle)), center.Y + radius * Math.Sin(DegrresToRadians(angle)), 0);
+                double leaderLength = 55;
+                string dimensionText = (Math.Round(radius)).ToString();
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                DimStyleTable dimensionStyleTable = (DimStyleTable)transaction.GetObject(database.DimStyleTableId, OpenMode.ForWrite);
+                DimStyleTableRecord dimensionStyleTableRecord = new DimStyleTableRecord();
+                ObjectId dimensionStyleId = dimensionStyleTable["1-50"];
+
+                RadialDimension radialDimension = new RadialDimension(center, chordPoint, leaderLength, dimensionText, dimensionStyleId);
+
+                blockTableRecord.AppendEntity(radialDimension);
+                transaction.AddNewlyCreatedDBObject(radialDimension, true);
+                transaction.Commit();
+                documentLock.Dispose();
+            }
         }
     }
 }

@@ -48,15 +48,18 @@ namespace Structures.WellDetailer.Entities
             DrawGeneralAnnotations(StartPointBluePrint);
         }
 
-        public void DrawWellUpperView(Point3d startUpperView) 
+        public void DrawWellUpperView(Point3d centerUpperView) 
         {
-            Wall.DrawWallUpperView(startUpperView);
-            Top.DrawTopUpperView(startUpperView);
+            Wall.DrawWallUpperView(centerUpperView);
+            Wall.DrawWallUpperViewAnnotations(centerUpperView);
+            Top.DrawTopUpperView(centerUpperView);
+            Top.DrawTopUpperViewAnnotations(centerUpperView);
         }
         public void DrawGeneralAnnotations(Point3d bluePrintCenter) 
         {
+            Point3d hoodCenter = new Point3d(bluePrintCenter.X + Bottom.Diameter * 0.5 + Top.Hood.Position.X + 300.0, bluePrintCenter.Y + Top.Hood.Position.Y, 0);
             CutLine cutLine = new CutLine('A');
-            cutLine.DrawCutLine((Wall.ExternalDiameter / 2.0) + Bottom.EdgeLength, bluePrintCenter);
+            cutLine.DrawCutLine((Wall.ExternalDiameter / 2.0) + Bottom.EdgeLength, bluePrintCenter, hoodCenter);
         }
 
         public void DrawWellAACut(Point3d StartPointAACut) 
