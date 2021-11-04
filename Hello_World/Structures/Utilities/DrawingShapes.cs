@@ -72,6 +72,26 @@ namespace Structures.Utilities
 
             DrawingUtilities.AddToDrawing(line);
         }
+        public static void DrawHorizontalLine(Point3d startPoint, double length, string layer)
+        {
+            Point3d endPoint = new Point3d(startPoint.X + length, startPoint.Y, 0);
+            DrawLine(startPoint, endPoint, layer);
+        }
+        public static void DrawHorizontalLine(Point3d startPoint, double length, string layer, string lineType)
+        {
+            Point3d endPoint = new Point3d(startPoint.X + length, startPoint.Y, 0);
+            DrawLine(startPoint, endPoint, layer, lineType);
+        }
+        public static void DrawVerticalLine(Point3d startPoint, double length, string layer) 
+        {
+            Point3d endPoint = new Point3d(startPoint.X, startPoint.Y + length, 0);
+            DrawLine(startPoint, endPoint, layer);
+        }
+        public static void DrawVerticalLine(Point3d startPoint, double length, string layer, string lineType)
+        {
+            Point3d endPoint = new Point3d(startPoint.X, startPoint.Y + length, 0);
+            DrawLine(startPoint, endPoint, layer, lineType);
+        }
         public static void DrawRectangle(Point3d Center, double X_length, double Y_length, string layer)
         {
             Point3d LeftUp = new Point3d(Center.X - X_length / 2.0, Center.Y + Y_length / 2.0, 0);
@@ -83,6 +103,11 @@ namespace Structures.Utilities
             DrawLine(RightUp, RightDown, layer);
             DrawLine(RightDown, LeftDown, layer);
             DrawLine(LeftDown, LeftUp, layer);
+        }
+        public static void DrawRectangle(double X_length, double Y_length, string layer, Point3d start)
+        {
+            Point3d Center = new Point3d(start.X + (X_length / 2.0), start.Y - (Y_length / 2.0), 0);
+            DrawRectangle(Center, X_length, Y_length, layer);
         }
         public static void AddQuotesInPolylines(Polyline polyline, double xPadding, double yPadding)
         {
@@ -187,7 +212,7 @@ namespace Structures.Utilities
                 Point3d chordPoint = new Point3d(center.X + diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y + diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
                 Point3d farChordPoint = new Point3d(center.X - diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y - diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
                 double leaderLength = 55;
-                string textContent = (Math.Round(diameter)).ToString();
+                string textContent = "φ" + (Math.Round(diameter)).ToString();
 
                 BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
                 BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
@@ -202,7 +227,7 @@ namespace Structures.Utilities
                 documentLock.Dispose();
             }
         }
-        public static void AddRadialDimension(Point3d center, double radius, double angle) 
+        public static void AddRadialDimension(Point3d center, double radius, double angle)
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
             Database database = document.Database;
@@ -211,7 +236,7 @@ namespace Structures.Utilities
             {
                 Point3d chordPoint = new Point3d(center.X + radius * Math.Cos(DegrresToRadians(angle)), center.Y + radius * Math.Sin(DegrresToRadians(angle)), 0);
                 double leaderLength = 55;
-                string dimensionText = (Math.Round(radius)).ToString();
+                string dimensionText = "R" + (Math.Round(radius)).ToString();
                 BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
                 BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
                 DimStyleTable dimensionStyleTable = (DimStyleTable)transaction.GetObject(database.DimStyleTableId, OpenMode.ForWrite);
@@ -225,6 +250,10 @@ namespace Structures.Utilities
                 transaction.Commit();
                 documentLock.Dispose();
             }
+        }
+        public static Point3d MoveVerticalPoint(Point3d point, double yOffset) 
+        {
+            return new Point3d(point.X, point.Y + yOffset, point.Z);
         }
     }
 }

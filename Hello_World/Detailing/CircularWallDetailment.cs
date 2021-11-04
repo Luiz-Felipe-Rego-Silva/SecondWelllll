@@ -1,6 +1,7 @@
 ﻿using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Structures.WellDetailer.Entities;
+using Structures.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,51 +89,69 @@ namespace Hello_World.Detailing
                     internalBar.AddVertexAt(5, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y + getAnchorLength(GaugeY) - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
                 }
             }
+            CorrectiveEffectivenessLengthAmendmets(internalBar, isTopInternalEngaged);
             return internalBar;
         }
         private Polyline CreateVerticalExternalLineBar() 
         {
             Polyline externalBar = new Polyline();
-            Point2d ExternalBasePoint = new Point2d(BasePoint.X + 2 * (Wall.Thickness - 2 * Cover + getAnchorLength(GaugeY)) + 100.0, BasePoint.Y - TopOffset);
-            if (isBottomExternalEngaged) 
+            Point2d externalBasePoint = new Point2d(BasePoint.X, BasePoint.Y - TopOffset);
+            if (isBottomInternalEngaged)
             {
-                if (isTopExternalEngaged) 
+                if (isTopInternalEngaged)
                 {
-                    externalBar.AddVertexAt(0, new Point2d(ExternalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(1, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(2, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y - ( Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(3, new Point2d(ExternalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(0, new Point2d(externalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(3, new Point2d(externalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
                 }
-                else 
+                else
                 {
-                    externalBar.AddVertexAt(0, new Point2d(ExternalBasePoint.X + (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
-                    externalBar.AddVertexAt(1, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(2, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(3, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(4, new Point2d(ExternalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), BasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(0, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    externalBar.AddVertexAt(1, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(3, new Point2d(externalBasePoint.X, externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(4, new Point2d(externalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
                 }
             }
+            else
+            {
+                if (isTopInternalEngaged)
+                {
+                    externalBar.AddVertexAt(0, new Point2d(externalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(3, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(4, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y + getAnchorLength(GaugeY) - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                }
+                else
+                {
+                    externalBar.AddVertexAt(0, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    externalBar.AddVertexAt(1, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    externalBar.AddVertexAt(3, new Point2d(externalBasePoint.X, externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(4, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    externalBar.AddVertexAt(5, new Point2d(externalBasePoint.X + (Wall.Thickness - 2 * Cover), externalBasePoint.Y + getAnchorLength(GaugeY) - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                }
+            }
+
+
+            return externalBar;
+        }
+        private void CorrectiveEffectivenessLengthAmendmets(Polyline barline, bool isTopEngaged) 
+        {
+            double totalLength = barline.Length;
+            if (totalLength < 1200.0)
+                return;
             else 
             {
-                if (isTopExternalEngaged) 
-                {
-                    externalBar.AddVertexAt(0, new Point2d(ExternalBasePoint.X - (Wall.Thickness - Cover) + getAnchorLength(GaugeY), ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(1, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(2, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(3, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(4, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y + getAnchorLength(GaugeY) - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                }
-                else 
-                {
-                    externalBar.AddVertexAt(0, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
-                    externalBar.AddVertexAt(1, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(2, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y), 0, 0, 0);
-                    externalBar.AddVertexAt(3, new Point2d(ExternalBasePoint.X, ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(4, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                    externalBar.AddVertexAt(5, new Point2d(ExternalBasePoint.X - (Wall.Thickness - 2 * Cover), ExternalBasePoint.Y + getAnchorLength(GaugeY) - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
-                }
+                int numberOfAmendment = getNumberOfAmendment(totalLength, GaugeY);
+                int startloop = 0;
+                if (isTopEngaged) { startloop = 2; }
+                else { startloop = 3; }
+
+                //for (int i = startloop) { }
             }
-            return externalBar;
         }
         private Polyline CreateHorizontalInternalLineBar() 
         {
@@ -157,17 +176,6 @@ namespace Hello_World.Detailing
             externaline.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
 
             return externaline;
-        }
-        private bool DoesNeedAmendment(double length) 
-        {
-            if (length/1200.0 > 1) 
-            {
-                return true;
-            }
-            else
-            {
-               return false;
-            }
         }
         private int getNumberOfAmendment(double baseLength, double gauge) 
         {

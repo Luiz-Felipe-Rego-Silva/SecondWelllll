@@ -36,7 +36,6 @@ namespace Hello_World.UI
             this.msktxt_topThickness = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_bottomThickness = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_wallHeigth = new System.Windows.Forms.MaskedTextBox();
-            this.msktxt_sideLength = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_insideDiameter = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_wallThickness = new System.Windows.Forms.MaskedTextBox();
             this.lbl_insideDiameter = new System.Windows.Forms.Label();
@@ -110,14 +109,6 @@ namespace Hello_World.UI
             this.msktxt_wallHeigth.TabIndex = 8;
             this.msktxt_wallHeigth.Text = "300";
             this.msktxt_wallHeigth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // msktxt_sideLength
-            // 
-            this.msktxt_sideLength.Location = new System.Drawing.Point(51, 47);
-            this.msktxt_sideLength.Name = "msktxt_sideLength";
-            this.msktxt_sideLength.Size = new System.Drawing.Size(43, 26);
-            this.msktxt_sideLength.TabIndex = 9;
-            this.msktxt_sideLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_insideDiameter
             // 
@@ -250,7 +241,6 @@ namespace Hello_World.UI
             this.Controls.Add(this.lbl_insideDiameter);
             this.Controls.Add(this.msktxt_wallThickness);
             this.Controls.Add(this.msktxt_insideDiameter);
-            this.Controls.Add(this.msktxt_sideLength);
             this.Controls.Add(this.msktxt_wallHeigth);
             this.Controls.Add(this.msktxt_bottomThickness);
             this.Controls.Add(this.msktxt_topThickness);
@@ -275,7 +265,6 @@ namespace Hello_World.UI
         private System.Windows.Forms.MaskedTextBox msktxt_topThickness;
         private System.Windows.Forms.MaskedTextBox msktxt_bottomThickness;
         private System.Windows.Forms.MaskedTextBox msktxt_wallHeigth;
-        private System.Windows.Forms.MaskedTextBox msktxt_sideLength;
         private System.Windows.Forms.MaskedTextBox msktxt_insideDiameter;
         private System.Windows.Forms.MaskedTextBox msktxt_wallThickness;
         private System.Windows.Forms.Label lbl_insideDiameter;

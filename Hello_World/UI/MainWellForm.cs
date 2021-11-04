@@ -75,13 +75,14 @@ namespace Hello_World.UI
             //Definição de Pontos
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
             Point3d bluePrintCenter = new Point3d(BasePoint.X + Well.Bottom.Diameter * 0.5 + BluePrintShiftness, BasePoint.Y - Well.Bottom.Diameter * 0.5 - BluePrintShiftness, 0);
-            Point3d upperViewCenter = new Point3d(bluePrintCenter.X + Well.Bottom.Diameter*0.5 + 300.0, bluePrintCenter.Y, 0);
-            Point3d AAStartCut = new Point3d(upperViewCenter.X + Well.Bottom.Diameter*0.5 + 300, bluePrintCenter.Y, 0);
-            
+            Point3d upperViewCenter = new Point3d(bluePrintCenter.X + Well.Bottom.Diameter * 0.5 + 300.0, bluePrintCenter.Y, 0);
+            Point3d AAStartCut = new Point3d(upperViewCenter.X + Well.Bottom.Diameter * 0.5 + 300, bluePrintCenter.Y, 0);
+            Point3d BaseDetailingPoint = new Point3d(AAStartCut.X + 300.0 + Well.Wall.ExternalDiameter + 2 * Well.Top.Passarela, AAStartCut.Y, 0);
 
             Well.DrawWellBluePrint(bluePrintCenter);
             Well.DrawWellAACut(AAStartCut);
             Well.DrawWellUpperView(upperViewCenter);
+            Well.DrawWellDetailment(BaseDetailingPoint);
         }
 
         private void msktxt_topThickness_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
