@@ -32,11 +32,11 @@ namespace Hello_World.UI
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.grpBox_TopX = new System.Windows.Forms.GroupBox();
-            this.lbl_topGaugeX = new System.Windows.Forms.Label();
-            this.lbl_TopSpacingX = new System.Windows.Forms.Label();
-            this.msktxt_TopSpacingX = new System.Windows.Forms.MaskedTextBox();
-            this.cmbBox_TopGaugeX = new System.Windows.Forms.ComboBox();
             this.lbl_TopGaugeUnitX = new System.Windows.Forms.Label();
+            this.cmbBox_TopGaugeX = new System.Windows.Forms.ComboBox();
+            this.msktxt_TopSpacingX = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_TopSpacingX = new System.Windows.Forms.Label();
+            this.lbl_topGaugeX = new System.Windows.Forms.Label();
             this.grpBox_TopY = new System.Windows.Forms.GroupBox();
             this.lbl_TopGaugeUnitY = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -71,6 +71,11 @@ namespace Hello_World.UI
             this.lbl_BottomSpacingY = new System.Windows.Forms.Label();
             this.lbl_bottomGaugeY = new System.Windows.Forms.Label();
             this.btn_manual = new System.Windows.Forms.Button();
+            this.chc_isTopArmed = new System.Windows.Forms.CheckBox();
+            this.msktxt_cover = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_cover = new System.Windows.Forms.Label();
+            this.lbl_gaugeFactor = new System.Windows.Forms.Label();
+            this.msktxt_gaugeFactor = new System.Windows.Forms.MaskedTextBox();
             this.grpBox_TopX.SuspendLayout();
             this.grpBox_TopY.SuspendLayout();
             this.grpBox_Top.SuspendLayout();
@@ -85,24 +90,26 @@ namespace Hello_World.UI
             // btn_save
             // 
             this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_save.Location = new System.Drawing.Point(577, 373);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_save.Location = new System.Drawing.Point(583, 373);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(4);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(112, 34);
             this.btn_save.TabIndex = 0;
             this.btn_save.Text = "Salvar";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // btn_cancel
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancel.Location = new System.Drawing.Point(577, 331);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cancel.Location = new System.Drawing.Point(583, 331);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(112, 34);
             this.btn_cancel.TabIndex = 1;
             this.btn_cancel.Text = "Cancelar";
             this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // grpBox_TopX
             // 
@@ -112,41 +119,22 @@ namespace Hello_World.UI
             this.grpBox_TopX.Controls.Add(this.lbl_TopSpacingX);
             this.grpBox_TopX.Controls.Add(this.lbl_topGaugeX);
             this.grpBox_TopX.Location = new System.Drawing.Point(7, 26);
-            this.grpBox_TopX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBox_TopX.Margin = new System.Windows.Forms.Padding(4);
             this.grpBox_TopX.Name = "grpBox_TopX";
-            this.grpBox_TopX.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBox_TopX.Padding = new System.Windows.Forms.Padding(4);
             this.grpBox_TopX.Size = new System.Drawing.Size(263, 84);
             this.grpBox_TopX.TabIndex = 2;
             this.grpBox_TopX.TabStop = false;
             this.grpBox_TopX.Text = "Horizontal";
             // 
-            // lbl_topGaugeX
+            // lbl_TopGaugeUnitX
             // 
-            this.lbl_topGaugeX.AutoSize = true;
-            this.lbl_topGaugeX.Font = new System.Drawing.Font("Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.lbl_topGaugeX.Location = new System.Drawing.Point(63, 23);
-            this.lbl_topGaugeX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_topGaugeX.Name = "lbl_topGaugeX";
-            this.lbl_topGaugeX.Size = new System.Drawing.Size(18, 20);
-            this.lbl_topGaugeX.TabIndex = 0;
-            this.lbl_topGaugeX.Text = "f";
-            // 
-            // lbl_TopSpacingX
-            // 
-            this.lbl_TopSpacingX.AutoSize = true;
-            this.lbl_TopSpacingX.Location = new System.Drawing.Point(10, 54);
-            this.lbl_TopSpacingX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_TopSpacingX.Name = "lbl_TopSpacingX";
-            this.lbl_TopSpacingX.Size = new System.Drawing.Size(122, 19);
-            this.lbl_TopSpacingX.TabIndex = 1;
-            this.lbl_TopSpacingX.Text = "Espaçamento (cm)";
-            // 
-            // msktxt_TopSpacingX
-            // 
-            this.msktxt_TopSpacingX.Location = new System.Drawing.Point(139, 51);
-            this.msktxt_TopSpacingX.Name = "msktxt_TopSpacingX";
-            this.msktxt_TopSpacingX.Size = new System.Drawing.Size(100, 26);
-            this.msktxt_TopSpacingX.TabIndex = 2;
+            this.lbl_TopGaugeUnitX.AutoSize = true;
+            this.lbl_TopGaugeUnitX.Location = new System.Drawing.Point(88, 24);
+            this.lbl_TopGaugeUnitX.Name = "lbl_TopGaugeUnitX";
+            this.lbl_TopGaugeUnitX.Size = new System.Drawing.Size(41, 19);
+            this.lbl_TopGaugeUnitX.TabIndex = 4;
+            this.lbl_TopGaugeUnitX.Text = "(mm)";
             // 
             // cmbBox_TopGaugeX
             // 
@@ -169,14 +157,33 @@ namespace Hello_World.UI
             this.cmbBox_TopGaugeX.TabIndex = 3;
             this.cmbBox_TopGaugeX.Text = "5.0";
             // 
-            // lbl_TopGaugeUnitX
+            // msktxt_TopSpacingX
             // 
-            this.lbl_TopGaugeUnitX.AutoSize = true;
-            this.lbl_TopGaugeUnitX.Location = new System.Drawing.Point(88, 24);
-            this.lbl_TopGaugeUnitX.Name = "lbl_TopGaugeUnitX";
-            this.lbl_TopGaugeUnitX.Size = new System.Drawing.Size(41, 19);
-            this.lbl_TopGaugeUnitX.TabIndex = 4;
-            this.lbl_TopGaugeUnitX.Text = "(mm)";
+            this.msktxt_TopSpacingX.Location = new System.Drawing.Point(139, 51);
+            this.msktxt_TopSpacingX.Name = "msktxt_TopSpacingX";
+            this.msktxt_TopSpacingX.Size = new System.Drawing.Size(100, 26);
+            this.msktxt_TopSpacingX.TabIndex = 2;
+            // 
+            // lbl_TopSpacingX
+            // 
+            this.lbl_TopSpacingX.AutoSize = true;
+            this.lbl_TopSpacingX.Location = new System.Drawing.Point(10, 54);
+            this.lbl_TopSpacingX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_TopSpacingX.Name = "lbl_TopSpacingX";
+            this.lbl_TopSpacingX.Size = new System.Drawing.Size(122, 19);
+            this.lbl_TopSpacingX.TabIndex = 1;
+            this.lbl_TopSpacingX.Text = "Espaçamento (cm)";
+            // 
+            // lbl_topGaugeX
+            // 
+            this.lbl_topGaugeX.AutoSize = true;
+            this.lbl_topGaugeX.Font = new System.Drawing.Font("Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lbl_topGaugeX.Location = new System.Drawing.Point(63, 23);
+            this.lbl_topGaugeX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_topGaugeX.Name = "lbl_topGaugeX";
+            this.lbl_topGaugeX.Size = new System.Drawing.Size(18, 20);
+            this.lbl_topGaugeX.TabIndex = 0;
+            this.lbl_topGaugeX.Text = "f";
             // 
             // grpBox_TopY
             // 
@@ -586,7 +593,7 @@ namespace Hello_World.UI
             // 
             this.btn_manual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_manual.ForeColor = System.Drawing.Color.ForestGreen;
-            this.btn_manual.Location = new System.Drawing.Point(577, 266);
+            this.btn_manual.Location = new System.Drawing.Point(583, 266);
             this.btn_manual.Margin = new System.Windows.Forms.Padding(4);
             this.btn_manual.Name = "btn_manual";
             this.btn_manual.Size = new System.Drawing.Size(112, 57);
@@ -594,11 +601,62 @@ namespace Hello_World.UI
             this.btn_manual.Text = "Vinculações Manuais";
             this.btn_manual.UseVisualStyleBackColor = true;
             // 
+            // chc_isTopArmed
+            // 
+            this.chc_isTopArmed.AutoSize = true;
+            this.chc_isTopArmed.Location = new System.Drawing.Point(571, 23);
+            this.chc_isTopArmed.Name = "chc_isTopArmed";
+            this.chc_isTopArmed.Size = new System.Drawing.Size(107, 23);
+            this.chc_isTopArmed.TabIndex = 11;
+            this.chc_isTopArmed.Text = "Laje Armada";
+            this.chc_isTopArmed.UseVisualStyleBackColor = true;
+            // 
+            // msktxt_cover
+            // 
+            this.msktxt_cover.Location = new System.Drawing.Point(575, 89);
+            this.msktxt_cover.Name = "msktxt_cover";
+            this.msktxt_cover.Size = new System.Drawing.Size(100, 26);
+            this.msktxt_cover.TabIndex = 12;
+            this.msktxt_cover.Text = "5";
+            this.msktxt_cover.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_cover
+            // 
+            this.lbl_cover.AutoSize = true;
+            this.lbl_cover.Location = new System.Drawing.Point(571, 67);
+            this.lbl_cover.Name = "lbl_cover";
+            this.lbl_cover.Size = new System.Drawing.Size(113, 19);
+            this.lbl_cover.TabIndex = 14;
+            this.lbl_cover.Text = "Cobrimento (cm)";
+            // 
+            // lbl_gaugeFactor
+            // 
+            this.lbl_gaugeFactor.AutoSize = true;
+            this.lbl_gaugeFactor.Location = new System.Drawing.Point(573, 132);
+            this.lbl_gaugeFactor.Name = "lbl_gaugeFactor";
+            this.lbl_gaugeFactor.Size = new System.Drawing.Size(134, 19);
+            this.lbl_gaugeFactor.TabIndex = 15;
+            this.lbl_gaugeFactor.Text = "Fator de Ancoragem";
+            // 
+            // msktxt_gaugeFactor
+            // 
+            this.msktxt_gaugeFactor.Location = new System.Drawing.Point(577, 155);
+            this.msktxt_gaugeFactor.Name = "msktxt_gaugeFactor";
+            this.msktxt_gaugeFactor.Size = new System.Drawing.Size(100, 26);
+            this.msktxt_gaugeFactor.TabIndex = 16;
+            this.msktxt_gaugeFactor.Text = "34";
+            this.msktxt_gaugeFactor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // SteelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 420);
+            this.ClientSize = new System.Drawing.Size(708, 420);
+            this.Controls.Add(this.msktxt_gaugeFactor);
+            this.Controls.Add(this.lbl_gaugeFactor);
+            this.Controls.Add(this.lbl_cover);
+            this.Controls.Add(this.msktxt_cover);
+            this.Controls.Add(this.chc_isTopArmed);
             this.Controls.Add(this.btn_manual);
             this.Controls.Add(this.grpBox_Bottom);
             this.Controls.Add(this.grpBox_Wall);
@@ -606,7 +664,7 @@ namespace Hello_World.UI
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_save);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SteelForm";
             this.Text = "SteelForm";
             this.Load += new System.EventHandler(this.SteelForm_Load);
@@ -626,6 +684,7 @@ namespace Hello_World.UI
             this.grpBox_BottomY.ResumeLayout(false);
             this.grpBox_BottomY.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -673,5 +732,10 @@ namespace Hello_World.UI
         private System.Windows.Forms.Label lbl_BottomSpacingY;
         private System.Windows.Forms.Label lbl_bottomGaugeY;
         private System.Windows.Forms.Button btn_manual;
+        private System.Windows.Forms.CheckBox chc_isTopArmed;
+        private System.Windows.Forms.MaskedTextBox msktxt_cover;
+        private System.Windows.Forms.Label lbl_cover;
+        private System.Windows.Forms.Label lbl_gaugeFactor;
+        private System.Windows.Forms.MaskedTextBox msktxt_gaugeFactor;
     }
 }

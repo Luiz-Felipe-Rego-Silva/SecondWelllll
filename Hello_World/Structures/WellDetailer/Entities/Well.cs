@@ -87,6 +87,7 @@ namespace Structures.WellDetailer.Entities
         {
             Point3d startProjectionPoint = new Point3d(BaseDetailingPoint.X + 260.0, BaseDetailingPoint.Y - 140.0, 0);
             Wall.DrawPlanifiedWall(startProjectionPoint, Top.Thickness, Bottom.Thickness);
+
         }
     }
     

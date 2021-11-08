@@ -129,6 +129,7 @@
       <DependentUpon>Commands.resx</DependentUpon>
     </Compile>
     <Compile Include="Detailing\CircularWallDetailment.cs" />
+    <Compile Include="Detailing\StandardDistribuction.cs" />
     <Compile Include="Structures\WellDetailer\Entities\Enums\Direction.cs" />
     <Compile Include="UI\EdgeForm.cs">
       <SubType>Form</SubType>
