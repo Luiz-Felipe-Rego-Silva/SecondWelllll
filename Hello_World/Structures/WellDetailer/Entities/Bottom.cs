@@ -50,10 +50,10 @@ namespace Structures.WellDetailer.Entities
         }
         private void DrawEdgeBluePrintAnnotations(Point3d bluePrintCenter)
         {
-            DrawingShapes.AddAlignedDimension("1-50", new Point3d(bluePrintCenter.X - 0.5 * Diameter * Math.Cos(DrawingShapes.DegrresToRadians(15.0)), 
-                bluePrintCenter.Y + 0.5 * Diameter * Math.Sin(DrawingShapes.DegrresToRadians(15.0)), 0), 
-                new Point3d(bluePrintCenter.X - (0.5 * Diameter - EdgeLength) * Math.Cos(DrawingShapes.DegrresToRadians(15.0)), 
-                bluePrintCenter.Y + (0.5 * Diameter - EdgeLength) * Math.Sin(DrawingShapes.DegrresToRadians(15.0)), 0));
+            DrawingShapes.AddAlignedDimension("1-50", new Point3d(bluePrintCenter.X - 0.5 * Diameter * Math.Cos(DrawingShapes.DegreesToRadians(15.0)), 
+                bluePrintCenter.Y + 0.5 * Diameter * Math.Sin(DrawingShapes.DegreesToRadians(15.0)), 0), 
+                new Point3d(bluePrintCenter.X - (0.5 * Diameter - EdgeLength) * Math.Cos(DrawingShapes.DegreesToRadians(15.0)), 
+                bluePrintCenter.Y + (0.5 * Diameter - EdgeLength) * Math.Sin(DrawingShapes.DegreesToRadians(15.0)), 0));
         }
         public void DrawAACut(Point3d startPointOfBottomCut)
         {

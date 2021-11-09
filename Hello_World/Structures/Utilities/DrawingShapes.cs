@@ -10,7 +10,7 @@ using Autodesk.AutoCAD.EditorInput;
 
 namespace Structures.Utilities
 {
-    class DrawingShapes
+    public static class DrawingShapes
     {
         public static void DrawCircle(Point3d center, double diameter, string layer)
         {
@@ -32,12 +32,12 @@ namespace Structures.Utilities
 
         public static void DrawArc(Point3d center, double radius, double startAngle, double endAngle, string layer)
         {
-            Arc Arc = new Arc(center, radius, DegrresToRadians(startAngle), DegrresToRadians(endAngle));
+            Arc Arc = new Arc(center, radius, DegreesToRadians(startAngle), DegreesToRadians(endAngle));
             Arc.Layer = layer;
             DrawingUtilities.AddToDrawing(Arc);
         }
 
-        public static double DegrresToRadians(double angle)
+        public static double DegreesToRadians(double angle)
         {
             return (Math.PI / 180) * angle;
         }
@@ -82,7 +82,7 @@ namespace Structures.Utilities
             Point3d endPoint = new Point3d(startPoint.X + length, startPoint.Y, 0);
             DrawLine(startPoint, endPoint, layer, lineType);
         }
-        public static void DrawVerticalLine(Point3d startPoint, double length, string layer) 
+        public static void DrawVerticalLine(Point3d startPoint, double length, string layer)
         {
             Point3d endPoint = new Point3d(startPoint.X, startPoint.Y + length, 0);
             DrawLine(startPoint, endPoint, layer);
@@ -209,8 +209,8 @@ namespace Structures.Utilities
             DocumentLock documentLock = document.LockDocument();
             using (Transaction transaction = database.TransactionManager.StartTransaction())
             {
-                Point3d chordPoint = new Point3d(center.X + diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y + diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
-                Point3d farChordPoint = new Point3d(center.X - diameter * 0.5 * Math.Cos(DegrresToRadians(angle)), center.Y - diameter * 0.5 * Math.Sin(DegrresToRadians(angle)), 0);
+                Point3d chordPoint = new Point3d(center.X + diameter * 0.5 * Math.Cos(DegreesToRadians(angle)), center.Y + diameter * 0.5 * Math.Sin(DegreesToRadians(angle)), 0);
+                Point3d farChordPoint = new Point3d(center.X - diameter * 0.5 * Math.Cos(DegreesToRadians(angle)), center.Y - diameter * 0.5 * Math.Sin(DegreesToRadians(angle)), 0);
                 double leaderLength = 55;
                 string textContent = "φ" + (Math.Round(diameter)).ToString();
 
@@ -234,7 +234,7 @@ namespace Structures.Utilities
             DocumentLock documentLock = document.LockDocument();
             using (Transaction transaction = database.TransactionManager.StartTransaction())
             {
-                Point3d chordPoint = new Point3d(center.X + radius * Math.Cos(DegrresToRadians(angle)), center.Y + radius * Math.Sin(DegrresToRadians(angle)), 0);
+                Point3d chordPoint = new Point3d(center.X + radius * Math.Cos(DegreesToRadians(angle)), center.Y + radius * Math.Sin(DegreesToRadians(angle)), 0);
                 double leaderLength = 55;
                 string dimensionText = "R" + (Math.Round(radius)).ToString();
                 BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
@@ -251,9 +251,13 @@ namespace Structures.Utilities
                 documentLock.Dispose();
             }
         }
-        public static Point3d MoveVerticalPoint(Point3d point, double yOffset) 
+        public static Point3d MoveVerticalPoint(Point3d point, double yOffset)
         {
             return new Point3d(point.X, point.Y + yOffset, point.Z);
+        }
+        public static double AngleWith(Point3d startPoint, Point3d endPoint)
+        {
+            return Math.Atan((startPoint.Y - endPoint.Y) / (startPoint.X - endPoint.X));
         }
     }
 }

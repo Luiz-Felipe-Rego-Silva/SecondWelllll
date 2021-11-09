@@ -121,7 +121,9 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Detailing\UI\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +132,7 @@
     </Compile>
     <Compile Include="Detailing\CircularWallDetailment.cs" />
     <Compile Include="Detailing\StandardDistribuction.cs" />
+    <Compile Include="Detailing\SteelTable.cs" />
     <Compile Include="Structures\WellDetailer\Entities\Enums\Direction.cs" />
     <Compile Include="UI\EdgeForm.cs">
       <SubType>Form</SubType>

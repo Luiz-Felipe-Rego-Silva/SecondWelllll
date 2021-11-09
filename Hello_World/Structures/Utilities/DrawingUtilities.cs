@@ -12,6 +12,36 @@ namespace Structures.Utilities
 {
     public static class DrawingUtilities
     {
+        public static long DrawObjectMark(Entity entity) 
+        {
+            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
+            Editor editor = document.Editor;
+            Database database = document.Database;
+            ObjectId objectId = ObjectId.Null;
+            try
+            {
+                using (DocumentLock documentLock = document.LockDocument())
+                {
+                    using (Transaction transaction = database.TransactionManager.StartTransaction())
+                    {
+                        BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                        BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+
+                        blockTableRecord.AppendEntity(entity);
+                        transaction.AddNewlyCreatedDBObject(entity, true);
+                        objectId = entity.ObjectId;
+                        transaction.Commit();
+                        transaction.Dispose();
+                    }
+                    documentLock.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                editor.WriteMessage(e.Message);
+            }
+            return objectId.Handle.Value;
+        }
         public static void AddToDrawing(Entity entity)
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
