@@ -5,6 +5,7 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
+using Hello_World.Detailing.UI;
 using Hello_World.UI;
 using System;
 
@@ -32,6 +33,21 @@ namespace Hello_World
             {
                 editor = document.Editor;
                 editor.WriteMessage("FUNCIONOU MEU PROGAMAZINHO");
+
+            }
+        }
+        [CommandMethod("Parede_Circular")]
+        public void callCircularWallForm()
+        {
+            CircularWallForm wallForm = new CircularWallForm();
+            wallForm.Show();
+            // Put your command code here
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            Editor editor;
+            if (document != null)
+            {
+                editor = document.Editor;
+                editor.WriteMessage("FUNCIONOU BB");
 
             }
         }

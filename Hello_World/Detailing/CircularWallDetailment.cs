@@ -16,13 +16,14 @@ namespace Hello_World.Detailing
     {
         //Dados relativos a parede
         public CircularWall Wall { get; private set; }
-        private double effectiveHeigth;
+        public double effectiveHeigth { private get; set; }
         public double SpacingX { get; private set; }
         public double SpacingY { get; private set; }
         public double GaugeX { get; private set; }
         public double GaugeY { get; private set; }
         public double AnchorFactor { get; private set; }
         public double Cover { get; private set; }
+        public int Multiplier { get; private set; }
         //Dados relativos aos contornos da parede
         private double edgeLength;
         private double passarela;
@@ -37,6 +38,11 @@ namespace Hello_World.Detailing
         public double BottomOffset { get; private set; }
         //Pontos  
         public Point3d BasePoint { get; set; }
+        
+        //Barras
+        private Polyline VerticalExternalLine, VerticalInternalLine, HorizontalInternalLine, HorizontalExternalLine;
+        private List<StandardDistribuction> distribuctions = new List<StandardDistribuction>();
+        public string Title { get; set;}
         public void SetSteelInfo(double spacingX, double spacingY, double gaugeX, double gaugeY, double anchorFactor, double cover)
         {
             SpacingX = spacingX;
@@ -46,14 +52,19 @@ namespace Hello_World.Detailing
             AnchorFactor = anchorFactor;
             Cover = cover;
         }
-        //Barras
-        private Polyline VerticalExternalLine, VerticalInternalLine, HorizontalInternalLine, HorizontalExternalLine;
+        public void SetGeometry(CircularWall wall, double topThickness, double bottomThickness) 
+        {
+            Wall = wall;
+            this.topThickness = topThickness;
+            this.bottomThickness = bottomThickness;
+        }
         public void SetBorderConditions(bool isTopInternalEngaged, bool isTopExternalEngaged, bool isBottomInternalEngaged, bool isBottomExternalEngaged)
         {
             IsTopExternalEngaged = isTopExternalEngaged;
             IsTopInternalEngaged = isTopInternalEngaged;
             IsBottomExternalEngaged = isBottomExternalEngaged;
             IsBottomInternalEngaged = isBottomInternalEngaged;
+            effectiveHeigth = Wall.Heigth + topThickness + bottomThickness;
         }
         public void SetOffsets(double topOffset, double bottomOffset)
         {
@@ -68,15 +79,20 @@ namespace Hello_World.Detailing
             this.edgeLength = edgeLength;
             effectiveHeigth = Wall.Heigth + topThickness + bottomThickness;
         }
+        public void setAnnotations(string title, int multiplier) 
+        {
+            Title = title;
+            Multiplier = multiplier;
+        }
         private double getAnchorLength(double gauge)
         {
-            return Math.Ceiling(gauge * AnchorFactor / 10.0);
+            return Math.Ceiling(gauge * AnchorFactor);
         }
-        private Polyline CreateVerticalExternalLineBar(string layer)
+        private void CreateVerticalExternalLineBar(string layer)
         {
             VerticalExternalLine = new Polyline();
             VerticalExternalLine.Layer = layer;
-            Point2d externalBasePoint = new Point2d(BasePoint.X - 60.0, BasePoint.Y - TopOffset);
+            Point2d externalBasePoint = new Point2d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 90.0, BasePoint.Y - 150.0 - TopOffset);
             double heigth = (effectiveHeigth - (2 * Cover + TopOffset + BottomOffset));
             double totalLenth = 0.0;
             if (IsBottomExternalEngaged)
@@ -128,13 +144,18 @@ namespace Hello_World.Detailing
                     VerticalExternalLine.AddVertexAt(5, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
                 }
             }
-            return VerticalExternalLine;
+            int verticalQuantity = getVerticalQuantity(Math.PI * (Wall.ExternalDiameter - 2 * Cover), SpacingY);
+            distribuctions.Add(new StandardDistribuction(1, 
+                VerticalExternalLine, GaugeY,
+                SpacingY, verticalQuantity, 
+                getNumberOfAmendment(totalLenth, GaugeY), 
+                (GaugeY)));
         }
-        private Polyline CreateVerticalInternalLineBar(string layer)
+        private void CreateVerticalInternalLineBar(string layer)
         {
             VerticalInternalLine = new Polyline();
             VerticalInternalLine.Layer = layer;
-            Point2d internalBasePoint = new Point2d(BasePoint.X - 240.0, BasePoint.Y - TopOffset);
+            Point2d internalBasePoint = new Point2d(BasePoint.X + 20.0, BasePoint.Y - 150.0 - TopOffset);
             double heigth = (effectiveHeigth - (2 * Cover + TopOffset + BottomOffset));
             double totalLenth = 0.0;
 
@@ -148,7 +169,7 @@ namespace Hello_World.Detailing
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
-                    VerticalInternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    VerticalInternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y - heigth), 0, 0, 0);
                 }
                 else
                 {
@@ -171,7 +192,7 @@ namespace Hello_World.Detailing
 
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
-                    VerticalInternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - (Wall.Heigth - (2 * Cover + TopOffset + BottomOffset))), 0, 0, 0);
+                    VerticalInternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - heigth), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(4, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
                 }
@@ -188,11 +209,16 @@ namespace Hello_World.Detailing
                     VerticalInternalLine.AddVertexAt(5, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
                 }
             }
-            return VerticalInternalLine;
+            int verticalQuantity = getVerticalQuantity(Math.PI * (Wall.ExternalDiameter - 2 * Cover), SpacingY);
+            distribuctions.Add(new StandardDistribuction(2,
+                VerticalInternalLine, GaugeY,
+                SpacingY, verticalQuantity,
+                getNumberOfAmendment(totalLenth, GaugeY),
+                (GaugeY)));
         }
-        private Polyline CreateHorizontalInternalLineBar(string layer)
+        private void CreateHorizontalInternalLineBar(string layer)
         {
-            Point2d baseHorizontalBarPoint = new Point2d(BasePoint.X + 2 * (Wall.Thickness - 2 * Cover + getAnchorLength(GaugeY)) + 160.0, BasePoint.Y - Wall.Heigth - 70.0);
+            Point2d baseHorizontalBarPoint = new Point2d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 210.0 - bottomThickness - topThickness - Wall.Heigth);
             HorizontalInternalLine = new Polyline();
             HorizontalInternalLine.Layer = layer;
             double baseLength = Math.PI * (Wall.InternalDiameter + 2 * Cover + 2 * GaugeY / 10.0) + getAmendmentLength(GaugeX);
@@ -200,11 +226,13 @@ namespace Hello_World.Detailing
 
             HorizontalInternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
             HorizontalInternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
-            return HorizontalInternalLine;
+
+            int horizontalInternalQuantity = getHorizontalInternalQuantity();
+            distribuctions.Add(new StandardDistribuction(4, HorizontalInternalLine, GaugeX, SpacingX, horizontalInternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, getAmendmentLength(GaugeX)));
         }
-        private Polyline CreateHorizontalExternalLineBar(string layer)
+        private void CreateHorizontalExternalLineBar(string layer)
         {
-            Point2d baseHorizontalBarPoint = new Point2d(BasePoint.X + 2 * (Wall.Thickness - 2 * Cover + getAnchorLength(GaugeY)) + 160.0, BasePoint.Y - Wall.Heigth - 120.0);
+            Point2d baseHorizontalBarPoint = new Point2d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 260.0 - bottomThickness - topThickness - Wall.Heigth); ;
             HorizontalExternalLine = new Polyline();
             HorizontalExternalLine.Layer = layer;
 
@@ -214,7 +242,8 @@ namespace Hello_World.Detailing
             HorizontalExternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
             HorizontalExternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
 
-            return HorizontalExternalLine;
+            int horizontalExternalQuantity = getHorizontalExternalQuantity();
+            distribuctions.Add(new StandardDistribuction(3, HorizontalExternalLine, GaugeX, SpacingX, horizontalExternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, getAmendmentLength(GaugeX)));
         }
         private int getNumberOfAmendment(double baseLength, double gauge)
         {
@@ -226,75 +255,50 @@ namespace Hello_World.Detailing
         }
         public double getAmendmentLength(double gauge)
         {
-            return (2.0 * gauge * AnchorFactor) / 10.0;
+            return (2.0 * gauge * AnchorFactor);
         }
-        private void DrawDistribuctions()
+        public void DrawDistribuctions(Point3d basePoint)
         {
+            BasePoint = basePoint;
             string layer = "5";
             CreateVerticalExternalLineBar(layer);
-            ;
+            CreateVerticalInternalLineBar(layer);
             CreateHorizontalExternalLineBar(layer);
             CreateHorizontalInternalLineBar(layer);
 
-            int verticalQuantity = getVerticalQuantity((Wall.ExternalDiameter - 2 * Cover), SpacingY);
-            int horizontalExternalQuantity = getHorizontalExternalQuantity();
-            int horizontalInternalQuantity = getHorizontalInternalQuantity();
+            Point3d wallBasePoint = new Point3d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 150.0, 0);
+            Wall.DrawPlanifiedWall(wallBasePoint, topThickness, bottomThickness);
 
-            List<StandardDistribuction> distribuctions = new List<StandardDistribuction>();
-            //distribuctions.Add(new StandardDistribuction(1, CreateVerticalInternalLineBar(layer), GaugeY, SpacingY ,verticalQuantity ));
+            foreach (StandardDistribuction distribuction in distribuctions) { distribuction.Draw();}
         }
         private int getVerticalQuantity(double length, double spacing)
         {
-            return (int)(length / spacing);
+            return (int) Math.Ceiling(length / spacing);
         }
         private int getHorizontalExternalQuantity()
         {
             if (passarela > 1)
             {
-                if (edgeLength > 1)
-                {
-                    return (int) Math.Ceiling((Wall.Heigth) / SpacingX);
-                }
-                else
-                {
-                    return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);
-                }
+                if (edgeLength > 1) { return (int) Math.Ceiling((Wall.Heigth) / SpacingX);}
+                else { return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);}
             }
             else
             {
-                if (edgeLength > 1)
-                {
-                    return (int) Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);
-                }
-                else
-                {
-                    return (int) Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);
-                }
+                if (edgeLength > 1) { return (int) Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);}
+                else { return (int) Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);}
             }
         }
         private int getHorizontalInternalQuantity()
         {
             if (topThickness > 1)
             {
-                if (bottomThickness > 1)
-                {
-                    return (int) Math.Ceiling((Wall.Heigth) / SpacingX);
-                }
-                else
-                {
-                    return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);
-                }
+                if (bottomThickness > 1) { return (int) Math.Ceiling((Wall.Heigth) / SpacingX);}
+                else { return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);}
             }
             else
             {
-                if (bottomThickness > 1)
-                {
-                    return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);
-                }
-                else
-                {
-                    return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);
-                }
+                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);}
+                else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);}
             }
         }
 

@@ -17,30 +17,20 @@ namespace Detailing
         public Polyline BarLine { get; private set; }
         public double Gauge { get; private set; }
         public double Spacing { get; private set; }
-        public double Length { get; private set; }
+        public double Length { get; set; }
         public double Weigth { get; private set; }
-        public double Quantity { get; private set; }
+        public double Quantity { get; set; }
         public bool IsVariable { get; set; }
         public int NumberOfAmendments { get; private set; } = 0;
         public double AmendmentLength { get; private set;}
         public long MarkHandle { get; set; }
 
-        public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments)
+        public StandardDistribuction(double gauge, double length)
         {
-            Id = id;
             Gauge = gauge;
-            Spacing = spacing;
-            Length = 0.0;
-            BarLine = line;
-            for (int i = 0; i < line.NumberOfVertices - 1; i++)
-            {
-                Length += Math.Round(Structures.Utilities.DrawingShapes.Distance(line.GetPoint3dAt(i), line.GetPoint3dAt(i + 1)),2);
-            }
-            Quantity = quantity;
-            Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
-            NumberOfAmendments = numberOfAmendments;
+            Length = length;
         }
-        public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, int amendmentLength)
+        public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, double amendmentLength)
         {
             Id = id;
             Gauge = gauge;
@@ -108,12 +98,12 @@ namespace Detailing
         {
             IsVariable = true;
         }
-        public void Draw(Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment) 
+        public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/) 
         {
             DrawingID = Structures.Utilities.DrawingUtilities.DrawObject(BarLine);
             LineToBar();
-            printDescriptionText(basePoint, lastDescriptionPoint, attachment);
-            Structures.Utilities.DrawingShapes.AddQuotesInPolylines(BarLine, 0, 0);
+            //printDescriptionText(basePoint, lastDescriptionPoint, attachment);
+            //Structures.Utilities.DrawingShapes.AddQuotesInPolylines(BarLine, 0, 0);
         }
         private void LineToBar()
         {

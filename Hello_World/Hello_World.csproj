@@ -122,7 +122,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Detailing\UI\" />
+    <None Include="Resources\Parede-circular.PNG" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.Designer.cs">
@@ -133,6 +133,12 @@
     <Compile Include="Detailing\CircularWallDetailment.cs" />
     <Compile Include="Detailing\StandardDistribuction.cs" />
     <Compile Include="Detailing\SteelTable.cs" />
+    <Compile Include="Detailing\UI\CircularWallForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detailing\UI\CircularWallForm.Designer.cs">
+      <DependentUpon>CircularWallForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Structures\WellDetailer\Entities\Enums\Direction.cs" />
     <Compile Include="UI\EdgeForm.cs">
       <SubType>Form</SubType>
@@ -193,6 +199,9 @@
       <DependentUpon>Commands.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Commands.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detailing\UI\CircularWallForm.resx">
+      <DependentUpon>CircularWallForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EdgeForm.resx">
       <DependentUpon>EdgeForm.cs</DependentUpon>

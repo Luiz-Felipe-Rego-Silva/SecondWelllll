@@ -1,35 +1,38 @@
-﻿using Detailing;
+﻿using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
+using Detailing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hello_World.Detailing
+namespace Detailing
 {
     class SteelTable
     {
-        public SteelTable(List<StandardDistribuction> rebars, int multiplier)
+        public SteelTable(List<StandardDistribuction> rebars, int multiplier, string title)
         {
             barsList = CleanList(rebars);
             this.multiplier = multiplier;
+            Title = title;
         }
-
         public List<StandardDistribuction> barsList { get; set; }
         public int multiplier { get; set; }
         private double massCA50 = 0.0;
         private double massCA60 = 0.0;
-        private List<SteelBar> CleanList(List<SteelBar> dirtyList)
+        private const double ROW_HEIGTH = 30.0;
+        private const double COLUMN_WIDTH = 90.0;
+        private string Title;
+        private List<StandardDistribuction> CleanList(List<StandardDistribuction> dirtyList)
         {
-            var numOfSelected = dirtyList.Count;
-            var result = new List<SteelBar>();
-
-
+            int numOfSelected = dirtyList.Count;
+            List<StandardDistribuction> result = new List<StandardDistribuction>();
             for (int i = 0; i < numOfSelected + 1; i++)
             {
                 bool found = false;
-
-                foreach (SteelBar bar in dirtyList)
+                foreach (StandardDistribuction bar in dirtyList)
                     if (bar.Id == i)
                     {
                         if (!found)
@@ -37,69 +40,56 @@ namespace Hello_World.Detailing
                             found = true;
                             result.Add(bar);
                         }
-                        else
-                        {
-                            result[i - 1].Quantity += bar.Quantity;
-                        }
+                        else { result[i-1].Quantity += bar.Quantity; }
                     }
             }
-
             return result;
         }
-
         public double CreateBarsTable(Point3d position)
         {
-            var list = barsList;
+            List<StandardDistribuction> list = barsList;
+            Table lengthTable = new Table { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle};
+            lengthTable.SetSize(list.Count + 2, 5);
+            lengthTable.SetRowHeight(ROW_HEIGTH);
+            lengthTable.SetColumnWidth(COLUMN_WIDTH);
+            lengthTable.Layer = "3";
+            lengthTable.Position = position;
 
-            var tb = new Table
-            {
-                TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle
-            };
-            tb.SetSize(list.Count + 2, 5);
-            tb.SetRowHeight(TablesConfigs.RowHeight);
-            tb.SetColumnWidth(TablesConfigs.ColumnWidth);
-            tb.Layer = "3";
-
-            tb.Position = position;
             if (multiplier > 1)
-                tb.Cells[0, 0].TextString = $"Quadro de Aço (x{multiplier})";
+                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title} (x{multiplier})";
             else
-                tb.Cells[0, 0].TextString = "Quadro de Aço";
+                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title}";
 
-            tb.Cells[1, 0].TextString = "N";
-            tb.Cells[1, 1].TextString = "φ (mm)";
-            tb.Cells[1, 2].TextString = "Quant.";
-            tb.Cells[1, 3].TextString = "C. unit.(m)";
-            tb.Cells[1, 4].TextString = "C. total(m)";
+            lengthTable.Cells[1, 0].TextString = "N";
+            lengthTable.Cells[1, 1].TextString = "φ (mm)";
+            lengthTable.Cells[1, 2].TextString = "Quant.";
+            lengthTable.Cells[1, 3].TextString = "C. unit.(m)";
+            lengthTable.Cells[1, 4].TextString = "C. total(m)";
 
-            foreach (var rebar in list)
+            foreach (StandardDistribuction rebar in list)
             {
-                var lengthText = (Math.Round(rebar.Length) / 100.0).ToString("F2");
+                string lengthText = (Math.Round(rebar.Length) / 100.0).ToString("F2");
                 if (rebar.IsVariable) lengthText = "VAR.";
 
                 var index = list.IndexOf(rebar) + 2;
-                tb.Cells[index, 0].TextString = Convert.ToString(rebar.Id);
-                tb.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge);
-                tb.Cells[index, 2].TextString = Convert.ToString(rebar.Quantity * multiplier); // x multi
-                tb.Cells[index, 3].TextString = lengthText;
-                tb.Cells[index, 4].TextString = (rebar.Quantity * multiplier * (Math.Round(rebar.Length) / 100.0)).ToString("F2");
+                lengthTable.Cells[index, 0].TextString = Convert.ToString(rebar.Id);
+                lengthTable.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge);
+                lengthTable.Cells[index, 2].TextString = Convert.ToString(rebar.Quantity * multiplier); // x multi
+                lengthTable.Cells[index, 3].TextString = lengthText;
+                lengthTable.Cells[index, 4].TextString = (rebar.Quantity * multiplier * (Math.Round(rebar.Length) / 100.0)).ToString("F2");
             }
-
-            tb.GenerateLayout();
-            var height = tb.Height;
-            Tools.AddToDrawing(tb);
-            tb.Dispose();
-
+            lengthTable.GenerateLayout();
+            double height = lengthTable.Height;
+            Structures.Utilities.DrawingUtilities.AddToDrawing(lengthTable);
+            lengthTable.Dispose();
             return height;
         }
-
-        private double CalculateMass(SteelBar bar)
+        private double CalculateMass(StandardDistribuction bar)
         {
-            //todas as medidas em CM -> resposta em Kg
             double mass = (Math.Round(bar.Length) / 100.0) * GetNominalSteelDensity(bar.Gauge);
             return Math.Round(mass, 1);
         }
-        public double GetNominalSteelDensity(double gauge)
+        private double GetNominalSteelDensity(double gauge)
         {
             int gaugeForswitch = (int)(10 * gauge);
             double nominalSteelDensity = 0.0;
@@ -132,25 +122,19 @@ namespace Hello_World.Detailing
             }
             return nominalSteelDensity;
         }
-
-        private List<SteelBar> GetMappedGauges()
+        private List<StandardDistribuction> GetMappedGauges()
         {
-            var packs = new List<SteelBar>();
-
-            foreach (var rebar in barsList)
+            List<StandardDistribuction> packs = new List<StandardDistribuction>();
+            foreach (StandardDistribuction rebar in barsList)
             {
-                var foundIndex = -1;
-                foreach (var pack in packs)
+                int foundIndex = -1;
+                foreach (StandardDistribuction pack in packs)
                     if (pack.Gauge == rebar.Gauge)
                         foundIndex = packs.IndexOf(pack);
 
                 if (foundIndex == -1)
                 {
-                    var st = new SteelBar
-                    {
-                        Gauge = rebar.Gauge,
-                        Length = (Math.Round(rebar.Length)) * rebar.Quantity
-                    };
+                    StandardDistribuction st = new StandardDistribuction(rebar.Gauge, (Math.Round(rebar.Length)) * rebar.Quantity);
                     packs.Add(st);
                 }
                 else
@@ -161,40 +145,37 @@ namespace Hello_World.Detailing
 
             return packs;
         }
-
         public double CreateGaugesTable(Point3d position)
         {
-            var list = GetMappedGauges();
+            List<StandardDistribuction> list = GetMappedGauges();
 
-            var tb = new Table();
-            tb.TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle;
-            tb.SetSize(list.Count + 2, 4);
-            tb.SetRowHeight(TablesConfigs.RowHeight);
-            tb.SetColumnWidth(TablesConfigs.ColumnWidth * 5 / 4);
-            tb.Layer = "3";
+            Table gaugeSumaryTable = new Table();
+            gaugeSumaryTable.TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle;
+            gaugeSumaryTable.SetSize(list.Count + 2, 4);
+            gaugeSumaryTable.SetRowHeight(ROW_HEIGTH);
+            gaugeSumaryTable.SetColumnWidth(COLUMN_WIDTH * 5 / 4);
+            gaugeSumaryTable.Layer = "3";
 
-            tb.Position = position;
+            gaugeSumaryTable.Position = position;
 
-            tb.Cells[0, 0].TextString = "Resumo";
-            tb.Cells[1, 0].TextString = "φ (mm)";
-            tb.Cells[1, 1].TextString = "Tipo";
-            tb.Cells[1, 2].TextString = "C. total(m)";
-            tb.Cells[1, 3].TextString = "Peso(kg)";
+            gaugeSumaryTable.Cells[0, 0].TextString = "Resumo";
+            gaugeSumaryTable.Cells[1, 0].TextString = "φ (mm)";
+            gaugeSumaryTable.Cells[1, 1].TextString = "Tipo";
+            gaugeSumaryTable.Cells[1, 2].TextString = "C. total(m)";
+            gaugeSumaryTable.Cells[1, 3].TextString = "Peso(kg)";
 
-
-            foreach (var rebar in list)
+            foreach (StandardDistribuction rebar in list)
             {
                 var index = list.IndexOf(rebar) + 2;
-                tb.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge);
+                gaugeSumaryTable.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge);
 
                 if (rebar.Gauge > 5.0)
-                    tb.Cells[index, 1].TextString = Convert.ToString("CA - 50");
+                    gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 50");
                 else
-                    tb.Cells[index, 1].TextString = Convert.ToString("CA - 60");
+                    gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 60");
 
-
-                tb.Cells[index, 2].TextString = (multiplier * ((Math.Round(rebar.Length)) / 100.0)).ToString("F2"); // x multi
-                tb.Cells[index, 3].TextString = (multiplier * CalculateMass(rebar)).ToString("F1"); // x multi
+                gaugeSumaryTable.Cells[index, 2].TextString = (multiplier * ((Math.Round(rebar.Length)) / 100.0)).ToString("F2"); // x multi
+                gaugeSumaryTable.Cells[index, 3].TextString = (multiplier * CalculateMass(rebar)).ToString("F1"); // x multi
 
                 if (rebar.Gauge < 6)
                     massCA60 += Math.Round(multiplier * CalculateMass(rebar), 1);
@@ -202,72 +183,61 @@ namespace Hello_World.Detailing
                     massCA50 += Math.Round(multiplier * CalculateMass(rebar), 1);
             }
 
-            tb.GenerateLayout();
-            Tools.AddToDrawing(tb);
-            var height = tb.Height;
-            tb.Dispose();
+            gaugeSumaryTable.GenerateLayout();
+            Structures.Utilities.DrawingUtilities.AddToDrawing(gaugeSumaryTable);
+            double height = gaugeSumaryTable.Height;
+            gaugeSumaryTable.Dispose();
 
             return height;
         }
-
         public void GenerateFullTable(Point3d position)
         {
-            var h = CreateBarsTable(position);
+            double h = CreateBarsTable(position);
             h += CreateGaugesTable(new Point3d(position.X, position.Y - h, 0));
             GenerateBriefTable(new Point3d(position.X, position.Y - h, 0));
         }
-
         public double GenerateBriefTable(Point3d position)
         {
             double mass_50 = 0;
             double mass_60 = 0;
 
-            foreach (var bar in barsList)
+            foreach (StandardDistribuction bar in barsList)
                 if (bar.Gauge < 6.0)
                     mass_60 += CalculateMass(bar) * bar.Quantity;
                 else
                     mass_50 += CalculateMass(bar) * bar.Quantity;
-            var NumTypes = 0;
 
+            int NumTypes = 0;
             if (mass_50 > 0) NumTypes++;
-
             if (mass_60 > 0) NumTypes++;
 
-            var tb = new Table
+            Table totalsTable = new Table
+            { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle};
+            totalsTable.SetSize(1 + NumTypes, 2);
+            totalsTable.SetRowHeight(ROW_HEIGTH);
+            totalsTable.SetColumnWidth(COLUMN_WIDTH * 5 / 2);
+            totalsTable.Layer = "3";
+
+            totalsTable.Cells[0, 0].TextString = "Total (Kg)";
+            int putted = 1;
+            if (mass_50 > 0 && NumTypes > 0) 
             {
-                TableStyle = Application.DocumentManager.MdiActiveDocument
-                    .Database.Tablestyle
-            };
-            tb.SetSize(1 + NumTypes, 2);
-            tb.SetRowHeight(TablesConfigs.RowHeight);
-            tb.SetColumnWidth(TablesConfigs.ColumnWidth * 5 / 2);
-            tb.Layer = "3";
-
-            tb.Cells[0, 0].TextString = "Total (Kg)";
-
-            var putted = 1;
-
-            if (mass_50 > 0 && NumTypes > 0)
-            {
-                tb.Cells[putted, 0].TextString = "CA-50";
-                tb.Cells[putted, 1].TextString = massCA50.ToString("F1");
+                totalsTable.Cells[putted, 0].TextString = "CA-50";
+                totalsTable.Cells[putted, 1].TextString = massCA50.ToString("F1");
                 putted++;
                 NumTypes--;
             }
-
             if (mass_60 > 0 && NumTypes > 0)
             {
-                tb.Cells[putted, 0].TextString = "CA-60";
-                tb.Cells[putted, 1].TextString = massCA60.ToString("F1");
-                putted++;
-                NumTypes--;
+                totalsTable.Cells[putted, 0].TextString = "CA-60";
+                totalsTable.Cells[putted, 1].TextString = massCA60.ToString("F1");
             }
 
-            tb.Position = position;
-            tb.GenerateLayout();
-            Tools.AddToDrawing(tb);
-            var height = tb.Height;
-            tb.Dispose();
+            totalsTable.Position = position;
+            totalsTable.GenerateLayout();
+            Structures.Utilities.DrawingUtilities.AddToDrawing(totalsTable);
+            double height = totalsTable.Height;
+            totalsTable.Dispose();
             return height;
         }
 
