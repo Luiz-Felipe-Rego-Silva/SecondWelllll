@@ -38,11 +38,11 @@ namespace Hello_World.Detailing
         public double BottomOffset { get; private set; }
         //Pontos  
         public Point3d BasePoint { get; set; }
-        
+
         //Barras
         private Polyline VerticalExternalLine, VerticalInternalLine, HorizontalInternalLine, HorizontalExternalLine;
         private List<StandardDistribuction> distribuctions = new List<StandardDistribuction>();
-        public string Title { get; set;}
+        public string Title { get; set; }
         public void SetSteelInfo(double spacingX, double spacingY, double gaugeX, double gaugeY, double anchorFactor, double cover)
         {
             SpacingX = spacingX;
@@ -52,7 +52,7 @@ namespace Hello_World.Detailing
             AnchorFactor = anchorFactor;
             Cover = cover;
         }
-        public void SetGeometry(CircularWall wall, double topThickness, double bottomThickness) 
+        public void SetGeometry(CircularWall wall, double topThickness, double bottomThickness)
         {
             Wall = wall;
             this.topThickness = topThickness;
@@ -79,7 +79,7 @@ namespace Hello_World.Detailing
             this.edgeLength = edgeLength;
             effectiveHeigth = Wall.Heigth + topThickness + bottomThickness;
         }
-        public void setAnnotations(string title, int multiplier) 
+        public void setAnnotations(string title, int multiplier)
         {
             Title = title;
             Multiplier = multiplier;
@@ -145,10 +145,10 @@ namespace Hello_World.Detailing
                 }
             }
             int verticalQuantity = getVerticalQuantity(Math.PI * (Wall.ExternalDiameter - 2 * Cover), SpacingY);
-            distribuctions.Add(new StandardDistribuction(1, 
+            distribuctions.Add(new StandardDistribuction(1,
                 VerticalExternalLine, GaugeY,
-                SpacingY, verticalQuantity, 
-                getNumberOfAmendment(totalLenth, GaugeY), 
+                SpacingY, verticalQuantity,
+                getNumberOfAmendment(totalLenth, GaugeY),
                 (GaugeY)));
         }
         private void CreateVerticalInternalLineBar(string layer)
@@ -257,51 +257,119 @@ namespace Hello_World.Detailing
         {
             return (2.0 * gauge * AnchorFactor);
         }
-        public void DrawDistribuctions(Point3d basePoint)
+        private void SetDistribuctions() 
         {
-            BasePoint = basePoint;
             string layer = "5";
             CreateVerticalExternalLineBar(layer);
             CreateVerticalInternalLineBar(layer);
             CreateHorizontalExternalLineBar(layer);
             CreateHorizontalInternalLineBar(layer);
-
+        }
+        public void DrawDistribuctions(Point3d basePoint)
+        {
+            BasePoint = basePoint;
             Point3d wallBasePoint = new Point3d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 150.0, 0);
+            Point3d tableBasePoint = new Point3d(wallBasePoint.X + Math.PI * Wall.ExternalDiameter + 300.0 + Wall.Thickness, wallBasePoint.Y - 50.0, 0);
+            DrawTitle(basePoint);
             Wall.DrawPlanifiedWall(wallBasePoint, topThickness, bottomThickness);
-
-            foreach (StandardDistribuction distribuction in distribuctions) { distribuction.Draw();}
+            SetDistribuctions();
+            foreach (StandardDistribuction distribuction in distribuctions) { distribuction.Draw(); }
+            distribuctions = StandardDistribuction.CreateReIndexedBarsList(distribuctions);
+            StandardDistribuction.UpdateBars(distribuctions);
+            DrawBarsInfo();
+            SteelTable steelTable = new SteelTable(distribuctions, Multiplier, Title);
+            steelTable.GenerateFullTable(tableBasePoint);
         }
         private int getVerticalQuantity(double length, double spacing)
         {
-            return (int) Math.Ceiling(length / spacing);
+            return (int)Math.Ceiling(length / spacing);
         }
         private int getHorizontalExternalQuantity()
         {
             if (passarela > 1)
             {
-                if (edgeLength > 1) { return (int) Math.Ceiling((Wall.Heigth) / SpacingX);}
-                else { return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);}
+                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX); }
             }
             else
             {
-                if (edgeLength > 1) { return (int) Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);}
-                else { return (int) Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);}
+                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
         private int getHorizontalInternalQuantity()
         {
             if (topThickness > 1)
             {
-                if (bottomThickness > 1) { return (int) Math.Ceiling((Wall.Heigth) / SpacingX);}
-                else { return (int) Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX);}
+                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX); }
             }
             else
             {
-                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX);}
-                else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX);}
+                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
+        private void DrawTitle(Point3d startPoint)
+        {
+            DBText title = new DBText()
+            {
+                Layer = "5",
+                Height = 20,
+                TextString = Title.ToUpper(),
+                Justify = AttachmentPoint.BottomLeft,
+                Rotation = 0,
+                AlignmentPoint = startPoint
+            };
+            DBText infoProjection = new DBText()
+            {
+                Layer = "3",
+                Height = 10,
+                TextString = "(VISTA DA PAREDE EM PROJEÇÃO)",
+                Justify = AttachmentPoint.BottomLeft,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 17.0, 0)
+            };
+            DBText esc_txt = new DBText()
+            {
+                Layer = "3",
+                Height = 10,
+                TextString = "ESC. 1/50",
+                Justify = AttachmentPoint.BottomLeft,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 34.0, 0)
+            };
+            DBText dim_text = new DBText() 
+            {
+                Layer = "3",
+                Height = 10,
+                TextString = $"(h={Wall.Heigth + bottomThickness + topThickness}, esp={Wall.Thickness}, Dext={Wall.ExternalDiameter})",
+                Justify = AttachmentPoint.BottomLeft,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 51.0, 0)
+            };
 
-
+            DrawingUtilities.AddToDrawing(title);
+            DrawingUtilities.AddToDrawing(infoProjection);
+            DrawingUtilities.AddToDrawing(esc_txt);
+            DrawingUtilities.AddToDrawing(dim_text);
+        }
+        private void DrawBarsInfo() 
+        {
+            //Vertical Externa
+            int startIndex = 1;
+            if (distribuctions[1].BarLine.GetPoint3dAt(startIndex).X - distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1).X > 0.5)
+                startIndex += 1;
+            Point3d textPoint = DrawingShapes.MiddlePoint(distribuctions[1].BarLine.GetPoint3dAt(startIndex), distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[1].PrintDescriptionText(new Point3d(textPoint.X + 10.0, textPoint.Y ,0), Math.PI/2.0);
+            //Vertical Interna
+            startIndex = 1;
+            if (distribuctions[2].BarLine.GetPoint3dAt(startIndex).X - distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1).X > 0.5)
+                startIndex += 1;
+            textPoint = DrawingShapes.MiddlePoint(distribuctions[2].BarLine.GetPoint3dAt(startIndex), distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X - 10.0, textPoint.Y, 0), Math.PI / 2.0);
+            //Horizontal Interna
+            //Horizontal Externa
+        }
     }
 }

@@ -12,12 +12,6 @@ namespace Detailing
 {
     class SteelTable
     {
-        public SteelTable(List<StandardDistribuction> rebars, int multiplier, string title)
-        {
-            barsList = CleanList(rebars);
-            this.multiplier = multiplier;
-            Title = title;
-        }
         public List<StandardDistribuction> barsList { get; set; }
         public int multiplier { get; set; }
         private double massCA50 = 0.0;
@@ -25,6 +19,12 @@ namespace Detailing
         private const double ROW_HEIGTH = 30.0;
         private const double COLUMN_WIDTH = 90.0;
         private string Title;
+        public SteelTable(List<StandardDistribuction> rebars, int multiplier, string title)
+        {
+            barsList = CleanList(rebars);
+            this.multiplier = multiplier;
+            Title = title;
+        }
         private List<StandardDistribuction> CleanList(List<StandardDistribuction> dirtyList)
         {
             int numOfSelected = dirtyList.Count;
@@ -45,7 +45,7 @@ namespace Detailing
             }
             return result;
         }
-        public double CreateBarsTable(Point3d position)
+        private double CreateBarsTable(Point3d position)
         {
             List<StandardDistribuction> list = barsList;
             Table lengthTable = new Table { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle};
@@ -56,9 +56,9 @@ namespace Detailing
             lengthTable.Position = position;
 
             if (multiplier > 1)
-                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title} (x{multiplier})";
+                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title.ToUpper()} (x{multiplier})";
             else
-                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title}";
+                lengthTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title.ToUpper()}";
 
             lengthTable.Cells[1, 0].TextString = "N";
             lengthTable.Cells[1, 1].TextString = "φ (mm)";
@@ -68,14 +68,11 @@ namespace Detailing
 
             foreach (StandardDistribuction rebar in list)
             {
-                string lengthText = (Math.Round(rebar.Length) / 100.0).ToString("F2");
-                if (rebar.IsVariable) lengthText = "VAR.";
-
-                var index = list.IndexOf(rebar) + 2;
+                int index = list.IndexOf(rebar) + 2;
                 lengthTable.Cells[index, 0].TextString = Convert.ToString(rebar.Id);
-                lengthTable.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge);
+                lengthTable.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge * 10);
                 lengthTable.Cells[index, 2].TextString = Convert.ToString(rebar.Quantity * multiplier); // x multi
-                lengthTable.Cells[index, 3].TextString = lengthText;
+                lengthTable.Cells[index, 3].TextString = (Math.Round(rebar.Length) / 100.0).ToString("F2");
                 lengthTable.Cells[index, 4].TextString = (rebar.Quantity * multiplier * (Math.Round(rebar.Length) / 100.0)).ToString("F2");
             }
             lengthTable.GenerateLayout();
@@ -91,7 +88,7 @@ namespace Detailing
         }
         private double GetNominalSteelDensity(double gauge)
         {
-            int gaugeForswitch = (int)(10 * gauge);
+            int gaugeForswitch = (int)(100 * gauge);
             double nominalSteelDensity = 0.0;
             switch (gaugeForswitch)
             {
@@ -145,9 +142,10 @@ namespace Detailing
 
             return packs;
         }
-        public double CreateGaugesTable(Point3d position)
+        private double CreateGaugesTable(Point3d position)
         {
             List<StandardDistribuction> list = GetMappedGauges();
+            list = list.OrderBy(bar => bar.Gauge).ToList();
 
             Table gaugeSumaryTable = new Table();
             gaugeSumaryTable.TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle;
@@ -166,10 +164,10 @@ namespace Detailing
 
             foreach (StandardDistribuction rebar in list)
             {
-                var index = list.IndexOf(rebar) + 2;
-                gaugeSumaryTable.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge);
+                int index = list.IndexOf(rebar) + 2;
+                gaugeSumaryTable.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge * 10.0);
 
-                if (rebar.Gauge > 5.0)
+                if (rebar.Gauge * 10.0 > 5.0)
                     gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 50");
                 else
                     gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 60");
@@ -177,7 +175,7 @@ namespace Detailing
                 gaugeSumaryTable.Cells[index, 2].TextString = (multiplier * ((Math.Round(rebar.Length)) / 100.0)).ToString("F2"); // x multi
                 gaugeSumaryTable.Cells[index, 3].TextString = (multiplier * CalculateMass(rebar)).ToString("F1"); // x multi
 
-                if (rebar.Gauge < 6)
+                if (rebar.Gauge * 10.0 < 6)
                     massCA60 += Math.Round(multiplier * CalculateMass(rebar), 1);
                 else
                     massCA50 += Math.Round(multiplier * CalculateMass(rebar), 1);
@@ -196,13 +194,13 @@ namespace Detailing
             h += CreateGaugesTable(new Point3d(position.X, position.Y - h, 0));
             GenerateBriefTable(new Point3d(position.X, position.Y - h, 0));
         }
-        public double GenerateBriefTable(Point3d position)
+        private double GenerateBriefTable(Point3d position)
         {
             double mass_50 = 0;
             double mass_60 = 0;
 
             foreach (StandardDistribuction bar in barsList)
-                if (bar.Gauge < 6.0)
+                if (bar.Gauge * 10.0 < 6.0)
                     mass_60 += CalculateMass(bar) * bar.Quantity;
                 else
                     mass_50 += CalculateMass(bar) * bar.Quantity;
@@ -211,8 +209,7 @@ namespace Detailing
             if (mass_50 > 0) NumTypes++;
             if (mass_60 > 0) NumTypes++;
 
-            Table totalsTable = new Table
-            { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle};
+            Table totalsTable = new Table { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle};
             totalsTable.SetSize(1 + NumTypes, 2);
             totalsTable.SetRowHeight(ROW_HEIGTH);
             totalsTable.SetColumnWidth(COLUMN_WIDTH * 5 / 2);

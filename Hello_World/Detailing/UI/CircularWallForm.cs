@@ -24,26 +24,34 @@ namespace Hello_World.Detailing.UI
         {
             if (chcbx_externalTop.Checked)
                 chcbx_externalTopEngaged.Checked = true;
-            //else if (!chcbx_externalTop.Checked)
-                //chcbx_externalTopEngaged.Checked = false;
+            else if (!chcbx_externalTop.Checked)
+                chcbx_externalTopEngaged.Checked = false;
         }
 
         private void chcbx_internalTop_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_internalTop.Checked)
                 chcbx_internalTopEngaged.Checked = true;
+            else if (!chcbx_internalTop.Checked)
+                chcbx_internalTopEngaged.Checked = false;
+
         }
 
         private void chcbx_externalBottom_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_externalBottom.Checked)
                 chcbx_externalBottomEngaged.Checked = true;
+            else if (!chcbx_externalBottom.Checked)
+                chcbx_externalBottomEngaged.Checked = false;
         }
 
         private void chcbx_internalBottom_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_internalBottom.Checked)
                 chcbx_internalBottomEngaged.Checked = true;
+            else if (!chcbx_internalBottom.Checked)
+                chcbx_internalBottomEngaged.Checked = false;
+
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

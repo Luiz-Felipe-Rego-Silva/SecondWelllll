@@ -136,5 +136,10 @@ namespace Structures.WellDetailer.Entities
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer, lineType);
             //Texto
         }
+        private void DrawCutInDetailment(Point3d topLeftPoint,double topThickness, double bottomThickness, bool[] boundaries) 
+        { 
+
+        
+        }
     }
 }
