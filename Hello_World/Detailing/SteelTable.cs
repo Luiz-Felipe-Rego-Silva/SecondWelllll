@@ -70,7 +70,7 @@ namespace Detailing
             {
                 int index = list.IndexOf(rebar) + 2;
                 lengthTable.Cells[index, 0].TextString = Convert.ToString(rebar.Id);
-                lengthTable.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge * 10);
+                lengthTable.Cells[index, 1].TextString = Convert.ToString(rebar.Gauge);
                 lengthTable.Cells[index, 2].TextString = Convert.ToString(rebar.Quantity * multiplier); // x multi
                 lengthTable.Cells[index, 3].TextString = (Math.Round(rebar.Length) / 100.0).ToString("F2");
                 lengthTable.Cells[index, 4].TextString = (rebar.Quantity * multiplier * (Math.Round(rebar.Length) / 100.0)).ToString("F2");
@@ -88,7 +88,7 @@ namespace Detailing
         }
         private double GetNominalSteelDensity(double gauge)
         {
-            int gaugeForswitch = (int)(100 * gauge);
+            int gaugeForswitch = (int)(10 * gauge);
             double nominalSteelDensity = 0.0;
             switch (gaugeForswitch)
             {
@@ -165,9 +165,9 @@ namespace Detailing
             foreach (StandardDistribuction rebar in list)
             {
                 int index = list.IndexOf(rebar) + 2;
-                gaugeSumaryTable.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge * 10.0);
+                gaugeSumaryTable.Cells[index, 0].TextString = Convert.ToString(rebar.Gauge);
 
-                if (rebar.Gauge * 10.0 > 5.0)
+                if (rebar.Gauge > 5.0)
                     gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 50");
                 else
                     gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 60");
@@ -175,7 +175,7 @@ namespace Detailing
                 gaugeSumaryTable.Cells[index, 2].TextString = (multiplier * ((Math.Round(rebar.Length)) / 100.0)).ToString("F2"); // x multi
                 gaugeSumaryTable.Cells[index, 3].TextString = (multiplier * CalculateMass(rebar)).ToString("F1"); // x multi
 
-                if (rebar.Gauge * 10.0 < 6)
+                if (rebar.Gauge < 6)
                     massCA60 += Math.Round(multiplier * CalculateMass(rebar), 1);
                 else
                     massCA50 += Math.Round(multiplier * CalculateMass(rebar), 1);
@@ -200,7 +200,7 @@ namespace Detailing
             double mass_60 = 0;
 
             foreach (StandardDistribuction bar in barsList)
-                if (bar.Gauge * 10.0 < 6.0)
+                if (bar.Gauge < 6.0)
                     mass_60 += CalculateMass(bar) * bar.Quantity;
                 else
                     mass_50 += CalculateMass(bar) * bar.Quantity;

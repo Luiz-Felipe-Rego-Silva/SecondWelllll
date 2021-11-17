@@ -104,7 +104,7 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.Location = new System.Drawing.Point(304, 44);
             this.grp_Factors.Name = "grp_Factors";
             this.grp_Factors.Size = new System.Drawing.Size(150, 76);
-            this.grp_Factors.TabIndex = 0;
+            this.grp_Factors.TabIndex = 2;
             this.grp_Factors.TabStop = false;
             // 
             // msktxt_anchorFactor
@@ -112,7 +112,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_anchorFactor.Location = new System.Drawing.Point(115, 43);
             this.msktxt_anchorFactor.Name = "msktxt_anchorFactor";
             this.msktxt_anchorFactor.Size = new System.Drawing.Size(29, 20);
-            this.msktxt_anchorFactor.TabIndex = 10;
+            this.msktxt_anchorFactor.TabIndex = 2;
             this.msktxt_anchorFactor.Text = "34";
             this.msktxt_anchorFactor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -121,7 +121,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_cover.Location = new System.Drawing.Point(115, 13);
             this.msktxt_cover.Name = "msktxt_cover";
             this.msktxt_cover.Size = new System.Drawing.Size(29, 20);
-            this.msktxt_cover.TabIndex = 9;
+            this.msktxt_cover.TabIndex = 1;
             this.msktxt_cover.Text = "5";
             this.msktxt_cover.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -131,7 +131,7 @@ namespace Hello_World.Detailing.UI
             this.lbl_anchorFactor.Location = new System.Drawing.Point(6, 46);
             this.lbl_anchorFactor.Name = "lbl_anchorFactor";
             this.lbl_anchorFactor.Size = new System.Drawing.Size(103, 13);
-            this.lbl_anchorFactor.TabIndex = 8;
+            this.lbl_anchorFactor.TabIndex = 2;
             this.lbl_anchorFactor.Text = "Fator de Ancoragem";
             // 
             // lbl_cover
@@ -156,7 +156,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steel.Location = new System.Drawing.Point(304, 126);
             this.grp_steel.Name = "grp_steel";
             this.grp_steel.Size = new System.Drawing.Size(150, 121);
-            this.grp_steel.TabIndex = 1;
+            this.grp_steel.TabIndex = 2;
             this.grp_steel.TabStop = false;
             this.grp_steel.Text = "Armadura";
             // 
@@ -176,7 +176,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_horizontalWallGauge.Name = "cmbbx_horizontalWallGauge";
             this.cmbbx_horizontalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_horizontalWallGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_horizontalWallGauge.TabIndex = 12;
+            this.cmbbx_horizontalWallGauge.TabIndex = 3;
             this.cmbbx_horizontalWallGauge.Text = "5.0";
             // 
             // cmbbx_verticalWallGauge
@@ -195,7 +195,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_verticalWallGauge.Name = "cmbbx_verticalWallGauge";
             this.cmbbx_verticalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_verticalWallGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_verticalWallGauge.TabIndex = 10;
+            this.cmbbx_verticalWallGauge.TabIndex = 1;
             this.cmbbx_verticalWallGauge.Text = "5.0";
             // 
             // msktxt_horizontalSpacing
@@ -203,7 +203,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_horizontalSpacing.Location = new System.Drawing.Point(84, 97);
             this.msktxt_horizontalSpacing.Name = "msktxt_horizontalSpacing";
             this.msktxt_horizontalSpacing.Size = new System.Drawing.Size(60, 20);
-            this.msktxt_horizontalSpacing.TabIndex = 11;
+            this.msktxt_horizontalSpacing.TabIndex = 4;
             this.msktxt_horizontalSpacing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_verticalSpacing
@@ -211,7 +211,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_verticalSpacing.Location = new System.Drawing.Point(84, 39);
             this.msktxt_verticalSpacing.Name = "msktxt_verticalSpacing";
             this.msktxt_verticalSpacing.Size = new System.Drawing.Size(60, 20);
-            this.msktxt_verticalSpacing.TabIndex = 9;
+            this.msktxt_verticalSpacing.TabIndex = 2;
             this.msktxt_verticalSpacing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_horizontalSpacing
@@ -261,7 +261,7 @@ namespace Hello_World.Detailing.UI
             this.grp_geometry.Location = new System.Drawing.Point(304, 253);
             this.grp_geometry.Name = "grp_geometry";
             this.grp_geometry.Size = new System.Drawing.Size(150, 108);
-            this.grp_geometry.TabIndex = 2;
+            this.grp_geometry.TabIndex = 3;
             this.grp_geometry.TabStop = false;
             this.grp_geometry.Text = "Geometria";
             // 
@@ -270,7 +270,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_wallThickness.Location = new System.Drawing.Point(100, 78);
             this.msktxt_wallThickness.Name = "msktxt_wallThickness";
             this.msktxt_wallThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_wallThickness.TabIndex = 16;
+            this.msktxt_wallThickness.TabIndex = 3;
             this.msktxt_wallThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_externalHeigth
@@ -278,7 +278,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_externalHeigth.Location = new System.Drawing.Point(100, 46);
             this.msktxt_externalHeigth.Name = "msktxt_externalHeigth";
             this.msktxt_externalHeigth.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_externalHeigth.TabIndex = 15;
+            this.msktxt_externalHeigth.TabIndex = 2;
             this.msktxt_externalHeigth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_externalDiameter
@@ -286,7 +286,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_externalDiameter.Location = new System.Drawing.Point(100, 13);
             this.msktxt_externalDiameter.Name = "msktxt_externalDiameter";
             this.msktxt_externalDiameter.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_externalDiameter.TabIndex = 12;
+            this.msktxt_externalDiameter.TabIndex = 1;
             this.msktxt_externalDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_wallThickness
@@ -325,7 +325,7 @@ namespace Hello_World.Detailing.UI
             this.grp_AdjacentElements.Location = new System.Drawing.Point(304, 367);
             this.grp_AdjacentElements.Name = "grp_AdjacentElements";
             this.grp_AdjacentElements.Size = new System.Drawing.Size(150, 84);
-            this.grp_AdjacentElements.TabIndex = 3;
+            this.grp_AdjacentElements.TabIndex = 4;
             this.grp_AdjacentElements.TabStop = false;
             this.grp_AdjacentElements.Text = "Elementos Adjacentes";
             // 
@@ -334,7 +334,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_bottomThickness.Location = new System.Drawing.Point(102, 57);
             this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
             this.msktxt_bottomThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_bottomThickness.TabIndex = 18;
+            this.msktxt_bottomThickness.TabIndex = 2;
             this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_topThickness
@@ -342,7 +342,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_topThickness.Location = new System.Drawing.Point(102, 27);
             this.msktxt_topThickness.Name = "msktxt_topThickness";
             this.msktxt_topThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_topThickness.TabIndex = 17;
+            this.msktxt_topThickness.TabIndex = 1;
             this.msktxt_topThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_bottomThickness
@@ -372,7 +372,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steelTop.Location = new System.Drawing.Point(7, 427);
             this.grp_steelTop.Name = "grp_steelTop";
             this.grp_steelTop.Size = new System.Drawing.Size(134, 70);
-            this.grp_steelTop.TabIndex = 5;
+            this.grp_steelTop.TabIndex = 10;
             this.grp_steelTop.TabStop = false;
             this.grp_steelTop.Text = "Armadura (Topo)";
             // 
@@ -392,7 +392,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_horizontalTopGauge.Name = "cmbbx_horizontalTopGauge";
             this.cmbbx_horizontalTopGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_horizontalTopGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_horizontalTopGauge.TabIndex = 15;
+            this.cmbbx_horizontalTopGauge.TabIndex = 2;
             // 
             // cmbbx_verticalTopGauge
             // 
@@ -410,7 +410,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_verticalTopGauge.Name = "cmbbx_verticalTopGauge";
             this.cmbbx_verticalTopGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_verticalTopGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_verticalTopGauge.TabIndex = 13;
+            this.cmbbx_verticalTopGauge.TabIndex = 1;
             // 
             // lbl_horizontalTopGauge
             // 
@@ -439,7 +439,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steelBottom.Location = new System.Drawing.Point(159, 427);
             this.grp_steelBottom.Name = "grp_steelBottom";
             this.grp_steelBottom.Size = new System.Drawing.Size(134, 70);
-            this.grp_steelBottom.TabIndex = 6;
+            this.grp_steelBottom.TabIndex = 11;
             this.grp_steelBottom.TabStop = false;
             this.grp_steelBottom.Text = "Armadura (Fundo)";
             // 
@@ -459,7 +459,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_horizontalBottomGauge.Name = "cmbbx_horizontalBottomGauge";
             this.cmbbx_horizontalBottomGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_horizontalBottomGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_horizontalBottomGauge.TabIndex = 17;
+            this.cmbbx_horizontalBottomGauge.TabIndex = 2;
             // 
             // cmbbx_verticalBottomGauge
             // 
@@ -477,7 +477,7 @@ namespace Hello_World.Detailing.UI
             this.cmbbx_verticalBottomGauge.Name = "cmbbx_verticalBottomGauge";
             this.cmbbx_verticalBottomGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_verticalBottomGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_verticalBottomGauge.TabIndex = 16;
+            this.cmbbx_verticalBottomGauge.TabIndex = 1;
             // 
             // lbl_horizontalBottomGauge
             // 
@@ -531,7 +531,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_multiplier.Location = new System.Drawing.Point(376, 25);
             this.msktxt_multiplier.Name = "msktxt_multiplier";
             this.msktxt_multiplier.Size = new System.Drawing.Size(78, 20);
-            this.msktxt_multiplier.TabIndex = 8;
+            this.msktxt_multiplier.TabIndex = 1;
             this.msktxt_multiplier.Text = "1";
             this.msktxt_multiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -542,7 +542,7 @@ namespace Hello_World.Detailing.UI
             this.rchtxt_title.Name = "rchtxt_title";
             this.rchtxt_title.ShowSelectionMargin = true;
             this.rchtxt_title.Size = new System.Drawing.Size(248, 16);
-            this.rchtxt_title.TabIndex = 9;
+            this.rchtxt_title.TabIndex = 0;
             this.rchtxt_title.Text = "";
             // 
             // btn_detail
@@ -550,7 +550,7 @@ namespace Hello_World.Detailing.UI
             this.btn_detail.Location = new System.Drawing.Point(388, 469);
             this.btn_detail.Name = "btn_detail";
             this.btn_detail.Size = new System.Drawing.Size(66, 28);
-            this.btn_detail.TabIndex = 10;
+            this.btn_detail.TabIndex = 12;
             this.btn_detail.Text = "Detalhar";
             this.btn_detail.UseVisualStyleBackColor = true;
             this.btn_detail.Click += new System.EventHandler(this.btn_detail_Click);
@@ -577,7 +577,7 @@ namespace Hello_World.Detailing.UI
             this.grp_sideShapes.Location = new System.Drawing.Point(7, 362);
             this.grp_sideShapes.Name = "grp_sideShapes";
             this.grp_sideShapes.Size = new System.Drawing.Size(286, 62);
-            this.grp_sideShapes.TabIndex = 4;
+            this.grp_sideShapes.TabIndex = 9;
             this.grp_sideShapes.TabStop = false;
             this.grp_sideShapes.Text = "Engaste";
             // 
@@ -587,7 +587,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_internalBottomEngaged.Location = new System.Drawing.Point(197, 38);
             this.chcbx_internalBottomEngaged.Name = "chcbx_internalBottomEngaged";
             this.chcbx_internalBottomEngaged.Size = new System.Drawing.Size(59, 17);
-            this.chcbx_internalBottomEngaged.TabIndex = 9;
+            this.chcbx_internalBottomEngaged.TabIndex = 4;
             this.chcbx_internalBottomEngaged.Text = "Interno";
             this.chcbx_internalBottomEngaged.UseVisualStyleBackColor = true;
             // 
@@ -597,7 +597,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_externalBottomEngaged.Location = new System.Drawing.Point(90, 38);
             this.chcbx_externalBottomEngaged.Name = "chcbx_externalBottomEngaged";
             this.chcbx_externalBottomEngaged.Size = new System.Drawing.Size(62, 17);
-            this.chcbx_externalBottomEngaged.TabIndex = 8;
+            this.chcbx_externalBottomEngaged.TabIndex = 3;
             this.chcbx_externalBottomEngaged.Text = "Externo";
             this.chcbx_externalBottomEngaged.UseVisualStyleBackColor = true;
             // 
@@ -607,7 +607,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_internalTopEngaged.Location = new System.Drawing.Point(197, 15);
             this.chcbx_internalTopEngaged.Name = "chcbx_internalTopEngaged";
             this.chcbx_internalTopEngaged.Size = new System.Drawing.Size(59, 17);
-            this.chcbx_internalTopEngaged.TabIndex = 7;
+            this.chcbx_internalTopEngaged.TabIndex = 2;
             this.chcbx_internalTopEngaged.Text = "Interna";
             this.chcbx_internalTopEngaged.UseVisualStyleBackColor = true;
             // 
@@ -617,7 +617,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_externalTopEngaged.Location = new System.Drawing.Point(90, 15);
             this.chcbx_externalTopEngaged.Name = "chcbx_externalTopEngaged";
             this.chcbx_externalTopEngaged.Size = new System.Drawing.Size(62, 17);
-            this.chcbx_externalTopEngaged.TabIndex = 6;
+            this.chcbx_externalTopEngaged.TabIndex = 1;
             this.chcbx_externalTopEngaged.Text = "Externa";
             this.chcbx_externalTopEngaged.UseVisualStyleBackColor = true;
             // 
@@ -655,7 +655,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_externalTop.Location = new System.Drawing.Point(278, 109);
             this.chcbx_externalTop.Name = "chcbx_externalTop";
             this.chcbx_externalTop.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_externalTop.TabIndex = 14;
+            this.chcbx_externalTop.TabIndex = 6;
             this.chcbx_externalTop.UseVisualStyleBackColor = true;
             this.chcbx_externalTop.CheckedChanged += new System.EventHandler(this.chcbx_externalTop_CheckedChanged);
             // 
@@ -665,7 +665,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_externalBottom.Location = new System.Drawing.Point(278, 300);
             this.chcbx_externalBottom.Name = "chcbx_externalBottom";
             this.chcbx_externalBottom.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_externalBottom.TabIndex = 15;
+            this.chcbx_externalBottom.TabIndex = 8;
             this.chcbx_externalBottom.UseVisualStyleBackColor = true;
             this.chcbx_externalBottom.CheckedChanged += new System.EventHandler(this.chcbx_externalBottom_CheckedChanged);
             // 
@@ -675,7 +675,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_internalBottom.Location = new System.Drawing.Point(232, 300);
             this.chcbx_internalBottom.Name = "chcbx_internalBottom";
             this.chcbx_internalBottom.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_internalBottom.TabIndex = 17;
+            this.chcbx_internalBottom.TabIndex = 7;
             this.chcbx_internalBottom.UseVisualStyleBackColor = true;
             this.chcbx_internalBottom.CheckedChanged += new System.EventHandler(this.chcbx_internalBottom_CheckedChanged);
             // 
@@ -685,7 +685,7 @@ namespace Hello_World.Detailing.UI
             this.chcbx_internalTop.Location = new System.Drawing.Point(232, 109);
             this.chcbx_internalTop.Name = "chcbx_internalTop";
             this.chcbx_internalTop.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_internalTop.TabIndex = 16;
+            this.chcbx_internalTop.TabIndex = 5;
             this.chcbx_internalTop.UseVisualStyleBackColor = true;
             this.chcbx_internalTop.CheckedChanged += new System.EventHandler(this.chcbx_internalTop_CheckedChanged);
             // 

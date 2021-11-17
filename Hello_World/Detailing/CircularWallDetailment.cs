@@ -221,7 +221,7 @@ namespace Hello_World.Detailing
             Point2d baseHorizontalBarPoint = new Point2d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 210.0 - bottomThickness - topThickness - Wall.Heigth);
             HorizontalInternalLine = new Polyline();
             HorizontalInternalLine.Layer = layer;
-            double baseLength = Math.PI * (Wall.InternalDiameter + 2 * Cover + 2 * GaugeY / 10.0) + getAmendmentLength(GaugeX);
+            double baseLength = Math.Ceiling(Math.PI * (Wall.InternalDiameter + 2 * Cover + 2 * GaugeY)) + getAmendmentLength(GaugeX);
             double totalLength = baseLength + (getNumberOfAmendment(baseLength, GaugeX)) * getAmendmentLength(GaugeX);
 
             HorizontalInternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
@@ -236,7 +236,7 @@ namespace Hello_World.Detailing
             HorizontalExternalLine = new Polyline();
             HorizontalExternalLine.Layer = layer;
 
-            double baseLength = Math.PI * (Wall.ExternalDiameter - 2 * Cover - 2 * GaugeY / 10.0) + getAmendmentLength(GaugeX);
+            double baseLength = Math.Ceiling(Math.PI * (Wall.ExternalDiameter - 2 * Cover - 2 * GaugeY)) + getAmendmentLength(GaugeX);
             double totalLength = baseLength + (getNumberOfAmendment(baseLength, GaugeX)) * getAmendmentLength(GaugeX);
 
             HorizontalExternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
@@ -255,7 +255,7 @@ namespace Hello_World.Detailing
         }
         public double getAmendmentLength(double gauge)
         {
-            return (2.0 * gauge * AnchorFactor);
+            return Math.Ceiling(2.0 * gauge * AnchorFactor);
         }
         private void SetDistribuctions() 
         {
@@ -270,8 +270,12 @@ namespace Hello_World.Detailing
             BasePoint = basePoint;
             Point3d wallBasePoint = new Point3d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 150.0, 0);
             Point3d tableBasePoint = new Point3d(wallBasePoint.X + Math.PI * Wall.ExternalDiameter + 300.0 + Wall.Thickness, wallBasePoint.Y - 50.0, 0);
+            Point3d centerGuideReference =DrawingShapes.MiddlePoint(new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0), new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0));
+         
+                
             DrawTitle(basePoint);
             Wall.DrawPlanifiedWall(wallBasePoint, topThickness, bottomThickness);
+            DrawGuideReferenceLine(centerGuideReference);
             SetDistribuctions();
             foreach (StandardDistribuction distribuction in distribuctions) { distribuction.Draw(); }
             distribuctions = StandardDistribuction.CreateReIndexedBarsList(distribuctions);
@@ -289,11 +293,11 @@ namespace Hello_World.Detailing
             if (passarela > 1)
             {
                 if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
-                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY) / SpacingX); }
             }
             else
             {
-                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY) / SpacingX); }
                 else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
@@ -302,11 +306,11 @@ namespace Hello_World.Detailing
             if (topThickness > 1)
             {
                 if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
-                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY ) / SpacingX); }
             }
             else
             {
-                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY / 10.0) / SpacingX); }
+                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY) / SpacingX); }
                 else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
@@ -358,18 +362,101 @@ namespace Hello_World.Detailing
         {
             //Vertical Externa
             int startIndex = 1;
-            if (distribuctions[1].BarLine.GetPoint3dAt(startIndex).X - distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1).X > 0.5)
+            if (Math.Abs(distribuctions[0].BarLine.GetPoint3dAt(startIndex).X - distribuctions[0].BarLine.GetPoint3dAt(startIndex + 1).X) > 0.5)
                 startIndex += 1;
-            Point3d textPoint = DrawingShapes.MiddlePoint(distribuctions[1].BarLine.GetPoint3dAt(startIndex), distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[1].PrintDescriptionText(new Point3d(textPoint.X + 10.0, textPoint.Y ,0), Math.PI/2.0);
+            Point3d textPoint = DrawingShapes.MiddlePoint(distribuctions[0].BarLine.GetPoint3dAt(startIndex), distribuctions[0].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[0].PrintDescriptionText(new Point3d(textPoint.X + 10.0, textPoint.Y ,0), Math.PI/2.0);
+
             //Vertical Interna
             startIndex = 1;
-            if (distribuctions[2].BarLine.GetPoint3dAt(startIndex).X - distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1).X > 0.5)
+           if (Math.Abs(distribuctions[1].BarLine.GetPoint3dAt(startIndex).X - distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1).X) > 0.5)
                 startIndex += 1;
-            textPoint = DrawingShapes.MiddlePoint(distribuctions[2].BarLine.GetPoint3dAt(startIndex), distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X - 10.0, textPoint.Y, 0), Math.PI / 2.0);
+            textPoint = DrawingShapes.MiddlePoint(distribuctions[1].BarLine.GetPoint3dAt(startIndex), distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[1].PrintDescriptionText(new Point3d(textPoint.X - 10.0, textPoint.Y, 0), Math.PI / 2.0);
+
             //Horizontal Interna
+            startIndex = 0;
+            textPoint = DrawingShapes.MiddlePoint(distribuctions[2].BarLine.GetPoint3dAt(startIndex), distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X , textPoint.Y  + 10.0, 0), 0);
             //Horizontal Externa
+            startIndex = 0;
+            textPoint = DrawingShapes.MiddlePoint(distribuctions[3].BarLine.GetPoint3dAt(startIndex), distribuctions[3].BarLine.GetPoint3dAt(startIndex + 1));
+            distribuctions[3].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0);
+
+            StandardDistribuction.UpdateBars(distribuctions);
+        }
+        private void DrawGuideReferenceLine(Point3d centerPoint) 
+        {
+            string lineType = "DASHDOT";
+            DBText title = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = "ESQUEMA DAS LINHAS DE REFERÊNCIA",
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(centerPoint.X , centerPoint.Y + 175.0, 0)
+            };
+            DrawingUtilities.AddToDrawing(title);
+            title.Dispose();
+
+
+            string layer = "3";
+            DrawingShapes.DrawCircle(centerPoint, 160.0, layer);
+            DrawingShapes.DrawCircle(centerPoint, 200.0, layer);
+
+            layer = "1";
+            DrawingShapes.DrawLine(new Point3d(centerPoint.X - 100.0, centerPoint.Y, 0), new Point3d(centerPoint.X - 140.0, centerPoint.Y, 0), layer, lineType);
+            DBText AAxis = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = "A",
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(centerPoint.X - 140.0, centerPoint.Y + 10.0, 0)
+            };
+            DrawingUtilities.AddToDrawing(AAxis);
+            AAxis.Dispose();
+
+            DrawingShapes.DrawLine(new Point3d(centerPoint.X, centerPoint.Y + 100.0, 0), new Point3d(centerPoint.X, centerPoint.Y + 140.0, 0), layer, lineType);
+            DBText BAxis = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = "B",
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(centerPoint.X, centerPoint.Y + 150.0, 0)
+            };
+            DrawingUtilities.AddToDrawing(BAxis);
+            BAxis.Dispose();
+
+            DrawingShapes.DrawLine(new Point3d(centerPoint.X + 100.0, centerPoint.Y, 0), new Point3d(centerPoint.X + 140.0, centerPoint.Y, 0), layer, lineType);
+            DBText CAxis = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = "C",
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(centerPoint.X + 140.0, centerPoint.Y + 10.0, 0)
+            };
+            DrawingUtilities.AddToDrawing(CAxis);
+            CAxis.Dispose();
+
+            DrawingShapes.DrawLine(new Point3d(centerPoint.X, centerPoint.Y - 100.0, 0), new Point3d(centerPoint.X, centerPoint.Y - 140.0, 0), layer, lineType);
+            DBText DAxis = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = "D",
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = 0,
+                AlignmentPoint = new Point3d(centerPoint.X, centerPoint.Y - 150.0, 0)
+            };
+            DrawingUtilities.AddToDrawing(DAxis);
+            DAxis.Dispose();
         }
     }
 }

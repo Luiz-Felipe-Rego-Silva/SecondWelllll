@@ -23,7 +23,7 @@ namespace Detailing
         public double Quantity { get; set; }
         public bool IsVariable { get; set; }
         public int NumberOfAmendments { get; private set; } = 0;
-        public double AmendmentLength { get; private set;}
+        public double AmendmentLength { get; private set; }
         public long MarkHandle { get; set; }
 
         public StandardDistribuction(double gauge, double length)
@@ -34,15 +34,12 @@ namespace Detailing
         public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, double amendmentLength)
         {
             Id = id;
-            Gauge = gauge;
+            Gauge = 10 * gauge;
             Spacing = spacing;
             Length = 0.0;
             BarLine = line;
             DrawingID = line.ObjectId;
-            for (int i = 0; i < line.NumberOfVertices - 1; i++)
-            {
-                Length += Math.Round(Structures.Utilities.DrawingShapes.Distance(line.GetPoint3dAt(i), line.GetPoint3dAt(i + 1)), 2);
-            }
+            Length += Math.Round(BarLine.Length, 2);
             Quantity = quantity;
             Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
             NumberOfAmendments = numberOfAmendments;
@@ -83,7 +80,7 @@ namespace Detailing
         }
         public ResultBuffer ExportResultBuffer()
         {
-            var variableState = IsVariable ? 1 : 0;
+            int variableState = IsVariable ? 1 : 0;
 
             return new ResultBuffer(
                 new TypedValue(1001, "STRUCTCS"),
@@ -100,19 +97,17 @@ namespace Detailing
         {
             IsVariable = true;
         }
-        public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/) 
+        public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/)
         {
             DrawingID = Structures.Utilities.DrawingUtilities.DrawObject(BarLine);
             LineToBar();
-            //printDescriptionText(basePoint, lastDescriptionPoint, attachment);
-            //Structures.Utilities.DrawingShapes.AddQuotesInPolylines(BarLine, 0, 0);
         }
         private void LineToBar()
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
             DocumentLock documentLock = document.LockDocument();
             Transaction transaction = document.TransactionManager.StartTransaction();
-            Entity bar = (Entity) transaction.GetObject(DrawingID, OpenMode.ForWrite);
+            Entity bar = (Entity)transaction.GetObject(DrawingID, OpenMode.ForWrite);
             if (bar.GetType() == typeof(Polyline))
             {
                 AddRegAppTableRecord("STRUCTCS");
@@ -121,7 +116,7 @@ namespace Detailing
                         new TypedValue(1001, "STRUCTCS"),
                         new TypedValue(1000, $"{Id}"),
                         new TypedValue(1000, $"{Length}"),
-                        new TypedValue(1000, $"{Gauge * 10}"),
+                        new TypedValue(1000, $"{Gauge}"),
                         new TypedValue(1000, $"{Spacing}"),
                         new TypedValue(1000, $"{Quantity}"),
                         new TypedValue(1000, $"{0}"),
@@ -152,21 +147,21 @@ namespace Detailing
         }
         private string GetDescriptionText()
         {
-            if (NumberOfAmendments < 1) 
+            if (NumberOfAmendments < 1)
             {
-                return $"{Quantity} N{Id} φ{10*Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))}";
+                return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))}";
             }
-            else if(NumberOfAmendments == 1)
+            else if (NumberOfAmendments == 1)
             {
-                return $"{Quantity} N{Id} φ{10*Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))} ({NumberOfAmendments} EMENDA DE {AmendmentLength}CM)";
+                return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))} ({NumberOfAmendments} EMENDA DE {AmendmentLength}CM)";
             }
-            else 
+            else
             {
-                return $"{Quantity} N{Id} φ{10*Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))} ({NumberOfAmendments} EMENDAS DE {AmendmentLength}CM)";
+                return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))} ({NumberOfAmendments} EMENDAS DE {AmendmentLength}CM)";
             }
-            
+
         }
-        public void PrintDescriptionText(Point3d middlePoint, double orientation) 
+        public void PrintDescriptionText(Point3d middlePoint, double orientation)
         {
             DBText descriptionText = new DBText
             {
@@ -189,7 +184,7 @@ namespace Detailing
             {
                 foreach (StandardDistribuction bar in list)
                 {
-                    Polyline barPolyline = (Polyline) transaction.GetObject(bar.DrawingID, OpenMode.ForWrite);
+                    Polyline barPolyline = (Polyline)transaction.GetObject(bar.DrawingID, OpenMode.ForWrite);
                     barPolyline.XData = bar.ExportResultBuffer();
                     //Tentando incorporar a mudança do texto do ferro
                     long _handle = Convert.ToInt64(barPolyline.XData.AsArray()[6].Value.ToString());
@@ -220,7 +215,7 @@ namespace Detailing
                 List<Polyline> listOfPolys = new List<Polyline>();
                 foreach (StandardDistribuction bar in list)
                 {
-                    Polyline barPolyline = (Polyline) transaction.GetObject(bar.DrawingID, OpenMode.ForRead);
+                    Polyline barPolyline = (Polyline)transaction.GetObject(bar.DrawingID, OpenMode.ForRead);
                     listOfPolys.Add(barPolyline);
                 }
                 //lista de listas -> cada lista possui uma lista de ferros iguais
@@ -258,7 +253,6 @@ namespace Detailing
                         result.Add(newbar);
                         canpass = true;
                     }
-
                     if (canpass) current_id++;
                 }
             }
@@ -294,8 +288,8 @@ namespace Detailing
         {
             List<double> result = new List<double>();
             int seg_num = polyline.NumberOfVertices - 1;
-            for (int i = 0; i < seg_num; i++) 
-                result.Add(polyline.GetLineSegment2dAt(i).Length);
+            for (int i = 0; i < seg_num; i++)
+                result.Add(Math.Round(polyline.GetLineSegment2dAt(i).Length,2));
             return result;
         }
     }

@@ -141,5 +141,6 @@ namespace Structures.WellDetailer.Entities
 
         
         }
+
     }
 }
