@@ -569,9 +569,9 @@ namespace Hello_World.Detailing.UI
             // 
             this.grp_sideShapes.Controls.Add(this.chcbx_internalBottomEngaged);
             this.grp_sideShapes.Controls.Add(this.chcbx_externalBottomEngaged);
-            this.grp_sideShapes.Controls.Add(this.chcbx_internalTopEngaged);
             this.grp_sideShapes.Controls.Add(this.chcbx_externalTopEngaged);
             this.grp_sideShapes.Controls.Add(this.lbl_bottomSides);
+            this.grp_sideShapes.Controls.Add(this.chcbx_internalTopEngaged);
             this.grp_sideShapes.Controls.Add(this.lbl_topSides);
             this.grp_sideShapes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grp_sideShapes.Location = new System.Drawing.Point(7, 362);
@@ -584,7 +584,7 @@ namespace Hello_World.Detailing.UI
             // chcbx_internalBottomEngaged
             // 
             this.chcbx_internalBottomEngaged.AutoSize = true;
-            this.chcbx_internalBottomEngaged.Location = new System.Drawing.Point(197, 38);
+            this.chcbx_internalBottomEngaged.Location = new System.Drawing.Point(68, 38);
             this.chcbx_internalBottomEngaged.Name = "chcbx_internalBottomEngaged";
             this.chcbx_internalBottomEngaged.Size = new System.Drawing.Size(59, 17);
             this.chcbx_internalBottomEngaged.TabIndex = 4;
@@ -594,7 +594,7 @@ namespace Hello_World.Detailing.UI
             // chcbx_externalBottomEngaged
             // 
             this.chcbx_externalBottomEngaged.AutoSize = true;
-            this.chcbx_externalBottomEngaged.Location = new System.Drawing.Point(90, 38);
+            this.chcbx_externalBottomEngaged.Location = new System.Drawing.Point(188, 38);
             this.chcbx_externalBottomEngaged.Name = "chcbx_externalBottomEngaged";
             this.chcbx_externalBottomEngaged.Size = new System.Drawing.Size(62, 17);
             this.chcbx_externalBottomEngaged.TabIndex = 3;
@@ -604,7 +604,7 @@ namespace Hello_World.Detailing.UI
             // chcbx_internalTopEngaged
             // 
             this.chcbx_internalTopEngaged.AutoSize = true;
-            this.chcbx_internalTopEngaged.Location = new System.Drawing.Point(197, 15);
+            this.chcbx_internalTopEngaged.Location = new System.Drawing.Point(68, 15);
             this.chcbx_internalTopEngaged.Name = "chcbx_internalTopEngaged";
             this.chcbx_internalTopEngaged.Size = new System.Drawing.Size(59, 17);
             this.chcbx_internalTopEngaged.TabIndex = 2;
@@ -614,7 +614,7 @@ namespace Hello_World.Detailing.UI
             // chcbx_externalTopEngaged
             // 
             this.chcbx_externalTopEngaged.AutoSize = true;
-            this.chcbx_externalTopEngaged.Location = new System.Drawing.Point(90, 15);
+            this.chcbx_externalTopEngaged.Location = new System.Drawing.Point(188, 15);
             this.chcbx_externalTopEngaged.Name = "chcbx_externalTopEngaged";
             this.chcbx_externalTopEngaged.Size = new System.Drawing.Size(62, 17);
             this.chcbx_externalTopEngaged.TabIndex = 1;
@@ -693,7 +693,7 @@ namespace Hello_World.Detailing.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 508);
+            this.ClientSize = new System.Drawing.Size(462, 508);
             this.Controls.Add(this.chcbx_internalBottom);
             this.Controls.Add(this.chcbx_internalTop);
             this.Controls.Add(this.chcbx_externalBottom);
@@ -716,6 +716,7 @@ namespace Hello_World.Detailing.UI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CircularWallForm";
             this.Text = "Detalhador - Parede Circular";
+            this.Load += new System.EventHandler(this.CircularWallForm_Load);
             this.grp_Factors.ResumeLayout(false);
             this.grp_Factors.PerformLayout();
             this.grp_steel.ResumeLayout(false);

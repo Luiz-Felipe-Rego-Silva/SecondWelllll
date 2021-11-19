@@ -111,6 +111,19 @@ namespace Structures.Utilities
 
             return pointResult.Value;
         }
+        public static void DrawText(Point3d center, string content, double orientation) 
+        {
+            DBText descriptionText = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = content,
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = orientation,
+                AlignmentPoint = center
+            };
+            AddToDrawing(descriptionText);
+        }
 
     }
 }

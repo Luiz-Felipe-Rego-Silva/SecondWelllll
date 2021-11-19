@@ -1,4 +1,7 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.EditorInput;
+using Autodesk.AutoCAD.Geometry;
 using Structures.Utilities;
 using Structures.WellDetailer.Entities;
 using System;
@@ -10,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Application = Autodesk.AutoCAD.ApplicationServices.Application;
 
 namespace Hello_World.Detailing.UI
 {
@@ -66,15 +70,15 @@ namespace Hello_World.Detailing.UI
 
             //Cadastro das armaduras
             double spacingX = Convert.ToDouble(msktxt_horizontalSpacing.Text);
-            double gaugeX = Convert.ToDouble(cmbbx_horizontalWallGauge.Text)/10.0;
+            double gaugeX = Convert.ToDouble(cmbbx_horizontalWallGauge.Text) / 10.0;
             double spacingY = Convert.ToDouble(msktxt_verticalSpacing.Text);
-            double gaugeY = Convert.ToDouble(cmbbx_verticalWallGauge.Text)/10.0;
+            double gaugeY = Convert.ToDouble(cmbbx_verticalWallGauge.Text) / 10.0;
             double cover = Convert.ToDouble(msktxt_cover.Text);
             double anchorFactor = Convert.ToDouble(msktxt_anchorFactor.Text);
             wallDetailment.SetSteelInfo(spacingX, spacingY, gaugeX, gaugeY, anchorFactor, cover);
             //Compatibilização com as adjacenciazinhas
-            double topOffset = (Convert.ToDouble(cmbbx_horizontalTopGauge.Text) + Convert.ToDouble(cmbbx_verticalTopGauge.Text))/10.0;
-            double bottomOffset = (Convert.ToDouble(cmbbx_horizontalBottomGauge.Text) + Convert.ToDouble(cmbbx_verticalBottomGauge.Text))/10.0;
+            double topOffset = (Convert.ToDouble(cmbbx_horizontalTopGauge.Text) + Convert.ToDouble(cmbbx_verticalTopGauge.Text)) / 10.0;
+            double bottomOffset = (Convert.ToDouble(cmbbx_horizontalBottomGauge.Text) + Convert.ToDouble(cmbbx_verticalBottomGauge.Text)) / 10.0;
             wallDetailment.SetOffsets(topOffset, bottomOffset);
             //Cadastro da Geometria
             double externalHeigth = Convert.ToDouble(msktxt_externalHeigth.Text);
@@ -89,11 +93,17 @@ namespace Hello_World.Detailing.UI
             wallDetailment.setAnnotations(rchtxt_title.Text, multiplier);
             //Cadastro das condições de contorno
             wallDetailment.SetBorderConditions(chcbx_internalTopEngaged.Checked, chcbx_externalTopEngaged.Checked, chcbx_internalBottomEngaged.Checked, chcbx_externalBottomEngaged.Checked);
-            
+
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
             wallDetailment.DrawDistribuctions(BasePoint);
+
+
         }
         private void ValidateInput() { }
 
+        private void CircularWallForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

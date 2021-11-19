@@ -257,7 +257,7 @@ namespace Hello_World.Detailing
         {
             return Math.Ceiling(2.0 * gauge * AnchorFactor);
         }
-        private void SetDistribuctions() 
+        private void SetDistribuctions()
         {
             string layer = "5";
             CreateVerticalExternalLineBar(layer);
@@ -270,9 +270,9 @@ namespace Hello_World.Detailing
             BasePoint = basePoint;
             Point3d wallBasePoint = new Point3d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 150.0, 0);
             Point3d tableBasePoint = new Point3d(wallBasePoint.X + Math.PI * Wall.ExternalDiameter + 300.0 + Wall.Thickness, wallBasePoint.Y - 50.0, 0);
-            Point3d centerGuideReference =DrawingShapes.MiddlePoint(new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0), new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0));
-         
-                
+            Point3d centerGuideReference = DrawingShapes.MiddlePoint(new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0), new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0));
+
+
             DrawTitle(basePoint);
             Wall.DrawPlanifiedWall(wallBasePoint, topThickness, bottomThickness);
             DrawGuideReferenceLine(centerGuideReference);
@@ -281,6 +281,9 @@ namespace Hello_World.Detailing
             distribuctions = StandardDistribuction.CreateReIndexedBarsList(distribuctions);
             StandardDistribuction.UpdateBars(distribuctions);
             DrawBarsInfo();
+            QuoteExternalLine();
+            QuoteInternalLine();
+            DrawReferenceBars(wallBasePoint);
             SteelTable steelTable = new SteelTable(distribuctions, Multiplier, Title);
             steelTable.GenerateFullTable(tableBasePoint);
         }
@@ -306,7 +309,7 @@ namespace Hello_World.Detailing
             if (topThickness > 1)
             {
                 if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
-                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY ) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY) / SpacingX); }
             }
             else
             {
@@ -343,7 +346,7 @@ namespace Hello_World.Detailing
                 Rotation = 0,
                 AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 34.0, 0)
             };
-            DBText dim_text = new DBText() 
+            DBText dim_text = new DBText()
             {
                 Layer = "3",
                 Height = 10,
@@ -358,18 +361,18 @@ namespace Hello_World.Detailing
             DrawingUtilities.AddToDrawing(esc_txt);
             DrawingUtilities.AddToDrawing(dim_text);
         }
-        private void DrawBarsInfo() 
+        private void DrawBarsInfo()
         {
             //Vertical Externa
             int startIndex = 1;
             if (Math.Abs(distribuctions[0].BarLine.GetPoint3dAt(startIndex).X - distribuctions[0].BarLine.GetPoint3dAt(startIndex + 1).X) > 0.5)
                 startIndex += 1;
             Point3d textPoint = DrawingShapes.MiddlePoint(distribuctions[0].BarLine.GetPoint3dAt(startIndex), distribuctions[0].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[0].PrintDescriptionText(new Point3d(textPoint.X + 10.0, textPoint.Y ,0), Math.PI/2.0);
+            distribuctions[0].PrintDescriptionText(new Point3d(textPoint.X + 10.0, textPoint.Y, 0), Math.PI / 2.0);
 
             //Vertical Interna
             startIndex = 1;
-           if (Math.Abs(distribuctions[1].BarLine.GetPoint3dAt(startIndex).X - distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1).X) > 0.5)
+            if (Math.Abs(distribuctions[1].BarLine.GetPoint3dAt(startIndex).X - distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1).X) > 0.5)
                 startIndex += 1;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[1].BarLine.GetPoint3dAt(startIndex), distribuctions[1].BarLine.GetPoint3dAt(startIndex + 1));
             distribuctions[1].PrintDescriptionText(new Point3d(textPoint.X - 10.0, textPoint.Y, 0), Math.PI / 2.0);
@@ -377,7 +380,7 @@ namespace Hello_World.Detailing
             //Horizontal Interna
             startIndex = 0;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[2].BarLine.GetPoint3dAt(startIndex), distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X , textPoint.Y  + 10.0, 0), 0);
+            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0);
             //Horizontal Externa
             startIndex = 0;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[3].BarLine.GetPoint3dAt(startIndex), distribuctions[3].BarLine.GetPoint3dAt(startIndex + 1));
@@ -385,7 +388,7 @@ namespace Hello_World.Detailing
 
             StandardDistribuction.UpdateBars(distribuctions);
         }
-        private void DrawGuideReferenceLine(Point3d centerPoint) 
+        private void DrawGuideReferenceLine(Point3d centerPoint)
         {
             string lineType = "DASHDOT";
             DBText title = new DBText
@@ -395,7 +398,7 @@ namespace Hello_World.Detailing
                 TextString = "ESQUEMA DAS LINHAS DE REFERÊNCIA",
                 Justify = AttachmentPoint.MiddleCenter,
                 Rotation = 0,
-                AlignmentPoint = new Point3d(centerPoint.X , centerPoint.Y + 175.0, 0)
+                AlignmentPoint = new Point3d(centerPoint.X, centerPoint.Y + 175.0, 0)
             };
             DrawingUtilities.AddToDrawing(title);
             title.Dispose();
@@ -457,6 +460,292 @@ namespace Hello_World.Detailing
             };
             DrawingUtilities.AddToDrawing(DAxis);
             DAxis.Dispose();
+        }
+        private void QuoteExternalLine()
+        {
+            string dimensionStyle = "FERRO 1-50";
+            if (IsBottomExternalEngaged)
+            {
+                if (IsTopExternalEngaged)
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(0),
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(0), VerticalExternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(1), VerticalExternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(2), VerticalExternalLine.GetPoint3dAt(3)).ToString());
+                }
+                else
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(0),
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(0), VerticalExternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(1), VerticalExternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(2), VerticalExternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        VerticalExternalLine.GetPoint3dAt(4),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(3), VerticalExternalLine.GetPoint3dAt(4)).ToString());
+                }
+            }
+            else
+            {
+                if (IsTopExternalEngaged)
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(0),
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(0), VerticalExternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(1), VerticalExternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(2), VerticalExternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        VerticalExternalLine.GetPoint3dAt(4),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(3), VerticalExternalLine.GetPoint3dAt(4)).ToString());
+                }
+                else
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(0),
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(0), VerticalExternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(1),
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(1), VerticalExternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(2),
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(2), VerticalExternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(3),
+                        VerticalExternalLine.GetPoint3dAt(4),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(3), VerticalExternalLine.GetPoint3dAt(4)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalExternalLine.GetPoint3dAt(4),
+                        VerticalExternalLine.GetPoint3dAt(5),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalExternalLine.GetPoint3dAt(4), VerticalExternalLine.GetPoint3dAt(5)).ToString());
+                }
+            }
+        }
+        private void QuoteInternalLine()
+        {
+            string dimensionStyle = "FERRO 1-50";
+            if (IsBottomInternalEngaged)
+            {
+                if (IsTopInternalEngaged)
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(0),
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(0), VerticalInternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(1), VerticalInternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(2), VerticalInternalLine.GetPoint3dAt(3)).ToString());
+                }
+                else
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(0),
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(0), VerticalInternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(1), VerticalInternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(2), VerticalInternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        VerticalInternalLine.GetPoint3dAt(4),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(3), VerticalInternalLine.GetPoint3dAt(4)).ToString());
+                }
+            }
+            else
+            {
+                if (IsTopInternalEngaged)
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(0),
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(0), VerticalInternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(1), VerticalInternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(2), VerticalInternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        VerticalInternalLine.GetPoint3dAt(4),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(3), VerticalInternalLine.GetPoint3dAt(4)).ToString());
+                }
+                else
+                {
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(0),
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(0), VerticalInternalLine.GetPoint3dAt(1)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(1),
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        0.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(1), VerticalInternalLine.GetPoint3dAt(2)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(2),
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(2), VerticalInternalLine.GetPoint3dAt(3)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(3),
+                        VerticalInternalLine.GetPoint3dAt(4),
+                        0.0, -20.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(3), VerticalInternalLine.GetPoint3dAt(4)).ToString());
+
+                    StandardDistribuction.AddDimension(
+                        dimensionStyle,
+                        VerticalInternalLine.GetPoint3dAt(4),
+                        VerticalInternalLine.GetPoint3dAt(5),
+                        20.0, 0.0,
+                        DrawingShapes.Distance(VerticalInternalLine.GetPoint3dAt(4), VerticalInternalLine.GetPoint3dAt(5)).ToString());
+                }
+            }
+        }
+        private void DrawReferenceBars(Point3d basePoint)
+        {
+            Point3d verticalBasePoint = new Point3d(basePoint.X + 0.575 * Math.PI * Wall.ExternalDiameter, basePoint.Y - Cover - TopOffset, 0);
+            Point3d horizontalBasePoint = new Point3d(basePoint.X, basePoint.Y - 0.25 * Math.PI * effectiveHeigth, 0);
+            DrawVerticalReferenceBars(verticalBasePoint);
+            DrawHorizontalReferenceBars(horizontalBasePoint);
+        }
+        private void DrawVerticalReferenceBars(Point3d startPoint)
+        {
+            string description = "N1";
+            if (distribuctions[0].Id != distribuctions[1].Id)
+                description += " + N2";
+
+            Polyline verticalBars = new Polyline() { Layer = "4" };
+            verticalBars.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
+            verticalBars.AddVertexAt(1, new Point2d(startPoint.X, startPoint.Y - effectiveHeigth + 2 * Cover + BottomOffset), 0, 0, 0);
+            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(startPoint, new Point3d(startPoint.X, startPoint.Y - effectiveHeigth + 2 * Cover + BottomOffset, 0)), description, Math.PI / 2.0);
+        }
+        private void DrawHorizontalReferenceBars(Point3d startPoint)
+        {
+            string description = distribuctions[2].Id.ToString() + distribuctions[3].Id.ToString();
+            Polyline horizontalBars = new Polyline() { Layer = "4" };
+            horizontalBars.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
+            horizontalBars.AddVertexAt(1, new Point2d(startPoint.X + HorizontalExternalLine.Length, startPoint.Y), 0, 0, 0);
+            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(startPoint, new Point3d(startPoint.X + HorizontalExternalLine.Length, startPoint.Y, 0)), description, Math.PI / 2.0);
         }
     }
 }

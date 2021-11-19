@@ -292,5 +292,44 @@ namespace Detailing
                 result.Add(Math.Round(polyline.GetLineSegment2dAt(i).Length,2));
             return result;
         }
+        public static void AddDimension(string dimStyleName, Point3d startPoint, Point3d endPoint, double xPadding, double yPadding, string textContent)
+        {
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            Editor editor = document.Editor;
+            Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            using (Transaction transaction = database.TransactionManager.StartTransaction())
+            {
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+                //Configurando os estilos de cota (dimensionStyle)
+                DimStyleTable dimensionStyleTable = (DimStyleTable)transaction.GetObject(database.DimStyleTableId, OpenMode.ForWrite);
+                DimStyleTableRecord dstr = new DimStyleTableRecord();
+                ObjectId dimStyleId = ObjectId.Null;
+
+                if (dimensionStyleTable.Has(dimStyleName))
+                    dimStyleId = dimensionStyleTable[dimStyleName];
+                else
+                    editor.WriteMessage("Dimension Styles não configuradas.");
+                //Setando o texto
+                if (textContent == null) textContent = Convert.ToString(Math.Round(Structures.Utilities.DrawingShapes.Distance(startPoint, endPoint), 2));
+
+                //Criando a cota, propriamente dita.
+                AlignedDimension cota = new AlignedDimension(
+                    startPoint,
+                    endPoint,
+                    new Point3d((startPoint.X + endPoint.X) / 2 + xPadding, (startPoint.Y + endPoint.Y) / 2 + yPadding, 0),
+                    textContent,
+                    dimStyleId
+                );
+                cota.Layer = "1";
+                //Colocando-a no desenho
+                blockTableRecord.AppendEntity(cota);
+                transaction.AddNewlyCreatedDBObject(cota, true);
+                transaction.Commit();
+                documentLock.Dispose();
+            }
+        }
+
     }
 }
