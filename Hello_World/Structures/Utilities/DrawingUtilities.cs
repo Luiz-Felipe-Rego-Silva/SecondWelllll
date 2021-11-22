@@ -12,29 +12,22 @@ namespace Structures.Utilities
 {
     public static class DrawingUtilities
     {
-        public static long DrawObjectMark(Entity entity) 
+        public static long DrawObjectMark(Entity entity)
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
             Editor editor = document.Editor;
             Database database = document.Database;
             ObjectId objectId = ObjectId.Null;
+            DocumentLock documentLock = document.LockDocument();
+            Transaction transaction = database.TransactionManager.StartTransaction();
             try
             {
-                using (DocumentLock documentLock = document.LockDocument())
-                {
-                    using (Transaction transaction = database.TransactionManager.StartTransaction())
-                    {
-                        BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
-                        BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
-
-                        blockTableRecord.AppendEntity(entity);
-                        transaction.AddNewlyCreatedDBObject(entity, true);
-                        objectId = entity.ObjectId;
-                        transaction.Commit();
-                        transaction.Dispose();
-                    }
-                    documentLock.Dispose();
-                }
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+                blockTableRecord.AppendEntity(entity);
+                transaction.AddNewlyCreatedDBObject(entity, true);
+                objectId = entity.ObjectId;
+                transaction.Commit();
             }
             catch (Exception e)
             {
@@ -47,29 +40,20 @@ namespace Structures.Utilities
             Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
             Editor editor = document.Editor;
             Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            Transaction transaction = database.TransactionManager.StartTransaction();
             try
             {
-                using (DocumentLock documentLock = document.LockDocument())
-                {
-                    using (Transaction transaction = database.TransactionManager.StartTransaction())
-                    {
-                        BlockTable blockTable = (BlockTable) transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
-                        BlockTableRecord blockTableRecord = (BlockTableRecord) transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
-
-                        blockTableRecord.AppendEntity(entity);
-                        transaction.AddNewlyCreatedDBObject(entity, true);
-
-                        transaction.Commit();
-                        transaction.Dispose();
-                    }
-                    documentLock.Dispose();
-                }
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+                blockTableRecord.AppendEntity(entity);
+                transaction.AddNewlyCreatedDBObject(entity, true);
+                transaction.Commit();
             }
             catch (Exception e)
             {
                 editor.WriteMessage(e.Message);
             }
-
         }
         public static ObjectId DrawObject(Entity entity)
         {
@@ -77,23 +61,17 @@ namespace Structures.Utilities
             Editor editor = document.Editor;
             Database database = document.Database;
             ObjectId objectId = ObjectId.Null;
+            DocumentLock documentLock = document.LockDocument();
+            Transaction transaction = database.TransactionManager.StartTransaction();
             try
             {
-                using (DocumentLock documentLock = document.LockDocument())
-                {
-                    using (Transaction transaction = database.TransactionManager.StartTransaction())
-                    {
-                        BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
-                        BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
 
-                        blockTableRecord.AppendEntity(entity);
-                        transaction.AddNewlyCreatedDBObject(entity, true);
-                        objectId = entity.ObjectId;
-                        transaction.Commit();
-                        transaction.Dispose();
-                    }
-                    documentLock.Dispose();
-                }
+                blockTableRecord.AppendEntity(entity);
+                transaction.AddNewlyCreatedDBObject(entity, true);
+                objectId = entity.ObjectId;
+                transaction.Commit();
             }
             catch (Exception e)
             {
@@ -111,7 +89,7 @@ namespace Structures.Utilities
 
             return pointResult.Value;
         }
-        public static void DrawText(Point3d center, string content, double orientation) 
+        public static void DrawText(Point3d center, string content, double orientation)
         {
             DBText descriptionText = new DBText
             {

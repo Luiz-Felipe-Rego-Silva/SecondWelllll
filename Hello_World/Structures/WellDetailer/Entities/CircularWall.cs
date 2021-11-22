@@ -101,7 +101,7 @@ namespace Structures.WellDetailer.Entities
         public void DrawPlanifiedWall(Point3d startPoint, double topThickness, double bottomThickness)
         {
             string layer = "3";
-            string lineType = "DASHED";
+            string lineType = "HIDDEN";
             Utilities.DrawingShapes.DrawRectangle(Math.PI * ExternalDiameter, (Heigth + topThickness + bottomThickness), layer, startPoint);
             layer = "1";
             if (topThickness > 0)
@@ -122,25 +122,21 @@ namespace Structures.WellDetailer.Entities
             string lineType = "DASHDOT";
             Point3d effectiveStartPoint = new Point3d(startPoint.X, startPoint.Y + 25.0, 0);
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer, lineType);
-            //Texto
+            Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "A", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.25 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
-            //Texto
+            Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "B", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.50 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
-            //Texto
+            Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "C", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.75 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
-            //Texto
+            Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "D", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
             Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer, lineType);
-            //Texto
+            Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "A", 0.0);
         }
-        private void DrawCutInDetailment(Point3d topLeftPoint,double topThickness, double bottomThickness, bool[] boundaries) 
-        { 
-
         
-        }
 
     }
 }

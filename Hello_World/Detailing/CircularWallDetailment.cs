@@ -33,6 +33,10 @@ namespace Hello_World.Detailing
         public bool IsTopExternalEngaged { get; private set; }
         public bool IsBottomInternalEngaged { get; private set; }
         public bool IsBottomExternalEngaged { get; private set; }
+        public bool TopExternal { get; private set; }
+        public bool TopInternal { get; private set; }
+        public bool BottomExternal { get; private set; }
+        public bool BottomInternal { get; private set; }
         //Bitolas para compatiblização
         public double TopOffset { get; private set; }
         public double BottomOffset { get; private set; }
@@ -43,6 +47,13 @@ namespace Hello_World.Detailing
         private Polyline VerticalExternalLine, VerticalInternalLine, HorizontalInternalLine, HorizontalExternalLine;
         private List<StandardDistribuction> distribuctions = new List<StandardDistribuction>();
         public string Title { get; set; }
+        public void SetBorder(bool topExternal, bool topInternal, bool bottomExternal, bool bottomInternal)
+        {
+            TopExternal = topExternal;
+            TopInternal = topInternal;
+            BottomExternal = bottomExternal;
+            BottomInternal = bottomInternal;
+        }
         public void SetSteelInfo(double spacingX, double spacingY, double gaugeX, double gaugeY, double anchorFactor, double cover)
         {
             SpacingX = spacingX;
@@ -60,10 +71,10 @@ namespace Hello_World.Detailing
         }
         public void SetBorderConditions(bool isTopInternalEngaged, bool isTopExternalEngaged, bool isBottomInternalEngaged, bool isBottomExternalEngaged)
         {
-            IsTopExternalEngaged = isTopExternalEngaged;
-            IsTopInternalEngaged = isTopInternalEngaged;
-            IsBottomExternalEngaged = isBottomExternalEngaged;
-            IsBottomInternalEngaged = isBottomInternalEngaged;
+            IsTopExternalEngaged = isTopInternalEngaged;
+            IsTopInternalEngaged = isTopExternalEngaged;
+            IsBottomExternalEngaged = isBottomInternalEngaged;
+            IsBottomInternalEngaged = isBottomExternalEngaged; 
             effectiveHeigth = Wall.Heigth + topThickness + bottomThickness;
         }
         public void SetOffsets(double topOffset, double bottomOffset)
@@ -265,14 +276,14 @@ namespace Hello_World.Detailing
             CreateHorizontalExternalLineBar(layer);
             CreateHorizontalInternalLineBar(layer);
         }
-        public void DrawDistribuctions(Point3d basePoint)
+        public void DrawDetailment(Point3d basePoint)
         {
             BasePoint = basePoint;
             Point3d wallBasePoint = new Point3d(BasePoint.X + 20 + 2 * (Wall.Thickness - Cover + getAnchorLength(GaugeY)) + 150.0, BasePoint.Y - 150.0, 0);
-            Point3d tableBasePoint = new Point3d(wallBasePoint.X + Math.PI * Wall.ExternalDiameter + 300.0 + Wall.Thickness, wallBasePoint.Y - 50.0, 0);
             Point3d centerGuideReference = DrawingShapes.MiddlePoint(new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0), new Point3d(wallBasePoint.X + Math.PI * 0.5 * Wall.ExternalDiameter, wallBasePoint.Y - Wall.Heigth - topThickness - bottomThickness - 325.0, 0));
-
-
+            Point3d startPointCut = new Point3d(wallBasePoint.X + Wall.ExternalDiameter * Math.PI + 200.0, wallBasePoint.Y, 0);
+            Point3d starCutNotation = new Point3d(wallBasePoint.X + 0.375 * Math.PI * Wall.ExternalDiameter, wallBasePoint.Y, 0);
+            Point3d tableBasePoint = new Point3d(wallBasePoint.X + Math.PI * Wall.ExternalDiameter + 300 + Wall.Thickness + 2 * (getAnchorLength(GaugeY) + 15.0), wallBasePoint.Y, 0);
             DrawTitle(basePoint);
             Wall.DrawPlanifiedWall(wallBasePoint, topThickness, bottomThickness);
             DrawGuideReferenceLine(centerGuideReference);
@@ -284,6 +295,8 @@ namespace Hello_World.Detailing
             QuoteExternalLine();
             QuoteInternalLine();
             DrawReferenceBars(wallBasePoint);
+            DrawCutProjection(startPointCut);
+            DrawCutLine(starCutNotation);
             SteelTable steelTable = new SteelTable(distribuctions, Multiplier, Title);
             steelTable.GenerateFullTable(tableBasePoint);
         }
@@ -293,27 +306,27 @@ namespace Hello_World.Detailing
         }
         private int getHorizontalExternalQuantity()
         {
-            if (passarela > 1)
+            if (TopExternal)
             {
-                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
-                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY) / SpacingX); }
+                if (BottomExternal) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX); }
             }
             else
             {
-                if (edgeLength > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY) / SpacingX); }
+                if (BottomExternal) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX); }
                 else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
         private int getHorizontalInternalQuantity()
         {
-            if (topThickness > 1)
+            if (TopInternal)
             {
-                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
-                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY) / SpacingX); }
+                if (BottomInternal) { return (int)Math.Ceiling((Wall.Heigth) / SpacingX); }
+                else { return (int)Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX); }
             }
             else
             {
-                if (bottomThickness > 1) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY) / SpacingX); }
+                if (BottomInternal) { return (int)Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX); }
                 else { return (int)Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX); }
             }
         }
@@ -737,15 +750,282 @@ namespace Hello_World.Detailing
             Polyline verticalBars = new Polyline() { Layer = "4" };
             verticalBars.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
             verticalBars.AddVertexAt(1, new Point2d(startPoint.X, startPoint.Y - effectiveHeigth + 2 * Cover + BottomOffset), 0, 0, 0);
-            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(startPoint, new Point3d(startPoint.X, startPoint.Y - effectiveHeigth + 2 * Cover + BottomOffset, 0)), description, Math.PI / 2.0);
+            DrawingUtilities.AddToDrawing(verticalBars);
+            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(new Point3d(startPoint.X - 10.0, startPoint.Y, 0), new Point3d(startPoint.X - 10.0, startPoint.Y - effectiveHeigth + 2 * Cover + BottomOffset, 0)), description, Math.PI / 2.0);
         }
         private void DrawHorizontalReferenceBars(Point3d startPoint)
         {
-            string description = distribuctions[2].Id.ToString() + distribuctions[3].Id.ToString();
+            string description = $"N{distribuctions[2].Id.ToString()} + N{distribuctions[3].Id.ToString()}";
             Polyline horizontalBars = new Polyline() { Layer = "4" };
             horizontalBars.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
-            horizontalBars.AddVertexAt(1, new Point2d(startPoint.X + HorizontalExternalLine.Length, startPoint.Y), 0, 0, 0);
-            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(startPoint, new Point3d(startPoint.X + HorizontalExternalLine.Length, startPoint.Y, 0)), description, Math.PI / 2.0);
+            horizontalBars.AddVertexAt(1, new Point2d(startPoint.X + Math.PI * Wall.ExternalDiameter + getAmendmentLength(GaugeX), startPoint.Y), 0, 0, 0);
+            DrawingUtilities.AddToDrawing(horizontalBars);
+            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(new Point3d(startPoint.X + 0.25 * Math.PI * Wall.ExternalDiameter, startPoint.Y + 10.0, 0), new Point3d(startPoint.X + 0.5 * Math.PI * Wall.ExternalDiameter + getAmendmentLength(GaugeX), startPoint.Y + 10.0, 0)), description, 0);
+            string amendmentLength = $"EMENDA DE {getAmendmentLength(GaugeX)} CM";
+            DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(new Point3d(startPoint.X + Math.PI * Wall.ExternalDiameter, startPoint.Y + 10.0, 0), new Point3d(startPoint.X + Math.PI * Wall.ExternalDiameter + getAmendmentLength(GaugeX), startPoint.Y + 10.0, 0)), amendmentLength, 0);
         }
+        private void DrawCutProjection(Point3d startPoint)
+        {
+            Point3d topAndWallStartPoint = new Point3d(startPoint.X, startPoint.Y - topThickness, 0);
+            Point3d bottomStartPoint = new Point3d(topAndWallStartPoint.X, topAndWallStartPoint.Y - Wall.Heigth, 0);
+            Point3d startHorizontalExternal = new Point3d(startPoint.X + Wall.Thickness - Cover, startPoint.Y - topThickness, 0);
+            Point3d startHorizontalInternal = new Point3d(startPoint.X + Cover, startPoint.Y - topThickness, 0);
+
+            DrawTopCutProjection(topAndWallStartPoint);
+            DrawInternalWallInCut(topAndWallStartPoint);
+            DrawBottomCutProjection(bottomStartPoint);
+            DrawBarNotationsInCut(topAndWallStartPoint);
+            DrawVerticalExternalLineBar(startPoint);
+            DrawVerticalInternalLineBar(startPoint);
+            DrawHorizontalExternalBarsInCut(startHorizontalExternal, getHorizontalExternalQuantity());
+            DrawHorizontalInternalBarsInCut(startHorizontalInternal, getHorizontalInternalQuantity());
+        }
+        private void DrawInternalWallInCut(Point3d startPoint)
+        {
+            string layer = "3";
+            DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X, startPoint.Y - Wall.Heigth, 0), layer);
+            DrawingShapes.DrawLine(new Point3d(startPoint.X + Wall.Thickness, startPoint.Y, 0), new Point3d(startPoint.X + Wall.Thickness, startPoint.Y - Wall.Heigth, 0), layer);
+        }
+        private void DrawTopCutProjection(Point3d startPoint)
+        {
+            string layer = "3";
+            DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y + topThickness, 0), new Point3d(startPoint.X + Wall.Thickness, startPoint.Y + topThickness, 0), layer);
+            if (TopInternal)
+            {
+                DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X - 65.0, startPoint.Y, 0), layer);
+                DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y + topThickness, 0), new Point3d(startPoint.X - 65.0, startPoint.Y + topThickness, 0), layer);
+                DrawCutSymbol(new Point3d(startPoint.X - 65.0, startPoint.Y, 0), new Point3d(startPoint.X - 65.0, startPoint.Y + topThickness, 0));
+            }
+            else
+            {
+                DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X, startPoint.Y + topThickness, 0), layer);
+            }
+            Point3d rightStart = new Point3d(startPoint.X + Wall.Thickness, startPoint.Y, 0);
+            if (TopExternal)
+            {
+                DrawingShapes.DrawLine(rightStart, new Point3d(rightStart.X + 65.0, rightStart.Y, 0), layer);
+                DrawingShapes.DrawLine(new Point3d(rightStart.X, rightStart.Y + topThickness, 0), new Point3d(rightStart.X + 65.0, rightStart.Y + topThickness, 0), layer);
+                DrawCutSymbol(new Point3d(rightStart.X + 65.0, rightStart.Y, 0), new Point3d(rightStart.X + 65.0, rightStart.Y + topThickness, 0));
+            }
+            else
+            {
+                DrawingShapes.DrawLine(rightStart, new Point3d(rightStart.X, rightStart.Y + topThickness, 0), layer);
+            }
+        }
+        private void DrawBottomCutProjection(Point3d startPoint)
+        {
+            string layer = "3";
+            DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y - bottomThickness, 0), new Point3d(startPoint.X + Wall.Thickness, startPoint.Y - bottomThickness, 0), layer);
+            if (BottomInternal)
+            {
+                DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X - 65.0, startPoint.Y, 0), layer);
+                DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y - bottomThickness, 0), new Point3d(startPoint.X - 65.0, startPoint.Y - bottomThickness, 0), layer);
+                DrawCutSymbol(new Point3d(startPoint.X - 65.0, startPoint.Y - bottomThickness, 0), new Point3d(startPoint.X - 65.0, startPoint.Y, 0));
+            }
+            else
+            {
+                DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X, startPoint.Y - bottomThickness, 0), layer);
+            }
+            Point3d rightStart = new Point3d(startPoint.X + Wall.Thickness, startPoint.Y, 0);
+            if (BottomExternal)
+            {
+                DrawingShapes.DrawLine(rightStart, new Point3d(rightStart.X + 65.0, rightStart.Y, 0), layer);
+                DrawingShapes.DrawLine(new Point3d(rightStart.X, rightStart.Y - bottomThickness, 0), new Point3d(rightStart.X + 65.0, rightStart.Y - bottomThickness, 0), layer);
+                DrawCutSymbol(new Point3d(rightStart.X + 65.0, rightStart.Y - bottomThickness, 0), new Point3d(rightStart.X + 65.0, rightStart.Y, 0));
+            }
+            else
+            {
+                DrawingShapes.DrawLine(rightStart, new Point3d(rightStart.X, rightStart.Y - bottomThickness, 0), layer);
+            }
+        }
+        private void DrawCutSymbol(Point3d startPoint, Point3d endPoint)
+        {
+            double cutSymbolLength = 6.0;
+            double cutSymbolHeigth = 16.0;
+            double length = DrawingShapes.Distance(startPoint, endPoint) + 10.0;
+            Point3d middle = DrawingShapes.MiddlePoint(startPoint, endPoint);
+            string layer = "1";
+            DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y - 5.0, 0), new Point3d(startPoint.X, startPoint.Y + (length - cutSymbolLength - 10.0) / 2.0, 0), layer);
+            DrawingShapes.DrawLine(new Point3d(endPoint.X, endPoint.Y + 5.0, 0), new Point3d(endPoint.X, endPoint.Y - (length - cutSymbolLength - 10.0) / 2.0, 0), layer);
+
+            Point3d middlLeft = new Point3d(middle.X - cutSymbolHeigth / 2.0, middle.Y, 0);
+            Point3d middleRigth = new Point3d(middle.X + cutSymbolHeigth / 2.0, middle.Y, 0);
+
+            DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y + (length - cutSymbolLength - 10.0) / 2.0, 0), middlLeft, layer);
+            DrawingShapes.DrawLine(new Point3d(endPoint.X, endPoint.Y - (length - cutSymbolLength - 10.0) / 2.0, 0), middleRigth, layer);
+            DrawingShapes.DrawLine(middlLeft, middleRigth, layer);
+        }
+        private void DrawVerticalExternalLineBar(Point3d basePoint)
+        {
+            Polyline ExternalLine = new Polyline();
+            ExternalLine.Layer = "4";
+            Point2d externalBasePoint = new Point2d(basePoint.X + Wall.Thickness - Cover, basePoint.Y - Cover - TopOffset);
+            double heigth = (effectiveHeigth - (2 * Cover + TopOffset + BottomOffset));
+            if (IsBottomExternalEngaged)
+            {
+                if (IsTopExternalEngaged)
+                {
+                    ExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(3, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y - heigth), 0, 0, 0);
+                }
+                else
+                {
+                    ExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    ExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(3, new Point2d(externalBasePoint.X, externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(4, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y - heigth), 0, 0, 0);
+                }
+            }
+            else
+            {
+                if (IsTopExternalEngaged)
+                {
+                    ExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(3, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(4, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
+                }
+                else
+                {
+                    ExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    ExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
+                    ExternalLine.AddVertexAt(3, new Point2d(externalBasePoint.X, externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(4, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - heigth), 0, 0, 0);
+                    ExternalLine.AddVertexAt(5, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
+                }
+            }
+            DrawingUtilities.AddToDrawing(ExternalLine);
+        }
+        private void DrawVerticalInternalLineBar(Point3d basePoint)
+        {
+            Polyline InternalLine = new Polyline();
+            InternalLine.Layer = "4";
+            Point2d internalBasePoint = new Point2d(basePoint.X + Cover, basePoint.Y - Cover - TopOffset);
+            double heigth = (effectiveHeigth - (2 * Cover + TopOffset + BottomOffset));
+
+            if (IsBottomInternalEngaged)
+            {
+                if (IsTopInternalEngaged)
+                {
+                    InternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y - heigth), 0, 0, 0);
+                }
+                else
+                {
+                    InternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    InternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(4, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y - heigth), 0, 0, 0);
+                }
+            }
+            else
+            {
+                if (IsTopInternalEngaged)
+                {
+                    InternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(4, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
+                }
+                else
+                {
+                    InternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
+                    InternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
+                    InternalLine.AddVertexAt(3, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(4, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - heigth), 0, 0, 0);
+                    InternalLine.AddVertexAt(5, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y + getAnchorLength(GaugeY) - heigth), 0, 0, 0);
+                }
+            }
+            DrawingUtilities.AddToDrawing(InternalLine);
+        }
+        private void DrawCutLine(Point3d startPoint)
+        {
+            Polyline supLine = new Polyline() { Layer = "1" };
+
+            supLine.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y - 20.0), 0, 0, 0);
+            supLine.AddVertexAt(1, new Point2d(startPoint.X, startPoint.Y + 20.0), 0, 0, 0);
+            supLine.AddVertexAt(2, new Point2d(startPoint.X + 10.0, startPoint.Y + 20.0), 0, 0, 0);
+            DrawingUtilities.AddToDrawing(supLine);
+            DrawingUtilities.DrawText(new Point3d(startPoint.X + 20.0, startPoint.Y + 20.0, 0), "A", 0.0);
+
+            Polyline infLine = new Polyline() { Layer = "1" };
+            startPoint = new Point3d(startPoint.X, startPoint.Y - effectiveHeigth, 0);
+            infLine.AddVertexAt(0, new Point2d(startPoint.X, startPoint.Y + 20.0), 0, 0, 0);
+            infLine.AddVertexAt(1, new Point2d(startPoint.X, startPoint.Y - 20.0), 0, 0, 0);
+            infLine.AddVertexAt(2, new Point2d(startPoint.X + 10.0, startPoint.Y - 20.0), 0, 0, 0);
+            DrawingUtilities.AddToDrawing(infLine);
+            DrawingUtilities.DrawText(new Point3d(startPoint.X + 20.0, startPoint.Y - 20.0, 0), "A", 0.0);
+        }
+        private void DrawHorizontalExternalBarsInCut(Point3d startPoint, int quantity)
+        {
+            string layer = "4";
+            double length = Wall.Heigth;
+            double horizontalOffset = 0.5 * GaugeX + GaugeY;
+            if (TopExternal)
+            {
+                if (BottomExternal) { }
+                else { length += bottomThickness - Cover - GaugeY - BottomOffset; }
+            }
+            else
+            {
+                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset- GaugeX*0.5, 0);
+                if (BottomExternal) {length += topThickness - Cover - GaugeY - TopOffset;}
+                else { length += topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset;}
+            }
+            double effectiveSpacing = length / quantity;
+            for (int index = 0; index < quantity; index++)
+            {
+                DrawingShapes.DrawCircle(new Point3d(startPoint.X - horizontalOffset, startPoint.Y - index * effectiveSpacing - 0.5 * GaugeX, 0), GaugeX, layer);
+            }
+        }
+        private void DrawHorizontalInternalBarsInCut(Point3d startPoint, int quantity)
+        {
+            string layer = "4";
+            double length = Wall.Heigth;
+            double horizontalOffset = 0.5 * GaugeX + GaugeY;
+            if (TopInternal)
+            {
+                if (BottomInternal) { }
+                else { length += bottomThickness - Cover - GaugeY - BottomOffset; }
+            }
+            else
+            {
+                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset - GaugeX * 0.5, 0);
+                if (BottomInternal) { length += topThickness - Cover - GaugeY - TopOffset; }
+                else { length += topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset; }
+            }
+            double effectiveSpacing = length / quantity;
+            for (int index = 0; index < quantity; index++)
+            {
+                DrawingShapes.DrawCircle(new Point3d(startPoint.X + horizontalOffset, startPoint.Y - index * effectiveSpacing - 0.5 * GaugeX, 0), GaugeX, layer);
+            }
+        }
+        private void DrawBarNotationsInCut(Point3d startPoint)
+        {
+            Point3d initPoint = new Point3d(startPoint.X + Wall.Thickness - Cover, startPoint.Y - 0.75 * Wall.Heigth, 0);
+            Leader leader = new Leader() { Layer = "1", HasArrowHead = true };
+            leader.AppendVertex(initPoint);
+            leader.AppendVertex(new Point3d(initPoint.X + 45.0, initPoint.Y - 20.0, 0));
+            DrawingUtilities.DrawText(new Point3d(initPoint.X + 55.0, initPoint.Y - 30.0, 0), $"N{distribuctions[0].Id}", 0.0);
+            DrawingUtilities.AddToDrawing(leader);
+
+            initPoint = new Point3d(startPoint.X + Cover, startPoint.Y - 0.25 * Wall.Heigth, 0);
+            leader = new Leader() { Layer = "1", HasArrowHead = true };
+            leader.AppendVertex(initPoint);
+            leader.AppendVertex(new Point3d(initPoint.X - 45.0, initPoint.Y + 20.0, 0));
+            DrawingUtilities.DrawText(new Point3d(initPoint.X - 45.0, initPoint.Y + 30.0, 0), $"N{distribuctions[1].Id}", 0.0);
+            DrawingUtilities.AddToDrawing(leader);
+        }
+
     }
 }

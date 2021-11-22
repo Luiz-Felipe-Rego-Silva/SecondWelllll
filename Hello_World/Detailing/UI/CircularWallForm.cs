@@ -27,40 +27,63 @@ namespace Hello_World.Detailing.UI
         private void chcbx_externalTop_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_externalTop.Checked)
+            {
                 chcbx_externalTopEngaged.Checked = true;
+                chcbx_externalTopEngaged.Enabled = true;
+            }
             else if (!chcbx_externalTop.Checked)
+            {
                 chcbx_externalTopEngaged.Checked = false;
+                chcbx_externalTopEngaged.Enabled = false;
+            }
         }
 
         private void chcbx_internalTop_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_internalTop.Checked)
+            {
                 chcbx_internalTopEngaged.Checked = true;
+                chcbx_internalTopEngaged.Enabled = true;
+            }
             else if (!chcbx_internalTop.Checked)
+            {
                 chcbx_internalTopEngaged.Checked = false;
+                chcbx_internalTopEngaged.Enabled = false;
+            }
 
         }
 
         private void chcbx_externalBottom_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_externalBottom.Checked)
+            {
                 chcbx_externalBottomEngaged.Checked = true;
+                chcbx_externalBottomEngaged.Enabled = true;
+            }
             else if (!chcbx_externalBottom.Checked)
+            {
                 chcbx_externalBottomEngaged.Checked = false;
+                chcbx_externalBottomEngaged.Enabled = false;
+            }
         }
 
         private void chcbx_internalBottom_CheckedChanged(object sender, EventArgs e)
         {
             if (chcbx_internalBottom.Checked)
+            {
                 chcbx_internalBottomEngaged.Checked = true;
+                chcbx_internalBottomEngaged.Enabled = true;
+            }
             else if (!chcbx_internalBottom.Checked)
+            {
                 chcbx_internalBottomEngaged.Checked = false;
-
+                chcbx_internalBottomEngaged.Enabled = false;
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void btn_detail_Click(object sender, EventArgs e)
@@ -76,10 +99,23 @@ namespace Hello_World.Detailing.UI
             double cover = Convert.ToDouble(msktxt_cover.Text);
             double anchorFactor = Convert.ToDouble(msktxt_anchorFactor.Text);
             wallDetailment.SetSteelInfo(spacingX, spacingY, gaugeX, gaugeY, anchorFactor, cover);
+            //Cadastro das formas laterais
+            wallDetailment.SetBorder(chcbx_externalTop.Checked, chcbx_internalTop.Checked, chcbx_externalBottom.Checked, chcbx_internalBottom.Checked);
             //Compatibilização com as adjacenciazinhas
-            double topOffset = (Convert.ToDouble(cmbbx_horizontalTopGauge.Text) + Convert.ToDouble(cmbbx_verticalTopGauge.Text)) / 10.0;
-            double bottomOffset = (Convert.ToDouble(cmbbx_horizontalBottomGauge.Text) + Convert.ToDouble(cmbbx_verticalBottomGauge.Text)) / 10.0;
+            double topOffset = 0.0;
+            double bottomOffset = 0.0;
+            try { topOffset += Convert.ToDouble(cmbbx_horizontalTopGauge.Text) / 10.0; }
+            catch (Exception) { topOffset += 0.0; }
+            try { topOffset += Convert.ToDouble(cmbbx_verticalTopGauge.Text) / 10.0; }
+            catch (Exception) { topOffset += 0.0; }
+
+            try { bottomOffset += Convert.ToDouble(cmbbx_horizontalBottomGauge.Text) / 10.0; }
+            catch (Exception) { topOffset += 0.0; }
+            try { bottomOffset += Convert.ToDouble(cmbbx_verticalBottomGauge.Text) / 10.0; }
+            catch (Exception) { topOffset += 0.0; }
+
             wallDetailment.SetOffsets(topOffset, bottomOffset);
+
             //Cadastro da Geometria
             double externalHeigth = Convert.ToDouble(msktxt_externalHeigth.Text);
             double externalDiameter = Convert.ToDouble(msktxt_externalDiameter.Text);
@@ -95,13 +131,21 @@ namespace Hello_World.Detailing.UI
             wallDetailment.SetBorderConditions(chcbx_internalTopEngaged.Checked, chcbx_externalTopEngaged.Checked, chcbx_internalBottomEngaged.Checked, chcbx_externalBottomEngaged.Checked);
 
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
-            wallDetailment.DrawDistribuctions(BasePoint);
+            wallDetailment.DrawDetailment(BasePoint);
 
 
         }
-        private void ValidateInput() { }
+        private void ValidateInput() 
+        { 
+        
+        }
 
         private void CircularWallForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grp_steelBottom_Enter(object sender, EventArgs e)
         {
 
         }

@@ -41,7 +41,7 @@ namespace WellDetailing.WellDetailer.Entities
             Point3d RightUp = new Point3d(HoodCenter.X + HorizontalLength/2.0, HoodCenter.Y + VerticalLength/2.0, 0);
 
             string layer = "1";
-            string lineType = "DASHED";
+            string lineType = "HIDDEN";
             DrawingShapes.DrawLine(LeftUp, RightDown, layer, lineType);
             DrawingShapes.DrawLine(RightUp, LeftDown, layer, lineType);
         }

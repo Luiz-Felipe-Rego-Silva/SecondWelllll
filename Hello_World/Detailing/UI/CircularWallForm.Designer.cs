@@ -76,9 +76,9 @@ namespace Hello_World.Detailing.UI
             this.grp_sideShapes = new System.Windows.Forms.GroupBox();
             this.chcbx_internalBottomEngaged = new System.Windows.Forms.CheckBox();
             this.chcbx_externalBottomEngaged = new System.Windows.Forms.CheckBox();
-            this.chcbx_internalTopEngaged = new System.Windows.Forms.CheckBox();
             this.chcbx_externalTopEngaged = new System.Windows.Forms.CheckBox();
             this.lbl_bottomSides = new System.Windows.Forms.Label();
+            this.chcbx_internalTopEngaged = new System.Windows.Forms.CheckBox();
             this.lbl_topSides = new System.Windows.Forms.Label();
             this.picbx_wall = new System.Windows.Forms.PictureBox();
             this.chcbx_externalTop = new System.Windows.Forms.CheckBox();
@@ -103,13 +103,13 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.Controls.Add(this.lbl_cover);
             this.grp_Factors.Location = new System.Drawing.Point(304, 44);
             this.grp_Factors.Name = "grp_Factors";
-            this.grp_Factors.Size = new System.Drawing.Size(150, 76);
-            this.grp_Factors.TabIndex = 2;
+            this.grp_Factors.Size = new System.Drawing.Size(162, 76);
+            this.grp_Factors.TabIndex = 3;
             this.grp_Factors.TabStop = false;
             // 
             // msktxt_anchorFactor
             // 
-            this.msktxt_anchorFactor.Location = new System.Drawing.Point(115, 43);
+            this.msktxt_anchorFactor.Location = new System.Drawing.Point(127, 43);
             this.msktxt_anchorFactor.Name = "msktxt_anchorFactor";
             this.msktxt_anchorFactor.Size = new System.Drawing.Size(29, 20);
             this.msktxt_anchorFactor.TabIndex = 2;
@@ -118,7 +118,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_cover
             // 
-            this.msktxt_cover.Location = new System.Drawing.Point(115, 13);
+            this.msktxt_cover.Location = new System.Drawing.Point(127, 13);
             this.msktxt_cover.Name = "msktxt_cover";
             this.msktxt_cover.Size = new System.Drawing.Size(29, 20);
             this.msktxt_cover.TabIndex = 1;
@@ -155,8 +155,8 @@ namespace Hello_World.Detailing.UI
             this.grp_steel.Controls.Add(this.lbl_verticalGauge);
             this.grp_steel.Location = new System.Drawing.Point(304, 126);
             this.grp_steel.Name = "grp_steel";
-            this.grp_steel.Size = new System.Drawing.Size(150, 121);
-            this.grp_steel.TabIndex = 2;
+            this.grp_steel.Size = new System.Drawing.Size(162, 121);
+            this.grp_steel.TabIndex = 4;
             this.grp_steel.TabStop = false;
             this.grp_steel.Text = "Armadura";
             // 
@@ -172,7 +172,7 @@ namespace Hello_World.Detailing.UI
             "16.0",
             "20.0",
             "25.0"});
-            this.cmbbx_horizontalWallGauge.Location = new System.Drawing.Point(84, 75);
+            this.cmbbx_horizontalWallGauge.Location = new System.Drawing.Point(96, 75);
             this.cmbbx_horizontalWallGauge.Name = "cmbbx_horizontalWallGauge";
             this.cmbbx_horizontalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_horizontalWallGauge.Size = new System.Drawing.Size(60, 21);
@@ -191,7 +191,7 @@ namespace Hello_World.Detailing.UI
             "16.0",
             "20.0",
             "25.0"});
-            this.cmbbx_verticalWallGauge.Location = new System.Drawing.Point(84, 17);
+            this.cmbbx_verticalWallGauge.Location = new System.Drawing.Point(96, 17);
             this.cmbbx_verticalWallGauge.Name = "cmbbx_verticalWallGauge";
             this.cmbbx_verticalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cmbbx_verticalWallGauge.Size = new System.Drawing.Size(60, 21);
@@ -200,7 +200,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_horizontalSpacing
             // 
-            this.msktxt_horizontalSpacing.Location = new System.Drawing.Point(84, 97);
+            this.msktxt_horizontalSpacing.Location = new System.Drawing.Point(96, 97);
             this.msktxt_horizontalSpacing.Name = "msktxt_horizontalSpacing";
             this.msktxt_horizontalSpacing.Size = new System.Drawing.Size(60, 20);
             this.msktxt_horizontalSpacing.TabIndex = 4;
@@ -208,7 +208,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_verticalSpacing
             // 
-            this.msktxt_verticalSpacing.Location = new System.Drawing.Point(84, 39);
+            this.msktxt_verticalSpacing.Location = new System.Drawing.Point(96, 39);
             this.msktxt_verticalSpacing.Name = "msktxt_verticalSpacing";
             this.msktxt_verticalSpacing.Size = new System.Drawing.Size(60, 20);
             this.msktxt_verticalSpacing.TabIndex = 2;
@@ -260,14 +260,14 @@ namespace Hello_World.Detailing.UI
             this.grp_geometry.Controls.Add(this.lbl_externalDiameter);
             this.grp_geometry.Location = new System.Drawing.Point(304, 253);
             this.grp_geometry.Name = "grp_geometry";
-            this.grp_geometry.Size = new System.Drawing.Size(150, 108);
-            this.grp_geometry.TabIndex = 3;
+            this.grp_geometry.Size = new System.Drawing.Size(162, 108);
+            this.grp_geometry.TabIndex = 5;
             this.grp_geometry.TabStop = false;
             this.grp_geometry.Text = "Geometria";
             // 
             // msktxt_wallThickness
             // 
-            this.msktxt_wallThickness.Location = new System.Drawing.Point(100, 78);
+            this.msktxt_wallThickness.Location = new System.Drawing.Point(112, 78);
             this.msktxt_wallThickness.Name = "msktxt_wallThickness";
             this.msktxt_wallThickness.Size = new System.Drawing.Size(44, 20);
             this.msktxt_wallThickness.TabIndex = 3;
@@ -275,7 +275,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_externalHeigth
             // 
-            this.msktxt_externalHeigth.Location = new System.Drawing.Point(100, 46);
+            this.msktxt_externalHeigth.Location = new System.Drawing.Point(112, 46);
             this.msktxt_externalHeigth.Name = "msktxt_externalHeigth";
             this.msktxt_externalHeigth.Size = new System.Drawing.Size(44, 20);
             this.msktxt_externalHeigth.TabIndex = 2;
@@ -283,7 +283,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_externalDiameter
             // 
-            this.msktxt_externalDiameter.Location = new System.Drawing.Point(100, 13);
+            this.msktxt_externalDiameter.Location = new System.Drawing.Point(112, 13);
             this.msktxt_externalDiameter.Name = "msktxt_externalDiameter";
             this.msktxt_externalDiameter.Size = new System.Drawing.Size(44, 20);
             this.msktxt_externalDiameter.TabIndex = 1;
@@ -324,14 +324,14 @@ namespace Hello_World.Detailing.UI
             this.grp_AdjacentElements.Controls.Add(this.lbl_topThickness);
             this.grp_AdjacentElements.Location = new System.Drawing.Point(304, 367);
             this.grp_AdjacentElements.Name = "grp_AdjacentElements";
-            this.grp_AdjacentElements.Size = new System.Drawing.Size(150, 84);
-            this.grp_AdjacentElements.TabIndex = 4;
+            this.grp_AdjacentElements.Size = new System.Drawing.Size(162, 84);
+            this.grp_AdjacentElements.TabIndex = 6;
             this.grp_AdjacentElements.TabStop = false;
             this.grp_AdjacentElements.Text = "Elementos Adjacentes";
             // 
             // msktxt_bottomThickness
             // 
-            this.msktxt_bottomThickness.Location = new System.Drawing.Point(102, 57);
+            this.msktxt_bottomThickness.Location = new System.Drawing.Point(112, 57);
             this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
             this.msktxt_bottomThickness.Size = new System.Drawing.Size(44, 20);
             this.msktxt_bottomThickness.TabIndex = 2;
@@ -339,7 +339,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_topThickness
             // 
-            this.msktxt_topThickness.Location = new System.Drawing.Point(102, 27);
+            this.msktxt_topThickness.Location = new System.Drawing.Point(112, 27);
             this.msktxt_topThickness.Name = "msktxt_topThickness";
             this.msktxt_topThickness.Size = new System.Drawing.Size(44, 20);
             this.msktxt_topThickness.TabIndex = 1;
@@ -372,7 +372,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steelTop.Location = new System.Drawing.Point(7, 427);
             this.grp_steelTop.Name = "grp_steelTop";
             this.grp_steelTop.Size = new System.Drawing.Size(134, 70);
-            this.grp_steelTop.TabIndex = 10;
+            this.grp_steelTop.TabIndex = 7;
             this.grp_steelTop.TabStop = false;
             this.grp_steelTop.Text = "Armadura (Topo)";
             // 
@@ -439,9 +439,10 @@ namespace Hello_World.Detailing.UI
             this.grp_steelBottom.Location = new System.Drawing.Point(159, 427);
             this.grp_steelBottom.Name = "grp_steelBottom";
             this.grp_steelBottom.Size = new System.Drawing.Size(134, 70);
-            this.grp_steelBottom.TabIndex = 11;
+            this.grp_steelBottom.TabIndex = 8;
             this.grp_steelBottom.TabStop = false;
             this.grp_steelBottom.Text = "Armadura (Fundo)";
+            this.grp_steelBottom.Enter += new System.EventHandler(this.grp_steelBottom_Enter);
             // 
             // cmbbx_horizontalBottomGauge
             // 
@@ -530,8 +531,8 @@ namespace Hello_World.Detailing.UI
             // 
             this.msktxt_multiplier.Location = new System.Drawing.Point(376, 25);
             this.msktxt_multiplier.Name = "msktxt_multiplier";
-            this.msktxt_multiplier.Size = new System.Drawing.Size(78, 20);
-            this.msktxt_multiplier.TabIndex = 1;
+            this.msktxt_multiplier.Size = new System.Drawing.Size(90, 20);
+            this.msktxt_multiplier.TabIndex = 2;
             this.msktxt_multiplier.Text = "1";
             this.msktxt_multiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -542,7 +543,7 @@ namespace Hello_World.Detailing.UI
             this.rchtxt_title.Name = "rchtxt_title";
             this.rchtxt_title.ShowSelectionMargin = true;
             this.rchtxt_title.Size = new System.Drawing.Size(248, 16);
-            this.rchtxt_title.TabIndex = 0;
+            this.rchtxt_title.TabIndex = 1;
             this.rchtxt_title.Text = "";
             // 
             // btn_detail
@@ -550,7 +551,7 @@ namespace Hello_World.Detailing.UI
             this.btn_detail.Location = new System.Drawing.Point(388, 469);
             this.btn_detail.Name = "btn_detail";
             this.btn_detail.Size = new System.Drawing.Size(66, 28);
-            this.btn_detail.TabIndex = 12;
+            this.btn_detail.TabIndex = 9;
             this.btn_detail.Text = "Detalhar";
             this.btn_detail.UseVisualStyleBackColor = true;
             this.btn_detail.Click += new System.EventHandler(this.btn_detail_Click);
@@ -560,7 +561,7 @@ namespace Hello_World.Detailing.UI
             this.btn_cancel.Location = new System.Drawing.Point(307, 469);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(76, 28);
-            this.btn_cancel.TabIndex = 11;
+            this.btn_cancel.TabIndex = 10;
             this.btn_cancel.Text = "Cancelar";
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
@@ -584,40 +585,36 @@ namespace Hello_World.Detailing.UI
             // chcbx_internalBottomEngaged
             // 
             this.chcbx_internalBottomEngaged.AutoSize = true;
+            this.chcbx_internalBottomEngaged.Checked = true;
+            this.chcbx_internalBottomEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_internalBottomEngaged.Location = new System.Drawing.Point(68, 38);
             this.chcbx_internalBottomEngaged.Name = "chcbx_internalBottomEngaged";
             this.chcbx_internalBottomEngaged.Size = new System.Drawing.Size(59, 17);
-            this.chcbx_internalBottomEngaged.TabIndex = 4;
+            this.chcbx_internalBottomEngaged.TabIndex = 0;
             this.chcbx_internalBottomEngaged.Text = "Interno";
             this.chcbx_internalBottomEngaged.UseVisualStyleBackColor = true;
             // 
             // chcbx_externalBottomEngaged
             // 
             this.chcbx_externalBottomEngaged.AutoSize = true;
+            this.chcbx_externalBottomEngaged.Checked = true;
+            this.chcbx_externalBottomEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_externalBottomEngaged.Location = new System.Drawing.Point(188, 38);
             this.chcbx_externalBottomEngaged.Name = "chcbx_externalBottomEngaged";
             this.chcbx_externalBottomEngaged.Size = new System.Drawing.Size(62, 17);
-            this.chcbx_externalBottomEngaged.TabIndex = 3;
+            this.chcbx_externalBottomEngaged.TabIndex = 0;
             this.chcbx_externalBottomEngaged.Text = "Externo";
             this.chcbx_externalBottomEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcbx_internalTopEngaged
-            // 
-            this.chcbx_internalTopEngaged.AutoSize = true;
-            this.chcbx_internalTopEngaged.Location = new System.Drawing.Point(68, 15);
-            this.chcbx_internalTopEngaged.Name = "chcbx_internalTopEngaged";
-            this.chcbx_internalTopEngaged.Size = new System.Drawing.Size(59, 17);
-            this.chcbx_internalTopEngaged.TabIndex = 2;
-            this.chcbx_internalTopEngaged.Text = "Interna";
-            this.chcbx_internalTopEngaged.UseVisualStyleBackColor = true;
             // 
             // chcbx_externalTopEngaged
             // 
             this.chcbx_externalTopEngaged.AutoSize = true;
+            this.chcbx_externalTopEngaged.Checked = true;
+            this.chcbx_externalTopEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_externalTopEngaged.Location = new System.Drawing.Point(188, 15);
             this.chcbx_externalTopEngaged.Name = "chcbx_externalTopEngaged";
             this.chcbx_externalTopEngaged.Size = new System.Drawing.Size(62, 17);
-            this.chcbx_externalTopEngaged.TabIndex = 1;
+            this.chcbx_externalTopEngaged.TabIndex = 0;
             this.chcbx_externalTopEngaged.Text = "Externa";
             this.chcbx_externalTopEngaged.UseVisualStyleBackColor = true;
             // 
@@ -629,6 +626,18 @@ namespace Hello_World.Detailing.UI
             this.lbl_bottomSides.Size = new System.Drawing.Size(40, 13);
             this.lbl_bottomSides.TabIndex = 1;
             this.lbl_bottomSides.Text = "Fundo:";
+            // 
+            // chcbx_internalTopEngaged
+            // 
+            this.chcbx_internalTopEngaged.AutoSize = true;
+            this.chcbx_internalTopEngaged.Checked = true;
+            this.chcbx_internalTopEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chcbx_internalTopEngaged.Location = new System.Drawing.Point(68, 15);
+            this.chcbx_internalTopEngaged.Name = "chcbx_internalTopEngaged";
+            this.chcbx_internalTopEngaged.Size = new System.Drawing.Size(59, 17);
+            this.chcbx_internalTopEngaged.TabIndex = 0;
+            this.chcbx_internalTopEngaged.Text = "Interna";
+            this.chcbx_internalTopEngaged.UseVisualStyleBackColor = true;
             // 
             // lbl_topSides
             // 
@@ -652,40 +661,48 @@ namespace Hello_World.Detailing.UI
             // chcbx_externalTop
             // 
             this.chcbx_externalTop.AutoSize = true;
+            this.chcbx_externalTop.Checked = true;
+            this.chcbx_externalTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_externalTop.Location = new System.Drawing.Point(278, 109);
             this.chcbx_externalTop.Name = "chcbx_externalTop";
             this.chcbx_externalTop.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_externalTop.TabIndex = 6;
+            this.chcbx_externalTop.TabIndex = 0;
             this.chcbx_externalTop.UseVisualStyleBackColor = true;
             this.chcbx_externalTop.CheckedChanged += new System.EventHandler(this.chcbx_externalTop_CheckedChanged);
             // 
             // chcbx_externalBottom
             // 
             this.chcbx_externalBottom.AutoSize = true;
+            this.chcbx_externalBottom.Checked = true;
+            this.chcbx_externalBottom.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_externalBottom.Location = new System.Drawing.Point(278, 300);
             this.chcbx_externalBottom.Name = "chcbx_externalBottom";
             this.chcbx_externalBottom.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_externalBottom.TabIndex = 8;
+            this.chcbx_externalBottom.TabIndex = 0;
             this.chcbx_externalBottom.UseVisualStyleBackColor = true;
             this.chcbx_externalBottom.CheckedChanged += new System.EventHandler(this.chcbx_externalBottom_CheckedChanged);
             // 
             // chcbx_internalBottom
             // 
             this.chcbx_internalBottom.AutoSize = true;
+            this.chcbx_internalBottom.Checked = true;
+            this.chcbx_internalBottom.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_internalBottom.Location = new System.Drawing.Point(232, 300);
             this.chcbx_internalBottom.Name = "chcbx_internalBottom";
             this.chcbx_internalBottom.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_internalBottom.TabIndex = 7;
+            this.chcbx_internalBottom.TabIndex = 0;
             this.chcbx_internalBottom.UseVisualStyleBackColor = true;
             this.chcbx_internalBottom.CheckedChanged += new System.EventHandler(this.chcbx_internalBottom_CheckedChanged);
             // 
             // chcbx_internalTop
             // 
             this.chcbx_internalTop.AutoSize = true;
+            this.chcbx_internalTop.Checked = true;
+            this.chcbx_internalTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcbx_internalTop.Location = new System.Drawing.Point(232, 109);
             this.chcbx_internalTop.Name = "chcbx_internalTop";
             this.chcbx_internalTop.Size = new System.Drawing.Size(15, 14);
-            this.chcbx_internalTop.TabIndex = 5;
+            this.chcbx_internalTop.TabIndex = 0;
             this.chcbx_internalTop.UseVisualStyleBackColor = true;
             this.chcbx_internalTop.CheckedChanged += new System.EventHandler(this.chcbx_internalTop_CheckedChanged);
             // 
@@ -693,7 +710,7 @@ namespace Hello_World.Detailing.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 508);
+            this.ClientSize = new System.Drawing.Size(478, 508);
             this.Controls.Add(this.chcbx_internalBottom);
             this.Controls.Add(this.chcbx_internalTop);
             this.Controls.Add(this.chcbx_externalBottom);
