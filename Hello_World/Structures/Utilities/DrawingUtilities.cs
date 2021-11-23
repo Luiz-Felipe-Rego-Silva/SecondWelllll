@@ -79,7 +79,6 @@ namespace Structures.Utilities
             }
             return objectId;
         }
-
         public static Point3d GetPointFromUser(string question)
         {
             Autodesk.AutoCAD.Internal.Utils.SetFocusToDwgView();

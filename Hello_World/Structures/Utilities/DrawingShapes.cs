@@ -29,19 +29,16 @@ namespace Structures.Utilities
             Circle.Linetype = lineType;
             DrawingUtilities.AddToDrawing(Circle);
         }
-
         public static void DrawArc(Point3d center, double radius, double startAngle, double endAngle, string layer)
         {
             Arc Arc = new Arc(center, radius, DegreesToRadians(startAngle), DegreesToRadians(endAngle));
             Arc.Layer = layer;
             DrawingUtilities.AddToDrawing(Arc);
         }
-
         public static double DegreesToRadians(double angle)
         {
             return (Math.PI / 180) * angle;
         }
-
         public static void DrawLine(Point3d startPoint, Point3d endPoint, string layer)
         {
             Polyline line = new Polyline();
@@ -161,6 +158,27 @@ namespace Structures.Utilities
                 DimStyleTableRecord dimensionStyleTableRecord = new DimStyleTableRecord();
                 ObjectId dimensionStyleId = dimensionStyleTable[dimStyleName];
                 AlignedDimension cota = new AlignedDimension(startPoint, endPoint, MiddlePoint(startPoint, endPoint), textContent, dimensionStyleId) { Layer = "1" };
+
+                blockTableRecord.AppendEntity(cota);
+                transaction.AddNewlyCreatedDBObject(cota, true);
+                transaction.Commit();
+                documentLock.Dispose();
+            }
+        }
+        public static void AddAlignedDimension(string dimStyleName, Point3d startPoint, Point3d endPoint, string textContent, double xPadding, double yPadding)
+        {
+            Document document = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument;
+            Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            using (Transaction transaction = database.TransactionManager.StartTransaction())
+            {
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite) as BlockTableRecord;
+
+                DimStyleTable dimensionStyleTable = (DimStyleTable)transaction.GetObject(database.DimStyleTableId, OpenMode.ForWrite);
+                DimStyleTableRecord dimensionStyleTableRecord = new DimStyleTableRecord();
+                ObjectId dimensionStyleId = dimensionStyleTable[dimStyleName];
+                AlignedDimension cota = new AlignedDimension(startPoint, endPoint, new Point3d(MiddlePoint(startPoint, endPoint).X + xPadding, MiddlePoint(startPoint, endPoint).Y + yPadding, 0), textContent, dimensionStyleId) { Layer = "1" };
 
                 blockTableRecord.AppendEntity(cota);
                 transaction.AddNewlyCreatedDBObject(cota, true);

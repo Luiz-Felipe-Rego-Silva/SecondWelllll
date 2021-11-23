@@ -101,39 +101,37 @@ namespace Structures.WellDetailer.Entities
         public void DrawPlanifiedWall(Point3d startPoint, double topThickness, double bottomThickness)
         {
             string layer = "3";
-            string lineType = "HIDDEN";
             Utilities.DrawingShapes.DrawRectangle(Math.PI * ExternalDiameter, (Heigth + topThickness + bottomThickness), layer, startPoint);
-            layer = "1";
+            layer = "hidden";
             if (topThickness > 0)
             {
                 Point3d initPoint = new Point3d(startPoint.X, startPoint.Y - topThickness, 0);
-                Utilities.DrawingShapes.DrawHorizontalLine(initPoint, Math.PI * ExternalDiameter, layer, lineType);
+                Utilities.DrawingShapes.DrawHorizontalLine(initPoint, Math.PI * ExternalDiameter, layer);
             }
             if (bottomThickness > 0)
             {
-                Point3d initPoint = new Point3d(startPoint.X, startPoint.Y - Heigth - bottomThickness, 0);
-                Utilities.DrawingShapes.DrawHorizontalLine(initPoint, Math.PI * ExternalDiameter, layer, lineType);
+                Point3d initPoint = new Point3d(startPoint.X, startPoint.Y - Heigth - topThickness, 0);
+                Utilities.DrawingShapes.DrawHorizontalLine(initPoint, Math.PI * ExternalDiameter, layer);
             }
             DrawAxisLines(startPoint, topThickness, bottomThickness);
         }
         private void DrawAxisLines(Point3d startPoint, double topThickness, double bottomThickness)
         {
-            string layer = "1";
-            string lineType = "DASHDOT";
+            string layer = "EIXOS";
             Point3d effectiveStartPoint = new Point3d(startPoint.X, startPoint.Y + 25.0, 0);
-            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer, lineType);
+            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer);
             Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "A", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.25 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
-            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
+            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer);
             Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "B", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.50 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
-            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
+            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer);
             Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "C", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + 0.75 * Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
-            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer, lineType);
+            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -(Heigth + topThickness + bottomThickness)-25.0, layer);
             Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "D", 0.0);
             effectiveStartPoint = new Point3d(startPoint.X + Math.PI * ExternalDiameter, startPoint.Y + 25.0, 0);
-            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer, lineType);
+            Utilities.DrawingShapes.DrawVerticalLine(effectiveStartPoint, -25.0, layer);
             Utilities.DrawingUtilities.DrawText(new Point3d(effectiveStartPoint.X, effectiveStartPoint.Y + 10.0, 0), "A", 0.0);
         }
         

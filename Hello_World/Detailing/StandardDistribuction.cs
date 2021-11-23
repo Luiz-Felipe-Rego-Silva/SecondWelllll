@@ -4,10 +4,6 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Detailing
 {
@@ -145,7 +141,7 @@ namespace Detailing
                 transaction.Commit();
             }
         }
-        private string GetDescriptionText()
+        public string GetDescriptionText()
         {
             if (NumberOfAmendments < 1)
             {
@@ -168,6 +164,19 @@ namespace Detailing
                 Height = 10,
                 Layer = "3",
                 TextString = GetDescriptionText(),
+                Justify = AttachmentPoint.MiddleCenter,
+                Rotation = orientation,
+                AlignmentPoint = middlePoint
+            };
+            MarkHandle = Structures.Utilities.DrawingUtilities.DrawObjectMark(descriptionText);
+        }
+        public void PrintDescriptionText(Point3d middlePoint, double orientation, string content)
+        {
+            DBText descriptionText = new DBText
+            {
+                Height = 10,
+                Layer = "3",
+                TextString = content,
                 Justify = AttachmentPoint.MiddleCenter,
                 Rotation = orientation,
                 AlignmentPoint = middlePoint

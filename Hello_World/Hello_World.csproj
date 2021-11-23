@@ -130,7 +130,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Commands.resx</DependentUpon>
     </Compile>
+    <Compile Include="Detailing\CircularBottomDetailing.cs" />
     <Compile Include="Detailing\CircularWallDetailment.cs" />
+    <Compile Include="Detailing\Entities\Enums.cs" />
     <Compile Include="Detailing\StandardDistribuction.cs" />
     <Compile Include="Detailing\SteelTable.cs" />
     <Compile Include="Detailing\UI\CircularWallForm.cs">

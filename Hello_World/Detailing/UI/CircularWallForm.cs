@@ -30,12 +30,20 @@ namespace Hello_World.Detailing.UI
             {
                 chcbx_externalTopEngaged.Checked = true;
                 chcbx_externalTopEngaged.Enabled = true;
+                msktxt_topThickness.Text = "20";
+                msktxt_topThickness.Enabled = true;
             }
             else if (!chcbx_externalTop.Checked)
             {
                 chcbx_externalTopEngaged.Checked = false;
                 chcbx_externalTopEngaged.Enabled = false;
             }
+            if (!chcbx_internalTop.Checked && !chcbx_externalTop.Checked)
+            {
+                msktxt_topThickness.Text = "0";
+                msktxt_topThickness.Enabled = false;
+            }
+            
         }
 
         private void chcbx_internalTop_CheckedChanged(object sender, EventArgs e)
@@ -44,11 +52,18 @@ namespace Hello_World.Detailing.UI
             {
                 chcbx_internalTopEngaged.Checked = true;
                 chcbx_internalTopEngaged.Enabled = true;
+                msktxt_topThickness.Text = "20";
+                msktxt_topThickness.Enabled = true;
             }
             else if (!chcbx_internalTop.Checked)
             {
                 chcbx_internalTopEngaged.Checked = false;
                 chcbx_internalTopEngaged.Enabled = false;
+            }
+            if (!chcbx_internalTop.Checked && !chcbx_externalTop.Checked) 
+            {
+                msktxt_topThickness.Text = "0";
+                msktxt_topThickness.Enabled = false;
             }
 
         }
@@ -59,11 +74,18 @@ namespace Hello_World.Detailing.UI
             {
                 chcbx_externalBottomEngaged.Checked = true;
                 chcbx_externalBottomEngaged.Enabled = true;
+                msktxt_bottomThickness.Text = "20";
+                msktxt_bottomThickness.Enabled = true;
             }
             else if (!chcbx_externalBottom.Checked)
             {
                 chcbx_externalBottomEngaged.Checked = false;
                 chcbx_externalBottomEngaged.Enabled = false;
+            }
+            if (!chcbx_externalBottom.Checked && !chcbx_internalBottom.Checked) 
+            {
+                msktxt_bottomThickness.Text = "0";
+                msktxt_bottomThickness.Enabled = false;
             }
         }
 
@@ -73,19 +95,24 @@ namespace Hello_World.Detailing.UI
             {
                 chcbx_internalBottomEngaged.Checked = true;
                 chcbx_internalBottomEngaged.Enabled = true;
+                msktxt_bottomThickness.Text = "20";
+                msktxt_bottomThickness.Enabled = true;
             }
             else if (!chcbx_internalBottom.Checked)
             {
                 chcbx_internalBottomEngaged.Checked = false;
                 chcbx_internalBottomEngaged.Enabled = false;
             }
+            if (!chcbx_externalBottom.Checked && !chcbx_internalBottom.Checked)
+            {
+                msktxt_bottomThickness.Text = "0";
+                msktxt_bottomThickness.Enabled = false;
+            }
         }
-
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void btn_detail_Click(object sender, EventArgs e)
         {
             ValidateInput();
@@ -132,8 +159,6 @@ namespace Hello_World.Detailing.UI
 
             Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
             wallDetailment.DrawDetailment(BasePoint);
-
-
         }
         private void ValidateInput() 
         { 
