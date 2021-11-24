@@ -304,26 +304,26 @@ namespace Hello_World.Detailing
         {
             if (TopExternal)
             {
-                if (BottomExternal) { return (int) (Math.Ceiling((Wall.Heigth) / SpacingX)+1); }
-                else { return (int) (Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX) + 1); }
+                if (BottomExternal) { return (int)(Math.Ceiling((Wall.Heigth) / SpacingX) + 1); }
+                else { return (int)(Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX) + 1); }
             }
             else
             {
-                if (BottomExternal) { return (int) (Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX) + 1); }
-                else { return (int) (Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX) + 1); }
+                if (BottomExternal) { return (int)(Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX) + 1); }
+                else { return (int)(Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX) + 1); }
             }
         }
         private int getHorizontalInternalQuantity()
         {
             if (TopInternal)
             {
-                if (BottomInternal) { return (int) (Math.Ceiling((Wall.Heigth) / SpacingX) + 1); }
-                else { return (int) (Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX) + 1); }
+                if (BottomInternal) { return (int)(Math.Ceiling((Wall.Heigth) / SpacingX) + 1); }
+                else { return (int)(Math.Ceiling((Wall.Heigth + bottomThickness - Cover - GaugeY - BottomOffset) / SpacingX) + 1); }
             }
             else
             {
-                if (BottomInternal) { return (int) (Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX) + 1); }
-                else { return (int) (Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX) + 1); }
+                if (BottomInternal) { return (int)(Math.Ceiling((Wall.Heigth + topThickness - Cover - GaugeY - TopOffset) / SpacingX) + 1); }
+                else { return (int)(Math.Ceiling((Wall.Heigth + topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset) / SpacingX) + 1); }
             }
         }
         private void DrawTitle(Point3d startPoint)
@@ -396,18 +396,18 @@ namespace Hello_World.Detailing
             startIndex = 0;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[3].BarLine.GetPoint3dAt(startIndex), distribuctions[3].BarLine.GetPoint3dAt(startIndex + 1));
             distribuctions[3].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0, GetHorizontalDescriptionText(3));
-
-
         }
-        private string GetHorizontalDescriptionText(int index) 
+        private string GetHorizontalDescriptionText(int index)
         {
-            string result = distribuctions[2].GetDescriptionText();
-            if (index == 2) 
+            string result;
+            if (index == 2)
             {
+                result = distribuctions[2].GetDescriptionText();
                 result += " - FACE EXTERNA";
             }
-            else 
+            else
             {
+                result = distribuctions[3].GetDescriptionText();
                 result += " - FACE INTERNA";
             }
             return result;
@@ -778,8 +778,8 @@ namespace Hello_World.Detailing
         {
             Point3d topAndWallStartPoint = new Point3d(startPoint.X, startPoint.Y - topThickness, 0);
             Point3d bottomStartPoint = new Point3d(topAndWallStartPoint.X, topAndWallStartPoint.Y - Wall.Heigth, 0);
-            Point3d startHorizontalExternal = new Point3d(startPoint.X + Wall.Thickness - Cover, startPoint.Y - topThickness, 0);
-            Point3d startHorizontalInternal = new Point3d(startPoint.X + Cover, startPoint.Y - topThickness, 0);
+            Point3d startHorizontalExternal = new Point3d(startPoint.X + Wall.Thickness - Cover - GaugeY, startPoint.Y - topThickness, 0);
+            Point3d startHorizontalInternal = new Point3d(startPoint.X + Cover + GaugeY, startPoint.Y - topThickness, 0);
 
             DrawTopCutProjection(topAndWallStartPoint);
             DrawInternalWallInCut(topAndWallStartPoint);
@@ -980,7 +980,6 @@ namespace Hello_World.Detailing
         {
             string layer = "4";
             double length = Wall.Heigth;
-            double horizontalOffset = 0.5 * GaugeX + GaugeY;
             if (TopExternal)
             {
                 if (BottomExternal) { }
@@ -988,12 +987,13 @@ namespace Hello_World.Detailing
             }
             else
             {
-                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset - GaugeX * 0.5, 0);
-                if (BottomExternal) { length += topThickness - Cover - GaugeY - TopOffset; }
-                else { length += topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset; }
+                length += topThickness - Cover - GaugeY - TopOffset;
+                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset, 0);
+                if (BottomExternal) {  }
+                else { length +=  bottomThickness - Cover - GaugeY - BottomOffset; }
             }
-            double effectiveSpacing = length / quantity;
-            for (int index = 0; index < quantity; index++) { DrawingShapes.DrawCircle(new Point3d(startPoint.X - horizontalOffset, startPoint.Y - index * effectiveSpacing - 0.5 * GaugeX, 0), GaugeX, layer); }
+            double effectiveSpacing = (length - GaugeX)/ (quantity-1);
+            for (int index = 0; index < quantity; index++) { DrawingShapes.DrawCircle(new Point3d(startPoint.X -0.5*GaugeX, startPoint.Y -0.5*GaugeX- index * effectiveSpacing, 0), GaugeX, layer); }
             string dimStyleName = "DIST 1-50";
             string content = $"N{distribuctions[2].Id}";
             DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X + Cover, startPoint.Y, 0), new Point3d(startPoint.X + Cover, startPoint.Y - length, 0), content, 20.0, 0);
@@ -1002,7 +1002,6 @@ namespace Hello_World.Detailing
         {
             string layer = "4";
             double length = Wall.Heigth;
-            double horizontalOffset = 0.5 * GaugeX + GaugeY;
             if (TopInternal)
             {
                 if (BottomInternal) { }
@@ -1010,18 +1009,21 @@ namespace Hello_World.Detailing
             }
             else
             {
-                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset - GaugeX * 0.5, 0);
-                if (BottomInternal) { length += topThickness - Cover - GaugeY - TopOffset; }
-                else { length += topThickness + bottomThickness - 2 * Cover - 2 * GaugeY - TopOffset - BottomOffset; }
+                length += topThickness - Cover - GaugeY - TopOffset;
+                startPoint = new Point3d(startPoint.X, startPoint.Y + topThickness - Cover - GaugeY - TopOffset, 0);
+                if (BottomInternal) {  }
+                else { length += bottomThickness - Cover - GaugeY - BottomOffset; }
             }
-            double effectiveSpacing = length / quantity;
+
+            double effectiveSpacing = (length - GaugeX) / (quantity - 1);
+
             for (int index = 0; index < quantity; index++)
             {
-                DrawingShapes.DrawCircle(new Point3d(startPoint.X + horizontalOffset, startPoint.Y - index * effectiveSpacing - 0.5 * GaugeX, 0), GaugeX, layer);
+                DrawingShapes.DrawCircle(new Point3d(startPoint.X + 0.5*GaugeX, startPoint.Y - 0.5 * GaugeX - index * effectiveSpacing, 0), GaugeX, layer);
             }
             string dimStyleName = "DIST 1-50";
             string content = $"N{distribuctions[3].Id}";
-            DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X - Cover, startPoint.Y, 0), new Point3d(startPoint.X - Cover, startPoint.Y - length, 0), content, -20.0, 0);
+            DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X - Cover - GaugeX, startPoint.Y, 0), new Point3d(startPoint.X - Cover - GaugeX, startPoint.Y - length, 0), content, -20.0, 0);
         }
         private void DrawBarNotationsInCut(Point3d startPoint)
         {

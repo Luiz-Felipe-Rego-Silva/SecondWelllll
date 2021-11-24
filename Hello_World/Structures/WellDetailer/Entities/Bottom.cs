@@ -93,5 +93,20 @@ namespace Structures.WellDetailer.Entities
             thiknessLine.AddVertexAt(1, new Point2d(BottomInCut[2].X, BottomInCut[2].Y), 0, 0, 0);
             Utilities.DrawingShapes.AddQuotesInPolylines(thiknessLine, - 15.0, 0);
         }
+        public void DrawBottomProjection(Point3d centerPoint) 
+        {
+            string layer = "3";
+            DrawingShapes.DrawCircle(centerPoint, Diameter, layer);
+            layer = "hidden";
+            if (EdgeLength > 0.0)
+            {
+                DrawingShapes.DrawCircle(centerPoint, Diameter - EdgeLength, layer);
+                DrawingShapes.DrawCircle(centerPoint, Diameter - EdgeLength - WallThickness, layer);
+            }
+            else 
+            {
+                DrawingShapes.DrawCircle(centerPoint, Diameter - WallThickness, layer);
+            }
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace Detailing
         public int NumberOfAmendments { get; private set; } = 0;
         public double AmendmentLength { get; private set; }
         public long MarkHandle { get; set; }
+        public static double AnchorFactor { get; set; } = 34.0;
 
         public StandardDistribuction(double gauge, double length)
         {
@@ -40,6 +41,10 @@ namespace Detailing
             Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
             NumberOfAmendments = numberOfAmendments;
             AmendmentLength = amendmentLength;
+        }
+        public static double getAnchorLength(double gauge)
+        {
+            return Math.Ceiling(gauge * AnchorFactor);
         }
         private double GetNominalSteelDensity()
         {
