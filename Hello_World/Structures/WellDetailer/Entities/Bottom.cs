@@ -107,6 +107,7 @@ namespace Structures.WellDetailer.Entities
             {
                 DrawingShapes.DrawCircle(centerPoint, Diameter - WallThickness, layer);
             }
+
         }
     }
 }

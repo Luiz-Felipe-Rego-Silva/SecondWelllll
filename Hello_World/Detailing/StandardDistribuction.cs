@@ -22,7 +22,6 @@ namespace Detailing
         public double AmendmentLength { get; private set; }
         public long MarkHandle { get; set; }
         public static double AnchorFactor { get; set; } = 34.0;
-
         public StandardDistribuction(double gauge, double length)
         {
             Gauge = gauge;
@@ -93,10 +92,6 @@ namespace Detailing
                 new TypedValue(1000, $"{MarkHandle}"),
                 new TypedValue(1000, $"{variableState}")
             );
-        }
-        public void SetVariable()
-        {
-            IsVariable = true;
         }
         public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/)
         {

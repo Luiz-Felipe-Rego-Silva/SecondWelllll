@@ -132,6 +132,12 @@
     </Compile>
     <Compile Include="Detailing\CircularBottomDetailing.cs" />
     <Compile Include="Detailing\CircularWallDetailment.cs" />
+    <Compile Include="Detailing\UI\CircularBottomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detailing\UI\CircularBottomForm.Designer.cs">
+      <DependentUpon>CircularBottomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Detailing\VariableDistribuction.cs" />
     <Compile Include="Detailing\Entities\Enums.cs" />
     <Compile Include="Detailing\StandardDistribuction.cs" />
@@ -202,6 +208,9 @@
       <DependentUpon>Commands.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Commands.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detailing\UI\CircularBottomForm.resx">
+      <DependentUpon>CircularBottomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Detailing\UI\CircularWallForm.resx">
       <DependentUpon>CircularWallForm.cs</DependentUpon>
