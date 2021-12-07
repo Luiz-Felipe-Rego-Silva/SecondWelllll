@@ -48,7 +48,20 @@ namespace Hello_World
             {
                 editor = document.Editor;
                 editor.WriteMessage("FUNCIONOU BB");
-
+            }
+        }
+        [CommandMethod("Fundo_Circular")]
+        public void callCircularBottomForm()
+        {
+            CircularBottomForm bottomForm = new CircularBottomForm();
+            bottomForm.Show();
+            // Put your command code here
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            Editor editor;
+            if (document != null)
+            {
+                editor = document.Editor;
+                editor.WriteMessage("FUNCIONOU BB");
             }
         }
 

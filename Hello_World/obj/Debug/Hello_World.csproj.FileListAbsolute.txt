@@ -26,3 +26,4 @@ C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.csproj.CoreCompileInputs.cache
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.pdb
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.Detailing.UI.CircularBottomForm.resources

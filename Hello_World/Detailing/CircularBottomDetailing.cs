@@ -26,30 +26,36 @@ namespace Hello_World.Detailing
         private double wallThickness;
         private List<Line> VerticalBaseLines;
         private List<Line> HorizontalBaseLines;
-        private double horizontalQuantity;
-        private double verticalQuantity;
-        private double mediumVerticalLine;
-        private double mediumHorizontalLine;
+        private int horizontalQuantity;
+        private int verticalQuantity;
         //****************************************************//
         private const double MINIMUM_VAR_LENGTH = 60.0;
         private const double EXTRA_LENGTH = 10.0;
 
-
         public Bottom Bottom { get; private set; }
 
-        public void SetHorizontalBorderConditions()
+        public void SetBorderConditions(bool horizontalTopEngaged, bool verticalTopEngaged)
         {
-
+            HorizontalTopEngaged = horizontalTopEngaged;
+            VerticalTopEngaged = verticalTopEngaged;
         }
-        public void SetVerticalBorderConditions()
+        public void SetArmorInfo(double gaugeX, double gaugeY, double spacingX, double spacingY, double anchorFactor, double cover)
         {
-
+            Cover = cover;
+            AnchorFactor = anchorFactor;
+            GaugeX = gaugeX;
+            GaugeY = gaugeY;
+            SpacingX = spacingX;
+            SpacingY = spacingY;
         }
-        public void SetArmorInfo()
+        public void SetGeometryInfo(double diameter, double thickness, double edgeLength, double wallThickness)
         {
-
+            Bottom = new Bottom(diameter - 2 * edgeLength - 2 * wallThickness, wallThickness, thickness, edgeLength);
         }
-        public void SetGeometryInfo() { }
+        public void SetBorderThickness(double _wallThickness)
+        {
+            wallThickness = _wallThickness;
+        }
         public void DrawTitle(Point3d startPoint)
         {
             DBText title = new DBText()
@@ -88,21 +94,25 @@ namespace Hello_World.Detailing
         {
             Point3d titlePoint = BasePoint;
             Point3d bottomCenter = new Point3d(BasePoint.X + 20.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY) + 150.0, BasePoint.Y - 150.0 - 0.5 * Bottom.Diameter, 0);
+            Point3d verticalLinePoint = new Point3d(bottomCenter.X, bottomCenter.Y - Bottom.Diameter - 200.0, 0);
+            Point3d horizontalLinePoint = new Point3d(verticalLinePoint.X + Bottom.Diameter + 200.0, verticalLinePoint.Y, 0);
 
             DrawTitle(titlePoint);
             Bottom.DrawBottomProjection(bottomCenter);
+            CreateVerticalLines(GaugeY, GetQuantity(GaugeY, SpacingY), verticalLinePoint);
+            CreateHorizontalLines(GaugeX, GetQuantity(GaugeX, SpacingX), horizontalLinePoint);
         }
-        public int GetQuantity(double gauge, double spacing, bool engagedCondition)
+        public int GetQuantity(double gauge, double spacing)
         {
             int quantity;
-            double offset = GetOffset(gauge, engagedCondition);
+            double offset = GetOffset(gauge);
             quantity = (int)((Bottom.Diameter - 2 * Cover - 2 * offset) / spacing) + 1;
             return quantity;
         }
-        private double GetOffset(double gauge, bool engagedCondition)
+        private double GetOffset(double gauge)
         {
             double minLength = 0.0;
-            minLength += 2 * GetHookLength(engagedCondition, gauge) + EXTRA_LENGTH;
+            minLength += 2 * StandardDistribuction.getAnchorLength(gauge) + EXTRA_LENGTH;
             if (MINIMUM_VAR_LENGTH > minLength)
                 minLength = MINIMUM_VAR_LENGTH;
 
@@ -110,7 +120,7 @@ namespace Hello_World.Detailing
             double offset = (effectiveDiameter / 2.0) * (1 - Math.Sqrt(1 - Math.Pow(minLength / effectiveDiameter, 2)));
             return offset;
         }
-        private double GetHookLength(bool isEngaged, double gauge)
+        private double GetHookLength(bool isEngaged, double gauge, double wallThickness)
         {
             double hookLength = 0.0;
             if (isEngaged)
@@ -123,64 +133,39 @@ namespace Hello_World.Detailing
             }
             return hookLength;
         }
-        private void CreateVerticalLines(double gauge, double quantity, bool engagedCondition, Point3d startPoint)
+        private void CreateVerticalLines(double gauge, double quantity, Point3d startPoint)
         {
             VerticalBaseLines = new List<Line>();
-            double offset = GetOffset(gauge, engagedCondition);
-            double effectiveSpacing = (Bottom.Diameter - 2*Cover - 2*offset - quantity * gauge) / (quantity-1);
-            double x0 = Bottom.Diameter * 0.5 - Cover - offset;
-            for (int index = 0; index < quantity; index++)
-            {
-                double x = x0 - index * effectiveSpacing;
-                double length = Math.Sqrt(Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(x, 2));
-                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X - index*effectiveSpacing, startPoint.Y + length/2.0,0), EndPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
-                VerticalBaseLines.Add(auxiliarLine);
-            }
-            foreach(Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line);}
-        }
-        private void CreateHorizontalLines(double gauge, double quantity, bool engagedCondition, Point3d startPoint)
-        {
-            HorizontalBaseLines = new List<Line>();
-            double offset = GetOffset(gauge, engagedCondition);
+            double offset = GetOffset(gauge);
             double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge) / (quantity - 1);
             double x0 = Bottom.Diameter * 0.5 - Cover - offset;
             for (int index = 0; index < quantity; index++)
             {
                 double x = x0 - index * effectiveSpacing;
-                double length = Math.Sqrt(Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(x, 2));
-                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X - length/2.0, startPoint.Y + index*effectiveSpacing, 0), EndPoint = new Point3d(startPoint.X + length / 2.0, startPoint.Y + index * effectiveSpacing, 0) };
+                double length = 2 * Math.Sqrt(0.5 * Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(x, 2));
+                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
+                VerticalBaseLines.Add(auxiliarLine);
+                Line mirrorAuxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + index * effectiveSpacing, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d(startPoint.X + index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
+                VerticalBaseLines.Add(mirrorAuxiliarLine);
+            }
+            foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
+        }
+        private void CreateHorizontalLines(double gauge, double quantity, Point3d startPoint)
+        {
+            HorizontalBaseLines = new List<Line>();
+            double offset = GetOffset(gauge);
+            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge) / (quantity - 1);
+            double y0 = Bottom.Diameter * 0.5 - Cover - offset;
+            for (int index = 0; index < quantity; index++)
+            {
+                double y = y0 - index * effectiveSpacing;
+                double length = 2 * Math.Sqrt(0.5 * Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(y, 2));
+                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length/2.0, startPoint.Y - index * effectiveSpacing, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y - index * effectiveSpacing, 0) };
                 HorizontalBaseLines.Add(auxiliarLine);
+                Line mirrorAuxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length / 2.0, startPoint.Y + index * effectiveSpacing, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y + index * effectiveSpacing, 0) };
+                HorizontalBaseLines.Add(mirrorAuxiliarLine);
             }
-            foreach (Line line in HorizontalBaseLines) { DrawingUtilities.AddToDrawing(line); }
-        }
-        private void SetMediumLines() 
-        {
-            foreach (Line line in VerticalBaseLines) 
-            {
-                mediumVerticalLine += line.Length;
-                mediumVerticalLine /= verticalQuantity;
-            }
-            foreach (Line line in HorizontalBaseLines)
-            {
-                mediumVerticalLine += line.Length;
-                mediumVerticalLine /= horizontalQuantity;
-            }
-        }
-        public void CreateVerticalVARPositive(Point3d startPoint) 
-        {
-            
-        }
-        public void CreateVerticalVARNegative(Point3d startPoint) 
-        {
-        
-        }
-        public void CreateHorizontalVARPositive(Point3d startPoint) 
-        {
-        
-        }
-        public void CreateHorizontalVARNegative(Point3d startPoint) 
-        {
-        
+            foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
         }
     }
 

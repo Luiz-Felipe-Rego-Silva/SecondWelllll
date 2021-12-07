@@ -38,17 +38,18 @@ namespace Hello_World.Detailing.UI
             this.lbl_multiplier = new System.Windows.Forms.Label();
             this.lbl_unitAlert = new System.Windows.Forms.Label();
             this.grp_AdjacentElements = new System.Windows.Forms.GroupBox();
+            this.msktxt_wallThickness = new System.Windows.Forms.MaskedTextBox();
             this.lbl_walSupThickness = new System.Windows.Forms.Label();
             this.grp_geometry = new System.Windows.Forms.GroupBox();
-            this.msktxt_wallSupThickness = new System.Windows.Forms.MaskedTextBox();
+            this.msktxt_bottomThickness = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_edgeLength = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_externalDiameter = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_bottomThickness = new System.Windows.Forms.Label();
             this.lbl_edgeLength = new System.Windows.Forms.Label();
+            this.lbl_bottomThickness = new System.Windows.Forms.Label();
             this.lbl_externalDiameter = new System.Windows.Forms.Label();
             this.grp_steel = new System.Windows.Forms.GroupBox();
-            this.cmbbx_horizontalWallGauge = new System.Windows.Forms.ComboBox();
-            this.cmbbx_verticalWallGauge = new System.Windows.Forms.ComboBox();
+            this.cmbbx_horizontalBottomGauge = new System.Windows.Forms.ComboBox();
+            this.cmbbx_verticalBottomGauge = new System.Windows.Forms.ComboBox();
             this.msktxt_horizontalSpacing = new System.Windows.Forms.MaskedTextBox();
             this.msktxt_verticalSpacing = new System.Windows.Forms.MaskedTextBox();
             this.lbl_horizontalSpacing = new System.Windows.Forms.Label();
@@ -60,17 +61,12 @@ namespace Hello_World.Detailing.UI
             this.msktxt_cover = new System.Windows.Forms.MaskedTextBox();
             this.lbl_anchorFactor = new System.Windows.Forms.Label();
             this.lbl_cover = new System.Windows.Forms.Label();
-            this.msktxt_bottomThickness = new System.Windows.Forms.MaskedTextBox();
-            this.msktxt_wallInfThickness = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.grp_sideShapes = new System.Windows.Forms.GroupBox();
-            this.lbl_horizontalEngaged = new System.Windows.Forms.Label();
-            this.lbl_horizontalConditions = new System.Windows.Forms.Label();
-            this.lbl_verticalConditions = new System.Windows.Forms.Label();
-            this.chcbx_topVerticalEngaged = new System.Windows.Forms.CheckBox();
-            this.chcbx_infVerticalEngaged = new System.Windows.Forms.CheckBox();
-            this.chcbx_infHorizontalEngaged = new System.Windows.Forms.CheckBox();
             this.chcbx_topHorizontalEngaged = new System.Windows.Forms.CheckBox();
+            this.chcbx_topVerticalEngaged = new System.Windows.Forms.CheckBox();
+            this.lbl_verticalConditions = new System.Windows.Forms.Label();
+            this.lbl_horizontalConditions = new System.Windows.Forms.Label();
+            this.lbl_horizontalEngaged = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.chcbx_inf = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -84,7 +80,7 @@ namespace Hello_World.Detailing.UI
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(310, 387);
+            this.btn_cancel.Location = new System.Drawing.Point(307, 355);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(76, 28);
             this.btn_cancel.TabIndex = 31;
@@ -93,16 +89,17 @@ namespace Hello_World.Detailing.UI
             // 
             // btn_detail
             // 
-            this.btn_detail.Location = new System.Drawing.Point(395, 387);
+            this.btn_detail.Location = new System.Drawing.Point(392, 355);
             this.btn_detail.Name = "btn_detail";
             this.btn_detail.Size = new System.Drawing.Size(71, 28);
             this.btn_detail.TabIndex = 29;
             this.btn_detail.Text = "Detalhar";
             this.btn_detail.UseVisualStyleBackColor = true;
+            this.btn_detail.Click += new System.EventHandler(this.btn_detail_Click);
             // 
             // rchtxt_title
             // 
-            this.rchtxt_title.Location = new System.Drawing.Point(53, 29);
+            this.rchtxt_title.Location = new System.Drawing.Point(53, 26);
             this.rchtxt_title.Multiline = false;
             this.rchtxt_title.Name = "rchtxt_title";
             this.rchtxt_title.ShowSelectionMargin = true;
@@ -112,7 +109,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_multiplier
             // 
-            this.msktxt_multiplier.Location = new System.Drawing.Point(379, 26);
+            this.msktxt_multiplier.Location = new System.Drawing.Point(379, 7);
             this.msktxt_multiplier.Name = "msktxt_multiplier";
             this.msktxt_multiplier.Size = new System.Drawing.Size(90, 20);
             this.msktxt_multiplier.TabIndex = 19;
@@ -122,7 +119,7 @@ namespace Hello_World.Detailing.UI
             // lbl_title
             // 
             this.lbl_title.AutoSize = true;
-            this.lbl_title.Location = new System.Drawing.Point(12, 32);
+            this.lbl_title.Location = new System.Drawing.Point(12, 29);
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(35, 13);
             this.lbl_title.TabIndex = 26;
@@ -131,7 +128,7 @@ namespace Hello_World.Detailing.UI
             // lbl_multiplier
             // 
             this.lbl_multiplier.AutoSize = true;
-            this.lbl_multiplier.Location = new System.Drawing.Point(307, 29);
+            this.lbl_multiplier.Location = new System.Drawing.Point(307, 10);
             this.lbl_multiplier.Name = "lbl_multiplier";
             this.lbl_multiplier.Size = new System.Drawing.Size(66, 13);
             this.lbl_multiplier.TabIndex = 24;
@@ -142,7 +139,7 @@ namespace Hello_World.Detailing.UI
             this.lbl_unitAlert.AutoSize = true;
             this.lbl_unitAlert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_unitAlert.ForeColor = System.Drawing.Color.Red;
-            this.lbl_unitAlert.Location = new System.Drawing.Point(15, 10);
+            this.lbl_unitAlert.Location = new System.Drawing.Point(12, 7);
             this.lbl_unitAlert.Name = "lbl_unitAlert";
             this.lbl_unitAlert.Size = new System.Drawing.Size(284, 13);
             this.lbl_unitAlert.TabIndex = 22;
@@ -150,25 +147,31 @@ namespace Hello_World.Detailing.UI
             // 
             // grp_AdjacentElements
             // 
-            this.grp_AdjacentElements.Controls.Add(this.msktxt_wallInfThickness);
-            this.grp_AdjacentElements.Controls.Add(this.label1);
-            this.grp_AdjacentElements.Controls.Add(this.msktxt_wallSupThickness);
+            this.grp_AdjacentElements.Controls.Add(this.msktxt_wallThickness);
             this.grp_AdjacentElements.Controls.Add(this.lbl_walSupThickness);
-            this.grp_AdjacentElements.Location = new System.Drawing.Point(15, 362);
+            this.grp_AdjacentElements.Location = new System.Drawing.Point(307, 303);
             this.grp_AdjacentElements.Name = "grp_AdjacentElements";
-            this.grp_AdjacentElements.Size = new System.Drawing.Size(286, 62);
+            this.grp_AdjacentElements.Size = new System.Drawing.Size(157, 46);
             this.grp_AdjacentElements.TabIndex = 25;
             this.grp_AdjacentElements.TabStop = false;
             this.grp_AdjacentElements.Text = "Elementos Adjacentes";
             // 
+            // msktxt_wallThickness
+            // 
+            this.msktxt_wallThickness.Location = new System.Drawing.Point(98, 16);
+            this.msktxt_wallThickness.Name = "msktxt_wallThickness";
+            this.msktxt_wallThickness.Size = new System.Drawing.Size(44, 20);
+            this.msktxt_wallThickness.TabIndex = 3;
+            this.msktxt_wallThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // lbl_walSupThickness
             // 
             this.lbl_walSupThickness.AutoSize = true;
-            this.lbl_walSupThickness.Location = new System.Drawing.Point(6, 30);
+            this.lbl_walSupThickness.Location = new System.Drawing.Point(9, 19);
             this.lbl_walSupThickness.Name = "lbl_walSupThickness";
-            this.lbl_walSupThickness.Size = new System.Drawing.Size(83, 13);
+            this.lbl_walSupThickness.Size = new System.Drawing.Size(44, 13);
             this.lbl_walSupThickness.TabIndex = 9;
-            this.lbl_walSupThickness.Text = "Parede Superior";
+            this.lbl_walSupThickness.Text = "Parede ";
             // 
             // grp_geometry
             // 
@@ -178,24 +181,24 @@ namespace Hello_World.Detailing.UI
             this.grp_geometry.Controls.Add(this.lbl_edgeLength);
             this.grp_geometry.Controls.Add(this.lbl_bottomThickness);
             this.grp_geometry.Controls.Add(this.lbl_externalDiameter);
-            this.grp_geometry.Location = new System.Drawing.Point(307, 254);
+            this.grp_geometry.Location = new System.Drawing.Point(307, 212);
             this.grp_geometry.Name = "grp_geometry";
-            this.grp_geometry.Size = new System.Drawing.Size(162, 108);
+            this.grp_geometry.Size = new System.Drawing.Size(162, 88);
             this.grp_geometry.TabIndex = 23;
             this.grp_geometry.TabStop = false;
             this.grp_geometry.Text = "Geometria";
             // 
-            // msktxt_wallSupThickness
+            // msktxt_bottomThickness
             // 
-            this.msktxt_wallSupThickness.Location = new System.Drawing.Point(95, 27);
-            this.msktxt_wallSupThickness.Name = "msktxt_wallSupThickness";
-            this.msktxt_wallSupThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_wallSupThickness.TabIndex = 3;
-            this.msktxt_wallSupThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.msktxt_bottomThickness.Location = new System.Drawing.Point(112, 35);
+            this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
+            this.msktxt_bottomThickness.Size = new System.Drawing.Size(44, 20);
+            this.msktxt_bottomThickness.TabIndex = 10;
+            this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_edgeLength
             // 
-            this.msktxt_edgeLength.Location = new System.Drawing.Point(112, 82);
+            this.msktxt_edgeLength.Location = new System.Drawing.Point(112, 59);
             this.msktxt_edgeLength.Name = "msktxt_edgeLength";
             this.msktxt_edgeLength.Size = new System.Drawing.Size(44, 20);
             this.msktxt_edgeLength.TabIndex = 2;
@@ -209,23 +212,23 @@ namespace Hello_World.Detailing.UI
             this.msktxt_externalDiameter.TabIndex = 1;
             this.msktxt_externalDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // lbl_bottomThickness
-            // 
-            this.lbl_bottomThickness.AutoSize = true;
-            this.lbl_bottomThickness.Location = new System.Drawing.Point(6, 50);
-            this.lbl_bottomThickness.Name = "lbl_bottomThickness";
-            this.lbl_bottomThickness.Size = new System.Drawing.Size(56, 13);
-            this.lbl_bottomThickness.TabIndex = 14;
-            this.lbl_bottomThickness.Text = "Espessura";
-            // 
             // lbl_edgeLength
             // 
             this.lbl_edgeLength.AutoSize = true;
-            this.lbl_edgeLength.Location = new System.Drawing.Point(6, 82);
+            this.lbl_edgeLength.Location = new System.Drawing.Point(6, 59);
             this.lbl_edgeLength.Name = "lbl_edgeLength";
             this.lbl_edgeLength.Size = new System.Drawing.Size(31, 13);
             this.lbl_edgeLength.TabIndex = 12;
             this.lbl_edgeLength.Text = "Abas";
+            // 
+            // lbl_bottomThickness
+            // 
+            this.lbl_bottomThickness.AutoSize = true;
+            this.lbl_bottomThickness.Location = new System.Drawing.Point(6, 38);
+            this.lbl_bottomThickness.Name = "lbl_bottomThickness";
+            this.lbl_bottomThickness.Size = new System.Drawing.Size(56, 13);
+            this.lbl_bottomThickness.TabIndex = 14;
+            this.lbl_bottomThickness.Text = "Espessura";
             // 
             // lbl_externalDiameter
             // 
@@ -238,25 +241,25 @@ namespace Hello_World.Detailing.UI
             // 
             // grp_steel
             // 
-            this.grp_steel.Controls.Add(this.cmbbx_horizontalWallGauge);
-            this.grp_steel.Controls.Add(this.cmbbx_verticalWallGauge);
+            this.grp_steel.Controls.Add(this.cmbbx_horizontalBottomGauge);
+            this.grp_steel.Controls.Add(this.cmbbx_verticalBottomGauge);
             this.grp_steel.Controls.Add(this.msktxt_horizontalSpacing);
             this.grp_steel.Controls.Add(this.msktxt_verticalSpacing);
             this.grp_steel.Controls.Add(this.lbl_horizontalSpacing);
             this.grp_steel.Controls.Add(this.lbl_horizontalGauge);
             this.grp_steel.Controls.Add(this.lbl_verticalSpacing);
             this.grp_steel.Controls.Add(this.lbl_verticalGauge);
-            this.grp_steel.Location = new System.Drawing.Point(307, 127);
+            this.grp_steel.Location = new System.Drawing.Point(307, 91);
             this.grp_steel.Name = "grp_steel";
             this.grp_steel.Size = new System.Drawing.Size(162, 121);
             this.grp_steel.TabIndex = 21;
             this.grp_steel.TabStop = false;
             this.grp_steel.Text = "Armadura";
             // 
-            // cmbbx_horizontalWallGauge
+            // cmbbx_horizontalBottomGauge
             // 
-            this.cmbbx_horizontalWallGauge.FormattingEnabled = true;
-            this.cmbbx_horizontalWallGauge.Items.AddRange(new object[] {
+            this.cmbbx_horizontalBottomGauge.FormattingEnabled = true;
+            this.cmbbx_horizontalBottomGauge.Items.AddRange(new object[] {
             "5.0",
             "6.3",
             "8.0",
@@ -265,17 +268,17 @@ namespace Hello_World.Detailing.UI
             "16.0",
             "20.0",
             "25.0"});
-            this.cmbbx_horizontalWallGauge.Location = new System.Drawing.Point(96, 75);
-            this.cmbbx_horizontalWallGauge.Name = "cmbbx_horizontalWallGauge";
-            this.cmbbx_horizontalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmbbx_horizontalWallGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_horizontalWallGauge.TabIndex = 3;
-            this.cmbbx_horizontalWallGauge.Text = "5.0";
+            this.cmbbx_horizontalBottomGauge.Location = new System.Drawing.Point(96, 75);
+            this.cmbbx_horizontalBottomGauge.Name = "cmbbx_horizontalBottomGauge";
+            this.cmbbx_horizontalBottomGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cmbbx_horizontalBottomGauge.Size = new System.Drawing.Size(60, 21);
+            this.cmbbx_horizontalBottomGauge.TabIndex = 3;
+            this.cmbbx_horizontalBottomGauge.Text = "5.0";
             // 
-            // cmbbx_verticalWallGauge
+            // cmbbx_verticalBottomGauge
             // 
-            this.cmbbx_verticalWallGauge.FormattingEnabled = true;
-            this.cmbbx_verticalWallGauge.Items.AddRange(new object[] {
+            this.cmbbx_verticalBottomGauge.FormattingEnabled = true;
+            this.cmbbx_verticalBottomGauge.Items.AddRange(new object[] {
             "5.0",
             "6.3",
             "8.0",
@@ -284,12 +287,12 @@ namespace Hello_World.Detailing.UI
             "16.0",
             "20.0",
             "25.0"});
-            this.cmbbx_verticalWallGauge.Location = new System.Drawing.Point(96, 17);
-            this.cmbbx_verticalWallGauge.Name = "cmbbx_verticalWallGauge";
-            this.cmbbx_verticalWallGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmbbx_verticalWallGauge.Size = new System.Drawing.Size(60, 21);
-            this.cmbbx_verticalWallGauge.TabIndex = 1;
-            this.cmbbx_verticalWallGauge.Text = "5.0";
+            this.cmbbx_verticalBottomGauge.Location = new System.Drawing.Point(96, 17);
+            this.cmbbx_verticalBottomGauge.Name = "cmbbx_verticalBottomGauge";
+            this.cmbbx_verticalBottomGauge.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cmbbx_verticalBottomGauge.Size = new System.Drawing.Size(60, 21);
+            this.cmbbx_verticalBottomGauge.TabIndex = 1;
+            this.cmbbx_verticalBottomGauge.Text = "5.0";
             // 
             // msktxt_horizontalSpacing
             // 
@@ -349,15 +352,15 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.Controls.Add(this.msktxt_cover);
             this.grp_Factors.Controls.Add(this.lbl_anchorFactor);
             this.grp_Factors.Controls.Add(this.lbl_cover);
-            this.grp_Factors.Location = new System.Drawing.Point(307, 45);
+            this.grp_Factors.Location = new System.Drawing.Point(307, 26);
             this.grp_Factors.Name = "grp_Factors";
-            this.grp_Factors.Size = new System.Drawing.Size(162, 76);
+            this.grp_Factors.Size = new System.Drawing.Size(162, 66);
             this.grp_Factors.TabIndex = 20;
             this.grp_Factors.TabStop = false;
             // 
             // msktxt_anchorFactor
             // 
-            this.msktxt_anchorFactor.Location = new System.Drawing.Point(127, 43);
+            this.msktxt_anchorFactor.Location = new System.Drawing.Point(127, 37);
             this.msktxt_anchorFactor.Name = "msktxt_anchorFactor";
             this.msktxt_anchorFactor.Size = new System.Drawing.Size(29, 20);
             this.msktxt_anchorFactor.TabIndex = 2;
@@ -376,7 +379,7 @@ namespace Hello_World.Detailing.UI
             // lbl_anchorFactor
             // 
             this.lbl_anchorFactor.AutoSize = true;
-            this.lbl_anchorFactor.Location = new System.Drawing.Point(6, 46);
+            this.lbl_anchorFactor.Location = new System.Drawing.Point(6, 40);
             this.lbl_anchorFactor.Name = "lbl_anchorFactor";
             this.lbl_anchorFactor.Size = new System.Drawing.Size(103, 13);
             this.lbl_anchorFactor.TabIndex = 2;
@@ -391,65 +394,40 @@ namespace Hello_World.Detailing.UI
             this.lbl_cover.TabIndex = 7;
             this.lbl_cover.Text = "Cobrimento";
             // 
-            // msktxt_bottomThickness
-            // 
-            this.msktxt_bottomThickness.Location = new System.Drawing.Point(112, 47);
-            this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
-            this.msktxt_bottomThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_bottomThickness.TabIndex = 10;
-            this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // msktxt_wallInfThickness
-            // 
-            this.msktxt_wallInfThickness.Location = new System.Drawing.Point(237, 27);
-            this.msktxt_wallInfThickness.Name = "msktxt_wallInfThickness";
-            this.msktxt_wallInfThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_wallInfThickness.TabIndex = 10;
-            this.msktxt_wallInfThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Parede Inferior";
-            // 
             // grp_sideShapes
             // 
-            this.grp_sideShapes.Controls.Add(this.chcbx_infHorizontalEngaged);
             this.grp_sideShapes.Controls.Add(this.chcbx_topHorizontalEngaged);
-            this.grp_sideShapes.Controls.Add(this.chcbx_infVerticalEngaged);
             this.grp_sideShapes.Controls.Add(this.chcbx_topVerticalEngaged);
             this.grp_sideShapes.Controls.Add(this.lbl_verticalConditions);
             this.grp_sideShapes.Controls.Add(this.lbl_horizontalConditions);
             this.grp_sideShapes.Controls.Add(this.lbl_horizontalEngaged);
             this.grp_sideShapes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grp_sideShapes.Location = new System.Drawing.Point(13, 270);
+            this.grp_sideShapes.Location = new System.Drawing.Point(15, 273);
             this.grp_sideShapes.Name = "grp_sideShapes";
-            this.grp_sideShapes.Size = new System.Drawing.Size(286, 92);
+            this.grp_sideShapes.Size = new System.Drawing.Size(286, 104);
             this.grp_sideShapes.TabIndex = 32;
             this.grp_sideShapes.TabStop = false;
             this.grp_sideShapes.Text = "Engaste";
             // 
-            // lbl_horizontalEngaged
+            // chcbx_topHorizontalEngaged
             // 
-            this.lbl_horizontalEngaged.AutoSize = true;
-            this.lbl_horizontalEngaged.Location = new System.Drawing.Point(6, 16);
-            this.lbl_horizontalEngaged.Name = "lbl_horizontalEngaged";
-            this.lbl_horizontalEngaged.Size = new System.Drawing.Size(280, 13);
-            this.lbl_horizontalEngaged.TabIndex = 0;
-            this.lbl_horizontalEngaged.Text = "Marque, nas áreas abaixo, as regiões em que há engaste;";
+            this.chcbx_topHorizontalEngaged.AutoSize = true;
+            this.chcbx_topHorizontalEngaged.Location = new System.Drawing.Point(148, 70);
+            this.chcbx_topHorizontalEngaged.Name = "chcbx_topHorizontalEngaged";
+            this.chcbx_topHorizontalEngaged.Size = new System.Drawing.Size(102, 17);
+            this.chcbx_topHorizontalEngaged.TabIndex = 5;
+            this.chcbx_topHorizontalEngaged.Text = "Parede Superior";
+            this.chcbx_topHorizontalEngaged.UseVisualStyleBackColor = true;
             // 
-            // lbl_horizontalConditions
+            // chcbx_topVerticalEngaged
             // 
-            this.lbl_horizontalConditions.AutoSize = true;
-            this.lbl_horizontalConditions.Location = new System.Drawing.Point(6, 70);
-            this.lbl_horizontalConditions.Name = "lbl_horizontalConditions";
-            this.lbl_horizontalConditions.Size = new System.Drawing.Size(57, 13);
-            this.lbl_horizontalConditions.TabIndex = 1;
-            this.lbl_horizontalConditions.Text = "Horizontal:";
+            this.chcbx_topVerticalEngaged.AutoSize = true;
+            this.chcbx_topVerticalEngaged.Location = new System.Drawing.Point(148, 45);
+            this.chcbx_topVerticalEngaged.Name = "chcbx_topVerticalEngaged";
+            this.chcbx_topVerticalEngaged.Size = new System.Drawing.Size(102, 17);
+            this.chcbx_topVerticalEngaged.TabIndex = 3;
+            this.chcbx_topVerticalEngaged.Text = "Parede Superior";
+            this.chcbx_topVerticalEngaged.UseVisualStyleBackColor = true;
             // 
             // lbl_verticalConditions
             // 
@@ -460,52 +438,30 @@ namespace Hello_World.Detailing.UI
             this.lbl_verticalConditions.TabIndex = 2;
             this.lbl_verticalConditions.Text = "Vertical:";
             // 
-            // chcbx_topVerticalEngaged
+            // lbl_horizontalConditions
             // 
-            this.chcbx_topVerticalEngaged.AutoSize = true;
-            this.chcbx_topVerticalEngaged.Location = new System.Drawing.Point(76, 46);
-            this.chcbx_topVerticalEngaged.Name = "chcbx_topVerticalEngaged";
-            this.chcbx_topVerticalEngaged.Size = new System.Drawing.Size(102, 17);
-            this.chcbx_topVerticalEngaged.TabIndex = 3;
-            this.chcbx_topVerticalEngaged.Text = "Parede Superior";
-            this.chcbx_topVerticalEngaged.UseVisualStyleBackColor = true;
+            this.lbl_horizontalConditions.AutoSize = true;
+            this.lbl_horizontalConditions.Location = new System.Drawing.Point(6, 70);
+            this.lbl_horizontalConditions.Name = "lbl_horizontalConditions";
+            this.lbl_horizontalConditions.Size = new System.Drawing.Size(57, 13);
+            this.lbl_horizontalConditions.TabIndex = 1;
+            this.lbl_horizontalConditions.Text = "Horizontal:";
             // 
-            // chcbx_infVerticalEngaged
+            // lbl_horizontalEngaged
             // 
-            this.chcbx_infVerticalEngaged.AutoSize = true;
-            this.chcbx_infVerticalEngaged.Location = new System.Drawing.Point(179, 46);
-            this.chcbx_infVerticalEngaged.Name = "chcbx_infVerticalEngaged";
-            this.chcbx_infVerticalEngaged.Size = new System.Drawing.Size(95, 17);
-            this.chcbx_infVerticalEngaged.TabIndex = 4;
-            this.chcbx_infVerticalEngaged.Text = "Parede Inferior";
-            this.chcbx_infVerticalEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcbx_infHorizontalEngaged
-            // 
-            this.chcbx_infHorizontalEngaged.AutoSize = true;
-            this.chcbx_infHorizontalEngaged.Location = new System.Drawing.Point(179, 69);
-            this.chcbx_infHorizontalEngaged.Name = "chcbx_infHorizontalEngaged";
-            this.chcbx_infHorizontalEngaged.Size = new System.Drawing.Size(95, 17);
-            this.chcbx_infHorizontalEngaged.TabIndex = 6;
-            this.chcbx_infHorizontalEngaged.Text = "Parede Inferior";
-            this.chcbx_infHorizontalEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcbx_topHorizontalEngaged
-            // 
-            this.chcbx_topHorizontalEngaged.AutoSize = true;
-            this.chcbx_topHorizontalEngaged.Location = new System.Drawing.Point(76, 69);
-            this.chcbx_topHorizontalEngaged.Name = "chcbx_topHorizontalEngaged";
-            this.chcbx_topHorizontalEngaged.Size = new System.Drawing.Size(102, 17);
-            this.chcbx_topHorizontalEngaged.TabIndex = 5;
-            this.chcbx_topHorizontalEngaged.Text = "Parede Superior";
-            this.chcbx_topHorizontalEngaged.UseVisualStyleBackColor = true;
+            this.lbl_horizontalEngaged.AutoSize = true;
+            this.lbl_horizontalEngaged.Location = new System.Drawing.Point(6, 16);
+            this.lbl_horizontalEngaged.Name = "lbl_horizontalEngaged";
+            this.lbl_horizontalEngaged.Size = new System.Drawing.Size(280, 13);
+            this.lbl_horizontalEngaged.TabIndex = 0;
+            this.lbl_horizontalEngaged.Text = "Marque, nas áreas abaixo, as regiões em que há engaste;";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 68);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(283, 195);
+            this.pictureBox1.Size = new System.Drawing.Size(283, 199);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
@@ -513,7 +469,7 @@ namespace Hello_World.Detailing.UI
             // chcbx_inf
             // 
             this.chcbx_inf.AutoSize = true;
-            this.chcbx_inf.Location = new System.Drawing.Point(250, 127);
+            this.chcbx_inf.Location = new System.Drawing.Point(250, 108);
             this.chcbx_inf.Name = "chcbx_inf";
             this.chcbx_inf.Size = new System.Drawing.Size(15, 14);
             this.chcbx_inf.TabIndex = 34;
@@ -522,7 +478,7 @@ namespace Hello_World.Detailing.UI
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(278, 127);
+            this.checkBox1.Location = new System.Drawing.Point(278, 108);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 35;
@@ -532,7 +488,7 @@ namespace Hello_World.Detailing.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 430);
+            this.ClientSize = new System.Drawing.Size(478, 389);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chcbx_inf);
             this.Controls.Add(this.pictureBox1);
@@ -577,9 +533,7 @@ namespace Hello_World.Detailing.UI
         private System.Windows.Forms.Label lbl_multiplier;
         private System.Windows.Forms.Label lbl_unitAlert;
         private System.Windows.Forms.GroupBox grp_AdjacentElements;
-        private System.Windows.Forms.MaskedTextBox msktxt_wallInfThickness;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox msktxt_wallSupThickness;
+        private System.Windows.Forms.MaskedTextBox msktxt_wallThickness;
         private System.Windows.Forms.Label lbl_walSupThickness;
         private System.Windows.Forms.GroupBox grp_geometry;
         private System.Windows.Forms.MaskedTextBox msktxt_bottomThickness;
@@ -589,8 +543,8 @@ namespace Hello_World.Detailing.UI
         private System.Windows.Forms.Label lbl_bottomThickness;
         private System.Windows.Forms.Label lbl_externalDiameter;
         private System.Windows.Forms.GroupBox grp_steel;
-        private System.Windows.Forms.ComboBox cmbbx_horizontalWallGauge;
-        private System.Windows.Forms.ComboBox cmbbx_verticalWallGauge;
+        private System.Windows.Forms.ComboBox cmbbx_horizontalBottomGauge;
+        private System.Windows.Forms.ComboBox cmbbx_verticalBottomGauge;
         private System.Windows.Forms.MaskedTextBox msktxt_horizontalSpacing;
         private System.Windows.Forms.MaskedTextBox msktxt_verticalSpacing;
         private System.Windows.Forms.Label lbl_horizontalSpacing;
@@ -604,9 +558,7 @@ namespace Hello_World.Detailing.UI
         private System.Windows.Forms.Label lbl_cover;
         private System.Windows.Forms.GroupBox grp_sideShapes;
         private System.Windows.Forms.Label lbl_horizontalEngaged;
-        private System.Windows.Forms.CheckBox chcbx_infHorizontalEngaged;
         private System.Windows.Forms.CheckBox chcbx_topHorizontalEngaged;
-        private System.Windows.Forms.CheckBox chcbx_infVerticalEngaged;
         private System.Windows.Forms.CheckBox chcbx_topVerticalEngaged;
         private System.Windows.Forms.Label lbl_verticalConditions;
         private System.Windows.Forms.Label lbl_horizontalConditions;
