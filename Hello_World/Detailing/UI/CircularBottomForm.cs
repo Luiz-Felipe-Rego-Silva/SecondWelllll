@@ -1,4 +1,5 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using Structures.Utilities;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,21 @@ namespace Hello_World.Detailing.UI
         public CircularBottomForm()
         {
             InitializeComponent();
-            _bottomDetailing = new CircularBottomDetailing();
+
         }
         private void btn_detail_Click(object sender, EventArgs e)
         {
-            SetArmorBottom();
-            SetBorderCondition();
-            Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
-            _bottomDetailing.DrawDetailment(BasePoint);
+            try
+            {
+                 _bottomDetailing = new CircularBottomDetailing();
+                 _bottomDetailing.Title = rchtxt_title.Text;
+                 SetArmorBottom();
+                 SetBorderCondition();
+                 SetBorderShape();
+                 Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
+                 _bottomDetailing.DrawDetailment(BasePoint);
+            }
+            catch(Exception) { }
         }
         private void SetArmorBottom() 
         {
@@ -37,21 +45,29 @@ namespace Hello_World.Detailing.UI
             cover = Convert.ToDouble(msktxt_cover.Text);
             anchorFactor = Convert.ToDouble(msktxt_anchorFactor.Text);
             _bottomDetailing.SetArmorInfo(gaugeX, gaugeY, spacingX, spacingY, anchorFactor, cover);
+
         }
         private void SetBorderCondition() 
         {
-            _bottomDetailing.SetBorderConditions(chcbx_topHorizontalEngaged.Checked, chcbx_topVerticalEngaged.Checked);
+
         }
         private void SetBorderShape() 
         {
             double supWallThickness;
-            supWallThickness = Convert.ToDouble(msktxt_wallThickness.Text);
+            supWallThickness = Convert.ToDouble(msktxt_elem1Thickness.Text);
             _bottomDetailing.SetBorderThickness(supWallThickness);
-            
             double diameter, thickness, edgeLength;
             diameter = Convert.ToDouble(msktxt_externalDiameter.Text);
             thickness = Convert.ToDouble(msktxt_bottomThickness.Text);
             edgeLength = Convert.ToDouble(msktxt_edgeLength.Text);
+            _bottomDetailing.SetGeometryInfo(diameter, thickness, edgeLength, supWallThickness);
+        }
+        private void SetCutInfo() 
+        {
+            double elem1 = Convert.ToDouble(msktxt_elem1Thickness.Text);
+            double elem2 = Convert.ToDouble(msktxt_elem2Thickness.Text);
+            double elem3 = Convert.ToDouble(msktxt_elem3Thickness.Text);
+            double elem4 = Convert.ToDouble(msktxt_elem4Thickness.Text);
         }
 
     }

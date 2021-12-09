@@ -11,7 +11,7 @@ namespace Hello_World.Detailing
 {
     class CircularBottomDetailing
     {
-        public string Title { get; private set; }
+        public string Title { get; set; }
         public double Cover { get; private set; }
         public double AnchorFactor { get; private set; }
         public int multiplier { get; set; }
@@ -71,7 +71,7 @@ namespace Hello_World.Detailing
             {
                 Layer = "3",
                 Height = 10,
-                TextString = "ESC. 1/50",
+                TextString = $"(DIAMETRO = {Bottom.Diameter:F0}, ESP= {Bottom.Thickness:F0})",
                 Justify = AttachmentPoint.BottomLeft,
                 Rotation = 0,
                 AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 17.0, 0)
@@ -80,10 +80,10 @@ namespace Hello_World.Detailing
             {
                 Layer = "3",
                 Height = 10,
-                TextString = $"(Dext = {Bottom.Diameter:F0}, ESP = {Bottom.Thickness:F0})",
+                TextString = "ESC. 1/50",
                 Justify = AttachmentPoint.BottomLeft,
                 Rotation = 0,
-                AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 51.0, 0)
+                AlignmentPoint = new Point3d(startPoint.X, startPoint.Y - 34.0, 0)
             };
 
             DrawingUtilities.AddToDrawing(title);
@@ -100,7 +100,6 @@ namespace Hello_World.Detailing
             DrawTitle(titlePoint);
             Bottom.DrawBottomProjection(bottomCenter);
             CreateVerticalLines(GaugeY, GetQuantity(GaugeY, SpacingY), verticalLinePoint);
-            CreateHorizontalLines(GaugeX, GetQuantity(GaugeX, SpacingX), horizontalLinePoint);
         }
         public int GetQuantity(double gauge, double spacing)
         {
@@ -112,7 +111,7 @@ namespace Hello_World.Detailing
         private double GetOffset(double gauge)
         {
             double minLength = 0.0;
-            minLength += 2 * StandardDistribuction.getAnchorLength(gauge) + EXTRA_LENGTH;
+            minLength += 2 * StandardDistribuction.getAnchorLength(gauge)/10.0 + EXTRA_LENGTH;
             if (MINIMUM_VAR_LENGTH > minLength)
                 minLength = MINIMUM_VAR_LENGTH;
 
@@ -137,16 +136,14 @@ namespace Hello_World.Detailing
         {
             VerticalBaseLines = new List<Line>();
             double offset = GetOffset(gauge);
-            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge) / (quantity - 1);
-            double x0 = Bottom.Diameter * 0.5 - Cover - offset;
+            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge/10.0) / (quantity - 1);
+            double x0 = -Bottom.Diameter * 0.5 + Cover + offset;
             for (int index = 0; index < quantity; index++)
             {
-                double x = x0 - index * effectiveSpacing;
-                double length = 2 * Math.Sqrt(0.5 * Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(x, 2));
+                double x = x0 + index * effectiveSpacing;
+                double length = 2 * Math.Sqrt(Math.Pow(0.5*Bottom.Diameter - Cover, 2) - Math.Pow(x, 2));
                 Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
                 VerticalBaseLines.Add(auxiliarLine);
-                Line mirrorAuxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + index * effectiveSpacing, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d(startPoint.X + index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
-                VerticalBaseLines.Add(mirrorAuxiliarLine);
             }
             foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
         }
@@ -154,7 +151,7 @@ namespace Hello_World.Detailing
         {
             HorizontalBaseLines = new List<Line>();
             double offset = GetOffset(gauge);
-            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge) / (quantity - 1);
+            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge/10.0) / (quantity - 1);
             double y0 = Bottom.Diameter * 0.5 - Cover - offset;
             for (int index = 0; index < quantity; index++)
             {
@@ -167,6 +164,22 @@ namespace Hello_World.Detailing
             }
             foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
         }
+        private void DrawHorizontalCut(double elem1, double elem2, Point3d point3D) 
+        { 
+            
+        
+        }
+        private void DrawLeftSideCut(double elem1, Point3d startPoint) { }
+        private void DrawHorizontalMiddle(Point3d startPoint) { }
+        private void DrawRigthSideCut(double elem2, Point3d startPoint) { }
+        private void DrawVerticalCut()
+        {
+
+        }
+        private void DrawUpSideCut(double elem3, Point3d startPoint) { }
+        private void DrawVerticalMiddle(Point3d startPoint) { }
+        private void DrawDownSideCut(double elem4, Point3d startPoint) { }
+
     }
 
 }
