@@ -288,5 +288,11 @@ namespace Structures.Utilities
 
             return Math.Round(sum / lines.Count, 2);
         }
+        public static double Sum(double [] values) 
+        {
+            double sum = 0.0;
+            foreach(double value in values) { sum += value; }
+            return sum;
+        }
     }
 }

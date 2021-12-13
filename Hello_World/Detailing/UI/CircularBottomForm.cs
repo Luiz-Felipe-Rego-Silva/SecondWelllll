@@ -22,20 +22,20 @@ namespace Hello_World.Detailing.UI
 
         }
         private void btn_detail_Click(object sender, EventArgs e)
-            {
+        {
             try
             {
-                 _bottomDetailing = new CircularBottomDetailing();
-                 _bottomDetailing.Title = rchtxt_title.Text;
-                 SetArmorBottom();
-                 SetBorderCondition();
-                 SetBorderShape();
-                 Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para desenho:");
-                 _bottomDetailing.DrawDetailment(BasePoint);
+                _bottomDetailing = new CircularBottomDetailing();
+                _bottomDetailing.Title = rchtxt_title.Text;
+                SetArmorBottom();
+                SetBorderCondition();
+                SetBorderShape();
+                Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para o desenho:");
+                _bottomDetailing.DrawDetailment(BasePoint);
             }
-            catch(Exception) { }
+            catch (Exception) { }
         }
-        private void SetArmorBottom() 
+        private void SetArmorBottom()
         {
             double gaugeX, gaugeY, spacingX, spacingY, cover, anchorFactor;
             gaugeX = Convert.ToDouble(cmbbx_horizontalBottomGauge.Text);
@@ -47,11 +47,14 @@ namespace Hello_World.Detailing.UI
             _bottomDetailing.SetArmorInfo(gaugeX, gaugeY, spacingX, spacingY, anchorFactor, cover);
 
         }
-        private void SetBorderCondition() 
+        private void SetBorderCondition()
         {
-
+            bool[] verticalConditions = new bool[4] { chcBx_NegativeUpEngaged.Checked, chcBx_NegativeDownEngaged.Checked, chcBx_PositiveUpEngaged.Checked, chcBx_PositiveDownEngaged.Checked };
+            _bottomDetailing.SetEngagedVerticalConditions(verticalConditions);
+            bool[] horizontalConditions = new bool[4] { chcBx_NegativeLeftEngaged.Checked, chcBx_NegativaRightEngaged.Checked, chcBx_PositiveLeftEngaged.Checked, chcBx_PositiveRigthEngaged.Checked };
+            _bottomDetailing.SetEngagedHorizontalConditions(horizontalConditions);
         }
-        private void SetBorderShape() 
+        private void SetBorderShape()
         {
             double supWallThickness;
             supWallThickness = Convert.ToDouble(msktxt_elem1Thickness.Text);
@@ -62,7 +65,7 @@ namespace Hello_World.Detailing.UI
             edgeLength = Convert.ToDouble(msktxt_edgeLength.Text);
             _bottomDetailing.SetGeometryInfo(diameter, thickness, edgeLength, supWallThickness);
         }
-        private void SetCutInfo() 
+        private void SetCutInfo()
         {
             double elem1 = Convert.ToDouble(msktxt_elem1Thickness.Text);
             double elem2 = Convert.ToDouble(msktxt_elem2Thickness.Text);

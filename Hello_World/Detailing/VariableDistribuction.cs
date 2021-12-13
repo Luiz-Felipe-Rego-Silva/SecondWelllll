@@ -31,10 +31,13 @@ namespace Detailing
         {
             double sum = 0.0;
             int numberOfAmendments = 0;
+            int index = 0;
             foreach (Line line in lines)
             {
+                LenghtOfLines[index] = Math.Floor(line.Length);
                 sum += Math.Floor(line.Length);
                 numberOfAmendments += Amendments.getNumberOfAmendments(Math.Round(line.Length + constantParts), amendmentLength);
+                index++;
             }
             Length = Math.Round(sum / lines.Count);
             NumberOfAmendments = numberOfAmendments;

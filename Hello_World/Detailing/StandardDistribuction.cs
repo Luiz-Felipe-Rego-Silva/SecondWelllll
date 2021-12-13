@@ -38,7 +38,8 @@ namespace Detailing
             Length = 0.0;
             BarLine = line;
             DrawingID = line.ObjectId;
-            Length += Math.Round(BarLine.Length);
+            try { Length += Math.Round(BarLine.Length); }
+            catch (Exception) { }
             Quantity = quantity;
             Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
             NumberOfAmendments = numberOfAmendments;

@@ -156,7 +156,7 @@ namespace Hello_World.Detailing
                 VerticalExternalLine, GaugeY,
                 SpacingY, verticalQuantity,
                 getNumberOfAmendment(totalLenth, GaugeY),
-                getAmendmentLength(GaugeY)));
+                (int) getAmendmentLength(GaugeY)));
         }
         private void CreateVerticalInternalLineBar(string layer)
         {
@@ -221,7 +221,7 @@ namespace Hello_World.Detailing
                 VerticalInternalLine, GaugeY,
                 SpacingY, verticalQuantity,
                 getNumberOfAmendment(totalLenth, GaugeY),
-                getAmendmentLength(GaugeY)));
+                (int) getAmendmentLength(GaugeY)));
         }
         private void CreateHorizontalInternalLineBar(string layer)
         {
@@ -235,7 +235,7 @@ namespace Hello_World.Detailing
             HorizontalInternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
 
             int horizontalInternalQuantity = getHorizontalInternalQuantity();
-            distribuctions.Add(new StandardDistribuction(4, HorizontalInternalLine, GaugeX, SpacingX, horizontalInternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, getAmendmentLength(GaugeX)));
+            distribuctions.Add(new StandardDistribuction(4, HorizontalInternalLine, GaugeX, SpacingX, horizontalInternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, (int) getAmendmentLength(GaugeX)));
         }
         private void CreateHorizontalExternalLineBar(string layer)
         {
@@ -250,7 +250,7 @@ namespace Hello_World.Detailing
             HorizontalExternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
 
             int horizontalExternalQuantity = getHorizontalExternalQuantity();
-            distribuctions.Add(new StandardDistribuction(3, HorizontalExternalLine, GaugeX, SpacingX, horizontalExternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, getAmendmentLength(GaugeX)));
+            distribuctions.Add(new StandardDistribuction(3, HorizontalExternalLine, GaugeX, SpacingX, horizontalExternalQuantity, getNumberOfAmendment(baseLength, GaugeX) + 1, (int) getAmendmentLength(GaugeX)));
         }
         private int getNumberOfAmendment(double baseLength, double gauge)
         {
