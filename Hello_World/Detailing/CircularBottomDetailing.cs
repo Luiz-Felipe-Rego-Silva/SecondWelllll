@@ -93,29 +93,30 @@ namespace Hello_World.Detailing
         public void DrawDetailment(Point3d BasePoint)
         {
             Point3d titlePoint = BasePoint;
-            Point3d bottomCenter = new Point3d(BasePoint.X + 20.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY) + 150.0, BasePoint.Y - 150.0 - 0.5 * Bottom.Diameter, 0);
+            Point3d bottomCenter = new Point3d(BasePoint.X + 20.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY) + 75.0, BasePoint.Y - 150.0 - 0.5 * Bottom.Diameter, 0);
             Point3d verticalLinePoint = new Point3d(bottomCenter.X, bottomCenter.Y - Bottom.Diameter - 200.0, 0);
             Point3d horizontalLinePoint = new Point3d(verticalLinePoint.X + Bottom.Diameter + 200.0, verticalLinePoint.Y, 0);
 
             DrawTitle(titlePoint);
             Bottom.DrawBottomProjection(bottomCenter);
             CreateVerticalLines(GaugeY, GetQuantity(GaugeY, SpacingY), verticalLinePoint);
+            CreateHorizontalLines(GaugeX, GetQuantity(GaugeX, SpacingX), horizontalLinePoint);
         }
         public int GetQuantity(double gauge, double spacing)
         {
             int quantity;
             double offset = GetOffset(gauge);
-            quantity = (int)((Bottom.Diameter - 2 * Cover - 2 * offset) / spacing) + 1;
+            quantity = (int)Math.Ceiling((Bottom.Diameter - 2 * Cover - 2 * offset - gauge / 10.0) / spacing) + 1;
             return quantity;
         }
         private double GetOffset(double gauge)
         {
             double minLength = 0.0;
-            minLength += 2 * StandardDistribuction.getAnchorLength(gauge)/10.0 + EXTRA_LENGTH;
+            minLength += 2 * StandardDistribuction.getAnchorLength(gauge) / 10.0 + EXTRA_LENGTH;
             if (MINIMUM_VAR_LENGTH > minLength)
                 minLength = MINIMUM_VAR_LENGTH;
 
-            double effectiveDiameter = Bottom.Diameter - 2 * Cover;
+            double effectiveDiameter = Bottom.Diameter - 2 * Cover - gauge / 10.0;
             double offset = (effectiveDiameter / 2.0) * (1 - Math.Sqrt(1 - Math.Pow(minLength / effectiveDiameter, 2)));
             return offset;
         }
@@ -136,14 +137,17 @@ namespace Hello_World.Detailing
         {
             VerticalBaseLines = new List<Line>();
             double offset = GetOffset(gauge);
-            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge/10.0) / (quantity - 1);
-            double x0 = -Bottom.Diameter * 0.5 + Cover + offset;
-            for (int index = 0; index < quantity; index++)
+            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - gauge / 10.0) / (quantity - 1);
+            double x0 = -Bottom.Diameter * 0.5 + Cover + offset + gauge / 20.0;
+            for (int index = 0; index < quantity * 0.5; index++)
             {
                 double x = x0 + index * effectiveSpacing;
-                double length = 2 * Math.Sqrt(Math.Pow(0.5*Bottom.Diameter - Cover, 2) - Math.Pow(x, 2));
-                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d(startPoint.X - index * effectiveSpacing, startPoint.Y - length / 2.0, 0) };
+                double length = 2 * Math.Sqrt(Math.Pow(0.5 * Bottom.Diameter - Cover - gauge / 20.0, 2) - Math.Pow(x, 2));
+                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d((startPoint.X - index * effectiveSpacing) - x0, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d((startPoint.X - index * effectiveSpacing) - x0, startPoint.Y - length / 2.0, 0) };
+                Line mirrorLine = new Line() { Layer = "4", StartPoint = new Point3d((startPoint.X - index * effectiveSpacing) - x0 + 2 * x, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d((startPoint.X - index * effectiveSpacing) - x0 + 2 * x, startPoint.Y - length / 2.0, 0) };
                 VerticalBaseLines.Add(auxiliarLine);
+                if (Math.Abs(x) > 0.5)
+                    VerticalBaseLines.Add(mirrorLine);
             }
             foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
         }
@@ -151,23 +155,27 @@ namespace Hello_World.Detailing
         {
             HorizontalBaseLines = new List<Line>();
             double offset = GetOffset(gauge);
-            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - quantity * gauge/10.0) / (quantity - 1);
-            double y0 = Bottom.Diameter * 0.5 - Cover - offset;
-            for (int index = 0; index < quantity; index++)
+            double effectiveSpacing = (Bottom.Diameter - 2 * Cover - 2 * offset - gauge / 10.0) / (quantity - 1);
+            double y0 = -Bottom.Diameter * 0.5 + Cover + offset + gauge / 20.0;
+            for (int index = 0; index < quantity * 0.5; index++)
             {
-                double y = y0 - index * effectiveSpacing;
-                double length = 2 * Math.Sqrt(0.5 * Math.Pow(Bottom.Diameter - 2 * Cover - 2 * offset, 2) - Math.Pow(y, 2));
-                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length/2.0, startPoint.Y - index * effectiveSpacing, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y - index * effectiveSpacing, 0) };
+                double y = y0 + index * effectiveSpacing;
+                double length = 2 * Math.Sqrt(Math.Pow(0.5 * Bottom.Diameter - Cover - gauge / 20.0, 2) - Math.Pow(y, 2));
+                //Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d((startPoint.X - index * effectiveSpacing) - y0, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d((startPoint.X - index * effectiveSpacing) - y0, startPoint.Y - length / 2.0, 0) };
+                //Line mirrorLine = new Line() { Layer = "4", StartPoint = new Point3d((startPoint.X - index * effectiveSpacing) - y0 + 2 * y, startPoint.Y + length / 2.0, 0), EndPoint = new Point3d((startPoint.X - index * effectiveSpacing) - y0 + 2 * y, startPoint.Y - length / 2.0, 0) };
+                Line auxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length / 2.0 , startPoint.Y - index * effectiveSpacing - y0, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y - index * effectiveSpacing - y0, 0) };
+                Line mirrorLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length / 2.0, startPoint.Y - index * effectiveSpacing - y0 + 2 * y, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y - index * effectiveSpacing - y0 + 2 * y, 0) };
+
                 HorizontalBaseLines.Add(auxiliarLine);
-                Line mirrorAuxiliarLine = new Line() { Layer = "4", StartPoint = new Point3d(startPoint.X + length / 2.0, startPoint.Y + index * effectiveSpacing, 0), EndPoint = new Point3d(startPoint.X - length / 2.0, startPoint.Y + index * effectiveSpacing, 0) };
-                HorizontalBaseLines.Add(mirrorAuxiliarLine);
+                if (Math.Abs(y) > 0.5)
+                    HorizontalBaseLines.Add(mirrorLine);
             }
-            foreach (Line line in VerticalBaseLines) { DrawingUtilities.AddToDrawing(line); }
+            foreach (Line line in HorizontalBaseLines) { DrawingUtilities.AddToDrawing(line); }
         }
-        private void DrawHorizontalCut(double elem1, double elem2, Point3d point3D) 
-        { 
-            
-        
+        private void DrawHorizontalCut(double elem1, double elem2, Point3d point3D)
+        {
+
+
         }
         private void DrawLeftSideCut(double elem1, Point3d startPoint) { }
         private void DrawHorizontalMiddle(Point3d startPoint) { }

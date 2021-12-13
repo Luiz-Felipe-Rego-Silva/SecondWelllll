@@ -22,7 +22,7 @@ namespace Hello_World.Detailing.UI
 
         }
         private void btn_detail_Click(object sender, EventArgs e)
-        {
+            {
             try
             {
                  _bottomDetailing = new CircularBottomDetailing();

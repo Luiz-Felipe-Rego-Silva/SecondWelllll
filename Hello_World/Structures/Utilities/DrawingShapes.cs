@@ -12,6 +12,10 @@ namespace Structures.Utilities
 {
     public static class DrawingShapes
     {
+        public static Point3d Move(Point3d pt, double dx, double dy)
+        {
+            return new Point3d(pt.X + dx, pt.Y + dy, 0);
+        }
         public static void DrawCircle(Point3d center, double diameter, string layer)
         {
             Circle Circle = new Circle();
@@ -276,6 +280,13 @@ namespace Structures.Utilities
         public static double AngleWith(Point3d startPoint, Point3d endPoint)
         {
             return Math.Atan((startPoint.Y - endPoint.Y) / (startPoint.X - endPoint.X));
+        }
+        public static double CalculateLinesMediumLength(List<Line> lines)
+        {
+            double sum = 0;
+            foreach (Line line in lines) sum += line.Length;
+
+            return Math.Round(sum / lines.Count, 2);
         }
     }
 }

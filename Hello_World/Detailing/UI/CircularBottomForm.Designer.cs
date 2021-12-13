@@ -38,6 +38,12 @@ namespace Hello_World.Detailing.UI
             this.lbl_multiplier = new System.Windows.Forms.Label();
             this.lbl_unitAlert = new System.Windows.Forms.Label();
             this.grp_AdjacentElements = new System.Windows.Forms.GroupBox();
+            this.msktxt_elem4Thickness = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_element4Thickness = new System.Windows.Forms.Label();
+            this.msktxt_elem3Thickness = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_element3Thickness = new System.Windows.Forms.Label();
+            this.msktxt_elem2Thickness = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_element2Thickness = new System.Windows.Forms.Label();
             this.msktxt_elem1Thickness = new System.Windows.Forms.MaskedTextBox();
             this.lbl_element1Thickness = new System.Windows.Forms.Label();
             this.grp_geometry = new System.Windows.Forms.GroupBox();
@@ -63,6 +69,13 @@ namespace Hello_World.Detailing.UI
             this.lbl_cover = new System.Windows.Forms.Label();
             this.grp_sideShapes = new System.Windows.Forms.GroupBox();
             this.lbl_horizontalEngaged = new System.Windows.Forms.Label();
+            this.grpBx_horizontalConditions = new System.Windows.Forms.GroupBox();
+            this.chcBx_PositiveRigthEngaged = new System.Windows.Forms.CheckBox();
+            this.chcBx_NegativaRightEngaged = new System.Windows.Forms.CheckBox();
+            this.lbl_horizontalPositiveEngagedConditions = new System.Windows.Forms.Label();
+            this.lbl_horizontalNegativeEngagedConditions = new System.Windows.Forms.Label();
+            this.chcBx_PositiveLeftEngaged = new System.Windows.Forms.CheckBox();
+            this.chcBx_NegativeLeftEngaged = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.chcBx_horizontalLeftDown = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -74,31 +87,18 @@ namespace Hello_World.Detailing.UI
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.lbl_verticalPositiveEngagedConditions = new System.Windows.Forms.Label();
             this.lbl_verticalNegativeEngagedConditions = new System.Windows.Forms.Label();
-            this.lbl_horizontalNegativeEngagedConditions = new System.Windows.Forms.Label();
-            this.lbl_horizontalPositiveEngagedConditions = new System.Windows.Forms.Label();
             this.chcBx_PositiveUpEngaged = new System.Windows.Forms.CheckBox();
             this.chcBx_PositiveDownEngaged = new System.Windows.Forms.CheckBox();
             this.chcBx_NegativeDownEngaged = new System.Windows.Forms.CheckBox();
             this.chcBx_NegativeUpEngaged = new System.Windows.Forms.CheckBox();
-            this.chcBx_NegativaRightEngaged = new System.Windows.Forms.CheckBox();
-            this.chcBx_NegativeLeftEngaged = new System.Windows.Forms.CheckBox();
-            this.chcBx_PositiveRigthEngaged = new System.Windows.Forms.CheckBox();
-            this.chcBx_PositiveLeftEngaged = new System.Windows.Forms.CheckBox();
-            this.grpBx_horizontalConditions = new System.Windows.Forms.GroupBox();
             this.grpBx_verticalConditions = new System.Windows.Forms.GroupBox();
-            this.msktxt_elem2Thickness = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_element2Thickness = new System.Windows.Forms.Label();
-            this.msktxt_elem3Thickness = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_element3Thickness = new System.Windows.Forms.Label();
-            this.msktxt_elem4Thickness = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_element4Thickness = new System.Windows.Forms.Label();
             this.grp_AdjacentElements.SuspendLayout();
             this.grp_geometry.SuspendLayout();
             this.grp_steel.SuspendLayout();
             this.grp_Factors.SuspendLayout();
             this.grp_sideShapes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpBx_horizontalConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpBx_verticalConditions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +128,7 @@ namespace Hello_World.Detailing.UI
             this.rchtxt_title.Name = "rchtxt_title";
             this.rchtxt_title.ShowSelectionMargin = true;
             this.rchtxt_title.Size = new System.Drawing.Size(248, 16);
-            this.rchtxt_title.TabIndex = 18;
+            this.rchtxt_title.TabIndex = 1;
             this.rchtxt_title.Text = "";
             // 
             // msktxt_multiplier
@@ -136,7 +136,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_multiplier.Location = new System.Drawing.Point(379, 7);
             this.msktxt_multiplier.Name = "msktxt_multiplier";
             this.msktxt_multiplier.Size = new System.Drawing.Size(90, 20);
-            this.msktxt_multiplier.TabIndex = 19;
+            this.msktxt_multiplier.TabIndex = 2;
             this.msktxt_multiplier.Text = "1";
             this.msktxt_multiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -182,16 +182,67 @@ namespace Hello_World.Detailing.UI
             this.grp_AdjacentElements.Location = new System.Drawing.Point(310, 328);
             this.grp_AdjacentElements.Name = "grp_AdjacentElements";
             this.grp_AdjacentElements.Size = new System.Drawing.Size(157, 121);
-            this.grp_AdjacentElements.TabIndex = 25;
+            this.grp_AdjacentElements.TabIndex = 6;
             this.grp_AdjacentElements.TabStop = false;
             this.grp_AdjacentElements.Text = "Elementos Adjacentes";
+            // 
+            // msktxt_elem4Thickness
+            // 
+            this.msktxt_elem4Thickness.Location = new System.Drawing.Point(107, 94);
+            this.msktxt_elem4Thickness.Name = "msktxt_elem4Thickness";
+            this.msktxt_elem4Thickness.Size = new System.Drawing.Size(44, 20);
+            this.msktxt_elem4Thickness.TabIndex = 4;
+            this.msktxt_elem4Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_element4Thickness
+            // 
+            this.lbl_element4Thickness.AutoSize = true;
+            this.lbl_element4Thickness.Location = new System.Drawing.Point(9, 97);
+            this.lbl_element4Thickness.Name = "lbl_element4Thickness";
+            this.lbl_element4Thickness.Size = new System.Drawing.Size(93, 13);
+            this.lbl_element4Thickness.TabIndex = 15;
+            this.lbl_element4Thickness.Text = "Espessura elem. 4";
+            // 
+            // msktxt_elem3Thickness
+            // 
+            this.msktxt_elem3Thickness.Location = new System.Drawing.Point(107, 68);
+            this.msktxt_elem3Thickness.Name = "msktxt_elem3Thickness";
+            this.msktxt_elem3Thickness.Size = new System.Drawing.Size(44, 20);
+            this.msktxt_elem3Thickness.TabIndex = 3;
+            this.msktxt_elem3Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_element3Thickness
+            // 
+            this.lbl_element3Thickness.AutoSize = true;
+            this.lbl_element3Thickness.Location = new System.Drawing.Point(8, 71);
+            this.lbl_element3Thickness.Name = "lbl_element3Thickness";
+            this.lbl_element3Thickness.Size = new System.Drawing.Size(93, 13);
+            this.lbl_element3Thickness.TabIndex = 13;
+            this.lbl_element3Thickness.Text = "Espessura elem. 3";
+            // 
+            // msktxt_elem2Thickness
+            // 
+            this.msktxt_elem2Thickness.Location = new System.Drawing.Point(107, 42);
+            this.msktxt_elem2Thickness.Name = "msktxt_elem2Thickness";
+            this.msktxt_elem2Thickness.Size = new System.Drawing.Size(44, 20);
+            this.msktxt_elem2Thickness.TabIndex = 2;
+            this.msktxt_elem2Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_element2Thickness
+            // 
+            this.lbl_element2Thickness.AutoSize = true;
+            this.lbl_element2Thickness.Location = new System.Drawing.Point(9, 45);
+            this.lbl_element2Thickness.Name = "lbl_element2Thickness";
+            this.lbl_element2Thickness.Size = new System.Drawing.Size(93, 13);
+            this.lbl_element2Thickness.TabIndex = 11;
+            this.lbl_element2Thickness.Text = "Espessura elem. 2";
             // 
             // msktxt_elem1Thickness
             // 
             this.msktxt_elem1Thickness.Location = new System.Drawing.Point(107, 16);
             this.msktxt_elem1Thickness.Name = "msktxt_elem1Thickness";
             this.msktxt_elem1Thickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_elem1Thickness.TabIndex = 3;
+            this.msktxt_elem1Thickness.TabIndex = 1;
             this.msktxt_elem1Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_element1Thickness
@@ -214,7 +265,7 @@ namespace Hello_World.Detailing.UI
             this.grp_geometry.Location = new System.Drawing.Point(307, 212);
             this.grp_geometry.Name = "grp_geometry";
             this.grp_geometry.Size = new System.Drawing.Size(162, 110);
-            this.grp_geometry.TabIndex = 23;
+            this.grp_geometry.TabIndex = 5;
             this.grp_geometry.TabStop = false;
             this.grp_geometry.Text = "Geometria";
             // 
@@ -223,7 +274,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_bottomThickness.Location = new System.Drawing.Point(112, 43);
             this.msktxt_bottomThickness.Name = "msktxt_bottomThickness";
             this.msktxt_bottomThickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_bottomThickness.TabIndex = 10;
+            this.msktxt_bottomThickness.TabIndex = 2;
             this.msktxt_bottomThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_edgeLength
@@ -231,7 +282,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_edgeLength.Location = new System.Drawing.Point(112, 73);
             this.msktxt_edgeLength.Name = "msktxt_edgeLength";
             this.msktxt_edgeLength.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_edgeLength.TabIndex = 2;
+            this.msktxt_edgeLength.TabIndex = 3;
             this.msktxt_edgeLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // msktxt_externalDiameter
@@ -282,7 +333,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steel.Location = new System.Drawing.Point(307, 91);
             this.grp_steel.Name = "grp_steel";
             this.grp_steel.Size = new System.Drawing.Size(162, 121);
-            this.grp_steel.TabIndex = 21;
+            this.grp_steel.TabIndex = 4;
             this.grp_steel.TabStop = false;
             this.grp_steel.Text = "Armadura";
             // 
@@ -385,7 +436,7 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.Location = new System.Drawing.Point(307, 26);
             this.grp_Factors.Name = "grp_Factors";
             this.grp_Factors.Size = new System.Drawing.Size(162, 66);
-            this.grp_Factors.TabIndex = 20;
+            this.grp_Factors.TabIndex = 3;
             this.grp_Factors.TabStop = false;
             // 
             // msktxt_anchorFactor
@@ -444,6 +495,79 @@ namespace Hello_World.Detailing.UI
             this.lbl_horizontalEngaged.Size = new System.Drawing.Size(280, 13);
             this.lbl_horizontalEngaged.TabIndex = 0;
             this.lbl_horizontalEngaged.Text = "Marque, nas áreas abaixo, as regiões em que há engaste;";
+            // 
+            // grpBx_horizontalConditions
+            // 
+            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_PositiveRigthEngaged);
+            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_NegativaRightEngaged);
+            this.grpBx_horizontalConditions.Controls.Add(this.lbl_horizontalPositiveEngagedConditions);
+            this.grpBx_horizontalConditions.Controls.Add(this.lbl_horizontalNegativeEngagedConditions);
+            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_PositiveLeftEngaged);
+            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_NegativeLeftEngaged);
+            this.grpBx_horizontalConditions.Location = new System.Drawing.Point(9, 98);
+            this.grpBx_horizontalConditions.Name = "grpBx_horizontalConditions";
+            this.grpBx_horizontalConditions.Size = new System.Drawing.Size(271, 75);
+            this.grpBx_horizontalConditions.TabIndex = 1;
+            this.grpBx_horizontalConditions.TabStop = false;
+            this.grpBx_horizontalConditions.Text = "Em x:";
+            // 
+            // chcBx_PositiveRigthEngaged
+            // 
+            this.chcBx_PositiveRigthEngaged.AutoSize = true;
+            this.chcBx_PositiveRigthEngaged.Location = new System.Drawing.Point(193, 20);
+            this.chcBx_PositiveRigthEngaged.Name = "chcBx_PositiveRigthEngaged";
+            this.chcBx_PositiveRigthEngaged.Size = new System.Drawing.Size(56, 17);
+            this.chcBx_PositiveRigthEngaged.TabIndex = 12;
+            this.chcBx_PositiveRigthEngaged.Text = "Direita";
+            this.chcBx_PositiveRigthEngaged.UseVisualStyleBackColor = true;
+            // 
+            // chcBx_NegativaRightEngaged
+            // 
+            this.chcBx_NegativaRightEngaged.AutoSize = true;
+            this.chcBx_NegativaRightEngaged.Location = new System.Drawing.Point(193, 47);
+            this.chcBx_NegativaRightEngaged.Name = "chcBx_NegativaRightEngaged";
+            this.chcBx_NegativaRightEngaged.Size = new System.Drawing.Size(56, 17);
+            this.chcBx_NegativaRightEngaged.TabIndex = 14;
+            this.chcBx_NegativaRightEngaged.Text = "Direita";
+            this.chcBx_NegativaRightEngaged.UseVisualStyleBackColor = true;
+            // 
+            // lbl_horizontalPositiveEngagedConditions
+            // 
+            this.lbl_horizontalPositiveEngagedConditions.AutoSize = true;
+            this.lbl_horizontalPositiveEngagedConditions.Location = new System.Drawing.Point(6, 20);
+            this.lbl_horizontalPositiveEngagedConditions.Name = "lbl_horizontalPositiveEngagedConditions";
+            this.lbl_horizontalPositiveEngagedConditions.Size = new System.Drawing.Size(47, 13);
+            this.lbl_horizontalPositiveEngagedConditions.TabIndex = 5;
+            this.lbl_horizontalPositiveEngagedConditions.Text = "Positiva:";
+            // 
+            // lbl_horizontalNegativeEngagedConditions
+            // 
+            this.lbl_horizontalNegativeEngagedConditions.AutoSize = true;
+            this.lbl_horizontalNegativeEngagedConditions.Location = new System.Drawing.Point(6, 47);
+            this.lbl_horizontalNegativeEngagedConditions.Name = "lbl_horizontalNegativeEngagedConditions";
+            this.lbl_horizontalNegativeEngagedConditions.Size = new System.Drawing.Size(53, 13);
+            this.lbl_horizontalNegativeEngagedConditions.TabIndex = 6;
+            this.lbl_horizontalNegativeEngagedConditions.Text = "Negativa:";
+            // 
+            // chcBx_PositiveLeftEngaged
+            // 
+            this.chcBx_PositiveLeftEngaged.AutoSize = true;
+            this.chcBx_PositiveLeftEngaged.Location = new System.Drawing.Point(98, 20);
+            this.chcBx_PositiveLeftEngaged.Name = "chcBx_PositiveLeftEngaged";
+            this.chcBx_PositiveLeftEngaged.Size = new System.Drawing.Size(71, 17);
+            this.chcBx_PositiveLeftEngaged.TabIndex = 11;
+            this.chcBx_PositiveLeftEngaged.Text = "Esquerda";
+            this.chcBx_PositiveLeftEngaged.UseVisualStyleBackColor = true;
+            // 
+            // chcBx_NegativeLeftEngaged
+            // 
+            this.chcBx_NegativeLeftEngaged.AutoSize = true;
+            this.chcBx_NegativeLeftEngaged.Location = new System.Drawing.Point(98, 47);
+            this.chcBx_NegativeLeftEngaged.Name = "chcBx_NegativeLeftEngaged";
+            this.chcBx_NegativeLeftEngaged.Size = new System.Drawing.Size(71, 17);
+            this.chcBx_NegativeLeftEngaged.TabIndex = 13;
+            this.chcBx_NegativeLeftEngaged.Text = "Esquerda";
+            this.chcBx_NegativeLeftEngaged.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -545,24 +669,6 @@ namespace Hello_World.Detailing.UI
             this.lbl_verticalNegativeEngagedConditions.TabIndex = 4;
             this.lbl_verticalNegativeEngagedConditions.Text = "Negativa:";
             // 
-            // lbl_horizontalNegativeEngagedConditions
-            // 
-            this.lbl_horizontalNegativeEngagedConditions.AutoSize = true;
-            this.lbl_horizontalNegativeEngagedConditions.Location = new System.Drawing.Point(6, 47);
-            this.lbl_horizontalNegativeEngagedConditions.Name = "lbl_horizontalNegativeEngagedConditions";
-            this.lbl_horizontalNegativeEngagedConditions.Size = new System.Drawing.Size(53, 13);
-            this.lbl_horizontalNegativeEngagedConditions.TabIndex = 6;
-            this.lbl_horizontalNegativeEngagedConditions.Text = "Negativa:";
-            // 
-            // lbl_horizontalPositiveEngagedConditions
-            // 
-            this.lbl_horizontalPositiveEngagedConditions.AutoSize = true;
-            this.lbl_horizontalPositiveEngagedConditions.Location = new System.Drawing.Point(6, 20);
-            this.lbl_horizontalPositiveEngagedConditions.Name = "lbl_horizontalPositiveEngagedConditions";
-            this.lbl_horizontalPositiveEngagedConditions.Size = new System.Drawing.Size(47, 13);
-            this.lbl_horizontalPositiveEngagedConditions.TabIndex = 5;
-            this.lbl_horizontalPositiveEngagedConditions.Text = "Positiva:";
-            // 
             // chcBx_PositiveUpEngaged
             // 
             this.chcBx_PositiveUpEngaged.AutoSize = true;
@@ -603,61 +709,6 @@ namespace Hello_World.Detailing.UI
             this.chcBx_NegativeUpEngaged.Text = "Em cima";
             this.chcBx_NegativeUpEngaged.UseVisualStyleBackColor = true;
             // 
-            // chcBx_NegativaRightEngaged
-            // 
-            this.chcBx_NegativaRightEngaged.AutoSize = true;
-            this.chcBx_NegativaRightEngaged.Location = new System.Drawing.Point(193, 47);
-            this.chcBx_NegativaRightEngaged.Name = "chcBx_NegativaRightEngaged";
-            this.chcBx_NegativaRightEngaged.Size = new System.Drawing.Size(56, 17);
-            this.chcBx_NegativaRightEngaged.TabIndex = 14;
-            this.chcBx_NegativaRightEngaged.Text = "Direita";
-            this.chcBx_NegativaRightEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcBx_NegativeLeftEngaged
-            // 
-            this.chcBx_NegativeLeftEngaged.AutoSize = true;
-            this.chcBx_NegativeLeftEngaged.Location = new System.Drawing.Point(98, 47);
-            this.chcBx_NegativeLeftEngaged.Name = "chcBx_NegativeLeftEngaged";
-            this.chcBx_NegativeLeftEngaged.Size = new System.Drawing.Size(71, 17);
-            this.chcBx_NegativeLeftEngaged.TabIndex = 13;
-            this.chcBx_NegativeLeftEngaged.Text = "Esquerda";
-            this.chcBx_NegativeLeftEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcBx_PositiveRigthEngaged
-            // 
-            this.chcBx_PositiveRigthEngaged.AutoSize = true;
-            this.chcBx_PositiveRigthEngaged.Location = new System.Drawing.Point(193, 20);
-            this.chcBx_PositiveRigthEngaged.Name = "chcBx_PositiveRigthEngaged";
-            this.chcBx_PositiveRigthEngaged.Size = new System.Drawing.Size(56, 17);
-            this.chcBx_PositiveRigthEngaged.TabIndex = 12;
-            this.chcBx_PositiveRigthEngaged.Text = "Direita";
-            this.chcBx_PositiveRigthEngaged.UseVisualStyleBackColor = true;
-            // 
-            // chcBx_PositiveLeftEngaged
-            // 
-            this.chcBx_PositiveLeftEngaged.AutoSize = true;
-            this.chcBx_PositiveLeftEngaged.Location = new System.Drawing.Point(98, 20);
-            this.chcBx_PositiveLeftEngaged.Name = "chcBx_PositiveLeftEngaged";
-            this.chcBx_PositiveLeftEngaged.Size = new System.Drawing.Size(71, 17);
-            this.chcBx_PositiveLeftEngaged.TabIndex = 11;
-            this.chcBx_PositiveLeftEngaged.Text = "Esquerda";
-            this.chcBx_PositiveLeftEngaged.UseVisualStyleBackColor = true;
-            // 
-            // grpBx_horizontalConditions
-            // 
-            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_PositiveRigthEngaged);
-            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_NegativaRightEngaged);
-            this.grpBx_horizontalConditions.Controls.Add(this.lbl_horizontalPositiveEngagedConditions);
-            this.grpBx_horizontalConditions.Controls.Add(this.lbl_horizontalNegativeEngagedConditions);
-            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_PositiveLeftEngaged);
-            this.grpBx_horizontalConditions.Controls.Add(this.chcBx_NegativeLeftEngaged);
-            this.grpBx_horizontalConditions.Location = new System.Drawing.Point(9, 98);
-            this.grpBx_horizontalConditions.Name = "grpBx_horizontalConditions";
-            this.grpBx_horizontalConditions.Size = new System.Drawing.Size(271, 75);
-            this.grpBx_horizontalConditions.TabIndex = 1;
-            this.grpBx_horizontalConditions.TabStop = false;
-            this.grpBx_horizontalConditions.Text = "Em x:";
-            // 
             // grpBx_verticalConditions
             // 
             this.grpBx_verticalConditions.Controls.Add(this.lbl_verticalPositiveEngagedConditions);
@@ -672,57 +723,6 @@ namespace Hello_World.Detailing.UI
             this.grpBx_verticalConditions.TabIndex = 1;
             this.grpBx_verticalConditions.TabStop = false;
             this.grpBx_verticalConditions.Text = "Em y:";
-            // 
-            // msktxt_elem2Thickness
-            // 
-            this.msktxt_elem2Thickness.Location = new System.Drawing.Point(107, 42);
-            this.msktxt_elem2Thickness.Name = "msktxt_elem2Thickness";
-            this.msktxt_elem2Thickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_elem2Thickness.TabIndex = 10;
-            this.msktxt_elem2Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lbl_element2Thickness
-            // 
-            this.lbl_element2Thickness.AutoSize = true;
-            this.lbl_element2Thickness.Location = new System.Drawing.Point(9, 45);
-            this.lbl_element2Thickness.Name = "lbl_element2Thickness";
-            this.lbl_element2Thickness.Size = new System.Drawing.Size(93, 13);
-            this.lbl_element2Thickness.TabIndex = 11;
-            this.lbl_element2Thickness.Text = "Espessura elem. 2";
-            // 
-            // msktxt_elem3Thickness
-            // 
-            this.msktxt_elem3Thickness.Location = new System.Drawing.Point(107, 68);
-            this.msktxt_elem3Thickness.Name = "msktxt_elem3Thickness";
-            this.msktxt_elem3Thickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_elem3Thickness.TabIndex = 12;
-            this.msktxt_elem3Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lbl_element3Thickness
-            // 
-            this.lbl_element3Thickness.AutoSize = true;
-            this.lbl_element3Thickness.Location = new System.Drawing.Point(8, 71);
-            this.lbl_element3Thickness.Name = "lbl_element3Thickness";
-            this.lbl_element3Thickness.Size = new System.Drawing.Size(93, 13);
-            this.lbl_element3Thickness.TabIndex = 13;
-            this.lbl_element3Thickness.Text = "Espessura elem. 3";
-            // 
-            // msktxt_elem4Thickness
-            // 
-            this.msktxt_elem4Thickness.Location = new System.Drawing.Point(107, 94);
-            this.msktxt_elem4Thickness.Name = "msktxt_elem4Thickness";
-            this.msktxt_elem4Thickness.Size = new System.Drawing.Size(44, 20);
-            this.msktxt_elem4Thickness.TabIndex = 14;
-            this.msktxt_elem4Thickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lbl_element4Thickness
-            // 
-            this.lbl_element4Thickness.AutoSize = true;
-            this.lbl_element4Thickness.Location = new System.Drawing.Point(9, 97);
-            this.lbl_element4Thickness.Name = "lbl_element4Thickness";
-            this.lbl_element4Thickness.Size = new System.Drawing.Size(93, 13);
-            this.lbl_element4Thickness.TabIndex = 15;
-            this.lbl_element4Thickness.Text = "Espessura elem. 4";
             // 
             // CircularBottomForm
             // 
@@ -764,9 +764,9 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.PerformLayout();
             this.grp_sideShapes.ResumeLayout(false);
             this.grp_sideShapes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpBx_horizontalConditions.ResumeLayout(false);
             this.grpBx_horizontalConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpBx_verticalConditions.ResumeLayout(false);
             this.grpBx_verticalConditions.PerformLayout();
             this.ResumeLayout(false);

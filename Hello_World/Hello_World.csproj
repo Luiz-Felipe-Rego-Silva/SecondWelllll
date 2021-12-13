@@ -112,6 +112,9 @@
       <HintPath>..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2021_Win_64bit_dlm\inc\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="StructCS.Creator">
+      <HintPath>..\..\Struct\Structs\StructCS.Creator\bin\Debug\StructCS.Creator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -130,6 +133,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Commands.resx</DependentUpon>
     </Compile>
+    <Compile Include="Detailing\Amendments.cs" />
     <Compile Include="Detailing\CircularBottomDetailing.cs" />
     <Compile Include="Detailing\CircularWallDetailment.cs" />
     <Compile Include="Detailing\UI\CircularBottomForm.cs">
@@ -148,6 +152,8 @@
     <Compile Include="Detailing\UI\CircularWallForm.Designer.cs">
       <DependentUpon>CircularWallForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Detailing\VarTable.cs" />
+    <Compile Include="Detailing\VerticalVarBar.cs" />
     <Compile Include="Structures\WellDetailer\Entities\Enums\Direction.cs" />
     <Compile Include="UI\EdgeForm.cs">
       <SubType>Form</SubType>

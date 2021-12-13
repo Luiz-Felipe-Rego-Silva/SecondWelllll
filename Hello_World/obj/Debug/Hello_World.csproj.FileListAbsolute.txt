@@ -13,7 +13,6 @@ C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\ob
 C:\Users\Daniel\Desktop\Dev File\Programs\Hello World\Hello_World\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\Hello_World.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\Hello_World.pdb
-C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.MyCommands.resources
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.Detailing.UI.CircularWallForm.resources
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.UI.EdgeForm.resources

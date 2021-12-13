@@ -9,25 +9,28 @@ namespace Detailing
 {
     class StandardDistribuction
     {
-        public int Id { get; private set; }
-        public ObjectId DrawingID { get; private set; }
-        public Polyline BarLine { get; private set; }
-        public double Gauge { get; private set; }
-        public double Spacing { get; private set; }
+        public int Id { get;  set; }
+        public ObjectId DrawingID { get;  set; }
+        public Polyline BarLine { get;  set; }
+        public double Gauge { get;  set; }
+        public double Spacing { get;  set; }
         public double Length { get; set; }
-        public double Weigth { get; private set; }
+        public double Weigth { get;  set; }
         public double Quantity { get; set; }
         public bool IsVariable { get; set; }
-        public int NumberOfAmendments { get; private set; } = 0;
-        public double AmendmentLength { get; private set; }
+        public int NumberOfAmendments { get;  set; } = 0;
+        public int AmendmentLength { get; set; } = 0;
         public long MarkHandle { get; set; }
         public static double AnchorFactor { get; set; } = 34.0;
+        public StandardDistribuction()
+        {
+        }
         public StandardDistribuction(double gauge, double length)
         {
             Gauge = gauge;
             Length = length;
         }
-        public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, double amendmentLength)
+        public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, int amendmentLength)
         {
             Id = id;
             Gauge = 10 * gauge;
@@ -35,7 +38,7 @@ namespace Detailing
             Length = 0.0;
             BarLine = line;
             DrawingID = line.ObjectId;
-            Length += Math.Round(BarLine.Length, 2);
+            Length += Math.Round(BarLine.Length);
             Quantity = quantity;
             Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
             NumberOfAmendments = numberOfAmendments;
@@ -78,10 +81,9 @@ namespace Detailing
             }
             return nominalSteelDensity;
         }
-        public ResultBuffer ExportResultBuffer()
+        public virtual ResultBuffer ExportResultBuffer()
         {
             int variableState = IsVariable ? 1 : 0;
-
             return new ResultBuffer(
                 new TypedValue(1001, "STRUCTCS"),
                 new TypedValue(1000, $"{Id}"),
@@ -90,8 +92,14 @@ namespace Detailing
                 new TypedValue(1000, $"{Spacing}"),
                 new TypedValue(1000, $"{Quantity}"),
                 new TypedValue(1000, $"{MarkHandle}"),
-                new TypedValue(1000, $"{variableState}")
+                new TypedValue(1000, $"{variableState}"),
+                new TypedValue(1000, $"{NumberOfAmendments}"),
+                new TypedValue(1000, $"{AmendmentLength}")
             );
+        }
+        public virtual double GetTotalLength()
+        {
+            return Quantity * (Length + NumberOfAmendments * AmendmentLength);
         }
         public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/)
         {
