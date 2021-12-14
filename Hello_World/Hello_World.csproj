@@ -137,6 +137,7 @@
     <Compile Include="Detailing\CircularBottomDetailing.cs" />
     <Compile Include="Detailing\CircularWallDetailment.cs" />
     <Compile Include="Detailing\Entities\VerticalCut.cs" />
+    <Compile Include="Detailing\HorizontalVarBar.cs" />
     <Compile Include="Detailing\UI\CircularBottomForm.cs">
       <SubType>Form</SubType>
     </Compile>

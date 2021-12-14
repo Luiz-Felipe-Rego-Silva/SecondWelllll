@@ -42,8 +42,11 @@ namespace Detailing
             SetCollumns();
             FillTable();
             DrawTable(position);
-            Point3d commentPoint = new Point3d(position.X, position.Y - varTable.Height - 30.0, 0);
-            PrintComments(commentPoint);
+            if(Id == 1) 
+            {
+                Point3d textPosition = new Point3d(position.X, position.Y - 40.0 - varTable.Height, 0);
+                PrintComments(textPosition);
+            }
             varTable.Dispose();
         }
         private void DoStructureOfTable()

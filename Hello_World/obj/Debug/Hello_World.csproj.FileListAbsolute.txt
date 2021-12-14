@@ -26,9 +26,9 @@ C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.pdb
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.Detailing.UI.CircularBottomForm.resources
-C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\StructCS.Creator.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\System.ValueTuple.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\StructCS.Creator.pdb
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\StructCS.Creator.dll.config
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Debug\System.ValueTuple.xml
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Debug\Hello_World.csproj.AssemblyReference.cache
