@@ -1,4 +1,5 @@
 ﻿using Autodesk.AutoCAD.DatabaseServices;
+using Structures.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,6 +119,24 @@ namespace Detailing
                     sortedList = lines.OrderBy(line => line.StartPoint.Y).ToList();
             }
             return sortedList;
+        }
+        public void UpdateLengthTable(double length)
+        {
+            Length = length;
+            double increment = (Length - constantParts) - Math.Floor(DrawingShapes.Media(LenghtOfLines));
+            NumberOfAmendments = 0;
+            for (int index = 0; index < LenghtOfLines.Length; index++)
+            {
+                LenghtOfLines[index] += increment;
+                NumberOfAmendments += Amendments.getNumberOfAmendments(Math.Round(LenghtOfLines[index] + constantParts), this.AmendmentLength);
+            }
+        }
+        public void UpdateLengthTable(double[] increment, double constantParts)
+        {
+            for (int index = 0; index < LenghtOfLines.Length; index++)
+            {
+                LenghtOfLines[index] += increment[index] + constantParts;
+            }
         }
 
 

@@ -30,6 +30,7 @@ namespace Hello_World.Detailing.UI
                 SetArmorBottom();
                 SetBorderCondition();
                 SetBorderShape();
+                SetCutInfo();
                 Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para o desenho:");
                 _bottomDetailing.DrawDetailment(BasePoint);
             }
@@ -56,21 +57,24 @@ namespace Hello_World.Detailing.UI
         }
         private void SetBorderShape()
         {
-            double supWallThickness;
-            supWallThickness = Convert.ToDouble(msktxt_elem1Thickness.Text);
-            _bottomDetailing.SetBorderThickness(supWallThickness);
+            double supWallThickness, infWallThickness;
+            supWallThickness = Convert.ToDouble(msktxt_TopThickness.Text);
+            infWallThickness = Convert.ToDouble(msktxt_InfThickness.Text);
+            _bottomDetailing.SetBorderThickness(supWallThickness, infWallThickness);
             double diameter, thickness, edgeLength;
             diameter = Convert.ToDouble(msktxt_externalDiameter.Text);
             thickness = Convert.ToDouble(msktxt_bottomThickness.Text);
             edgeLength = Convert.ToDouble(msktxt_edgeLength.Text);
-            _bottomDetailing.SetGeometryInfo(diameter, thickness, edgeLength, supWallThickness);
+            _bottomDetailing.SetGeometryInfo(diameter, thickness, edgeLength);
         }
         private void SetCutInfo()
         {
-            double elem1 = Convert.ToDouble(msktxt_elem1Thickness.Text);
-            double elem2 = Convert.ToDouble(msktxt_elem2Thickness.Text);
-            double elem3 = Convert.ToDouble(msktxt_elem3Thickness.Text);
-            double elem4 = Convert.ToDouble(msktxt_elem4Thickness.Text);
+            bool[] conditions = new bool[4];
+            conditions[0] = chcBx_VerticalUpLeft.Checked;
+            conditions[1] = chcBx_VerticalUpRigth.Checked;
+            conditions[2] = chcBx_VerticalDownLeft.Checked;
+            conditions[3] = chcBx_VerticalDownRigth.Checked;
+            _bottomDetailing.SetBorderShape(conditions);
         }
 
     }

@@ -81,11 +81,6 @@ namespace Structures.WellDetailer.Entities
             for (int i = 0; i < 5; i++) { Utilities.DrawingShapes.DrawLine(BottomInCut[i],BottomInCut[i+1], layer); }
             Utilities.DrawingShapes.DrawLine(BottomInCut[6], BottomInCut[7], layer);
         }
-        public bool HasEdge() 
-        { 
-            if(EdgeLength > 1) { return true; }
-            else { return false; }
-        }
         public void DrawAACutAnnotations()
         {
             Polyline thiknessLine = new Polyline();
@@ -93,19 +88,24 @@ namespace Structures.WellDetailer.Entities
             thiknessLine.AddVertexAt(1, new Point2d(BottomInCut[2].X, BottomInCut[2].Y), 0, 0, 0);
             Utilities.DrawingShapes.AddQuotesInPolylines(thiknessLine, - 15.0, 0);
         }
-        public void DrawBottomProjection(Point3d centerPoint) 
+        public void DrawBottomProjection(Point3d centerPoint, double infWallThickness) 
         {
             string layer = "3";
             DrawingShapes.DrawCircle(centerPoint, Diameter, layer);
             layer = "hidden";
+            double d_sup, d_inf;
+            d_sup = Diameter - 2 * EdgeLength;
+            d_inf = Diameter - 2 * infWallThickness;
             if (EdgeLength > 0.0)
             {
-                DrawingShapes.DrawCircle(centerPoint, Diameter - EdgeLength, layer);
-                DrawingShapes.DrawCircle(centerPoint, Diameter - EdgeLength - WallThickness, layer);
+                DrawingShapes.DrawCircle(centerPoint, d_sup, layer);
+                DrawingShapes.DrawCircle(centerPoint, d_sup - 2 * WallThickness, layer);
+                if (d_inf != d_sup && d_inf != (d_sup - 2 * WallThickness)) { DrawingShapes.DrawCircle(centerPoint, d_inf, layer); }
             }
             else 
             {
-                DrawingShapes.DrawCircle(centerPoint, Diameter - WallThickness, layer);
+                DrawingShapes.DrawCircle(centerPoint, d_sup - 2 * WallThickness, layer);
+                if (d_inf != (d_sup - 2*WallThickness)) { DrawingShapes.DrawCircle(centerPoint, d_inf, layer); }
             }
 
         }

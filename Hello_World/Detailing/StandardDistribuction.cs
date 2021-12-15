@@ -9,19 +9,18 @@ namespace Detailing
 {
     class StandardDistribuction
     {
-        public int Id { get;  set; }
-        public ObjectId DrawingID { get;  set; }
-        public Polyline BarLine { get;  set; }
-        public double Gauge { get;  set; }
-        public double Spacing { get;  set; }
+        public int Id { get; set; }
+        public ObjectId DrawingID { get; set; }
+        public Polyline BarLine { get; set; }
+        public double Gauge { get; set; }
+        public double Spacing { get; set; }
         public double Length { get; set; }
-        public double Weigth { get;  set; }
+        public double Weigth { get; set; }
         public double Quantity { get; set; }
         public bool IsVariable { get; set; }
-        public int NumberOfAmendments { get;  set; } = 0;
+        public int NumberOfAmendments { get; set; } = 0;
         public int AmendmentLength { get; set; } = 0;
         public long MarkHandle { get; set; }
-        public static double AnchorFactor { get; set; } = 34.0;
         public StandardDistribuction()
         {
         }
@@ -45,7 +44,7 @@ namespace Detailing
             NumberOfAmendments = numberOfAmendments;
             AmendmentLength = amendmentLength;
         }
-        public static double getAnchorLength(double gauge)
+        public static double getAnchorLength(double gauge, double AnchorFactor)
         {
             return Math.Ceiling(gauge * AnchorFactor);
         }
@@ -115,17 +114,19 @@ namespace Detailing
             Entity bar = (Entity)transaction.GetObject(DrawingID, OpenMode.ForWrite);
             if (bar.GetType() == typeof(Polyline))
             {
+                int variableState = IsVariable ? 1 : 0;
                 AddRegAppTableRecord("STRUCTCS");
-                ResultBuffer ResultBuffer =
-                    new ResultBuffer(
-                        new TypedValue(1001, "STRUCTCS"),
-                        new TypedValue(1000, $"{Id}"),
-                        new TypedValue(1000, $"{Length}"),
-                        new TypedValue(1000, $"{Gauge}"),
-                        new TypedValue(1000, $"{Spacing}"),
-                        new TypedValue(1000, $"{Quantity}"),
-                        new TypedValue(1000, $"{0}"),
-                        new TypedValue(1000, $"{0}")
+                ResultBuffer ResultBuffer = new ResultBuffer(
+                    new TypedValue(1001, "STRUCTCS"),
+                    new TypedValue(1000, $"{Id}"),
+                    new TypedValue(1000, $"{Length}"),
+                    new TypedValue(1000, $"{Gauge}"),
+                    new TypedValue(1000, $"{Spacing}"),
+                    new TypedValue(1000, $"{Quantity}"),
+                    new TypedValue(1000, $"{MarkHandle}"),
+                    new TypedValue(1000, $"{variableState}"),
+                    new TypedValue(1000, $"{NumberOfAmendments}"),
+                    new TypedValue(1000, $"{AmendmentLength}")
                     );
                 bar.XData = ResultBuffer;
                 ResultBuffer.Dispose();
@@ -152,6 +153,10 @@ namespace Detailing
         }
         public string GetDescriptionText()
         {
+            if (IsVariable)
+            {
+                return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - VAR";
+            }
             if (NumberOfAmendments < 1)
             {
                 return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))}";
@@ -164,7 +169,6 @@ namespace Detailing
             {
                 return $"{Quantity} N{Id} φ{Gauge} c.{Spacing} - {Convert.ToString(Math.Round(Length))} ({NumberOfAmendments} EMENDAS DE {AmendmentLength}CM)";
             }
-
         }
         public void PrintDescriptionText(Point3d middlePoint, double orientation)
         {
@@ -307,7 +311,7 @@ namespace Detailing
             List<double> result = new List<double>();
             int seg_num = polyline.NumberOfVertices - 1;
             for (int i = 0; i < seg_num; i++)
-                result.Add(Math.Round(polyline.GetLineSegment2dAt(i).Length,2));
+                result.Add(Math.Round(polyline.GetLineSegment2dAt(i).Length, 2));
             return result;
         }
         public static void AddDimension(string dimStyleName, Point3d startPoint, Point3d endPoint, double xPadding, double yPadding, string textContent)

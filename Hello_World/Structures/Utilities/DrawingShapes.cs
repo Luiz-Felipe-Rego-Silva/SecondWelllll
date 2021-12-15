@@ -294,5 +294,6 @@ namespace Structures.Utilities
             foreach(double value in values) { sum += value; }
             return sum;
         }
+
     }
 }

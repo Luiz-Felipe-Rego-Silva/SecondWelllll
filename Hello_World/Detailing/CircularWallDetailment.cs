@@ -107,7 +107,6 @@ namespace Hello_World.Detailing
                 if (IsTopExternalEngaged)
                 {
                     totalLenth += 2 * ((Wall.Thickness - Cover) + getAnchorLength(GaugeY)) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
 
                     VerticalExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
                     VerticalExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
@@ -117,7 +116,6 @@ namespace Hello_World.Detailing
                 else
                 {
                     totalLenth += 2 * getAnchorLength(GaugeY) + (2 * Wall.Thickness - 3 * Cover) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
 
                     VerticalExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
                     VerticalExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
@@ -131,7 +129,6 @@ namespace Hello_World.Detailing
                 if (IsTopExternalEngaged)
                 {
                     totalLenth += 2 * getAnchorLength(GaugeY) + (2 * Wall.Thickness - 3 * Cover) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
                     VerticalExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - Cover) - getAnchorLength(GaugeY), externalBasePoint.Y), 0, 0, 0);
                     VerticalExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X, externalBasePoint.Y), 0, 0, 0);
                     VerticalExternalLine.AddVertexAt(2, new Point2d(externalBasePoint.X, externalBasePoint.Y - heigth), 0, 0, 0);
@@ -141,7 +138,6 @@ namespace Hello_World.Detailing
                 else
                 {
                     totalLenth += 2 * ((Wall.Thickness - 2 * Cover) + getAnchorLength(GaugeY)) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
 
                     VerticalExternalLine.AddVertexAt(0, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
                     VerticalExternalLine.AddVertexAt(1, new Point2d(externalBasePoint.X - (Wall.Thickness - 2 * Cover), externalBasePoint.Y), 0, 0, 0);
@@ -171,8 +167,7 @@ namespace Hello_World.Detailing
                 if (IsTopInternalEngaged)
                 {
                     totalLenth += 2 * ((Wall.Thickness - Cover) + getAnchorLength(GaugeY)) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
-
+  
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(2, new Point2d(internalBasePoint.X, internalBasePoint.Y - heigth), 0, 0, 0);
@@ -181,7 +176,7 @@ namespace Hello_World.Detailing
                 else
                 {
                     totalLenth += 2 * getAnchorLength(GaugeY) + (2 * Wall.Thickness - 3 * Cover) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
+
 
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y), 0, 0, 0);
@@ -195,7 +190,6 @@ namespace Hello_World.Detailing
                 if (IsTopInternalEngaged)
                 {
                     totalLenth += 2 * getAnchorLength(GaugeY) + (2 * Wall.Thickness - 3 * Cover) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
 
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - Cover) + getAnchorLength(GaugeY), internalBasePoint.Y), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X, internalBasePoint.Y), 0, 0, 0);
@@ -206,7 +200,6 @@ namespace Hello_World.Detailing
                 else
                 {
                     totalLenth += 2 * ((Wall.Thickness - 2 * Cover) + getAnchorLength(GaugeY)) + heigth;
-                    heigth += getNumberOfAmendment(totalLenth, GaugeY) * getAmendmentLength(GaugeY);
 
                     VerticalInternalLine.AddVertexAt(0, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y - getAnchorLength(GaugeY)), 0, 0, 0);
                     VerticalInternalLine.AddVertexAt(1, new Point2d(internalBasePoint.X + (Wall.Thickness - 2 * Cover), internalBasePoint.Y), 0, 0, 0);
@@ -229,7 +222,7 @@ namespace Hello_World.Detailing
             HorizontalInternalLine = new Polyline();
             HorizontalInternalLine.Layer = layer;
             double baseLength = Math.Ceiling(Math.PI * (Wall.InternalDiameter + 2 * Cover + 2 * GaugeY)) + getAmendmentLength(GaugeX);
-            double totalLength = baseLength + (getNumberOfAmendment(baseLength, GaugeX)) * getAmendmentLength(GaugeX);
+            double totalLength = baseLength;
 
             HorizontalInternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
             HorizontalInternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
@@ -244,7 +237,7 @@ namespace Hello_World.Detailing
             HorizontalExternalLine.Layer = layer;
 
             double baseLength = Math.Ceiling(Math.PI * (Wall.ExternalDiameter - 2 * Cover - 2 * GaugeY)) + getAmendmentLength(GaugeX);
-            double totalLength = baseLength + (getNumberOfAmendment(baseLength, GaugeX)) * getAmendmentLength(GaugeX);
+            double totalLength = baseLength;
 
             HorizontalExternalLine.AddVertexAt(0, new Point2d(baseHorizontalBarPoint.X, baseHorizontalBarPoint.Y), 0, 0, 0);
             HorizontalExternalLine.AddVertexAt(1, new Point2d(baseHorizontalBarPoint.X + totalLength, baseHorizontalBarPoint.Y), 0, 0, 0);
