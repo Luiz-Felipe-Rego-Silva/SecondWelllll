@@ -14,10 +14,7 @@ namespace Detailing
         public VerticalVarBar(StandardDistribuction bar, double constantParts) : base(bar, constantParts)
         {
         }
-        public double[] HookLengths = new double[4];
         public double _mediumLength { get; private set; }
-        public int BarDir;
-        public bool isNegative = false;
         public List<Line> barLines = new List<Line>();
 
         public void SetAnchor(double[] hookLength)

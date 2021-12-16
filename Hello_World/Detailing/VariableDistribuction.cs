@@ -40,7 +40,7 @@ namespace Detailing
                 numberOfAmendments += Amendments.getNumberOfAmendments(Math.Round(line.Length + constantParts), amendmentLength);
                 index++;
             }
-            Length = Math.Round(sum / lines.Count);
+            Length = Math.Floor(sum / lines.Count);
             NumberOfAmendments = numberOfAmendments;
         }
         public void SetLengths(List<Line> lines)
@@ -53,22 +53,6 @@ namespace Detailing
                 index++;
             }
             ResgisterDistribuction(lines, this.AmendmentLength);
-        }
-        public void SetLengths(double[] lengths)
-        {
-            LenghtOfLines = new double[lengths.Length];
-            LenghtOfLines = lengths;
-        }
-        public void SetLengths(List<double> lengths)
-        {
-            LenghtOfLines = new double[lengths.Count];
-            int index = 0;
-            foreach (double value in lengths)
-            {
-                LenghtOfLines[index] = Math.Floor(value);
-                NumberOfAmendments += Amendments.getNumberOfAmendments(Math.Round(LenghtOfLines[index] + constantParts), this.AmendmentLength);
-                index++;
-            }
         }
         public override double GetTotalLength()
         {
@@ -101,7 +85,7 @@ namespace Detailing
         private static string EncryptLengthToDatabase(double[] VARLength)
         {
             string result = "";
-            for (int index = 0; index < VARLength.Length; index++) { result += Math.Round(VARLength[index]).ToString("F0") + "|";}
+            for (int index = 0; index < VARLength.Length; index++) { result += Math.Floor(VARLength[index]).ToString("F0") + "|";}
             return result;
         }
         public static List<Line> OrderLines(List<Line> lines)
@@ -138,6 +122,9 @@ namespace Detailing
                 LenghtOfLines[index] += increment[index] + constantParts;
             }
         }
+        public double[] HookLengths = new double[4];
+        public int BarDir;
+        public bool isNegative = false;
 
 
     }

@@ -39,6 +39,7 @@ namespace Hello_World.Detailing
         //****************************************************//
         private const double MINIMUM_VAR_LENGTH = 60.0;
         private const double EXTRA_LENGTH = 10.0;
+        private int VarTablesCount = 1;
 
         public Bottom Bottom { get; private set; }
         public void SetEngagedVerticalConditions(bool[] condtions)
@@ -122,14 +123,15 @@ namespace Hello_World.Detailing
         public void DrawDetailment(Point3d BasePoint)
         {
             Point3d titlePoint = BasePoint;
-            Point3d bottomCenter = new Point3d(BasePoint.X + 2 * StandardDistribuction.getAnchorLength(GaugeX/10.0, AnchorFactor) + 0.5 * Bottom.Diameter + 100.0, BasePoint.Y - 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) - 100.0 - 0.5 * Bottom.Diameter, 0);
+            Point3d bottomCenter = new Point3d(BasePoint.X + 2 * StandardDistribuction.getAnchorLength(GaugeX / 10.0, AnchorFactor) + 0.5 * Bottom.Diameter + 100.0, BasePoint.Y - 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) - 200.0 - 0.5 * Bottom.Diameter, 0);
             Point3d verticalLinePoint = new Point3d(bottomCenter.X, bottomCenter.Y - Bottom.Diameter - 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) - 200.0, 0);
             Point3d horizontalLinePoint = new Point3d(verticalLinePoint.X, verticalLinePoint.Y - (1.25 * Bottom.Diameter), 0);
-            Point3d verticalBarsPoint = new Point3d(bottomCenter.X - 0.5*Bottom.Diameter - 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) - 100.0, bottomCenter.Y, 0);
+            Point3d verticalBarsPoint = new Point3d(bottomCenter.X - 0.5 * Bottom.Diameter - 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) - 100.0, bottomCenter.Y, 0);
             Point3d horizontalBarsPoint = new Point3d(bottomCenter.X, bottomCenter.Y - 0.5 * Bottom.Diameter - 70.0, 0.0);
             Point3d verticalCutPosition = new Point3d(bottomCenter.X + 0.5 * Bottom.Diameter + 50.0, bottomCenter.Y + 0.5 * Bottom.Diameter, 0);
-            Point3d horizontalCutPosition = new Point3d(bottomCenter.X - 0.5*Bottom.Diameter, bottomCenter.Y + 0.5*Bottom.Diameter + 50.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor), 0);
-            Point3d VARTableStartPoint = new Point3d(verticalCutPosition.X + 2 * StandardDistribuction.getAnchorLength(GaugeY/10.0, AnchorFactor) + Bottom.Thickness + 30.0 + 50.0, verticalCutPosition.Y, 0);
+            Point3d horizontalCutPosition = new Point3d(bottomCenter.X - 0.5 * Bottom.Diameter, bottomCenter.Y + 0.5 * Bottom.Diameter + 150.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor), 0);
+            Point3d VARTableStartPoint = new Point3d(verticalCutPosition.X + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) + Bottom.Thickness + 30.0 + 50.0, verticalCutPosition.Y, 0);
+
 
             DrawTitle(titlePoint);
             Bottom.DrawBottomProjection(bottomCenter, InfWallThickness);
@@ -143,8 +145,9 @@ namespace Hello_World.Detailing
             DrawVARTables(VARTableStartPoint);
             DrawHorizontalReferenceBars(bottomCenter);
             DrawVerticalReferenceBars(bottomCenter);
-            verticalCut.Draw(verticalCutPosition);
-            horizontalCut.Draw(horizontalCutPosition);
+            DrawVerticalCut(verticalCutPosition);
+            DrawHorizontalCut(horizontalCutPosition);
+            DrawTable(VARTableStartPoint);
         }
         public int GetQuantity(double gauge, double spacing)
         {
@@ -156,7 +159,7 @@ namespace Hello_World.Detailing
         private double GetOffset(double gauge)
         {
             double minLength = 0.0;
-            minLength += 2 * StandardDistribuction.getAnchorLength(gauge/10.0, AnchorFactor) + EXTRA_LENGTH;
+            minLength += 2 * StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor) + EXTRA_LENGTH;
             if (MINIMUM_VAR_LENGTH > minLength)
                 minLength = MINIMUM_VAR_LENGTH;
 
@@ -208,14 +211,14 @@ namespace Hello_World.Detailing
         }
         private void DrawVerticalDistribuctions(Point3d startPointBars)
         {
-            StandardDistribuction baseBar = new StandardDistribuction() { Id = 2, Gauge = GaugeY, Spacing = SpacingY, IsVariable = true, Quantity = GetQuantity(GaugeY, SpacingY), AmendmentLength = (int)(2 * StandardDistribuction.getAnchorLength(GaugeY/10.0, AnchorFactor)) };
+            StandardDistribuction baseBar = new StandardDistribuction() { Id = 2, Gauge = GaugeY, Spacing = SpacingY, IsVariable = true, Quantity = GetQuantity(GaugeY, SpacingY), AmendmentLength = (int)(2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor)) };
 
             double[] hookVerticalNegative = GetAnchor(new bool[2] { VerticalNegativeTopEngaged, VerticalNegativeInfEngaged }, GaugeY, GaugeX);
             VerticalVarBar negativeVerticalBar = new VerticalVarBar(baseBar, DrawingShapes.Sum(hookVerticalNegative)) { isNegative = true };
             negativeVerticalBar.SetLengths(VerticalBaseLines);
             negativeVerticalBar.barLines = VerticalBaseLines;
             negativeVerticalBar.SetAnchor(hookVerticalNegative);
-            negativeVerticalBar.ResgisterDistribuction(VerticalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeY/10.0, AnchorFactor)));
+            negativeVerticalBar.ResgisterDistribuction(VerticalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor)));
 
             baseBar.Id = 1;
             double[] hookVerticalPositive = GetAnchor(new bool[2] { VerticalPositiveTopEngaged, VerticalPositiveInfEngaged }, GaugeY, GaugeX);
@@ -223,10 +226,10 @@ namespace Hello_World.Detailing
             positiveVerticalBar.SetLengths(VerticalBaseLines);
             positiveVerticalBar.barLines = VerticalBaseLines;
             positiveVerticalBar.SetAnchor(hookVerticalPositive);
-            positiveVerticalBar.ResgisterDistribuction(VerticalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeY/10.0, AnchorFactor)));
+            positiveVerticalBar.ResgisterDistribuction(VerticalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor)));
             positiveVerticalBar.UpdateMediumLength();
             negativeVerticalBar.UpdateMediumLength();
-            Point3d negativeStartPoint = new Point3d(startPointBars.X + 2 * StandardDistribuction.getAnchorLength(GaugeY/10.0, AnchorFactor) + 50.0, startPointBars.Y + negativeVerticalBar._mediumLength / 2.0, startPointBars.Z);
+            Point3d negativeStartPoint = new Point3d(startPointBars.X + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) + 50.0, startPointBars.Y + negativeVerticalBar._mediumLength / 2.0, startPointBars.Z);
             Point3d positiveStartPoint = new Point3d(startPointBars.X, startPointBars.Y + positiveVerticalBar._mediumLength / 2.0, startPointBars.Z);
 
             positiveVerticalBar.AddDetailingToDrawing(positiveStartPoint);
@@ -236,14 +239,14 @@ namespace Hello_World.Detailing
         }
         private void DrawHorizontalDistribuction(Point3d startPointBars)
         {
-            StandardDistribuction baseBar = new StandardDistribuction() { Id = 4, Gauge = GaugeX, Spacing = SpacingX, IsVariable = true, Quantity = GetQuantity(GaugeX, SpacingX), AmendmentLength = (int)(2 * StandardDistribuction.getAnchorLength(GaugeX/10.0, AnchorFactor)) };
+            StandardDistribuction baseBar = new StandardDistribuction() { Id = 4, Gauge = GaugeX, Spacing = SpacingX, IsVariable = true, Quantity = GetQuantity(GaugeX, SpacingX), AmendmentLength = (int)(2 * StandardDistribuction.getAnchorLength(GaugeX / 10.0, AnchorFactor)) };
 
             double[] hookHorizontalNegative = GetAnchor(new bool[2] { HorizontalNegativeLeftEngaged, HorizontalNegativeRigthEngaged }, GaugeX, 0.0);
             HorizontalVarBar negativeHorizontalBar = new HorizontalVarBar(baseBar, DrawingShapes.Sum(hookHorizontalNegative)) { isNegative = true };
             negativeHorizontalBar.SetLengths(HorizontalBaseLines);
             negativeHorizontalBar.barLines = HorizontalBaseLines;
             negativeHorizontalBar.SetAnchor(hookHorizontalNegative);
-            negativeHorizontalBar.ResgisterDistribuction(HorizontalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeX/10.0, AnchorFactor)));
+            negativeHorizontalBar.ResgisterDistribuction(HorizontalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeX / 10.0, AnchorFactor)));
 
             baseBar.Id = 3;
             double[] hookVerticalPositive = GetAnchor(new bool[2] { HorizontalPositiveLeftEngaged, HorizontalPositiveRigthEngaged }, GaugeX, 0.0);
@@ -251,7 +254,7 @@ namespace Hello_World.Detailing
             positiveHorizontalBar.SetLengths(HorizontalBaseLines);
             positiveHorizontalBar.barLines = HorizontalBaseLines;
             positiveHorizontalBar.SetAnchor(hookVerticalPositive);
-            positiveHorizontalBar.ResgisterDistribuction(HorizontalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeX/10.0, AnchorFactor)));
+            positiveHorizontalBar.ResgisterDistribuction(HorizontalBaseLines, (int)(2 * StandardDistribuction.getAnchorLength(GaugeX / 10.0, AnchorFactor)));
             positiveHorizontalBar.UpdateMediumLength();
             negativeHorizontalBar.UpdateMediumLength();
 
@@ -269,23 +272,23 @@ namespace Hello_World.Detailing
             if (engagedConditions[0])
             {
                 values[0] = 0.0;
-                values[1] = Math.Ceiling(Bottom.Thickness - Cover - offset / 10.0 + StandardDistribuction.getAnchorLength(gauge/10.0, AnchorFactor));
+                values[1] = Math.Ceiling(Bottom.Thickness - Cover - offset / 10.0 + StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor));
             }
             else
             {
-                values[0] = StandardDistribuction.getAnchorLength(gauge/10.0, AnchorFactor) ;
+                values[0] = StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor);
                 values[1] = Math.Floor(Bottom.Thickness - 2 * (Cover + offset / 10.0));
             }
 
             if (engagedConditions[1])
             {
-                values[2] = Math.Ceiling(Bottom.Thickness - Cover - offset / 10.0 + StandardDistribuction.getAnchorLength(gauge/10.0, AnchorFactor) );
+                values[2] = Math.Ceiling(Bottom.Thickness - Cover - offset / 10.0 + StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor));
                 values[3] = 0.0;
             }
             else
             {
                 values[2] = Math.Floor(Bottom.Thickness - 2 * (Cover + offset / 10.0));
-                values[3] = StandardDistribuction.getAnchorLength(gauge/10.0, AnchorFactor);
+                values[3] = StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor);
             }
 
             return values;
@@ -333,7 +336,33 @@ namespace Hello_World.Detailing
             DrawingUtilities.DrawText(DrawingShapes.MiddlePoint(new Point3d(bottomCenter.X - length, bottomCenter.Y + 0.35 * Bottom.Diameter + 10.0, 0), new Point3d(bottomCenter.X + length, bottomCenter.Y + 0.35 * Bottom.Diameter + 10.0, 0)), description, 0);
 
         }
-     
+        public void DrawHorizontalCut(Point3d startPoint)
+        {
+            horizontalCut.Draw(startPoint);
+            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[2], Cover);
+            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[3], Cover);
+            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[0], Cover, GaugeX/10.0);
+            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[1], Cover, GaugeX/10.0);
+        }
+        public void DrawVerticalCut(Point3d startPoint)
+        {
+            verticalCut.Draw(startPoint);
+            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[0], Cover, GaugeX);
+            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[1], Cover, GaugeX);
+            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction) distribuctions[2], Cover);
+            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[3], Cover);
+        }
+        private void DrawTable(Point3d startPoint)
+        {
+            for (int index = 0; index < distribuctions.Count - 1; index++)
+            {
+                if (distribuctions[index].Id != distribuctions[index + 1].Id)
+                    VarTablesCount++;
+            }
+            SteelTable steelTable = new SteelTable(distribuctions, multiplier, Title);
+            steelTable.GenerateFullTable(new Point3d(startPoint.X + VarTablesCount * 370.0 + 20.0, startPoint.Y, 0.0));
+        }
+
     }
 
 }

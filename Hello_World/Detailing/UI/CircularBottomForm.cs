@@ -31,6 +31,7 @@ namespace Hello_World.Detailing.UI
                 SetBorderCondition();
                 SetBorderShape();
                 SetCutInfo();
+                _bottomDetailing.multiplier = Convert.ToInt32(msktxt_multiplier.Text);
                 Point3d BasePoint = DrawingUtilities.GetPointFromUser("Insira um ponto para o desenho:");
                 _bottomDetailing.DrawDetailment(BasePoint);
             }
@@ -60,6 +61,8 @@ namespace Hello_World.Detailing.UI
             double supWallThickness, infWallThickness;
             supWallThickness = Convert.ToDouble(msktxt_TopThickness.Text);
             infWallThickness = Convert.ToDouble(msktxt_InfThickness.Text);
+            //if(Convert.ToDouble(msktxt_TopThickness.Text) < 1) { supWallThickness = 20.0; }
+            //if (Convert.ToDouble(msktxt_InfThickness.Text) < 1) { infWallThickness = 20.0; }
             _bottomDetailing.SetBorderThickness(supWallThickness, infWallThickness);
             double diameter, thickness, edgeLength;
             diameter = Convert.ToDouble(msktxt_externalDiameter.Text);
@@ -77,5 +80,97 @@ namespace Hello_World.Detailing.UI
             _bottomDetailing.SetBorderShape(conditions);
         }
 
+        private void chcBx_VerticalUpLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcBx_VerticalUpLeft.Checked) 
+            {
+                chcBx_NegativeUpEngaged.Enabled = true;
+                chcBx_NegativeUpEngaged.Checked = true;
+
+                chcBx_PositiveRigthEngaged.Enabled = true;
+                chcBx_PositiveRigthEngaged.Checked = true;
+
+            }
+            else
+            {
+                chcBx_NegativeUpEngaged.Enabled = false;
+                chcBx_NegativeUpEngaged.Checked = false;
+
+                chcBx_PositiveRigthEngaged.Enabled = false;
+                chcBx_PositiveRigthEngaged.Checked = false;
+            }
+        }
+
+        private void chcBx_VerticalUpRigth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcBx_VerticalUpRigth.Checked)
+            {
+                chcBx_PositiveUpEngaged.Enabled = true;
+                chcBx_PositiveUpEngaged.Checked = true;
+
+                chcBx_NegativaRightEngaged.Enabled = true;
+                chcBx_NegativaRightEngaged.Checked = true;
+
+            }
+            else
+            {
+                chcBx_PositiveUpEngaged.Enabled = false;
+                chcBx_PositiveUpEngaged.Checked = false;
+
+                chcBx_NegativaRightEngaged.Enabled = false;
+                chcBx_NegativaRightEngaged.Checked = false;
+
+            }
+        }
+
+        private void chcBx_VerticalDownLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcBx_VerticalDownLeft.Checked)
+            {
+                chcBx_NegativeDownEngaged.Enabled = true;
+                chcBx_NegativeDownEngaged.Checked = true;
+
+                chcBx_PositiveLeftEngaged.Enabled = true;
+                chcBx_PositiveLeftEngaged.Checked = true;
+            }
+            else
+            {
+                chcBx_PositiveLeftEngaged.Enabled = false;
+                chcBx_PositiveLeftEngaged.Checked = false;
+                
+
+                chcBx_NegativeDownEngaged.Enabled = false;
+                chcBx_NegativeDownEngaged.Checked = false;
+            }
+        }
+
+        private void chcBx_VerticalDownRigth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcBx_VerticalDownRigth.Checked)
+            {
+                chcBx_PositiveDownEngaged.Enabled = true;
+                chcBx_PositiveDownEngaged.Checked = true;
+
+                chcBx_NegativeLeftEngaged.Enabled = true;
+                chcBx_NegativeLeftEngaged.Checked = true;
+
+            }
+            else
+            {
+                chcBx_PositiveDownEngaged.Enabled = false;
+                chcBx_PositiveDownEngaged.Checked = false;
+
+                chcBx_NegativeLeftEngaged.Enabled = false;
+                chcBx_NegativeLeftEngaged.Checked = false;
+            }
+        }
+
+        private void msktxt_TopThickness_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+        }
+        private void msktxt_InfThickness_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }

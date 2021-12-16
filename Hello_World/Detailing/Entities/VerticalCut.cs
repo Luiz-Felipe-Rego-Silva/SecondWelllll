@@ -1,11 +1,12 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using Structures.Utilities;
 
 namespace Detailing.Entities
 {
     class VerticalCut
     {
-        public double  ElemSuperior { get; set; }
+        public double ElemSuperior { get; set; }
         public double ElemInferior { get; set; }
         public double Extension { get; set; }
         public double ExtesionThickness { get; set; }
@@ -21,12 +22,12 @@ namespace Detailing.Entities
         }
         public void AddBorder(bool[] borders)
         {
-            for(int index = 0; index < borders.Length; index++ ) 
+            for (int index = 0; index < borders.Length; index++)
             {
                 _configuration[index] = borders[index];
             }
         }
-        public void Draw(Point3d startPoint) 
+        public void Draw(Point3d startPoint)
         {
             startPoint = new Point3d(startPoint.X + ExtraLength, startPoint.Y - ElemInferior, 0.0);
             DrawUpSideCut(startPoint);
@@ -62,7 +63,7 @@ namespace Detailing.Entities
             }
 
         }
-        private void DrawUpSideCut(Point3d startPoint) 
+        private void DrawUpSideCut(Point3d startPoint)
         {
             string layer = "3";
             DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y + ElemInferior, 0), new Point3d(startPoint.X + ExtesionThickness, startPoint.Y + ElemInferior, 0), layer);
@@ -88,10 +89,10 @@ namespace Detailing.Entities
                 DrawingShapes.DrawLine(rightStart, new Point3d(rightStart.X, rightStart.Y + ElemSuperior, 0), layer);
             }
         }
-        private void DrawMiddle(Point3d startPoint) 
+        private void DrawMiddle(Point3d startPoint)
         {
             string layer = "3";
-            DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X, startPoint.Y - (Extension -  2 *  ElemInferior) , 0), layer);
+            DrawingShapes.DrawLine(startPoint, new Point3d(startPoint.X, startPoint.Y - (Extension - 2 * ElemInferior), 0), layer);
             DrawingShapes.DrawLine(new Point3d(startPoint.X + ExtesionThickness, startPoint.Y - (ElemSuperior - ElemInferior), 0), new Point3d(startPoint.X + ExtesionThickness, startPoint.Y - (ElemSuperior - ElemInferior) - (Extension - 2 * ElemSuperior), 0), layer);
         }
         private void DrawCutSymbol(Point3d startPoint, Point3d endPoint)
@@ -110,6 +111,42 @@ namespace Detailing.Entities
             DrawingShapes.DrawLine(new Point3d(startPoint.X, startPoint.Y + (length - cutSymbolLength - 10.0) / 2.0, 0), middlLeft, layer);
             DrawingShapes.DrawLine(new Point3d(endPoint.X, endPoint.Y - (length - cutSymbolLength - 10.0) / 2.0, 0), middleRigth, layer);
             DrawingShapes.DrawLine(middlLeft, middleRigth, layer);
+        }
+        public void DrawBarInCut(Point3d startPoint, VariableDistribuction bar, double offset, double gaugeCompat)
+        {
+            Point3d basePoint;
+            if (bar.isNegative) { basePoint = new Point3d(startPoint.X + ExtraLength + ExtesionThickness - offset - gaugeCompat / 10.0, startPoint.Y - offset, 0); }
+            else { basePoint = new Point3d(startPoint.X + ExtraLength + offset + gaugeCompat / 10.0, startPoint.Y - offset, 0.0); }
+
+
+            double v0 = bar.HookLengths[0];
+            double v1 = bar.HookLengths[1];
+            double v2 = Extension - 2 * offset;
+            double v3 = bar.HookLengths[2];
+            double v4 = bar.HookLengths[3];
+
+            Polyline polyline = new Polyline() { Layer = "4" };
+            polyline.AddVertexAt(0, DrawingShapes.Move(basePoint, bar.BarDir * v1, -v0).Convert2d(new Plane()), 0, 0, 0);
+            polyline.AddVertexAt(1, DrawingShapes.Move(basePoint, bar.BarDir * v1, 0).Convert2d(new Plane()), 0, 0, 0);
+            polyline.AddVertexAt(2, basePoint.Convert2d(new Plane()), 0, 0, 0);
+            polyline.AddVertexAt(3, DrawingShapes.Move(basePoint, 0, -v2).Convert2d(new Plane()), 0, 0, 0);
+            polyline.AddVertexAt(4, DrawingShapes.Move(basePoint, bar.BarDir * v3, -v2).Convert2d(new Plane()), 0, 0, 0);
+            polyline.AddVertexAt(5, DrawingShapes.Move(basePoint, bar.BarDir * v3, -v2 + v4).Convert2d(new Plane()), 0, 0, 0);
+
+            DrawingUtilities.AddToDrawing(polyline);
+        }
+        public void DrawBarSectioned(Point3d startPoint, VariableDistribuction bar, double cover)
+        {
+            if (bar.isNegative) { startPoint = new Point3d(startPoint.X + ExtraLength + ExtesionThickness - cover, startPoint.Y - cover, 0); }
+            else { startPoint = new Point3d(startPoint.X + ExtraLength + cover, startPoint.Y - cover, 0.0); }
+
+            string layer = "4";
+            double length = Extension - 2 * cover;
+            double effectiveSpacing = (length - bar.Gauge / 10.0) / (bar.Quantity - 1);
+            for (int index = 0; index < bar.Quantity; index++) { DrawingShapes.DrawCircle(new Point3d(startPoint.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, startPoint.Y - 0.5 * bar.Gauge / 10.0 - index * effectiveSpacing, 0), bar.Gauge / 10.0, layer); }
+            //string dimStyleName = "DIST 1-50";
+            //string content = $"N{bar.Id}";
+            //DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X + cover, startPoint.Y, 0), new Point3d(startPoint.X + cover, startPoint.Y - length, 0), content, 20.0, 0);
         }
 
     }

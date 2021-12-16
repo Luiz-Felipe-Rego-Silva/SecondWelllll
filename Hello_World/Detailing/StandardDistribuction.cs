@@ -15,7 +15,6 @@ namespace Detailing
         public double Gauge { get; set; }
         public double Spacing { get; set; }
         public double Length { get; set; }
-        public double Weigth { get; set; }
         public double Quantity { get; set; }
         public bool IsVariable { get; set; }
         public int NumberOfAmendments { get; set; } = 0;
@@ -40,7 +39,6 @@ namespace Detailing
             try { Length += Math.Round(BarLine.Length); }
             catch (Exception) { }
             Quantity = quantity;
-            Weigth = Quantity * Math.Round(Math.Round(Length, 2) * GetNominalSteelDensity(), 1);
             NumberOfAmendments = numberOfAmendments;
             AmendmentLength = amendmentLength;
         }
@@ -48,9 +46,9 @@ namespace Detailing
         {
             return Math.Ceiling(gauge * AnchorFactor);
         }
-        private double GetNominalSteelDensity()
+        private double GetNominalSteelDensity(double gauge)
         {
-            int gaugeForswitch = (int)(10 * this.Gauge);
+            int gaugeForswitch = (int)(10 * gauge);
             double nominalSteelDensity = 0.0;
             switch (gaugeForswitch)
             {
@@ -78,8 +76,23 @@ namespace Detailing
                 case 250:
                     nominalSteelDensity = 3.853;
                     break;
+                case 320:
+                    nominalSteelDensity = 6.313;
+                    break;
+                case 400:
+                    nominalSteelDensity = 9.865;
+                    break;
             }
             return nominalSteelDensity;
+        }
+        public virtual double GetTotalLength()
+        {
+            return Quantity * (Length + NumberOfAmendments * AmendmentLength);
+        }
+        public double GetMass()
+        {
+            double mass = (Math.Round(GetTotalLength()) / 100.0) * GetNominalSteelDensity(Gauge);
+            return Math.Round(mass, 1);
         }
         public virtual ResultBuffer ExportResultBuffer()
         {
@@ -96,10 +109,6 @@ namespace Detailing
                 new TypedValue(1000, $"{NumberOfAmendments}"),
                 new TypedValue(1000, $"{AmendmentLength}")
             );
-        }
-        public virtual double GetTotalLength()
-        {
-            return Quantity * (Length + NumberOfAmendments * AmendmentLength);
         }
         public void Draw(/*Point3d basePoint, Point3d lastDescriptionPoint, AttachmentPoint attachment*/)
         {

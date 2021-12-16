@@ -5,31 +5,35 @@ using Autodesk.AutoCAD.ApplicationServices.Core;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Detailing;
+using Structures.Utilities;
 
-namespace StructCS.Creator.Models
+namespace Detailing
 {
-    class Quantitative
+    class SteelTable
     {
-        public Quantitative(List<StandardDistribuction> list, int multiplier, string title)
-        {
-            barsList = CleanList(list);
-            this.multiplier = multiplier;
-        }
         public List<StandardDistribuction> barsList { get; set; }
+        public string Title { get; set; }
         public int multiplier { get; set; }
         private double massCA50 = 0.0;
         private double massCA60 = 0.0;
+        private double RowHeigth = 30.0;
+        private double CollumnWidth = 90.0;
+        public SteelTable(List<StandardDistribuction> list, int multiplier, string title)
+        {
+            barsList = CleanList(list);
+            this.multiplier = multiplier;
+            Title = title;
+        }
         private List<StandardDistribuction> CleanList(List<StandardDistribuction> dirtyList)
         {
             int numOfSelected = dirtyList.Count;
             List<StandardDistribuction> result = new List<StandardDistribuction>();
-
-            for (int i = 0; i < numOfSelected + 1; i++)
+            for (int index = 0; index < numOfSelected + 1; index++)
             {
                 bool found = false;
                 foreach (StandardDistribuction bar in dirtyList)
                 {
-                    if (bar.Id == i)
+                    if (bar.Id == index)
                     {
                         if (!found)
                         {
@@ -39,11 +43,11 @@ namespace StructCS.Creator.Models
                         else
                         {
                             if (!bar.IsVariable)
-                                result[i - 1].Quantity += bar.Quantity;
+                                result[index - 1].Quantity += bar.Quantity;
                             else
                             {
-                                result[i - 1].Quantity += bar.Quantity;
-                                (result[i - 1] as VariableDistribuction).UpdateLengthTable((bar as VariableDistribuction).LenghtOfLines, (bar as VariableDistribuction).constantParts);
+                                result[index - 1].Quantity += bar.Quantity;
+                                (result[index - 1] as VariableDistribuction).UpdateLengthTable((bar as VariableDistribuction).LenghtOfLines, (bar as VariableDistribuction).constantParts);
                             }
                         }
                     }
@@ -54,21 +58,20 @@ namespace StructCS.Creator.Models
         public double CreateBarsTable(Point3d position)
         {
             List<StandardDistribuction> list = barsList;
-
             Table barSumaryTable = new Table
             {
                 TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle
             };
             barSumaryTable.SetSize(list.Count + 2, 5);
-            barSumaryTable.SetRowHeight(TablesConfigs.RowHeight);
-            barSumaryTable.SetColumnWidth(TablesConfigs.ColumnWidth);
+            barSumaryTable.SetRowHeight(RowHeigth);
+            barSumaryTable.SetColumnWidth(CollumnWidth);
             barSumaryTable.Layer = "3";
             barSumaryTable.Position = position;
 
             if (multiplier > 1)
-                barSumaryTable.Cells[0, 0].TextString = $"Quadro de Aço (x{multiplier})";
+                barSumaryTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title} (x{multiplier})";
             else
-                barSumaryTable.Cells[0, 0].TextString = "Quadro de Aço";
+                barSumaryTable.Cells[0, 0].TextString = $"Quadro de Aço - {Title}";
 
             barSumaryTable.Cells[1, 0].TextString = "N";
             barSumaryTable.Cells[1, 1].TextString = "φ (mm)";
@@ -91,7 +94,7 @@ namespace StructCS.Creator.Models
 
             barSumaryTable.GenerateLayout();
             var height = barSumaryTable.Height;
-            Tools.DrawByHandle(barSumaryTable);
+            DrawingUtilities.AddToDrawing(barSumaryTable);
             barSumaryTable.Dispose();
 
             return height;
@@ -128,8 +131,8 @@ namespace StructCS.Creator.Models
             Table gaugeSumaryTable = new Table();
             gaugeSumaryTable.TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle;
             gaugeSumaryTable.SetSize(gaugeMatriz.Count + 2, 4);
-            gaugeSumaryTable.SetRowHeight(TablesConfigs.RowHeight);
-            gaugeSumaryTable.SetColumnWidth(TablesConfigs.ColumnWidth * 5 / 4);
+            gaugeSumaryTable.SetRowHeight(RowHeigth);
+            gaugeSumaryTable.SetColumnWidth(CollumnWidth * 5 / 4);
             gaugeSumaryTable.Layer = "3";
 
             gaugeSumaryTable.Position = position;
@@ -150,7 +153,6 @@ namespace StructCS.Creator.Models
                 else
                     gaugeSumaryTable.Cells[index, 1].TextString = Convert.ToString("CA - 50");
 
-
                 gaugeSumaryTable.Cells[index, 2].TextString = (multiplier * ((Math.Round(gaugeMatriz[index - 2][1])) / 100.0)).ToString("F2"); // x multi
                 gaugeSumaryTable.Cells[index, 3].TextString = (multiplier * gaugeMatriz[index - 2][2]).ToString("F1"); // x multi
 
@@ -163,7 +165,7 @@ namespace StructCS.Creator.Models
             }
 
             gaugeSumaryTable.GenerateLayout();
-            Tools.DrawByHandle(gaugeSumaryTable);
+            DrawingUtilities.AddToDrawing(gaugeSumaryTable);
             double height = gaugeSumaryTable.Height;
             gaugeSumaryTable.Dispose();
 
@@ -194,9 +196,9 @@ namespace StructCS.Creator.Models
 
         public void GenerateFullTable(Point3d position)
         {
-            var h = CreateBarsTable(position);
-            h += CreateGaugesTable(new Point3d(position.X, position.Y - h, 0));
-            GenerateBriefTable(new Point3d(position.X, position.Y - h, 0));
+            double aux = CreateBarsTable(position);
+            aux += CreateGaugesTable(new Point3d(position.X, position.Y - aux, 0));
+            GenerateBriefTable(new Point3d(position.X, position.Y - aux, 0));
         }
 
         public double GenerateBriefTable(Point3d position)
@@ -211,8 +213,8 @@ namespace StructCS.Creator.Models
 
             Table totalTable = new Table { TableStyle = Application.DocumentManager.MdiActiveDocument.Database.Tablestyle };
             totalTable.SetSize(1 + NumTypes, 2);
-            totalTable.SetRowHeight(TablesConfigs.RowHeight);
-            totalTable.SetColumnWidth(TablesConfigs.ColumnWidth * 5 / 2);
+            totalTable.SetRowHeight(RowHeigth);
+            totalTable.SetColumnWidth(CollumnWidth * 5 / 2);
             totalTable.Layer = "3";
             totalTable.Cells[0, 0].TextString = "Total (Kg)";
 
@@ -235,8 +237,8 @@ namespace StructCS.Creator.Models
             }
             totalTable.Position = position;
             totalTable.GenerateLayout();
-            Tools.DrawByHandle(totalTable);
-            var height = totalTable.Height;
+            DrawingUtilities.AddToDrawing(totalTable);
+            double height = totalTable.Height;
             totalTable.Dispose();
             return height;
         }

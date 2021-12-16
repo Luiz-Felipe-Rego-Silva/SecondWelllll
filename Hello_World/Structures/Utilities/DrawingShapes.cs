@@ -294,6 +294,11 @@ namespace Structures.Utilities
             foreach(double value in values) { sum += value; }
             return sum;
         }
+        public static double Media(double[] values) 
+        {
+            double sum = Sum(values);
+            return sum / (values.Length);
+        }
 
     }
 }
