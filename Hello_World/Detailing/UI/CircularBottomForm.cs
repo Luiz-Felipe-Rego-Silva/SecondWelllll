@@ -89,7 +89,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_PositiveRigthEngaged.Enabled = true;
                 chcBx_PositiveRigthEngaged.Checked = true;
-
+                msktxt_InfThickness.Enabled = true; msktxt_InfThickness.Text = "20"; 
             }
             else
             {
@@ -98,6 +98,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_PositiveRigthEngaged.Enabled = false;
                 chcBx_PositiveRigthEngaged.Checked = false;
+                if (!chcBx_VerticalDownLeft.Checked) { msktxt_InfThickness.Enabled = false; msktxt_InfThickness.Text = "0"; }
             }
         }
 
@@ -110,7 +111,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_NegativaRightEngaged.Enabled = true;
                 chcBx_NegativaRightEngaged.Checked = true;
-
+                msktxt_TopThickness.Enabled = true; msktxt_TopThickness.Text = "20";
             }
             else
             {
@@ -119,7 +120,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_NegativaRightEngaged.Enabled = false;
                 chcBx_NegativaRightEngaged.Checked = false;
-
+                if (!chcBx_VerticalDownRigth.Checked) { msktxt_TopThickness.Enabled = false; msktxt_TopThickness.Text = "0"; }
             }
         }
 
@@ -132,6 +133,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_PositiveLeftEngaged.Enabled = true;
                 chcBx_PositiveLeftEngaged.Checked = true;
+                msktxt_InfThickness.Enabled = true; msktxt_InfThickness.Text = "20";
             }
             else
             {
@@ -141,6 +143,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_NegativeDownEngaged.Enabled = false;
                 chcBx_NegativeDownEngaged.Checked = false;
+                if (!chcBx_VerticalUpLeft.Checked) { msktxt_InfThickness.Enabled = false; msktxt_InfThickness.Text = "0"; }
             }
         }
 
@@ -153,7 +156,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_NegativeLeftEngaged.Enabled = true;
                 chcBx_NegativeLeftEngaged.Checked = true;
-
+                msktxt_TopThickness.Enabled = true; msktxt_TopThickness.Text = "20"; 
             }
             else
             {
@@ -162,6 +165,7 @@ namespace Hello_World.Detailing.UI
 
                 chcBx_NegativeLeftEngaged.Enabled = false;
                 chcBx_NegativeLeftEngaged.Checked = false;
+                if (!chcBx_VerticalUpRigth.Checked) { msktxt_TopThickness.Enabled = false; msktxt_TopThickness.Text = "0"; }
             }
         }
 

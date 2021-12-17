@@ -29,11 +29,25 @@ namespace Detailing.Entities
         }
         public void Draw(Point3d startPoint)
         {
+            DrawTitle(new Point3d(startPoint.X, startPoint.Y + 20.0, 0.0));
             startPoint = new Point3d(startPoint.X + ExtraLength, startPoint.Y - ElemInferior, 0.0);
             DrawUpSideCut(startPoint);
             DrawMiddle(startPoint);
             startPoint = new Point3d(startPoint.X, startPoint.Y - (Extension - 2 * ElemInferior), 0.0);
             DrawDownSideCut(startPoint);
+        }
+        private void DrawTitle(Point3d startPoint) 
+        {
+            DBText title = new DBText()
+            {
+                Layer = "3",
+                Height = 10,
+                TextString = "CORTE B-B",
+                Justify = AttachmentPoint.BottomLeft,
+                Rotation = 0,
+                AlignmentPoint = startPoint
+            };
+            DrawingUtilities.AddToDrawing(title);
         }
         private void DrawDownSideCut(Point3d startPoint)
         {
@@ -134,6 +148,7 @@ namespace Detailing.Entities
             polyline.AddVertexAt(5, DrawingShapes.Move(basePoint, bar.BarDir * v3, -v2 + v4).Convert2d(new Plane()), 0, 0, 0);
 
             DrawingUtilities.AddToDrawing(polyline);
+            DrawLeader(basePoint, bar.Id, offset, bar.isNegative);
         }
         public void DrawBarSectioned(Point3d startPoint, VariableDistribuction bar, double cover)
         {
@@ -144,10 +159,52 @@ namespace Detailing.Entities
             double length = Extension - 2 * cover;
             double effectiveSpacing = (length - bar.Gauge / 10.0) / (bar.Quantity - 1);
             for (int index = 0; index < bar.Quantity; index++) { DrawingShapes.DrawCircle(new Point3d(startPoint.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, startPoint.Y - 0.5 * bar.Gauge / 10.0 - index * effectiveSpacing, 0), bar.Gauge / 10.0, layer); }
-            //string dimStyleName = "DIST 1-50";
-            //string content = $"N{bar.Id}";
-            //DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X + cover, startPoint.Y, 0), new Point3d(startPoint.X + cover, startPoint.Y - length, 0), content, 20.0, 0);
-        }
 
+            string dimStyleName = "DIST 1-50";
+            string content = $"N{bar.Id}";
+
+            if (bar.isNegative)
+            {
+                Point3d start = new Point3d(startPoint.X - (ExtesionThickness - 2 * cover) , startPoint.Y, 0.0);
+                DrawingShapes.AddAlignedDimension(
+                    dimStyleName,
+                    new Point3d(start.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, start.Y, 0),
+                    new Point3d(start.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, start.Y - length, 0),
+                    content,
+                    -ExtesionThickness, 0);
+                
+            }
+            else
+            {
+                Point3d start = new Point3d(startPoint.X + (ExtesionThickness - 2 * cover), startPoint.Y, 0.0);
+                DrawingShapes.AddAlignedDimension(dimStyleName,
+                    new Point3d(start.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, start.Y, 0),
+                    new Point3d(start.X - 0.5 * bar.BarDir * bar.Gauge / 10.0, start.Y - length, 0),
+                    content,
+                    ExtesionThickness + 10.0, 0);
+            }
+        }
+        private void DrawLeader(Point3d startPoint, int ID, double cover, bool isNegative) 
+        {
+            if (isNegative)
+            {
+                Point3d initPoint = new Point3d(startPoint.X, startPoint.Y - 0.67 * (Extension - 2 * cover), 0);
+                Leader leader = new Leader() { Layer = "1", HasArrowHead = true };
+                leader.AppendVertex(initPoint);
+                leader.AppendVertex(new Point3d(initPoint.X + 45.0, initPoint.Y - 20.0, 0));
+                DrawingUtilities.DrawText(new Point3d(initPoint.X + 55.0, initPoint.Y - 30.0, 0), $"N{ID}", 0.0);
+                DrawingUtilities.AddToDrawing(leader);
+            }
+            else 
+            {
+                Point3d initPoint = new Point3d(startPoint.X, startPoint.Y - 0.33 * (Extension - 2 * cover), 0);
+                Leader leader = new Leader() { Layer = "1", HasArrowHead = true };
+                leader.AppendVertex(initPoint);
+                leader.AppendVertex(new Point3d(initPoint.X - 45.0, initPoint.Y + 20.0, 0));
+                DrawingUtilities.DrawText(new Point3d(initPoint.X - 45.0, initPoint.Y + 30.0, 0), $"N{ID}", 0.0);
+                DrawingUtilities.AddToDrawing(leader);
+            }
+            
+        }
     }
 }

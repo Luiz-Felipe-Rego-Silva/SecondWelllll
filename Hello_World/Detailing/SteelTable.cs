@@ -194,11 +194,12 @@ namespace Detailing
             return gaugeTable;
         }
 
-        public void GenerateFullTable(Point3d position)
+        public double GenerateFullTable(Point3d position)
         {
             double aux = CreateBarsTable(position);
             aux += CreateGaugesTable(new Point3d(position.X, position.Y - aux, 0));
-            GenerateBriefTable(new Point3d(position.X, position.Y - aux, 0));
+            aux += GenerateBriefTable(new Point3d(position.X, position.Y - aux, 0));
+            return aux;
         }
 
         public double GenerateBriefTable(Point3d position)

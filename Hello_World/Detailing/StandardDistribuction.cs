@@ -23,11 +23,6 @@ namespace Detailing
         public StandardDistribuction()
         {
         }
-        public StandardDistribuction(double gauge, double length)
-        {
-            Gauge = gauge;
-            Length = length;
-        }
         public StandardDistribuction(int id, Polyline line, double gauge, double spacing, int quantity, int numberOfAmendments, int amendmentLength)
         {
             Id = id;
@@ -361,6 +356,9 @@ namespace Detailing
                 documentLock.Dispose();
             }
         }
-
+        public bool HasAmendment() 
+        {
+            return NumberOfAmendments > 0;
+        }
     }
 }

@@ -1,0 +1,16 @@
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Release\Hello_World.dll
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Release\Hello_World.pdb
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.csproj.AssemblyReference.cache
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.MyCommands.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.Detailing.UI.CircularBottomForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.Detailing.UI.CircularWallForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.UI.EdgeForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.UI.MainWellForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.Properties.Resources.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.UI.MislaForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.UI.SteelForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.UI.TopForm.resources
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.csproj.GenerateResource.cache
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.csproj.CoreCompileInputs.cache
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.dll
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.pdb

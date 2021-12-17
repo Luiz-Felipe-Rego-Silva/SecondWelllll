@@ -164,7 +164,6 @@ namespace Hello_World.Detailing.UI
         { 
         
         }
-
         private void CircularWallForm_Load(object sender, EventArgs e)
         {
 

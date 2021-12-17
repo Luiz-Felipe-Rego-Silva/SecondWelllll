@@ -96,7 +96,7 @@ namespace Structures.WellDetailer.Entities
             double d_sup, d_inf;
             d_sup = Diameter - 2 * EdgeLength;
             d_inf = Diameter - 2 * infWallThickness;
-            if (EdgeLength > 0.0)
+            if (EdgeLength > 0.5)
             {
                 DrawingShapes.DrawCircle(centerPoint, d_sup, layer);
                 DrawingShapes.DrawCircle(centerPoint, d_sup - 2 * WallThickness, layer);
@@ -105,7 +105,7 @@ namespace Structures.WellDetailer.Entities
             else 
             {
                 DrawingShapes.DrawCircle(centerPoint, d_sup - 2 * WallThickness, layer);
-                if (d_inf != (d_sup - 2*WallThickness)) { DrawingShapes.DrawCircle(centerPoint, d_inf, layer); }
+                if (d_inf != (d_sup - 2*WallThickness) && d_inf != d_sup) { DrawingShapes.DrawCircle(centerPoint, d_inf, layer); }
             }
 
         }

@@ -132,7 +132,6 @@ namespace Hello_World.Detailing
             Point3d horizontalCutPosition = new Point3d(bottomCenter.X - 0.5 * Bottom.Diameter, bottomCenter.Y + 0.5 * Bottom.Diameter + 150.0 + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor), 0);
             Point3d VARTableStartPoint = new Point3d(verticalCutPosition.X + 2 * StandardDistribuction.getAnchorLength(GaugeY / 10.0, AnchorFactor) + Bottom.Thickness + 30.0 + 50.0, verticalCutPosition.Y, 0);
 
-
             DrawTitle(titlePoint);
             Bottom.DrawBottomProjection(bottomCenter, InfWallThickness);
             CreateVerticalLines(GaugeY, GetQuantity(GaugeY, SpacingY), verticalLinePoint);
@@ -147,6 +146,7 @@ namespace Hello_World.Detailing
             DrawVerticalReferenceBars(bottomCenter);
             DrawVerticalCut(verticalCutPosition);
             DrawHorizontalCut(horizontalCutPosition);
+            CutInfo.DrawCutSigns(bottomCenter, Bottom.Diameter);
             DrawTable(VARTableStartPoint);
         }
         public int GetQuantity(double gauge, double spacing)
@@ -159,7 +159,7 @@ namespace Hello_World.Detailing
         private double GetOffset(double gauge)
         {
             double minLength = 0.0;
-            minLength += 2 * StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor) + EXTRA_LENGTH;
+            //minLength += 2 * StandardDistribuction.getAnchorLength(gauge / 10.0, AnchorFactor) + EXTRA_LENGTH;
             if (MINIMUM_VAR_LENGTH > minLength)
                 minLength = MINIMUM_VAR_LENGTH;
 
@@ -338,29 +338,54 @@ namespace Hello_World.Detailing
         }
         public void DrawHorizontalCut(Point3d startPoint)
         {
+            List<VariableDistribuction> vertBars = new List<VariableDistribuction>();
+            List<VariableDistribuction> horBars = new List<VariableDistribuction>();
+
+            foreach (StandardDistribuction distribuction in distribuctions) 
+            {
+                if (distribuction.GetType().Name == "VerticalVarBar")
+                    vertBars.Add(distribuction as VariableDistribuction);
+                else
+                    horBars.Add(distribuction as VariableDistribuction);
+            }
+
             horizontalCut.Draw(startPoint);
-            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[2], Cover);
-            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[3], Cover);
-            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[0], Cover, GaugeX/10.0);
-            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[1], Cover, GaugeX/10.0);
+            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)horBars[0], Cover);
+            horizontalCut.DrawBarInCut(startPoint, (VariableDistribuction)horBars[1], Cover);
+            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)vertBars[0], Cover, GaugeX/10.0);
+            horizontalCut.DrawBarSectioned(startPoint, (VariableDistribuction)vertBars[1], Cover, GaugeX/10.0);
         }
         public void DrawVerticalCut(Point3d startPoint)
         {
+            List<VariableDistribuction> vertBars = new List<VariableDistribuction>();
+            List<VariableDistribuction> horBars = new List<VariableDistribuction>();
+            foreach (StandardDistribuction distribuction in distribuctions)
+            {
+                if (distribuction.GetType().Name == "VerticalVarBar")
+                    vertBars.Add(distribuction as VariableDistribuction);
+                else
+                    horBars.Add(distribuction as VariableDistribuction);
+            }
             verticalCut.Draw(startPoint);
-            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[0], Cover, GaugeX);
-            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)distribuctions[1], Cover, GaugeX);
-            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction) distribuctions[2], Cover);
-            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction)distribuctions[3], Cover);
+            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)vertBars[0], Cover, GaugeX);
+            verticalCut.DrawBarInCut(startPoint, (VariableDistribuction)vertBars[1], Cover, GaugeX);
+            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction)horBars[0], Cover);
+            verticalCut.DrawBarSectioned(startPoint, (VariableDistribuction)horBars[1], Cover);
         }
         private void DrawTable(Point3d startPoint)
         {
+            bool hasAmendments = false;
             for (int index = 0; index < distribuctions.Count - 1; index++)
             {
                 if (distribuctions[index].Id != distribuctions[index + 1].Id)
                     VarTablesCount++;
+                if ((distribuctions[index].HasAmendment()) || (distribuctions[index + 1].HasAmendment()))
+                    hasAmendments = true;
+
             }
             SteelTable steelTable = new SteelTable(distribuctions, multiplier, Title);
-            steelTable.GenerateFullTable(new Point3d(startPoint.X + VarTablesCount * 370.0 + 20.0, startPoint.Y, 0.0));
+            double heigth = steelTable.GenerateFullTable(new Point3d(startPoint.X + VarTablesCount * 370.0 + 20.0, startPoint.Y, 0.0));
+            VarTable.PrintGenericComents(new Point3d(startPoint.X + VarTablesCount * 370.0 + 20.0, startPoint.Y - heigth - 25.0, 0.0), hasAmendments);
         }
 
     }

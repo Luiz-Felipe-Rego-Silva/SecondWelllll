@@ -70,7 +70,7 @@ namespace Detailing
             return new ResultBuffer(
                 new TypedValue(1001, "STRUCTCS"),
                 new TypedValue(1000, $"{Id}"),
-                new TypedValue(1000, $"{Length}"),
+                new TypedValue(1000, $"{Math.Floor(Length)}"),
                 new TypedValue(1000, $"{Gauge}"),
                 new TypedValue(1000, $"{Spacing}"),
                 new TypedValue(1000, $"{Quantity}"),
@@ -106,8 +106,8 @@ namespace Detailing
         }
         public void UpdateLengthTable(double length)
         {
-            Length = length;
-            double increment = (Length - constantParts) - Math.Floor(DrawingShapes.Media(LenghtOfLines));
+            Length = Math.Floor(length);
+            double increment = Math.Floor(Length - constantParts) - Math.Floor(DrawingShapes.Media(LenghtOfLines));
             NumberOfAmendments = 0;
             for (int index = 0; index < LenghtOfLines.Length; index++)
             {

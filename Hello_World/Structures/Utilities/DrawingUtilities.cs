@@ -55,6 +55,29 @@ namespace Structures.Utilities
                 editor.WriteMessage(e.Message);
             }
         }
+        public static void AddToDrawing(params Entity[] entitys)
+        {
+            Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;
+            Editor editor = document.Editor;
+            Database database = document.Database;
+            DocumentLock documentLock = document.LockDocument();
+            Transaction transaction = database.TransactionManager.StartTransaction();
+            try
+            {
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                BlockTableRecord blockTableRecord = (BlockTableRecord)transaction.GetObject(blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+                foreach(Entity entity in entitys) 
+                {
+                    blockTableRecord.AppendEntity(entity);
+                    transaction.AddNewlyCreatedDBObject(entity, true);
+                }
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                editor.WriteMessage(e.Message);
+            }
+        }
         public static ObjectId DrawObject(Entity entity)
         {
             Document document = Autodesk.AutoCAD.ApplicationServices.Core.Application.DocumentManager.MdiActiveDocument;

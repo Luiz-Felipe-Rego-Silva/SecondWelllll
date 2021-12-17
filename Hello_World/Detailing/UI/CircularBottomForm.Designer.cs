@@ -99,7 +99,7 @@ namespace Hello_World.Detailing.UI
             this.btn_cancel.Location = new System.Drawing.Point(307, 446);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(82, 36);
-            this.btn_cancel.TabIndex = 31;
+            this.btn_cancel.TabIndex = 7;
             this.btn_cancel.Text = "Cancelar";
             this.btn_cancel.UseVisualStyleBackColor = true;
             // 
@@ -108,7 +108,7 @@ namespace Hello_World.Detailing.UI
             this.btn_detail.Location = new System.Drawing.Point(395, 446);
             this.btn_detail.Name = "btn_detail";
             this.btn_detail.Size = new System.Drawing.Size(74, 36);
-            this.btn_detail.TabIndex = 29;
+            this.btn_detail.TabIndex = 6;
             this.btn_detail.Text = "Detalhar";
             this.btn_detail.UseVisualStyleBackColor = true;
             this.btn_detail.Click += new System.EventHandler(this.btn_detail_Click);
@@ -120,7 +120,7 @@ namespace Hello_World.Detailing.UI
             this.rchtxt_title.Name = "rchtxt_title";
             this.rchtxt_title.ShowSelectionMargin = true;
             this.rchtxt_title.Size = new System.Drawing.Size(248, 16);
-            this.rchtxt_title.TabIndex = 1;
+            this.rchtxt_title.TabIndex = 0;
             this.rchtxt_title.Text = "";
             // 
             // msktxt_multiplier
@@ -128,7 +128,7 @@ namespace Hello_World.Detailing.UI
             this.msktxt_multiplier.Location = new System.Drawing.Point(386, 22);
             this.msktxt_multiplier.Name = "msktxt_multiplier";
             this.msktxt_multiplier.Size = new System.Drawing.Size(90, 20);
-            this.msktxt_multiplier.TabIndex = 2;
+            this.msktxt_multiplier.TabIndex = 1;
             this.msktxt_multiplier.Text = "1";
             this.msktxt_multiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -170,13 +170,13 @@ namespace Hello_World.Detailing.UI
             this.grp_AdjacentElements.Location = new System.Drawing.Point(307, 360);
             this.grp_AdjacentElements.Name = "grp_AdjacentElements";
             this.grp_AdjacentElements.Size = new System.Drawing.Size(169, 80);
-            this.grp_AdjacentElements.TabIndex = 6;
+            this.grp_AdjacentElements.TabIndex = 5;
             this.grp_AdjacentElements.TabStop = false;
             this.grp_AdjacentElements.Text = "Elementos Adjacentes";
             // 
             // msktxt_InfThickness
             // 
-            this.msktxt_InfThickness.Location = new System.Drawing.Point(107, 49);
+            this.msktxt_InfThickness.Location = new System.Drawing.Point(118, 49);
             this.msktxt_InfThickness.Name = "msktxt_InfThickness";
             this.msktxt_InfThickness.Size = new System.Drawing.Size(44, 20);
             this.msktxt_InfThickness.TabIndex = 2;
@@ -186,7 +186,7 @@ namespace Hello_World.Detailing.UI
             // lbl_elementInf
             // 
             this.lbl_elementInf.AutoSize = true;
-            this.lbl_elementInf.Location = new System.Drawing.Point(9, 52);
+            this.lbl_elementInf.Location = new System.Drawing.Point(4, 53);
             this.lbl_elementInf.Name = "lbl_elementInf";
             this.lbl_elementInf.Size = new System.Drawing.Size(90, 13);
             this.lbl_elementInf.TabIndex = 11;
@@ -194,7 +194,7 @@ namespace Hello_World.Detailing.UI
             // 
             // msktxt_TopThickness
             // 
-            this.msktxt_TopThickness.Location = new System.Drawing.Point(107, 23);
+            this.msktxt_TopThickness.Location = new System.Drawing.Point(118, 23);
             this.msktxt_TopThickness.Name = "msktxt_TopThickness";
             this.msktxt_TopThickness.Size = new System.Drawing.Size(44, 20);
             this.msktxt_TopThickness.TabIndex = 1;
@@ -204,7 +204,7 @@ namespace Hello_World.Detailing.UI
             // lbl_elementTop
             // 
             this.lbl_elementTop.AutoSize = true;
-            this.lbl_elementTop.Location = new System.Drawing.Point(9, 26);
+            this.lbl_elementTop.Location = new System.Drawing.Point(3, 26);
             this.lbl_elementTop.Name = "lbl_elementTop";
             this.lbl_elementTop.Size = new System.Drawing.Size(96, 13);
             this.lbl_elementTop.TabIndex = 9;
@@ -221,7 +221,7 @@ namespace Hello_World.Detailing.UI
             this.grp_geometry.Location = new System.Drawing.Point(307, 257);
             this.grp_geometry.Name = "grp_geometry";
             this.grp_geometry.Size = new System.Drawing.Size(169, 97);
-            this.grp_geometry.TabIndex = 5;
+            this.grp_geometry.TabIndex = 4;
             this.grp_geometry.TabStop = false;
             this.grp_geometry.Text = "Geometria";
             // 
@@ -239,7 +239,9 @@ namespace Hello_World.Detailing.UI
             this.msktxt_edgeLength.Name = "msktxt_edgeLength";
             this.msktxt_edgeLength.Size = new System.Drawing.Size(44, 20);
             this.msktxt_edgeLength.TabIndex = 3;
+            this.msktxt_edgeLength.Text = "0";
             this.msktxt_edgeLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.msktxt_edgeLength.Visible = false;
             // 
             // msktxt_externalDiameter
             // 
@@ -257,6 +259,7 @@ namespace Hello_World.Detailing.UI
             this.lbl_edgeLength.Size = new System.Drawing.Size(31, 13);
             this.lbl_edgeLength.TabIndex = 12;
             this.lbl_edgeLength.Text = "Abas";
+            this.lbl_edgeLength.Visible = false;
             // 
             // lbl_bottomThickness
             // 
@@ -289,7 +292,7 @@ namespace Hello_World.Detailing.UI
             this.grp_steel.Location = new System.Drawing.Point(307, 130);
             this.grp_steel.Name = "grp_steel";
             this.grp_steel.Size = new System.Drawing.Size(169, 121);
-            this.grp_steel.TabIndex = 4;
+            this.grp_steel.TabIndex = 3;
             this.grp_steel.TabStop = false;
             this.grp_steel.Text = "Armadura";
             // 
@@ -396,7 +399,7 @@ namespace Hello_World.Detailing.UI
             this.grp_Factors.Location = new System.Drawing.Point(307, 48);
             this.grp_Factors.Name = "grp_Factors";
             this.grp_Factors.Size = new System.Drawing.Size(169, 66);
-            this.grp_Factors.TabIndex = 3;
+            this.grp_Factors.TabIndex = 2;
             this.grp_Factors.TabStop = false;
             // 
             // msktxt_anchorFactor
@@ -474,6 +477,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_PositiveRigthEngaged
             // 
             this.chcBx_PositiveRigthEngaged.AutoSize = true;
+            this.chcBx_PositiveRigthEngaged.Checked = true;
+            this.chcBx_PositiveRigthEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_PositiveRigthEngaged.Location = new System.Drawing.Point(193, 20);
             this.chcBx_PositiveRigthEngaged.Name = "chcBx_PositiveRigthEngaged";
             this.chcBx_PositiveRigthEngaged.Size = new System.Drawing.Size(56, 17);
@@ -484,6 +489,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_NegativaRightEngaged
             // 
             this.chcBx_NegativaRightEngaged.AutoSize = true;
+            this.chcBx_NegativaRightEngaged.Checked = true;
+            this.chcBx_NegativaRightEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_NegativaRightEngaged.Location = new System.Drawing.Point(193, 39);
             this.chcBx_NegativaRightEngaged.Name = "chcBx_NegativaRightEngaged";
             this.chcBx_NegativaRightEngaged.Size = new System.Drawing.Size(56, 17);
@@ -512,6 +519,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_PositiveLeftEngaged
             // 
             this.chcBx_PositiveLeftEngaged.AutoSize = true;
+            this.chcBx_PositiveLeftEngaged.Checked = true;
+            this.chcBx_PositiveLeftEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_PositiveLeftEngaged.Location = new System.Drawing.Point(98, 20);
             this.chcBx_PositiveLeftEngaged.Name = "chcBx_PositiveLeftEngaged";
             this.chcBx_PositiveLeftEngaged.Size = new System.Drawing.Size(71, 17);
@@ -522,6 +531,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_NegativeLeftEngaged
             // 
             this.chcBx_NegativeLeftEngaged.AutoSize = true;
+            this.chcBx_NegativeLeftEngaged.Checked = true;
+            this.chcBx_NegativeLeftEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_NegativeLeftEngaged.Location = new System.Drawing.Point(98, 39);
             this.chcBx_NegativeLeftEngaged.Name = "chcBx_NegativeLeftEngaged";
             this.chcBx_NegativeLeftEngaged.Size = new System.Drawing.Size(71, 17);
@@ -542,6 +553,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_VerticalUpLeft
             // 
             this.chcBx_VerticalUpLeft.AutoSize = true;
+            this.chcBx_VerticalUpLeft.Checked = true;
+            this.chcBx_VerticalUpLeft.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_VerticalUpLeft.Location = new System.Drawing.Point(249, 120);
             this.chcBx_VerticalUpLeft.Name = "chcBx_VerticalUpLeft";
             this.chcBx_VerticalUpLeft.Size = new System.Drawing.Size(15, 14);
@@ -552,6 +565,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_VerticalDownLeft
             // 
             this.chcBx_VerticalDownLeft.AutoSize = true;
+            this.chcBx_VerticalDownLeft.Checked = true;
+            this.chcBx_VerticalDownLeft.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_VerticalDownLeft.Location = new System.Drawing.Point(249, 284);
             this.chcBx_VerticalDownLeft.Name = "chcBx_VerticalDownLeft";
             this.chcBx_VerticalDownLeft.Size = new System.Drawing.Size(15, 14);
@@ -562,6 +577,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_VerticalDownRigth
             // 
             this.chcBx_VerticalDownRigth.AutoSize = true;
+            this.chcBx_VerticalDownRigth.Checked = true;
+            this.chcBx_VerticalDownRigth.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_VerticalDownRigth.Location = new System.Drawing.Point(278, 285);
             this.chcBx_VerticalDownRigth.Name = "chcBx_VerticalDownRigth";
             this.chcBx_VerticalDownRigth.Size = new System.Drawing.Size(15, 14);
@@ -572,6 +589,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_VerticalUpRigth
             // 
             this.chcBx_VerticalUpRigth.AutoSize = true;
+            this.chcBx_VerticalUpRigth.Checked = true;
+            this.chcBx_VerticalUpRigth.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_VerticalUpRigth.Location = new System.Drawing.Point(278, 120);
             this.chcBx_VerticalUpRigth.Name = "chcBx_VerticalUpRigth";
             this.chcBx_VerticalUpRigth.Size = new System.Drawing.Size(15, 14);
@@ -600,6 +619,8 @@ namespace Hello_World.Detailing.UI
             // chcBx_PositiveUpEngaged
             // 
             this.chcBx_PositiveUpEngaged.AutoSize = true;
+            this.chcBx_PositiveUpEngaged.Checked = true;
+            this.chcBx_PositiveUpEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_PositiveUpEngaged.Location = new System.Drawing.Point(98, 19);
             this.chcBx_PositiveUpEngaged.Name = "chcBx_PositiveUpEngaged";
             this.chcBx_PositiveUpEngaged.Size = new System.Drawing.Size(66, 17);
@@ -610,26 +631,32 @@ namespace Hello_World.Detailing.UI
             // chcBx_PositiveDownEngaged
             // 
             this.chcBx_PositiveDownEngaged.AutoSize = true;
+            this.chcBx_PositiveDownEngaged.Checked = true;
+            this.chcBx_PositiveDownEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_PositiveDownEngaged.Location = new System.Drawing.Point(193, 19);
             this.chcBx_PositiveDownEngaged.Name = "chcBx_PositiveDownEngaged";
-            this.chcBx_PositiveDownEngaged.Size = new System.Drawing.Size(69, 17);
+            this.chcBx_PositiveDownEngaged.Size = new System.Drawing.Size(66, 17);
             this.chcBx_PositiveDownEngaged.TabIndex = 8;
-            this.chcBx_PositiveDownEngaged.Text = "Em baixo";
+            this.chcBx_PositiveDownEngaged.Text = "Embaixo";
             this.chcBx_PositiveDownEngaged.UseVisualStyleBackColor = true;
             // 
             // chcBx_NegativeDownEngaged
             // 
             this.chcBx_NegativeDownEngaged.AutoSize = true;
+            this.chcBx_NegativeDownEngaged.Checked = true;
+            this.chcBx_NegativeDownEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_NegativeDownEngaged.Location = new System.Drawing.Point(193, 43);
             this.chcBx_NegativeDownEngaged.Name = "chcBx_NegativeDownEngaged";
-            this.chcBx_NegativeDownEngaged.Size = new System.Drawing.Size(69, 17);
+            this.chcBx_NegativeDownEngaged.Size = new System.Drawing.Size(66, 17);
             this.chcBx_NegativeDownEngaged.TabIndex = 10;
-            this.chcBx_NegativeDownEngaged.Text = "Em baixo";
+            this.chcBx_NegativeDownEngaged.Text = "Embaixo";
             this.chcBx_NegativeDownEngaged.UseVisualStyleBackColor = true;
             // 
             // chcBx_NegativeUpEngaged
             // 
             this.chcBx_NegativeUpEngaged.AutoSize = true;
+            this.chcBx_NegativeUpEngaged.Checked = true;
+            this.chcBx_NegativeUpEngaged.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chcBx_NegativeUpEngaged.Location = new System.Drawing.Point(98, 43);
             this.chcBx_NegativeUpEngaged.Name = "chcBx_NegativeUpEngaged";
             this.chcBx_NegativeUpEngaged.Size = new System.Drawing.Size(66, 17);

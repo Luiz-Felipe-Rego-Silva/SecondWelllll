@@ -774,6 +774,7 @@ namespace Hello_World.Detailing
             Point3d startHorizontalExternal = new Point3d(startPoint.X + Wall.Thickness - Cover - GaugeY, startPoint.Y - topThickness, 0);
             Point3d startHorizontalInternal = new Point3d(startPoint.X + Cover + GaugeY, startPoint.Y - topThickness, 0);
 
+            DrawTitleCut(new Point3d(startPoint.X, startPoint.Y + 10.0, 0.0));
             DrawTopCutProjection(topAndWallStartPoint);
             DrawInternalWallInCut(topAndWallStartPoint);
             DrawBottomCutProjection(bottomStartPoint);
@@ -1033,6 +1034,19 @@ namespace Hello_World.Detailing
             leader.AppendVertex(new Point3d(initPoint.X - 45.0, initPoint.Y + 20.0, 0));
             DrawingUtilities.DrawText(new Point3d(initPoint.X - 45.0, initPoint.Y + 30.0, 0), $"N{distribuctions[1].Id}", 0.0);
             DrawingUtilities.AddToDrawing(leader);
+        }
+        private void DrawTitleCut(Point3d startPoint)
+        {
+            DBText title = new DBText()
+            {
+                Layer = "3",
+                Height = 10,
+                TextString = "CORTE A-A",
+                Justify = AttachmentPoint.BottomCenter,
+                Rotation = 0,
+                AlignmentPoint = startPoint
+            };
+            DrawingUtilities.AddToDrawing(title);
         }
 
     }

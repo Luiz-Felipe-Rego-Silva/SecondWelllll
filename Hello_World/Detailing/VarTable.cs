@@ -42,11 +42,9 @@ namespace Detailing
             SetCollumns();
             FillTable();
             DrawTable(position);
-            if(Id == 1) 
-            {
-                Point3d textPosition = new Point3d(position.X, position.Y - 40.0 - varTable.Height, 0);
-                PrintComments(textPosition);
-            }
+            Point3d textPosition = new Point3d(position.X, position.Y - 20.0 - varTable.Height, 0);
+            PrintComments(textPosition);
+
             varTable.Dispose();
         }
         private void DoStructureOfTable()
@@ -85,6 +83,19 @@ namespace Detailing
             DrawingUtilities.AddToDrawing(varTable);
         }
         public void PrintComments(Point3d basePoint)
+        {
+            if (hasAmendment)
+            {
+                DBText comments_5 = new DBText();
+                comments_5.Position = new Point3d(basePoint.X, basePoint.Y, 0);
+                comments_5.Height = 10.0;
+                comments_5.Layer = "3";
+                string content_5 = "EMENDAS DE " + _amendmentLength + " CM.";
+                comments_5.TextString = content_5;
+                DrawingUtilities.AddToDrawing(comments_5);
+            }
+        }
+        public static void PrintGenericComents(Point3d basePoint, bool hasAmendment)
         {
             DBText commentsObs = new DBText();
             commentsObs.Position = basePoint;
@@ -127,13 +138,11 @@ namespace Detailing
                 comments_4.Layer = "3";
                 string content_4 = "4. Emendar evitando o congestionamento de armaduras.";
                 comments_4.TextString = content_4;
-                DrawingUtilities.AddToDrawing(comments_4);
-
-                DBText comments_5 = new DBText();
+                DrawingUtilities.AddToDrawing(comments_4); DBText comments_5 = new DBText();
                 comments_5.Position = new Point3d(basePoint.X, basePoint.Y - 5 * 17.0, 0);
                 comments_5.Height = 10.0;
                 comments_5.Layer = "3";
-                string content_5 = "5. *n: 'n' indica a quantidade de emendas de " + _amendmentLength + "CM no trecho";
+                string content_5 = "5. *n: 'n' indica a quantidade de emendas no trecho";
                 comments_5.TextString = content_5;
                 DrawingUtilities.AddToDrawing(comments_5);
             }
