@@ -42,18 +42,22 @@ namespace Detailing
             SetCollumns();
             FillTable();
             DrawTable(position);
-            Point3d textPosition = new Point3d(position.X, position.Y - 20.0 - varTable.Height, 0);
-            PrintComments(textPosition);
-
             varTable.Dispose();
         }
         private void DoStructureOfTable()
         {
+            int numberOfCollumns = 3;
             varTable = new Table();
             varTable.TableStyle = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Database.Tablestyle;
-            varTable.SetSize(VARLength.Length + 2, 3);
+            if (HasAmendment())
+                numberOfCollumns++;
+            varTable.SetSize(VARLength.Length + 2, numberOfCollumns);
             varTable.SetRowHeight(RowHeight);
-            varTable.SetColumnWidth(120.0);
+            varTable.Columns[0].Width = 60.0;
+            varTable.Columns[1].Width = 60.0;
+            varTable.Columns[2].Width = 100.0;
+            if (hasAmendment)
+                varTable.Columns[3].Width = 120.0;
             varTable.Layer = "3";
         }
         private void SetCollumns()
@@ -62,6 +66,8 @@ namespace Detailing
             varTable.Cells[1, 0].TextString = "N";
             varTable.Cells[1, 1].TextString = "VAR (cm)";
             varTable.Cells[1, 2].TextString = "Comprimento (m)";
+            if (hasAmendment)
+                varTable.Cells[1, 3].TextString = "Emendas";
         }
         private void FillTable()
         {
@@ -73,27 +79,33 @@ namespace Detailing
                 int numberOfAmendments = Amendments.getNumberOfAmendments(VARLength[lineIndex] + ConstantPart, _amendmentLength);
                 varTable.Cells[index, 1].TextString = Math.Round(VARLength[lineIndex], 0).ToString();
                 varTable.Cells[index, 2].TextString = (Math.Round((VARLength[lineIndex] + ConstantPart + numberOfAmendments * _amendmentLength) / 100.0, 2)).ToString("F2");
-                if (numberOfAmendments * _amendmentLength > 0) { varTable.Cells[index, 2].TextString += $" | *{numberOfAmendments}"; hasAmendment = true; }
+                if (hasAmendment)
+                {
+                    if (numberOfAmendments * _amendmentLength > 0)
+                    {
+                        varTable.Cells[index, 3].TextString += $" {_amendmentLength}cm (x{numberOfAmendments})";
+                    }
+                    else
+                    {
+                        varTable.Cells[index, 3].TextString += " - ";
+                    }
+                }
             }
+        }
+        private bool HasAmendment()
+        {
+            for (int index = 0; index < VARLength.Length; index++)
+            {
+                int numberOfAmendments = Amendments.getNumberOfAmendments(VARLength[index] + ConstantPart, _amendmentLength);
+                if (numberOfAmendments * _amendmentLength > 0) { hasAmendment = true; return true; }
+            }
+            return false;
         }
         private void DrawTable(Point3d position)
         {
             varTable.Position = position;
             varTable.GenerateLayout();
             DrawingUtilities.AddToDrawing(varTable);
-        }
-        public void PrintComments(Point3d basePoint)
-        {
-            if (hasAmendment)
-            {
-                DBText comments_5 = new DBText();
-                comments_5.Position = new Point3d(basePoint.X, basePoint.Y, 0);
-                comments_5.Height = 10.0;
-                comments_5.Layer = "3";
-                string content_5 = "EMENDAS DE " + _amendmentLength + " CM.";
-                comments_5.TextString = content_5;
-                DrawingUtilities.AddToDrawing(comments_5);
-            }
         }
         public static void PrintGenericComents(Point3d basePoint, bool hasAmendment)
         {
@@ -139,12 +151,6 @@ namespace Detailing
                 string content_4 = "4. Emendar evitando o congestionamento de armaduras.";
                 comments_4.TextString = content_4;
                 DrawingUtilities.AddToDrawing(comments_4); DBText comments_5 = new DBText();
-                comments_5.Position = new Point3d(basePoint.X, basePoint.Y - 5 * 17.0, 0);
-                comments_5.Height = 10.0;
-                comments_5.Layer = "3";
-                string content_5 = "5. *n: 'n' indica a quantidade de emendas no trecho";
-                comments_5.TextString = content_5;
-                DrawingUtilities.AddToDrawing(comments_5);
             }
         }
     }

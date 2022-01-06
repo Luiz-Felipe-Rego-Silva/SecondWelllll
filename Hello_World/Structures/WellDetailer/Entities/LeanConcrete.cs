@@ -56,7 +56,9 @@ namespace WellDetailing.WellDetailer.Entities
         }
         private void DrawHatchLeanConcrete()
         {
+#pragma warning disable CS0219 // The variable 'layer' is assigned but its value is never used
             string layer = "1";
+#pragma warning restore CS0219 // The variable 'layer' is assigned but its value is never used
         }
         public void DrawLeanConcreteAnnotations()
         {

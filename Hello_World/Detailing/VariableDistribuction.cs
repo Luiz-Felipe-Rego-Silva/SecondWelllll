@@ -12,7 +12,9 @@ namespace Detailing
     internal class VariableDistribuction : StandardDistribuction
     {
         public bool defined;
+#pragma warning disable CS0649 // Field 'VariableDistribuction.ListOfLines' is never assigned to, and will always have its default value null
         public List<Line> ListOfLines;
+#pragma warning restore CS0649 // Field 'VariableDistribuction.ListOfLines' is never assigned to, and will always have its default value null
         public double[] LenghtOfLines;
         public double constantParts;
         public VariableDistribuction(StandardDistribuction bar, double constantParts) : base()

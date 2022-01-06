@@ -48,10 +48,18 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <DocumentationFile>bin\Release\Hello_World.xml</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ProjectIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <!--ACA References Begin-->
@@ -113,8 +121,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -122,6 +132,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\Parede-circular.PNG" />
   </ItemGroup>
   <ItemGroup>
@@ -131,12 +142,19 @@
       <DependentUpon>Commands.resx</DependentUpon>
     </Compile>
     <Compile Include="Detailing\Amendments.cs" />
+    <Compile Include="Detailing\AnchorBlockDetailing.cs" />
     <Compile Include="Detailing\CircularBottomDetailing.cs" />
     <Compile Include="Detailing\CircularWallDetailment.cs" />
     <Compile Include="Detailing\Entities\CutInfo.cs" />
     <Compile Include="Detailing\Entities\HorizontalCut.cs" />
     <Compile Include="Detailing\Entities\VerticalCut.cs" />
     <Compile Include="Detailing\HorizontalVarBar.cs" />
+    <Compile Include="Detailing\UI\AnchorBlockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detailing\UI\AnchorBlockForm.Designer.cs">
+      <DependentUpon>AnchorBlockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Detailing\UI\CircularBottomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +281,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ProjectIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

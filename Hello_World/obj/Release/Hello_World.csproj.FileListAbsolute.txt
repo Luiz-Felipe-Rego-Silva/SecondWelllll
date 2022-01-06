@@ -14,3 +14,6 @@ C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Relea
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.csproj.CoreCompileInputs.cache
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.pdb
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Release\Hello_World.dll.config
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\bin\Release\Hello_World.xml
+C:\Users\Projeckt\Desktop\Dev File\Programas\SecondWelllll\Hello_World\obj\Release\Hello_World.g.resources

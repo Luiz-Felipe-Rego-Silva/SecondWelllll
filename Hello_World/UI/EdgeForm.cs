@@ -14,7 +14,9 @@ namespace Hello_World.UI
     public partial class EdgeForm : Form
     {
         public double EdgeLength { get; private set; }
+#pragma warning disable CS0108 // 'EdgeForm.Bottom' hides inherited member 'Control.Bottom'. Use the new keyword if hiding was intended.
         private Bottom Bottom;
+#pragma warning restore CS0108 // 'EdgeForm.Bottom' hides inherited member 'Control.Bottom'. Use the new keyword if hiding was intended.
         public EdgeForm(Bottom bottom)
         {
             InitializeComponent();
