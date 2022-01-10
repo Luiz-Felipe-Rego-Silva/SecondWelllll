@@ -134,7 +134,9 @@
     <Compile Include="Model\Detailing\Entities\Cut\CutInfo.cs" />
     <Compile Include="Model\Detailing\Entities\Cut\HorizontalCut.cs" />
     <Compile Include="Model\Detailing\Entities\Cut\VerticalCut.cs" />
+    <Compile Include="Model\Detailing\Entities\SteelBars\HorizontalBar.cs" />
     <Compile Include="Model\Detailing\Entities\SteelBars\HorizontalVarBar.cs" />
+    <Compile Include="Model\Detailing\Entities\SteelBars\VerticalBar.cs" />
     <Compile Include="Views\DetailersViews\CircularBottomForm.cs">
       <SubType>Form</SubType>
     </Compile>

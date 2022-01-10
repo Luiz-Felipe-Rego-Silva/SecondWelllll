@@ -649,7 +649,7 @@
             // 
             // picbx_wall
             // 
-            this.picbx_wall.Image = global::Hello_World.Properties.Resources.Parede_circular;
+            this.picbx_wall.Image = global::AutoDetailers.Properties.Resources.Parede_circular;
             this.picbx_wall.Location = new System.Drawing.Point(12, 50);
             this.picbx_wall.Name = "picbx_wall";
             this.picbx_wall.Size = new System.Drawing.Size(286, 306);
