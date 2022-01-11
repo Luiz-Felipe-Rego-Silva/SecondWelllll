@@ -383,11 +383,11 @@ namespace Controllers
             //Horizontal Interna
             startIndex = 0;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[2].BarLine.GetPoint3dAt(startIndex), distribuctions[2].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0, GetHorizontalDescriptionText(2));
+            distribuctions[2].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0);
             //Horizontal Externa
             startIndex = 0;
             textPoint = DrawingShapes.MiddlePoint(distribuctions[3].BarLine.GetPoint3dAt(startIndex), distribuctions[3].BarLine.GetPoint3dAt(startIndex + 1));
-            distribuctions[3].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0, GetHorizontalDescriptionText(3));
+            distribuctions[3].PrintDescriptionText(new Point3d(textPoint.X, textPoint.Y + 10.0, 0), 0);
         }
         private string GetHorizontalDescriptionText(int index)
         {
@@ -395,12 +395,10 @@ namespace Controllers
             if (index == 2)
             {
                 result = distribuctions[2].GetDescriptionText();
-                result += " - FACE EXTERNA";
             }
             else
             {
                 result = distribuctions[3].GetDescriptionText();
-                result += " - FACE INTERNA";
             }
             return result;
         }
@@ -992,7 +990,7 @@ namespace Controllers
             double effectiveSpacing = (length - GaugeX)/ (quantity-1);
             for (int index = 0; index < quantity; index++) { DrawingShapes.DrawCircle(new Point3d(startPoint.X -0.5*GaugeX, startPoint.Y -0.5*GaugeX- index * effectiveSpacing, 0), GaugeX, layer); }
             string dimStyleName = "DIST 1-50";
-            string content = $"N{distribuctions[2].Id}";
+            string content = $"N{distribuctions[2].Id} - FACE EXTERNA";
             DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X + Cover, startPoint.Y, 0), new Point3d(startPoint.X + Cover, startPoint.Y - length, 0), content, 20.0, 0);
         }
         private void DrawHorizontalInternalBarsInCut(Point3d startPoint, int quantity)
@@ -1019,7 +1017,7 @@ namespace Controllers
                 DrawingShapes.DrawCircle(new Point3d(startPoint.X + 0.5*GaugeX, startPoint.Y - 0.5 * GaugeX - index * effectiveSpacing, 0), GaugeX, layer);
             }
             string dimStyleName = "DIST 1-50";
-            string content = $"N{distribuctions[3].Id}";
+            string content = $"N{distribuctions[3].Id} - FACE INTERNA";
             DrawingShapes.AddAlignedDimension(dimStyleName, new Point3d(startPoint.X - Cover - GaugeX, startPoint.Y, 0), new Point3d(startPoint.X - Cover - GaugeX, startPoint.Y - length, 0), content, -20.0, 0);
         }
         private void DrawBarNotationsInCut(Point3d startPoint)

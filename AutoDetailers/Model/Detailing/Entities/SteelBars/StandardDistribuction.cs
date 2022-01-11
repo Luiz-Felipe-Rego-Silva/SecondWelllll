@@ -20,6 +20,7 @@ namespace Model.Detailing.Entities.SteelBars
         public int NumberOfAmendments { get; set; } = 0;
         public int AmendmentLength { get; set; } = 0;
         public long MarkHandle { get; set; }
+        public double[] HookLength { get; set; }
         public StandardDistribuction()
         {
         }

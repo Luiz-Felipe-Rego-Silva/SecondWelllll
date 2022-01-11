@@ -10,6 +10,10 @@ namespace Model.Detailing.Entities.SteelBars
     {
         public double[] LenghtOfLines;
         public double constantParts;
+        public double[] HookLengths = new double[4];
+        public int BarDir;
+        public bool isNegative = false;
+
         public VariableDistribuction(StandardDistribuction bar, double constantParts) : base()
         {
             this.Id = bar.Id;
@@ -37,6 +41,20 @@ namespace Model.Detailing.Entities.SteelBars
             Length = Math.Floor(sum / lines.Count);
             NumberOfAmendments = numberOfAmendments;
         }
+        public void ResgisterDistribuction(double[] lengths, int amendmentLength)
+        {
+            double sum = 0.0;
+            int numberOfAmendments = 0;
+            for (int index = 0; index < lengths.Length; index++)
+            {
+                LenghtOfLines[index] = Math.Floor(lengths[index]);
+                sum += Math.Floor(lengths[index]);
+                numberOfAmendments += Amendments.GetNumberOfAmendments(Math.Round(lengths[index] + constantParts), amendmentLength);
+                index++;
+            }
+            Length = Math.Floor(sum / lengths.Length);
+            NumberOfAmendments = numberOfAmendments;
+        }
         public void SetLengths(List<Line> lines)
         {
             LenghtOfLines = new double[lines.Count];
@@ -47,6 +65,17 @@ namespace Model.Detailing.Entities.SteelBars
                 index++;
             }
             ResgisterDistribuction(lines, this.AmendmentLength);
+        }
+        public void SetLengths(double[] lengths)
+        {
+            LenghtOfLines = new double[lengths.Length];
+            
+            for(int index = 0; index < lengths.Length; index++)
+            {
+                LenghtOfLines[index] = Math.Floor(lengths[index]);
+                index++;
+            }
+            ResgisterDistribuction(lengths, this.AmendmentLength);
         }
         public override double GetTotalLength()
         {
@@ -116,9 +145,7 @@ namespace Model.Detailing.Entities.SteelBars
                 LenghtOfLines[index] += increment[index] + constantParts;
             }
         }
-        public double[] HookLengths = new double[4];
-        public int BarDir;
-        public bool isNegative = false;
+        
 
 
     }

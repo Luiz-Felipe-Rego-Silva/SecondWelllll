@@ -43,3 +43,4 @@ C:\Users\Projeckt\Desktop\Dev File\Programas\TEste\SecondWelllll\AutoDetailers\o
 C:\Users\Projeckt\Desktop\Dev File\Programas\TEste\SecondWelllll\AutoDetailers\obj\Debug\AutoDetailers.csproj.CopyComplete
 C:\Users\Projeckt\Desktop\Dev File\Programas\TEste\SecondWelllll\AutoDetailers\obj\Debug\AutoDetailers.dll
 C:\Users\Projeckt\Desktop\Dev File\Programas\TEste\SecondWelllll\AutoDetailers\obj\Debug\AutoDetailers.pdb
+C:\Users\Projeckt\Desktop\Dev File\Programas\TEste\SecondWelllll\AutoDetailers\obj\Debug\AutoDetailers.csproj.AssemblyReference.cache

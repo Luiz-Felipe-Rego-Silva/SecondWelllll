@@ -55,6 +55,12 @@ namespace AutoDetailers
                 editor.WriteMessage("FUNCIONOU BB");
             }
         }
+        [CommandMethod("BlocoA")]
+        public void CallAnchorDetailer()
+        {
+            Controllers.AnchorBlockDetailing detailing = new Controllers.AnchorBlockDetailing();
+            detailing.DrawDetailment();
+        }
 
         /*// Modal Command with pickfirst selection
         [CommandMethod("MyGroup", "MyPickFirst", "MyPickFirstLocal", CommandFlags.Modal | CommandFlags.UsePickSet)]

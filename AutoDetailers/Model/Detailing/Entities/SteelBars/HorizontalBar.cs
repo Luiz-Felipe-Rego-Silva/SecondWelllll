@@ -19,7 +19,7 @@ namespace Model.Detailing.Entities.SteelBars
         }
         public void DrawBar(Point3d basePoint, double extension)
         {
-            Polyline polyline = new Polyline();
+            Polyline polyline = new Polyline() { Layer = "5"};
             double v0 = HookLengths[0];
             double v1 = HookLengths[1];
             double v2 = extension;
