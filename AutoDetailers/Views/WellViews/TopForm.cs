@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WellDetailing.WellDetailer.Entities;
 
-namespace Hello_World.UI
+namespace AutoDetailers.UI
 {
     public partial class TopForm : Form
     {

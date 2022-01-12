@@ -1,9 +1,7 @@
-﻿// (C) Copyright 2021 by  
-//
+﻿// (C) Copyright 2021 by //
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
-using Hello_World.UI;
 using Views.DetailersViews;
 
 // This line is not mandatory, but improves loading performances

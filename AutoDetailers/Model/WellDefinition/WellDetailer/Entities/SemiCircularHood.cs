@@ -1,5 +1,5 @@
 using Autodesk.AutoCAD.Geometry;
-using Hello_World.Structures.WellDetailer.Entities.Enums;
+using AutoDetailers.Structures.WellDetailer.Entities.Enums;
 using Structures.Utilities;
 using Structures.WellDetailer.Entities.Enums;
 using System;

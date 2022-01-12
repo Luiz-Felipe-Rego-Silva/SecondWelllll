@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hello_World.UI
+namespace AutoDetailers.UI
 {
     public partial class MainWellForm : Form
     {

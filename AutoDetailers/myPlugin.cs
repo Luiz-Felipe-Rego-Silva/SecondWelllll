@@ -8,16 +8,15 @@ using Autodesk.AutoCAD.Runtime;
 using System;
 
 // This line is not mandatory, but improves loading performances
-[assembly: ExtensionApplication(typeof(Hello_World.MyPlugin))]
+[assembly: ExtensionApplication(typeof(AutoDetailers.MyPlugin))]
 
-namespace Hello_World
+namespace AutoDetailers
 {
     // This class is instantiated by AutoCAD once and kept alive for the 
     // duration of the session. If you don't do any one time initialization 
     // then you should remove this class.
     public class MyPlugin : IExtensionApplication
     {
-
         void IExtensionApplication.Initialize()
         {
             // Add one time initialization here

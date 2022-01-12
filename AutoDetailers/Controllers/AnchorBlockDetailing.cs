@@ -11,7 +11,7 @@ namespace Controllers
 {
     class AnchorBlockDetailing
     {
-        public double NominalDiameter { get; set; } = .50;
+        public double NominalDiameter { get; set; } = 50;
         public double BiggestBase { get; set; } = 400.0;
         public double SmallestBase { get; set; } = 400.0;
         public double Length { get; set; } = 200.0;
@@ -25,7 +25,7 @@ namespace Controllers
         public double Spacing { get; set; } = 10.0;
         public double Gauge { get; set; } = 8.0;
         public double AnchorFactor { get; set; } = 34.0;
-        private List<StandardDistribuction> Distribuctions = new List<StandardDistribuction>();
+        private List<StandardDistribuction> _distribuctions = new List<StandardDistribuction>();
         public AnchorBlockDetailing(double nominalDiameter, double largestBase, double length,
             double heigth, double smallestHeigth, double cover,
             int multiplier, double spacing, double gauge)
@@ -93,7 +93,7 @@ namespace Controllers
                 Gauge = Gauge
             };
             bar.DrawBar(basePoint, extension);
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
             HorizontalBar mirrorBar = new HorizontalBar()
             {
                 Id = id,
@@ -104,7 +104,7 @@ namespace Controllers
                 Gauge = Gauge
             };
             mirrorBar.DrawBar(mirrorPoint, extension);
-            Distribuctions.Add(mirrorBar);
+            _distribuctions.Add(mirrorBar);
         }
         public void AddVerticalDistribuction(Point3d basePoint, Point3d mirrorPoint, double extension, int id)
         {
@@ -119,7 +119,7 @@ namespace Controllers
                 Gauge = Gauge
             };
             bar.DrawBar(basePoint, extension);
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
             VerticalBar mirrorBar = new VerticalBar()
             {
                 Id = id,
@@ -130,7 +130,7 @@ namespace Controllers
                 Gauge = Gauge
             };
             mirrorBar.DrawBar(mirrorPoint, extension);
-            Distribuctions.Add(mirrorBar);
+            _distribuctions.Add(mirrorBar);
         }
         public void CreateSmallDistribuctions(Point3d startPoint)
         {
@@ -142,7 +142,7 @@ namespace Controllers
             double[] hookLengths = new double[4] { 0.0, hook, hook, 0.0 };
             VerticalBar bar = new VerticalBar()
             {
-                Id = 8,
+                Id = 10,
                 IsVariable = false,
                 AmendmentLength = (int)Math.Ceiling(2 * Gauge * AnchorFactor / 10.0),
                 BarDir = -1,
@@ -150,14 +150,14 @@ namespace Controllers
                 Gauge = Gauge
             };
             bar.DrawBar(startPoint, extension7);
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
             hook = Width - Cover + StandardDistribuction.GetAnchorLength(Gauge / 10.0, AnchorFactor - 1);
             hookLengths[1] = hook;
             hookLengths[2] = hook;
             startPoint = startPoint.Add(new Vector3d(55.0 + hook,0.0,0.0));
             bar = new VerticalBar()
             {
-                Id = 9,
+                Id = 11,
                 IsVariable = false,
                 AmendmentLength = (int)Math.Ceiling(2 * Gauge * AnchorFactor / 10.0),
                 BarDir = -1,
@@ -165,14 +165,14 @@ namespace Controllers
                 Gauge = Gauge
             };
             bar.DrawBar(startPoint, extension8);
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
 
             hook = SmallestHeigth - 2 * Cover;
             hookLengths[1] = hook;
             hookLengths[2] = hook;
             startPoint = startPoint.Add(new Vector3d(60.0, 0.0, 0.0));
             Point3d mirrorPoint = new Point3d(startPoint.X + 30.0, startPoint.Y - 30.0, 0.0);
-            AddVerticalDistribuction(startPoint, mirrorPoint, extension9, 10);
+            AddVerticalDistribuction(startPoint, mirrorPoint, extension9, 12);
         }
         private int GetQuantity(double extensionDist) 
         {
@@ -197,7 +197,7 @@ namespace Controllers
                 HookLengths = hookLength
             };
             bar.SetLengths(GenerateVarLengths(extension, offset, heigth));
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
         }
         private void HorizontalNewDistribuction(int id, double extension, int dir, double heigth, double offset)
         {
@@ -226,50 +226,17 @@ namespace Controllers
             for (int index = 0; index < quantity; index++) { varLengths[index] = heigth + index * realSpacing - shiftness; }
             return varLengths;
         }
-        private void SetDistribuctions() 
+        private void SetStandardDistribuctions() 
         {
-            //id = 1
-            double extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            double heigth = Heigth - 2 * Cover;
-            double offset = 0.0;
-            VerticalNewDistribuction(1, extension, -1, heigth, offset);
-            VerticalNewDistribuction(1, extension, 1, heigth, offset);
-            //id = 2
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
-            //id = 3
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
-            //id = 4
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
-            //id = 5
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
-            //id = 6
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
-            //id = 7
-            extension = Math.Sqrt((BiggestBase - SmallestBase) * (BiggestBase - SmallestBase) + 4 * Length) / 2.0;
-            heigth = Heigth - 2 * Cover;
-            offset = 0.0;
-            VerticalNewDistribuction(2, extension, -1, heigth, offset);
-            VerticalNewDistribuction(2, extension, 1, heigth, offset);
+            //id 5
+            StandardDistribuction bar = new StandardDistribuction()
+            {
+                Id = 5,
+                Gauge = this.Gauge,
+                Spacing = Spacing,
+                IsVariable = false,
+                Quantity = GetQuantity(Length -  2 * Cover - Math.Ceiling(2 * Gauge/10.0))
+            };
         }
         public void AddHorizontalDistribuction(double extension, int id, int dir, double heigth)
         {
@@ -286,7 +253,7 @@ namespace Controllers
                 Quantity = GetQuantity(extension),
                 HookLength = hookLengths
             };
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
         }
         public void AddVerticalDistribuction(double extension, int id, int dir, double heigth)
         {
@@ -303,7 +270,7 @@ namespace Controllers
                 Quantity = GetQuantity(extension),
                 HookLength = hookLengths
             };
-            Distribuctions.Add(bar);
+            _distribuctions.Add(bar);
         }
     }
 }

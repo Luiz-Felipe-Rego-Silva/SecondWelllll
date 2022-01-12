@@ -1,5 +1,5 @@
 ﻿
-namespace Hello_World.UI
+namespace AutoDetailers.UI
 {
     partial class MainWellForm
     {

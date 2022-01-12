@@ -1,4 +1,4 @@
-﻿namespace Hello_World.Structures.WellDetailer.Entities.Enums
+﻿namespace AutoDetailers.Structures.WellDetailer.Entities.Enums
 {
     public enum Direction : sbyte
     {
