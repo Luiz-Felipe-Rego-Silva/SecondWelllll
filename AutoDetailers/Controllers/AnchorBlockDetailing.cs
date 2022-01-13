@@ -1,4 +1,5 @@
-﻿using Autodesk.AutoCAD.Geometry;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using Model.Detailing.Entities.SteelBars;
 using Structures.Utilities;
 using System;
@@ -225,6 +226,63 @@ namespace Controllers
             double realSpacing = extension / (quantity - 1);
             for (int index = 0; index < quantity; index++) { varLengths[index] = heigth + index * realSpacing - shiftness; }
             return varLengths;
+        }
+        private void SetDistribuctions(Point3d startPoint)
+        {
+            double[] extensions = new double[9];
+            extensions[0] = Math.Sqrt(Math.Pow(Length - 2 * Cover, 2) + Math.Pow((BiggestBase - SmallestBase) / 2.0 - Cover, 2));
+            extensions[1] = 0.0;
+            extensions[2] = 0.0;
+            extensions[3] = 0.0;
+            extensions[4] = 0.0;
+            extensions[5] = 0.0;
+            extensions[6] = 0.0;
+            extensions[7] = 0.0;
+            extensions[8] = 0.0;
+
+            //id 1
+            double[] segments = new double[3];
+            segments[0] = StandardDistribuction.GetAnchorLength(Gauge, AnchorFactor);
+            segments[1] = Math.Sqrt(Math.Pow(Length - 2 * Cover, 2) + Math.Pow((BiggestBase - SmallestBase) / 2.0 - Cover, 2));
+            segments[2] = StandardDistribuction.GetAnchorLength(Gauge, AnchorFactor);
+
+            double[] angles = new double[2];
+            angles[0] = Math.Atan2(Length - 2 * Cover, (BiggestBase - SmallestBase) / 2.0 - Cover);
+            angles[1] = Math.PI - angles[0];
+
+            Polyline line = new Polyline() { Layer = "5" };
+            HorizontalBar bar = new HorizontalBar()
+            {
+                Id = 1,
+                Gauge = this.Gauge,
+                Spacing = this.Spacing,
+                BarDir = 1,
+                IsVariable = false
+            };
+            line = bar.MakeLine(startPoint, segments, angles);
+            bar.BarLine = line;
+            bar.Length = line.Length;
+            
+            //id 2
+            segments[1] = StandardDistribuction.GetAnchorLength(Gauge, AnchorFactor);
+            segments[2] = Math.Sqrt(Math.Pow(Length - 2 * Cover, 2) + Math.Pow((BiggestBase - SmallestBase) / 2.0 - Cover, 2));
+            segments[3] = StandardDistribuction.GetAnchorLength(Gauge, AnchorFactor);
+
+            angles[0] = Math.Atan2(Length - 2 * Cover, (BiggestBase - SmallestBase) / 2.0 - Cover);
+            angles[1] = Math.PI - angles[0];
+
+            line = new Polyline() { Layer = "5" };
+            HorizontalBar bar = new HorizontalBar()
+            {
+                Id = 1,
+                Gauge = this.Gauge,
+                Spacing = this.Spacing,
+                BarDir = 1,
+                IsVariable = false,
+            };
+            line = bar.MakeLine(startPoint, segments, angles);
+            bar.BarLine = line;
+            bar.Length = line.Length;
         }
         private void SetStandardDistribuctions() 
         {

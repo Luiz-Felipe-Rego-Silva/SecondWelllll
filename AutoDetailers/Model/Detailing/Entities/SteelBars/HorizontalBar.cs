@@ -83,10 +83,10 @@ namespace Model.Detailing.Entities.SteelBars
         public Polyline MakeLine(Point3d startPoint, double[] segments, double[] angles)
         {
             Polyline polyline = new Polyline() { Layer = "4" };
-            polyline.AddVertexAt(0, new Point2d(startPoint.X + segments[0] * BarDir * Math.Sin(angles[0]), startPoint.Y - segments[0] * Math.Cos(angles[0])), 0, 0, 0);
+            polyline.AddVertexAt(0, new Point2d(startPoint.X + segments[0] * Math.Cos(angles[0]), startPoint.Y + segments[0] * BarDir * Math.Sin(angles[0])), 0, 0, 0);
             polyline.AddVertexAt(1, new Point2d(startPoint.X, startPoint.Y), 0, 0, 0);
-            polyline.AddVertexAt(2, new Point2d(startPoint.X, startPoint.Y - segments[1]), 0, 0, 0);
-            polyline.AddVertexAt(3, new Point2d(startPoint.X + segments[2] * BarDir * Math.Sin(angles[1]), startPoint.Y + segments[2] * Math.Cos(angles[1])), 0, 0, 0);
+            polyline.AddVertexAt(2, new Point2d(startPoint.X + segments[1], startPoint.Y), 0, 0, 0);
+            polyline.AddVertexAt(3, new Point2d(startPoint.X + segments[1] - segments[2] * Math.Cos(angles[1]), startPoint.Y + segments[2] * BarDir * Math.Sin(angles[1])), 0, 0, 0);
 
             return polyline;
         }
